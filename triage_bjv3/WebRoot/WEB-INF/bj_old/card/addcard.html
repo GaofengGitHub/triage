@@ -1,0 +1,139 @@
+#@bj_layout('card')
+#define bj_main()
+<script>
+#include("addcard.js")
+</script>
+ <aside class="right-side">
+    <section class="content">
+    	<div class="addcard-section">
+    		<h1 class="clearfix"><span>新增就诊卡</span><a id="listCard" href="javascript:void(0);">办卡记录</a></h1>
+    		<input type="hidden" id="id">
+		    <div id="myTabContent" class="tab-content">
+		        <div class="form-horizontal">
+			  <div class="addcard-form clearfix">
+			  	<div class="pull-left">
+			  		<div class="form-group">
+					    <label class="control-label"><span>*</span>就诊卡号</label>
+					    <div class="pull-left addcard-input-box addcard-input-box-big">
+					      <input type="text" class="form-control" placeholder="请输入就诊卡号" id="cardnum">
+					      <span class="addcard-input-btn">读</span>
+					    </div>
+					 </div>
+					 <div class="form-group ">
+					    <label class="control-label">身份证号</label>
+					    <div class="pull-left addcard-input-box">
+					      <input type="text" class="form-control" placeholder="请输入患者身份证号" id="idcard">
+					      <span class="addcard-input-btn">读</span>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label"><span>*</span>姓名</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入患者姓名" id="fullname" maxlength="15">
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label"><span>*</span>性别</label>
+					    <div class="pull-left sex-item" id="gender" >
+					      <span value="男">男</span>
+					      <span value="女">女</span>
+					      <span value="未说明">未说明</span>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label"><span>*</span>出生日期</label>
+					    <div class="pull-left">
+							<input class="form-control" size="16" type="text"  id="bronday" />
+						</div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label">年龄</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入年龄" id="age" readonly>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label"><span>*</span>联系电话</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入联系电话" id="tel">
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label">民族</label>
+					    <div class="pull-left">
+					      <select  class="form-control" id="nation">
+					      </select>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label">国籍</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="" id="country" value="中国大陆">
+					      <div class="nationality-suggest-list-container" style="display:block;">
+							<ul class="nationality-suggest-list"></ul>
+							</div>
+					    </div>
+					 </div>	 
+			  	</div>
+			  	<div class="pull-left">
+					 <div class="form-group">
+					    <label class="control-label">紧急联系人</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入患者亲属或紧急联系人姓名" id="ralationname" maxlength="15">
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label">紧急联系人电话</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入紧急联系人电话" id="ralationtel">
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label">家庭住址</label>
+					    <div class="pull-left"  id="distpicker">
+					      	<select id="aprovince" data-province="---- 选择省 ----"></select>
+  							<select id="acity" data-city="---- 选择市 ----"></select>
+  							<select id="acountry" data-district="---- 选择区 ----"></select>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label"></label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入具体家庭住址" id="adderssdesc" maxlength="50">
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label">职业</label>
+					    <div class="pull-left">
+					      <select class="form-control"  id="occupation">
+					      </select>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label">工作单位</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入工作单位" id="workplace" maxlength="50">
+					    </div>
+					 </div>	 
+					 <div class="form-group">
+					    <label class="control-label">备注信息</label>
+					    <div class="pull-left">
+					      <textarea class="form-control" rows="3" id="remark" maxlength="100"></textarea>
+					    </div>
+					 </div>
+					 <div class="addcard-btns">
+					 	<button id="cancel" class="btn btn-default">取消</button>
+					 	<button id="save" class="btn btn-primary">保存</button>
+					 </div>
+			  	</div>
+			  </div>
+			  
+			</div>
+		      </div>
+		     
+		    </div>
+    	
+    </section>
+</aside>
+
+#end

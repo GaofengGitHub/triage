@@ -1,0 +1,62 @@
+<script src='#path()/static/js/area.js'></script>
+<script src='#path()/static/js/select.js'></script>
+<script type="text/javascript">
+#include("system-revamp.js")
+</script>
+	<div class="panelMain">
+	<form id="revampform" action="" method="" enctype="">
+		<div class="col-md-12">
+		    <div class="form-group">
+				<input id="hospitalid" name="hospitalid" type="hidden" value="#(hpid ??)">
+				<!-- <input id="hospitalid" name="hospitalid" type="hidden" value="1"> -->
+			</div>
+			<div class="form-group">
+				<label><i class="red">*</i>医院名称：</label> <input
+					class="form-control formHalf" id="hospitalname" name="hospitalname" type="text"  placeholder="#(hpname ??)" value="#(hpname ??)" required>
+					<span class="tips"></span>
+			</div>
+			<div class="form-group">
+				<label><i class="red">*</i>组织机构代码：</label> <input class="form-control formHalf" id="hospitalcode"  name="hospitalcode"
+					type="text" placeholder="#(hpcode ??)" value="#(hpcode ??)" required><span class="tips"></span>
+			</div>
+			<div class="form-group">
+				<label><i class="red">*</i>医院地址：</label> 
+				<select class="form-control formtenth" name="province" id="province"><option value="请选择">请选择</option></select>
+				<select class="form-control formtenth" name="city" id="city"><option value="请选择">请选择</option></select>
+	            <input class="form-control formThirty" id="hospitaladdress"  name="hospitaladdress" type="text"
+					placeholder="#(hpaddress ??)" value="#(hpaddress ??)" required><span class="tips"></span>
+			</div>
+			<div class="form-group">
+				<label>医院logo：</label>
+				<div class="formTwenty">
+					<input id="hospitallogourl" name="hospitallogourl" type="file"><span class="tips"></span>
+				</div>
+				<span class="tips" style="color: red">（用于系统左上角显示，建议图标大小24*24）</span>
+			</div>
+		</div>
+		<div class="form-group">
+				<label>point-x：</label> <input
+					class="form-control formHalf" id="piont-x" name="piont-x" type="text" placeholder="#(piont_x ??)" value="#(piont_x ??)"  required>
+					<span class="tips"></span>
+			</div>
+			<div class="form-group">
+				<label>point-y：</label> <input
+					class="form-control formHalf" id="piont-y" name="piont-y" type="text" placeholder="#(piont_y ??)" value="#(piont_y ??)"  required>
+					<span class="tips"></span>
+					<input  type="button" onclick="showword()" value="查看坐标获取说明" >
+			</div>
+			
+			<div id="word" style="display:none">1、	访问网站http://api.map.baidu.com/lbsapi/getpoint/</br>2、 输入要查询的名称，点击查询</br>
+3、	选择右侧地点</br>
+4、	左上角复制坐标</br>
+5、	复制结果如：114.305953,30.540879</br>
+逗号前复制至point-x，逗号后复制至point-y
+			</div>
+		<div class="form-group panelMainBtn">
+				<input type="button" id="confirmupdhospital" value="提交" class="btn btn-rule btn-lg"/> 
+				<a href=""><input type="button" value="取消" class="btn btn-rule btn-lg"/></a>
+		</div>
+		
+		</form>
+		
+	</div>

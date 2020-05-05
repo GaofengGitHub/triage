@@ -1,0 +1,634 @@
+#@layout('divid') #define main() 
+<script>
+#include("pageload.js")
+#include("function.js")
+#include("score.js")
+#include("validate.js")
+#include("mews.js")
+</script>
+<script>
+    $(document).ready(function () {
+    	//设置按钮样式
+    	//setgradebtncss();
+    	//急诊非急诊切换
+		$(".tab-title li").click(function() {
+			var index = $(this).index();
+			$("#feijz").val((index+1));			
+			$(this).addClass("active").siblings().removeClass("active");			
+			if(index !=0){
+				/* $(".right-grade").hide(); */
+				$(".col-hide").css("visibility", "hidden");
+				$(".panel").addClass("panel-bg");
+				$(".swept").addClass("border-NO");
+			}else{
+				/* $(".right-grade").show(); */
+				$(".col-hide").css("visibility", "visible");
+				$(".panel").removeClass("panel-bg");
+				$(".swept").removeClass("border-NO");
+			}
+		})
+    	//不需要评分模块时，请注销 initPf()
+    	initPf();
+    	
+		//初始化mesw评分表
+    	initMews();
+    	//初始化页面
+    	pageload();
+    	//添加验证
+    	//initValidate();
+    	
+    	$("#cardnum").focus();
+    	
+    	//下拉列表
+		$(".dropdown-menu li").click(function() {
+			var txt = $(this).text();
+			$(this).parent().siblings(".read").find(".form-control").val(txt).attr("title",txt);
+		})
+		
+		//增加下拉框样式
+		if($(window).width() >= 1350 && $(window).width() <= 1430){
+			$(".combo-arrow").css("width","60px");
+	    	$(".combo-panel").css("padding","5px 0");
+		}
+		if($(window).width() >= 1430 && $(window).width() <= 1500){
+			$(".combo-arrow").css("width","60px");
+	    	$(".combo-panel").css("padding","5px 0");
+		}		
+    	
+    	//添加输入框隐藏显示功能  
+    	$(".checkDiv .btn").each(function(){
+    		if($(this).val() == "无" && $(this).hasClass("active")){
+    			$(this).siblings().attr("disabled","disabled").removeClass("active");
+    			$("#jwsother").hide();   
+    		} 		
+    	})
+    	if($("#jwsother").val() != ""){
+    		$("#jwsother").show();
+    	}else{
+    		$("#jwsother").hide();
+    	}
+		    	
+    	$(".checkDiv .btn").click(function(){
+    		disable($(this));	
+    	})   
+    	function disable($this){   		
+    		if($this.val() == "无" && $this.hasClass("active")){
+    			$this.siblings().attr("disabled","disabled").removeClass("active");
+    			$("#jwsother").hide();   
+    		}else{
+    			$this.siblings().removeAttr("disabled");
+    			if($this.val() == "其他"){
+        			if($this.hasClass("active")){
+        				$("#jwsother").show();
+            		}else{
+            			$("#jwsother").hide();
+            		}	
+        		}
+    		}
+    	}
+    	
+    	//屏幕高度自适应
+    	/*var h = $(window).height();
+    	var nav_h = $(".navbar").height();
+    	var tab_h = $(".tab-title").height();
+    	var bread_h = $(".breadcrumb").height();
+    	var panel_head_h = $(".panel-heading").height();
+    	var save_h = $(".save").height();
+    	var dir_h = h-nav_h-tab_h-bread_h-bread_h-panel_head_h-save_h;
+    	$(".direction,.panel-box").height(dir_h);*/
+    });
+</script>
+<input type="hidden" id="returnUrl" value=""></input>
+<input type="hidden" id="hisid" value=""></input>
+<input type="hidden" id="time" value=""></input>
+<input type="hidden" id="id" value=""></input>
+<input type="hidden" id="sighid" value=""></input>
+<input type="hidden" id="cixu" value="0"></input>
+<input type="hidden" id="maxcixu" value="1"></input>
+<input type="hidden" id="handleid" value=""></input>
+<input type="hidden" id="status" value=""></input>
+<input type="hidden" id="userId" value="#userId()"></input>
+<input type="hidden" id="level_1_id" value="" />
+<input type="hidden" id="level_1_name" value="" />
+<input type="hidden" id="level_2_id" value="" />
+<input type="hidden" id="level_2_name" value="" />
+<input type="hidden" id="level_3_id" value="" />
+<input type="hidden" id="level_3_name" value="" />
+<input type="hidden" id="autograde" value="" />
+<!-- <input type="hidden" id="qggrade" value="" /> -->
+<input type="hidden" id="etdsgrade" value="" />
+<input type="hidden" id="mewsgrade" value="" />
+<input type="hidden" id="quick_grade" value="" />
+<input type="hidden" id="finalgrade" value="" />
+<input type="hidden" id="deptment" value="" />
+<input type="hidden" id="defultpjfs" value="" />
+<input type="hidden" id="defultpjfsname" value="" />
+<input type="hidden" id="edts_ids" value="" />
+<input type="hidden" id="mews_ids" value="" />
+<input type="hidden" id="quickgrade_ids" value="" />
+<input type="hidden" id="memberstel" value="" />
+<input type="hidden" id="feijz" value="1" />
+<input type="hidden" id="finalgradename" value="" />
+<input type="hidden" id="lastfinalgrade" value="" />
+<input type="hidden" id="lastfinalgradename" value="" />
+<input type="hidden" id="lastupdgradereason" value="" />
+<input type="hidden" id="lastupdreasondetail" value="" />
+<input type="hidden" id="savestatus" value="" />
+<input type="hidden" id="pjconfirmstatus" value="" />
+<input type="hidden" id="symptomhide" value="" />
+<div class="row" style="position: relative;">
+	<ul class="tab-title">
+		<li id="jzann" class="active">急诊</li>
+		<li id="feijzann" class="">非急诊</li>
+	</ul>
+	<div id="showsffenji" class="right-grade" style="display: none;">
+		<a id="handle0" href="#" onclick="gotofenjipage(this);">
+			<div class="pull-left label-left">
+				<p id="handle1">1</p>
+				<p>&lt;</p>
+			</div>
+		</a>
+		<div class="pull-left label-content">
+			<p>
+				<!-- <i class="fa fa-stop"> -->
+				</i><span id="handle2">2级</span>
+			</p>
+			<p id="handle3">第一次分级</p>
+		</div>
+		<a id="handle4" href="#" onclick="gotofenjipage(this);">
+			<div class="pull-left label-right">
+				<p id="handle5">-</p>
+				<p>&gt;</p>
+			</div>
+		</a>
+	</div>
+</div>
+<div id="page-wrapper">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#path()/index/index">首页</a></li>
+			<li class="active">患者分级</li>
+		</ol>
+	</div>
+	<div class="row">
+		<div class="col-md-4 pr0">
+			<div class="panel panel-default panel-dz">
+				<div class="panel-heading">患者信息</div>
+				<div class="panel-body direction">
+					<div class="form-group-sm clearfix swept" style='overflow: auto;'>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-5 pr1">
+								<label>身份证/医保卡/就诊卡:</label>
+							</div>
+							<div class="col-md-5 pr1" style="padding-right:0">
+								<input class="form-control formHalf" type="text" id="cardnum"
+									name="cardnum">
+							</div>
+							<div class="col-md-2 pr1 pr0 text-right">
+								<button onclick="readCard();" class="btn btn-info btn-so">读卡</button>
+							</div>
+						</div>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-4 pr0 pr1">
+								<div class="col-md-6 pr1 pr0">
+									<label>患者姓名:</label>
+								</div>
+								<div class="col-md-6 pr1 pr0">
+									<input class="form-control formHalf" type="text" id="fullname"
+										maxlength="32">
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="col-md-5 pr1 pr0">
+									<label>性别:</label>
+								</div>
+								<div class="col-md-7 pr1 pr0">
+									<select class="form-control formHalf" id="gender">
+										<option value="未说明">未说明</option>
+										<option value="男">男</option>
+										<option value="女">女</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 pr0 pr1">
+								<div class="col-md-5 pr1 pr0">
+									<label>年龄:</label>
+								</div>
+								<div class="col-md-7 pr1 pr0">
+									<input class="form-control formHalf" type="text" id="age" readonly="readonly">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-6 pr1">
+								<div class="col-md-4 pr1 pr0">
+									<label>出生日期:</label>
+								</div>
+								<div class="col-md-8 pr1 pr0 left-leave">
+									<input class="form-control formHalf" type="text" id="bornday">
+								</div>
+							</div>
+							<div class="col-md-6 pr1 pr0 own">
+								<div class="col-md-4 pr1 pr0">
+									<label>费别:</label>
+								</div>
+								<div class="col-md-8 pr1 pr0 left-leave">
+									<select class="form-control formHalf" id="category">
+										<option value="1">城镇职工基本医疗保险</option>
+										<option value="2">城镇居民基本医疗保险</option>
+										<option value="3">新型农村合作医疗</option>
+										<option value="4">贫困救助</option>
+										<option value="5">商业医疗保险</option>
+										<option value="6">全公费</option>
+										<option value="7" selected="selected">全自费</option>
+										<option value="8">其他</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-6 pr1">
+								<div class="col-md-4 pr1 pr0">
+									<label>联系方式:</label>
+								</div>
+								<div class="col-md-8 pr1 pr0 left-leave">
+									<input class="form-control formHalf" id="tel" type="text"
+										value="">
+								</div>
+							</div>
+							<div class="col-md-6 pr1 pr0">
+								<div class="col-md-4 pr1 pr0">
+									<label>身份证号:</label>
+								</div>
+								<div class="col-md-8 pr1 pr0 left-leave">
+									<input class="form-control formHalf" id="idcard" type="text"
+										value="">
+								</div>
+							</div>
+						</div>
+						<div class="col-hide">
+							<div class="col-md-12 clearfix">
+								<div class="col-md-2 pr1 pr0">
+									<label>来&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;源:</label>
+								</div>
+								<div class='col-md-10 inlineBlock radioDiv pr0 pr1'>
+									<button class='btn btn-sm' name="source" value="自行来院">自行来院</button>
+									<button class='btn btn-sm' name="source" value="120">120</button>
+									<button class='btn btn-sm' name="source" value="东院">东院</button>
+									<button class='btn btn-sm' name="source" value="汉川">汉川</button>
+									<button class='btn btn-sm' name="source" value="钟祥">钟祥</button>
+									<button class='btn btn-sm' name="source" value="鄂州">鄂州</button>
+									<button class='btn btn-sm' name="source" value="固始">固始</button>
+									<button class='btn btn-sm' name="source" value="院内">院内</button>
+									<button class='btn btn-sm' name="source" value="110">110</button>
+								</div>
+							</div>
+							<div class="col-md-12 clearfix">
+								<div class="col-md-2 pr1 pr0">
+									<label>来院方式:</label>
+								</div>
+								<div class='col-md-10 inlineBlock radioDiv pr1 pr0'>
+									<button class='btn btn-sm' name="lyfs" value="步行">步行</button>
+									<button class='btn btn-sm' name="lyfs" value="扶走">扶走</button>
+									<button class='btn btn-sm' name="lyfs" value="轮椅">轮椅</button>
+									<button class='btn btn-sm' name="lyfs" value="担架床">平车</button>
+								</div>
+							</div>
+							<div class="col-md-12 clearfix">
+								<div class="col-md-2 pr1 pr0">
+									<label>意识状态:</label>
+								</div>
+								<div class='col-md-10 inlineBlock radioDiv pr1 pr0'>
+									<button class='btn btn-sm' name="consciousness" value="清醒">清醒</button>
+									<button class='btn btn-sm' name="consciousness" value="昏迷">昏迷</button>
+									<button class='btn btn-sm' name="consciousness" value="谵妄">谵妄</button>
+									<button class='btn btn-sm' name="consciousness" value="嗜睡">嗜睡</button>
+									<button class='btn btn-sm' name="consciousness" value="昏睡">昏睡</button>
+								</div>
+							</div>
+							<div class="col-md-12 records clearfix">
+								<div class="col-md-2 pr1 pr0">
+									<label>既&nbsp;&nbsp;往&nbsp;&nbsp;史:</label>
+								</div>
+								<div class='col-md-10 inlineBlock checkDiv pr1 pr0'>
+									<button class='btn btn-sm ' name="anamnesis" value="无">无</button>
+									<button class='btn btn-sm ' name="anamnesis" value="糖尿病">糖尿病</button>
+									<button class='btn btn-sm ' name="anamnesis" value="高血压">高血压</button>
+									<button class='btn btn-sm ' name="anamnesis" value="冠心病">冠心病</button>
+									<button class='btn btn-sm ' name="anamnesis" value="COPD">COPD</button>
+									<button class='btn btn-sm ' name="anamnesis" value="哮喘">哮喘</button>
+									<button class='btn btn-sm ' name="anamnesis" value="其他">其他</button>
+									<input id="jwsother" class="form-control formHalf" type="text"
+										style="width: 50%;margin-bottom:5px">
+								</div>
+							</div>
+							<div class="col-md-12 clearfix">
+								<div class="col-md-2 pr1 pr0">
+									<label>主&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;诉:</label>
+								</div>
+								<div class="col-md-10 pr1 pr0">
+									<input class="easyui-combobox" id="zhusu" name="zhusu"
+										prompt="请输入主诉内容" style="width: 300px;" maxlength="200"
+										data-options="valueField:'lable',textField:'value',
+    								data:[{
+               		 					lable:'胸痛',
+                						value:'胸痛'
+            						},
+            						{
+                						lable:'头痛',
+                						value:'头痛'
+            						},
+           							{
+                						lable:'腹痛',
+                						value:'腹痛'
+            						},
+            						{
+                						lable:'外伤',
+                						value:'外伤'
+            						}
+        						]" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group-sm clearfix swept2 col-hide">
+						<div class="col-md-12 clearfix">
+							<div class="col-md-6 pr1">
+								<div class="col-md-4 pr1 pr0">
+									<label>身高(cm):</label>
+								</div>
+								<div class="col-md-8 pr1 pr0">
+									<input class="form-control formHalf formW" id="sg" type="text"
+										value="" placeholder="数值" style="margin-left: 5px">
+								</div>
+							</div>
+							<div class="col-md-6 pr1 pr0">
+								<div class="col-md-4 pr1 pr0">
+									<label>体重(kg):</label>
+								</div>
+								<div class="col-md-8 pr1 pr0">
+									<input class="form-control formHalf formW" id="tz" type="text"
+										value="" placeholder="数值">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-2 pr1 pr0">
+								<label>绿色通道:</label>
+							</div>
+							<div class='col-md-10 inlineBlock radioDiv pr1 pr0'>
+								<button class='btn btn-sm' name="lstd" value="心血管">心血管</button>
+								<button class='btn btn-sm' name="lstd" value="脑出血">脑出血</button>
+								<button class='btn btn-sm' name="lstd" value="孕产妇">孕产妇</button>
+								<button class='btn btn-sm' name="lstd" value="急性心梗">急性心梗</button>
+								<button class='btn btn-sm' name="lstd" value="创伤">创伤</button>
+							</div>
+						</div>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-2 pr1 pr0">
+								<label>其&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;他:</label>
+							</div>
+							<div class='col-md-10 inlineBlock radioDiv pr1 pr0'>
+								<button class='btn btn-sm' name="others" value="三无人员">三无人员</button>
+								<button class='btn btn-sm' name="others" value="AIDS">AIDS</button>
+								<input class="form-control formHalf" id="othersinput" type="text" maxlength="20" style="width: 50%;" placeholder="输入内容">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 pr0">
+			<div class="panel panel-default panel-dz">
+				<div class="panel-heading col-hide">患者体征</div>
+				<div class="panel-body direction">
+					<div class='swept col-hide'>
+						<div class="form-group-sm clearfix">
+							<div class="col-md-12 clearfix" style="margin-bottom: 10px">
+								<select class="form-control formHalf formW" style="width: 124px">
+									<option>分诊台POCT1</option>
+									<option>分诊台POCT2</option>
+									<option>分诊台POCT3</option>
+									<option>分诊台POCT4</option>
+								</select> <a id="mach_status"></a>
+								<button class="btn btn-info btn-so" onclick="readMach();">采集数据</button>
+							</div>
+						</div>
+						<div class="form-group-sm clearfix">
+							<div class="col-md-4">
+								<div class='st-sign-mark'>
+									<p>血压:</p>
+									<div class='markInput'>
+										<input class="form-control formHalf" id="shousuoya"
+											type="text" value="">/ <input
+											class="form-control formHalf" id="shuzhangya" type="text"
+											value="">
+									</div>
+									<p>mmHg</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class='st-sign-mark'>
+									<p>SPO2:</p>
+									<div class='markInput'>
+										<input class="form-control formHalf" id="spo2" type="text"
+											value="">
+									</div>
+									<p>%</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class='st-sign-mark'>
+									<p>体温:</p>
+									<div class='markInput'>
+										<input class="form-control formHalf" id="tiwen" type="text"
+											value="">
+									</div>
+									<p>℃</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class='st-sign-mark'>
+									<p>心率:</p>
+									<div class='markInput'>
+										<input class="form-control formHalf" id="maibo" type="text"
+											value="">
+									</div>
+									<p>次/分</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class='st-sign-mark'>
+									<p>呼吸:</p>
+									<div class='markInput'>
+										<input class="form-control formHalf" id="huxi" type="text"
+											value="">
+									</div>
+									<p>次/分</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 clearfix axis">
+						<div class="modules">
+							<textarea placeholder="此处可填写备注" class="imitateInput"
+								maxlength="200" id="hljl"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default panel-dz" style="background-color: transparent">
+				<div class="panel-heading col-hide">综合评级</div>
+				<div class="panel-body panel-box">
+					<div class="row">
+						<div class="col-hide">
+							<div class="col-md-12 clearfix" style="background: #fff;">								
+									<!-- <p class='btn4' data-toggle="modal" href="#modalGrade">4级</p> -->
+								<div class="st-grade st-font col-md-8 col-md-offset-2 title-top" style="cursor: pointer;display: block;"
+										data-toggle="modal" href="#modalGrade" id="grade"></div>																						
+								<div id="twopartpj" class="assess" style="display:none;">
+									<div class="col-md-6" id="zdpj">
+									<p class="text-center">综合评级:</p>
+									<div class="st-grade"></div>
+									</div>
+									<div class="col-md-6" data-toggle="modal" href="#modalGrade" style="cursor: pointer;" id="sdpj">
+									</div>
+									<div class="col-md-12 cause clearfix">
+										<p id="sdtjreason"></p>
+									</div>
+								</div>
+								<div class="modal fade common-modal" id="modalGrade" tabindex="-1"
+										role="dialog" aria-labelledby="myModalLabel"
+										aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content level">
+												<div class="modal-header">
+													<!-- <button type="button" class="close" data-dismiss="modal"
+														aria-hidden="true">×</button> -->
+													<span class="modal-title">修改分级</span>
+												</div>
+												<div class="modal-body clearfix">
+													<div class='row m-b-25' style="margin-bottom: 25px;">
+														<div class='col-md-5 col-md-offset-1'>
+															<span class='gradetxt'>系统评级</span>
+															<div class='col-md-6' id="atuogradearea">
+																<div class="st-grade" style='height: 64px'>
+																	<!-- <p class="allocatNum">2</p>
+                                                               <p class="allocatUnit">级</p> -->
+																</div>
+															</div>
+														</div>
+														<div class='col-md-5'>
+															<span class='gradetxt'>修改评级为</span>
+															<div class='col-md-6' id="finalgradearea">
+																<div class="st-grade" style='height: 64px'>
+																	<!-- <p class="allocatNum">2</p>
+                                                               <p class="allocatUnit">级</p> -->
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class='row m-b-15' id="gradearea"></div>
+													<div class='col-md-8 m-b-15 p0'>
+														<div class='col-md-4 p0'>
+															<label class='control-label'>修改原因说明：</label>
+														</div>
+														<div class='col-md-6'>
+	                                                        <select class="form-control input-sm m-b-10" id="changereason">
+	                                                          <option value="">选择修改原因</option>
+	                                                          <option value="病情减轻">病情减轻</option>
+	                                                          <option value="病情加重">病情加重</option>
+	                                                          <option value="操作失误">操作失误</option>
+	                                                          <option value="其他">其他</option>
+	                                                        </select>
+	                                                    </div>
+													</div>
+													<div class='row'>
+														<div class='col-md-12 clearfix'>
+															<textarea class="form-control textareaType"
+																maxlength=150" id="reasondetail" placeholder="修改原因:"></textarea>
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button data-dismiss="modal" class="btn btn-miss btn-default"
+														type="button">取消</button>
+													<button class="btn btn-primary"
+														onclick="confirmupdgradearea();" type="button">确认</button>
+												</div>
+											</div>
+										</div>
+									</div>
+							</div>
+							<div class="col-md-12 swept3 clearfix">
+								<div class="modules pingji" >
+									<p>评级描述：</p>
+									<div class="result clearfix" id="symptom">
+									</div>
+									<p class='text-center' style="padding-top:20px">
+										<a href="javascript:void(0);" onclick="tiaozhuanfenji();">
+											<img src='#path()/static/images/evaluation.png'>
+										</a>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 swept3 clearfix">
+							<div class="modules clearfix" style="height: 95px">
+								<div class="text-left module-leave">
+									<span class=''>分诊去向：</span> <span class='text-center'>
+										<button type='button' class='btn btn-info btnWhere'
+											data-toggle="modal" href="#setGone">
+											<span class="glyphicon glyphicon-heart"></span><span
+												id="qingquxiang">请选择去向</span>
+										</button>
+									</span>
+									<div class="modal fade common-modal" id="setGone" tabindex="-1"
+										role="dialog" aria-labelledby="myModalLabel"
+										aria-hidden="true" style="display: none;">
+										<div class="modal-dialog" style="width: 200px;">
+											<div class="modal-content" modalMain='modalMain'>
+												<div class="modal-body clearfix"
+													style="background: transparent; padding: 0;">
+													<div class="directionBox" style="display: block;">
+														<ul class="list-unstyled subject" style='padding: 0'
+															id="depart">
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									</div>
+									<div class="text-left module-leave">
+										<label>分诊时间：</label> <input class="form-control formHalf btn-time"
+											type="text" id="dividtime"> 
+											<!-- <span class="leave"><i class="glyphicon glyphicon-edit"></i></span>-->
+									</div>
+									<div class="text-left">
+										<div id="lastnurseqianm" style="display: none;"><lable>上次记录者签名： </lable>
+										<span id="lastnurse"></span>
+										<lable style="padding-left:10px">当前编辑者签名： </lable>
+										<span id="nurse2">#userName()</span></div>
+										<div id="nurseqianm" style="display: block;"><lable>分诊护士： </lable>
+										<span id="nurse">#userName()</span></div>
+									</div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 clearfix">
+			<div class="save">
+				<a href="#" onclick="doDraf()">暂存</a>
+				<button class="btn btn-default cure" onclick="doSave()">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+#include("fenzhenpjb.html")
+#end

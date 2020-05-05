@@ -1,0 +1,133 @@
+<div class="modal fade common-modal" id="fenzhenpjb" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true"
+	style="min-width: 1300px;width:96%">
+	<div class="modal-dialog" style="width: 100%;height: 87%;">
+		<div class="modal-content" style="width: 100%;height: 100%;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+				Userbehavior="A167"	aria-hidden="true" onclick="reset();">×</button>
+			</div>
+			<div id="page-wrapper" style="padding:1% 15px;height:94%">
+				<div class='col-md-9 changeDiag midInfo pr0 pr1' style="height: 100%;width:70%;">
+					<div class='row' style="height:100%">
+						<div class="col-md-2 pr0" style="width:20%;height: 100%;">
+							<div class="meauHead">
+								<i class="icon_head"></i>评级方式
+							</div>
+							<ul class="leftMenu" id="leftMenu">
+							</ul>
+						</div>
+						<aside class="col-md-10 pr1 pr0" style="height: 100%;width:80%">
+							<div class="gradingBox clearfix" style="height:100%;overflow:auto;background: #fff;border: solid 1px #ccc;border-radius:4px;margin:0 15px">
+								#include("score.html") #include("grade.html")
+								#include("mews.html") #include("default.html")
+								#include("pain.html") #include("gcs.html")</div>
+						</aside>
+					</div>
+				</div>
+				<div class='col-md-3 changeDiag pr0' style="height:100%;width:30%;">
+					<div class="panel describe" style="height:100%;background: inherit;box-shadow: none;">
+						<div class="panel-body" style="padding:10px;overflow:auto;">
+							<div class="describe-title">
+								<h3 style="margin: 0 0 10px 0;">
+									<sup>.</sup><span class="panel-title">评级描述</span><sup>.</sup>
+								</h3>
+							</div>
+							<div class="grade-box pjms-box">
+								<div class="result clearfix grade-show" id="symptom"></div>
+								<div class="result clearfix grade-show" id="ttpf"></div>
+								<div class="result clearfix grade-show" id="gcspf1"></div>
+							</div>
+							<div class="describe-title">
+								<h3 style="margin-top:0">
+									<sup>.</sup><span class="panel-title">综合评级</span><sup>.</sup>
+								</h3>
+							</div>
+							<div class="row">
+								<div class="col-md-12 clearfix">
+									<div class="form-group groupClass1"
+										style="margin: 12px 0;text-align:center;"></div>
+
+								</div>
+							</div>
+							<div class="describe-title">
+								<h3 style="margin-top:0">
+									<sup>.</sup><span class="panel-title">手动调级</span><sup>.</sup>
+								</h3>
+							</div>
+							
+								<div class="col-md-12 p0 clearfix">
+									<div class="form-group groupClass2"
+										style="margin: 12px 0;text-align:center;"></div>
+										<div class="col-md-12 fzpjb-change-reason">
+	                                              <div class="col-md-5 pr0 pr1">
+	                                                   <label class="control-label" style="line-height: 32px;font-weight:normal;">修改原因说明：</label>
+	                                               </div>
+	                                             <div class="col-md-7 p0">
+	                                                 <select class="form-control input-sm m-b-10 reason input-blue-color" id="changereason">
+	                                                       	  <option value="">选择修改原因</option>
+	                                                          <option value="病情减轻">病情减轻</option>
+	                                                          <option value="病情加重">病情加重</option>
+	                                                          <option value="操作失误">操作失误</option>
+	                                                          <option value="其他">其他</option>
+	                                                  </select>
+	                                              </div>
+	                                             <span id="noreason" style="color: red;"></span>
+	                                         </div>
+										<!-- <select class="form-control input-sm m-b-10" id="changereason">
+                                                         <option value="" id="loginname">选择修改原因</option>
+                                                         <option value="病情减轻">病情减轻</option>
+                                                         <option value="病情加重">病情加重</option>
+                                                         <option value="操作失误">操作失误</option>
+                                                      <option value="其他">其他</option>
+                                                     </select> -->
+                                                     <textarea class="form-control textareaType input-blue-color" id="reasondetail" placeholder="手动调级原因:"></textarea>
+							<div class="row" style="margin:10px 0">
+<!-- 										<div class="form-group textarea form-easyui"> -->
+<!-- 											<input class="easyui-combobox" id="changereason" -->
+<!-- 												prompt="手动调级原因:" style="width:250px;" -->
+<!-- 												data-options="valueField:'lable',textField:'value', -->
+<!--     								data:[{ -->
+<!--                		 					lable:'病情加重', -->
+<!--                 						value:'病情加重' -->
+<!--             						}, -->
+<!--             						{ -->
+<!--                 						lable:'病情减轻', -->
+<!--                 						value:'病情减轻' -->
+<!--             						}, -->
+<!--            							{ -->
+<!--                 						lable:'操作失误', -->
+<!--                 						value:'操作失误' -->
+<!--             						}, -->
+<!--             						{ -->
+<!--                 						lable:'其他', -->
+<!--                 						value:'其他' -->
+<!--             						} -->
+<!--         						]" /> -->
+<!-- 										</div> -->
+									<p style="margin-bottom:20px;">评级时间：<input class="form-control formHalf btn-time"
+									type="text" id="dividtime" style="width: 70%;"> </p>
+									<p>评级护士：#userName()</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="sure">
+									<div class="col-md-6">
+										<input type="button" class="form-control button btn-define" value="重置"
+										Userbehavior="A166"	onclick="showreset();">
+									</div>
+									<div class="col-md-6">
+										<input type="button" class="form-control button btn-define"
+										Userbehavior="A165"	aria-hidden="true" onclick="saveGrade();" value="保存">
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

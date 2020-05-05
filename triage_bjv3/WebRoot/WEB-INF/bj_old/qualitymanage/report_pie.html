@@ -1,0 +1,190 @@
+#@bj_layout('index')
+#define bj_main()
+<script type="text/javascript">
+#include("report_pie.js")
+</script>
+<aside class="right-side">
+	    <section class="content">		
+			<div class="chart-section">
+				<div class="select-top clearfix">
+			        <div class="datetime-box pull-left">
+			        	<form class="form-inline headSearch" role="">
+			        		<select id="YSelect">
+							<option value="" selected>2019</option>
+							<option value="" >2018</option>
+							<option value="">2017</option>
+							<option value="">2016</option>
+							<option value="">2015</option>
+							<option value="">2014</option>
+							<option value="">2013</option>
+						</select>
+								<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+									查询
+								</a>
+							</form>
+			    	</div>
+			    	<div class="pull-right">
+			    		<button class="btn btn-primary zkgl-page01-btn">第一页</button>
+			    		<button class="btn btn-primary zkgl-page02-btn">第二页</button>
+					</div>
+			    </div>
+			    <div class="clearfix chart-part11 zkgl-page01">
+			        <div class="pull-left chart-part11-01 chart-part11-bottom1">
+			            <div class="report-common-box">
+			             		<h1 class="barTitle">急诊各级患者比例</h1>
+								<div class="chart-box">
+				                 	<div id="linechart" style="width: 100%;height:200px;"></div>
+				                 </div>
+			            </div>
+			        </div>
+			        <div class="pull-left chart-part11-02 chart-part11-bottom1">
+			            <div class="report-common-box">
+			             		<h1 class="barTitle">胸痛中心患者收入心内科/CCU比例 </h1>
+								<div class="chart-box">
+				                 	<div id="report_11_pie1" style="width: 100%;height:200px;"></div>
+				                 </div>
+			            </div>
+			        </div>
+			        <div class="pull-left chart-part11-03 chart-part11-bottom1">
+			            <div class="report-common-box">
+			                <h1 class="barTitle">急性消化道出血患者24小时内完成急诊胃镜比例</h1>
+								<div class="chart-box">
+				                 	<div id="report_12_pie1" style="width: 100%;height:200px;"></div>
+				                 </div>
+			            </div>
+			        </div>
+			        <div class="pull-left chart-part11-01 chart-part11-bottom1">
+			            <div class="report-common-box">
+			           		 <h1 class="barTitle">监护床位危重病患比</h1>
+			                 <div class="chart-box">
+			                 	<div id="report_13_pie1" style="width: 100%;height:200px;"></div>
+			                 </div>
+			            </div>
+			        </div>
+			        <div class="pull-left chart-part11-02 chart-part11-bottom1">
+			            <div class="report-common-box">
+			                 <h1 class="barTitle">抢救室滞留时间平均数</h1>
+			                 <div class="occupy">
+								<div id="div_rct_time">
+								</div>
+							</div>                 
+			            </div>
+			        </div>        
+			        <div class="pull-left chart-part11-03 chart-part11-bottom1">
+			            <div class="report-common-box">
+			              	<h1 class="barTitle">急诊抢救室患者死亡率</h1>
+			              	<div class="chart-box">
+			              		<div id="report_14_pie3" style="width: 100%;height:200px;"></div>
+			              	</div>                 
+			            </div>
+			        </div>
+			    </div>
+			   <div class="clearfix chart-part11 zkgl-page02">
+			        <div class="pull-left chart-part11-01 chart-part11-bottom1">
+			            <div class="report-common-box">
+			             		<h1 class="barTitle">脓毒症患者1小时内使用抗生素率</h1>
+								<div class="chart-box">
+				                 	<div id="pie_chart1" style="width:500px;height:200px;"></div>
+				                 </div>
+			            </div>
+			        </div>
+			        <div class="pull-left chart-part11-02 chart-part11-bottom1">
+			            <div class="report-common-box">
+			             		<h1 class="barTitle">脓毒症患者1小时内留取血培养率 </h1>
+								<div class="chart-box">
+				                 	<div id="pie_chart2" style="width:500px;height:200px;"></div>
+				                 </div>
+			            </div>
+			        </div>
+			        <div class="pull-left chart-part11-03 chart-part11-bottom1">
+			            <div class="report-common-box">
+			                <h1 class="barTitle">ROSC成功率</h1>
+								<div class="chart-box">
+				                 	<div id="pie_chart3" style="width: 500px;height:200px;"></div>
+				                 </div>
+			            </div>
+			        </div>
+			        <div class="pull-left chart-part11-01 chart-part11-bottom1">
+			            <div class="report-common-box">
+			           		 <h1 class="barTitle">急诊患者抗生素使用率</h1>
+			                 <div class="chart-box">
+			                 	<div id="pie_chart4" style="width: 500px;height:200px;"></div>
+			                 </div>
+			            </div>
+			        </div>
+			        <div class="pull-left chart-part11-02 chart-part11-bottom1">
+			            <div class="report-common-box">
+			                 <h1 class="barTitle">急诊就诊费用</h1>
+			                 <div class="chart-box">
+			                 	<div id="pie_chart5" style="width: 500px;height:200px;"></div>
+			                 </div>              
+			            </div>
+			        </div>        
+			        <div class="pull-left chart-part11-03 chart-part11-bottom1">
+			            <div class="report-common-box">
+			              	<h1 class="barTitle">急诊是否使用电子病历系统</h1>
+			              	<div class="zkgl-chart-form">
+			              		<div class="icheck-inline1" id="show_radio">
+									<label id="allbtn"> 
+										<input type="radio" name="is_use" checked class="icheck" data-radio="iradio_flat-blue" value="1">
+										是
+									</label> 
+									<label id="zdgbtn">
+										<input type="radio" name="is_use" class="icheck" data-radio="iradio_flat-blue" value="0">
+										 否
+									</label> 				
+								</div>
+								<div class="icheck-inline1" id="show_num" style="display:none">
+									<span id="is_use1"> 
+										
+									</span> 
+									<span id="is_use0">
+										 
+									</span> 				
+								</div>
+								<div class="form-horizontal">
+									<div class="form-group">
+									    <label class="col-sm-3 control-label"><span class="red-star">*</span>填写人：</label>
+									    <div class="col-sm-7">
+									      <input type="text" class="form-control only_read" id='writtener'>
+									    </div>
+									 </div>
+									 <div class="form-group">
+									    <label class="col-sm-3 control-label">部门/科室：</label>
+									    <div class="col-sm-7">
+									      <input type="text" class="form-control only_read" id='department'>
+									    </div>
+									 </div>
+									 <div class="form-group">
+									    <label class="col-sm-3 control-label">职务/职称：</label>
+									    <div class="col-sm-7">
+									      <input type="text" class="form-control only_read" id='duties'>
+									    </div>
+									 </div>
+									 <div class="form-group">
+									    <label class="col-sm-3 control-label"><span class="red-star">*</span>手机号码：</label>
+									    <div class="col-sm-7">
+									      <input type="text" class="form-control only_read" id="tel">
+									    </div>
+									 </div>
+									 <div class="text-right zkgl-form-btn">
+									 	<button class="btn btn-primary" onclick="saveUseEmr(this)" id="save">提交</button>
+									 </div>
+								</div>
+								
+			              	</div>                
+			            </div>
+			        </div>
+			    </div>
+			
+			</div>
+		<!-- <div class="footer-main">
+                    <div class="roll">
+                        <ul class="mingdan list-unstyled" style="margin-top: 0px;" id="depart">
+                          
+                        </ul>
+                      </div>
+                </div> -->
+                   </section>
+                   </aside> 
+#end

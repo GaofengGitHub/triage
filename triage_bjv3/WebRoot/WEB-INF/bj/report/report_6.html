@@ -1,0 +1,269 @@
+<script src="#path()/static/bj/js/iCheck/app.min.js"></script>
+<script src="#path()/static/bj/js/iCheck/icheck.min.js"></script>
+<script src="#path()/static/bj/js/iCheck/form-icheck.min.js"></script>
+<script type="text/javascript">
+#include("report_6.js")
+</script>
+<div class="chart-section">
+<div class="select-top">
+    <div class="datetime-box clearfix">
+        <form class="form-inline headSearch" role="">
+        <div style="display:inline-block;vertical-align: middle;">
+			<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+		        <input type="text" class="form-control" name="from" id="starttime">
+		        <span class="input-group-addon"> - </span>
+		        <input type="text" class="form-control" name="to" id="endtime">                    
+		    </div>
+		</div>
+				    <!-- <input type="text" class="form-control" style='width: 40%;'
+				        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+						id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+					<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+						查询
+					</a>
+				</form>
+    </div>
+    <div class="filter-radio-box clearfix">
+			<div class="icheck-inline">
+				<label id="allbtn"> 
+					<input type="radio" name="filter-radio" checked class="icheck" data-radio="iradio_flat-blue" value="全部">
+					全部
+				</label> 
+				<label id="zdgbtn">
+					<input type="radio" name="filter-radio" class="icheck" data-radio="iradio_flat-blue" value="自定义">
+					 自定义
+				</label> 				
+			</div>
+			<div id="showzdy" class="icheck-inline" style="display: none;">
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊内科
+				</label>
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊外科
+				</label>
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊神经内科
+				</label>
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊妇科
+				</label>
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊产科
+				</label>
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊皮肤科
+				</label>
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊耳鼻喉科
+				</label>
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊眼科
+				</label>
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊口腔科
+				</label>
+				<label>
+					<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+					急诊精神科
+				</label>
+			</div>
+
+			
+        <!-- <div>
+            <label class="control-label">
+                <span class="checked-static radio-static">
+                    <input type="radio" name="filter-radio" value="全部" checked>
+                    <i></i>
+                </span>
+                                        全部
+            </label>
+        </div>
+        
+        <div class="filter-radio-btn-box">
+            <label class="control-label filter-radio-btn">
+                <span class="checked-static radio-static">
+                    <input type="radio" name="filter-radio" value="自定义">
+                    <i></i>
+                </span>
+                                        自定义
+            </label>
+            <div id="showzdy" class="pull-left filter-radio-content" style="display: none;">
+                <div class="pull-left">
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                               急诊内科
+                    </label>
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                             急诊外科
+                    </label>
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                              急诊神经内科
+                    </label>
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                             急诊妇科
+                    </label>
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                              急诊产科
+                    </label>
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                              急诊皮肤科
+                    </label>
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                              急诊耳鼻喉科
+                    </label>
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                              急诊眼科
+                    </label>
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                             急诊口腔科
+                    </label>
+                    <label class="control-label">
+                        <span class="checked-static">
+                            <input type="checkbox" name="" value="" >
+                            <i></i>
+                        </span>
+                                                              急诊精神科
+                    </label>
+                </div>
+            </div>
+        </div> -->
+    </div>
+ </div>
+    <div class="chart-part06-new clearfix">
+        <div class="pull-left">
+            <div>
+                <h1>急诊总量</h1>
+                <h2><font class="counter">8156</font><span>（人）</span></h2>
+                <div class="report-progress-box">
+                    <div class="report-progress"></div>
+                </div>
+            </div>
+            <div>
+                <h1>分诊去向与就诊科室符合率</h1>
+                <h2><font class="counter">8074</font><span>人次符合</span></h2>
+                <div class="report-progress-box">
+                    <div class="report-progress02" style="width:99%">
+                        <i>99%</i>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-box" id="option_1" style="min-height: 250px;"></div>
+        </div>
+        <div class="pull-right">
+            <div class="report-common-box">
+                <h1>各科室患者数量</h1>
+                <div class="chart-box" id="option_2" style="height:200px"></div>
+			<table class="table table-bordered report-common-table report-common-table-notdbg">
+				<thead>
+					<tr>
+						<th>急诊内科</th>
+						<th>急诊外科</th>
+						<th>急诊神经内科</th>
+						<th>急诊妇科</th>
+						<th>急诊产科</th>
+						<th>急诊皮肤科</th>
+						<th>急诊耳鼻喉科</th>
+						<th>急诊眼科</th>
+						<th>急诊口腔科</th>
+						<th>急诊精神</th>
+					</tr>
+				</thead>
+				<tbody>					
+					<tr>
+						<td class="counter">2547</td>
+						<td class="counter">1831</td>
+						<td class="counter">994</td>
+						<td class="counter">534</td>
+						<td class="counter">366</td>
+						<td class="counter">543</td>
+						<td class="counter">554</td>
+						<td class="counter">321</td>
+						<td class="counter">332</td>
+						<td class="counter">134</td>
+					</tr>
+				</tbody>
+			</table>
+            </div>
+            <div class="report-common-box chart-part06-new-bottom">
+                <h1>各科室患者占总患者百分比</h1>
+                <div class="chart-box" id="option_3" style="height:calc(100% - 120px)"></div>
+			<div class="table-scroll-x">
+				<table class="table table-bordered report-common-table report-common-table-notdbg">
+					<thead>
+						<tr>
+							<th>急诊内科</th>
+							<th>急诊外科</th>
+							<th>急诊神经内科</th>
+							<th>急诊妇科</th>
+							<th>急诊产科</th>
+							<th>急诊皮肤科</th>
+							<th>急诊耳鼻喉科</th>
+							<th>急诊眼科</th>
+							<th>急诊口腔科</th>
+							<th>急诊精神</th>
+						</tr>
+					</thead>
+				<tbody>					
+					<tr>
+						<td>31.2%</td>
+						<td>22.5%</td>
+						<td>12.2%</td>
+						<td>6.55%</td>
+						<td>4.49%</td>
+						<td>6.65%</td>
+						<td>6.80%</td>
+						<td>3.93%</td>
+						<td>4.07%</td>
+						<td>1.61%</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+            </div>
+        </div>
+    </div>       
+</div>

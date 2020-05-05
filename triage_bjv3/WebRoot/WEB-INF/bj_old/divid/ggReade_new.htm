@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html lang= "en">
+<head>
+<title>GGCamera_Demo</title>
+</head>
+<BODY>
+<div>
+	<p>
+		<div style="background:white;float:right;width:100%; height:100%; border:1px solid #999;padding:3px;">	
+
+			<font color="#FF0000" size="2">连接服务操作: </font><br>
+			<br>
+			<font color="#0000FF" size="2">指令服务端口号: </font>
+			<input type="radio" name="cmd_port" value="port_10890" onclick="OnCmdPortChanged(this)" checked="true">10890
+			<input type="button" name="btn" value="连接指令服务器" onclick='connect_cmd_svc()'><br>
+			<hr>		
+			<font color="#FF0000" size="2">二代证模块测试: </font><br>
+	
+			<font color="#00AA00" size="2">端口</font>
+			<input type="text" name="ComPort" id="ComPort" style="width:100px;" value="4">
+			<font color="#00AA00" size="2">照片路径</font>
+			<input type="text" name="PhotoPath" id="PhotoPath" style="width:100px;" value="D:\">
+			<input type="button" name="btn" style="width:120px;"value="读二代证" onclick='ReadCard()'>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img name="PhotoDisplay" style="width:81px; height:100px;"/>
+			<br><br>
+			<font color="#00AA00" size="2">姓名</font>
+			<input type="text" name="Name" id="Name" style="width:100px;" value="">		
+			<font color="#00AA00" size="2">民族</font>
+			<input type="text" name="Nation" id="Nation" style="width:100px;" value="">
+			<font color="#00AA00" size="2">证件号码</font>
+			<input type="text" name="ID" id="ID" style="width:200px;" value="">
+			<font color="#00AA00" size="2">起始日期</font>
+			<input type="text" name="StartDate" id="StartDate" style="width:100px;" value="">	
+			<font color="#00AA00" size="2">地&nbsp;&nbsp;&nbsp;&nbsp;址</font>
+			<input type="text" name="Address" id="Address" style="width:200px;" value="">
+			<br>
+			<font color="#00AA00" size="2">性别</font>
+			<input type="text" name="Sex" id="Sex" style="width:100px;" value="">
+			<font color="#00AA00" size="2">生日</font>
+			<input type="text" name="Birthday" id="Birthday" style="width:100px;" value="">		
+			<font color="#00AA00" size="2">签发机关</font>
+			<input type="text" name="Department" id="Department" style="width:200px;" value="">		
+			<font color="#00AA00" size="2">终止日期</font>
+			<input type="text" name="EndDate" id="EndDate" style="width:100px;" value="">		
+			<font color="#00AA00" size="2">&nbsp;新地址</font>
+			<input type="text" name="AppAddress1" id="AppAddress1" style="width:200px;" value="">
+			<font color="#00AA00" size="2">预留信息</font>
+			<input type="text" name="Reserve" id="Reserve" style="width:100px;" value="">
+			
+
+			<hr>
+			<font color="#FF0000" size="2">磁条卡模块测试: </font><br>
+			<br>
+			<font color="#00AA00" size="2">端口</font>
+			<input type="text" name="ComPort_T" id="ComPort_T" style="width:100px;" value="4">
+			<font color="#00AA00" size="2">超时</font>
+			<input type="text" name="WaitTime" id="WaitTime" style="width:100px;" value="15">
+			<font color="#00AA00" size="2">磁道号</font>
+			<input type="text" name="TrackNo" id="TrackNo" style="width:100px;" value="23">
+
+			<input type="button" name="btn" style="width:120px;"value="读磁卡" onclick='ReadTrack()'>
+			<input type="button" name="btn" style="width:120px;"value="写磁卡" onclick='WriteTrack()'>
+			<br><br>
+			<font color="#00AA00" size="2">二磁道数据</font>
+			<input type="text" name="TrackData2" id="TrackData2" style="width:300px;" value="12345678901234567890">
+			
+			<font color="#00AA00" size="2">三磁道数据</font>
+			<input type="text" name="TrackData3" id="TrackData3" style="width:300px;" value="09876543210987654321">
+			<hr>
+			<font color="#FF0000" size="2">IC卡模块测试: </font><br>
+			<br>
+			<font color="#00AA00" size="2">端口</font>
+			<input type="text" name="ComPort_I" id="ComPort_I" style="width:100px;" value="4">
+			<font color="#00AA00" size="2">扩展口</font>
+			<input type="text" name="ExPort" id="ExPort" style="width:100px;" value="">
+			<font color="#00AA00" size="2">超时</font>
+			<input type="text" name="WaitTime_I" id="WaitTime_I" style="width:100px;" value="15">
+			<font color="#00AA00" size="2">波特率</font>
+			<input type="text" name="Baud" id="Baud" style="width:100px;" value="9600">
+			<font color="#00AA00" size="2">卡类型</font>
+			<input type="text" name="ICType" id="ICType" style="width:100px;" value="3">
+			<font color="#00AA00" size="2">TagList</font>
+			<input type="text" name="TagList" id="TagList" style="width:100px;" value="ABCDEFGHIJKL">
+			<font color="#00AA00" size="2">AIDList</font>
+			<input type="text" name="AIDList" id="AIDList" style="width:100px;" value="A000000333010101|A000000333010102">
+
+			<input type="button" name="btn" style="width:120px;"value="读IC卡信息" onclick='ReadIcInfo()'>
+			<input type="button" name="btn" style="width:120px;"value="清空" onclick='ClearText()'>
+			<hr>
+		</div>
+		
+		<div style="background:#cdc8c8;float:left;width:100%;height:100%">
+			<CENTER><textarea id="TextArea1" style="background:white; width:800px; height:300px"></textarea>
+		</div>
+	</p>
+</div>
+
+<script type="text/javascript">
+
+var txtlog = document.getElementById("TextArea1");
+
+
+var ws_cmd = null;
+var cmd_svc_port = 10890;
+var cmd_svc_connect = false;
+
+//指令服务四个端口：10889, 11487, 32548, 48570
+
+function OnCmdPortChanged(obj){
+	if(obj.checked)
+	{
+		switch(obj.value)
+		{
+		case "port_10889":
+			cmd_svc_port = 10890;
+			break;
+		}
+	}
+}
+
+function connect_cmd_svc() {
+	if(cmd_svc_connect == true){
+		//("已连接指令服务器");
+		txtlog.value = "已连接指令服务器" + txtlog.value;
+		return;
+	}
+
+	var url = "ws://localhost:" + cmd_svc_port + "/";
+	if ('WebSocket' in window)
+	{
+		ws_cmd = new WebSocket(url);
+		ws_cmd.binaryType = "arraybuffer";
+	}
+	else if ('MozWebSocket' in window)
+	{
+		ws_cmd = new MozWebSocket(url);
+		ws_cmd.binaryType = "arraybuffer";
+	}
+	else
+	{
+		//alert("浏览器不支持WebSocket");
+		txtlog.value = "浏览器不支持WebSocket" + txtlog.value;
+	}
+	cmdWebSocketEvent();
+}
+
+function cmdWebSocketEvent()
+{
+	ws_cmd.onopen = function()
+	{
+		cmd_svc_connect = true;
+		//alert("成功连接指令服务器");
+		txtlog.value = "成功连接指令服务器" + txtlog.value;
+
+		//成功连接服务器后，需要发送身份验证消息
+		//身份验证格式: {"id": 1000}
+		//成功收到验证反馈消息: {"id": 1001, "status": "success"}，说明为CZUR提供
+		//ws_cmd.send('{\"id\": 1000}');
+	}
+
+	ws_cmd.onmessage = function(e)
+	{
+		var jsonObj = window.JSON.parse(e.data);
+		switch(jsonObj.id){
+			//身份验证反馈消息
+			case 1001:{
+				txtlog.value = "指令服务器身份验证成功: " + jsonObj.status + "\r\n" + txtlog.value;
+			}
+			break;
+
+			//读二代证
+			case 200:{
+				if(jsonObj.hasOwnProperty("error")){
+					var text = "读二代证失败: " + jsonObj.error + "\r\n";
+					txtlog.value = text + txtlog.value;
+				}
+				else{				
+					var Name = document.getElementById("Name");
+					Name.value = jsonObj.Name;
+					var Sex = document.getElementById("Sex");
+					Sex.value = jsonObj.Sex;
+					var Nation = document.getElementById("Nation");
+					Nation.value = jsonObj.Nation;
+					var Birthday = document.getElementById("Birthday");
+					Birthday.value = jsonObj.Birthday;
+					var Address = document.getElementById("Address");
+					Address.value = jsonObj.Address;
+					var ID = document.getElementById("ID");
+					ID.value = jsonObj.ID;
+					var Department = document.getElementById("Department");
+					Department.value = jsonObj.Department;
+					var StartDate = document.getElementById("StartDate");
+					StartDate.value = jsonObj.StartDate;
+					var EndDate = document.getElementById("EndDate");
+					EndDate.value = jsonObj.EndDate;
+					var Reserve = document.getElementById("Reserve");
+					Reserve.value = jsonObj.Reserve;
+					var AppAddress1 = document.getElementById("AppAddress1");
+					Reserve.value = jsonObj.AppAddress1;
+					document.all['PhotoDisplay'].src = jsonObj.PhotoPath+"zp.bmp"; 
+					//成功
+					txtlog.value = "读二代证成功\r\n" + txtlog.value;
+				}
+			}
+			break;
+			//读磁条卡
+			case 201:{
+				if(jsonObj.hasOwnProperty("error")){
+					var text = "读磁条卡失败: " + jsonObj.error + "\r\n";
+					txtlog.value = text + txtlog.value;
+				}
+				else{
+					var text = "二磁道信息: " + jsonObj.TrackData2 + "\r\n";
+					txtlog.value = text + txtlog.value;
+					text = "三磁道信息: " + jsonObj.TrackData3 + "\r\n";
+					txtlog.value = text + txtlog.value;
+				}
+			}
+			break;
+			//写磁条卡
+			case 202:{
+				if(jsonObj.hasOwnProperty("error")){
+					var text = "写磁条卡失败: " + jsonObj.error + "\r\n";
+					txtlog.value = text + txtlog.value;
+				}
+				else{
+					var text = "写磁条卡成功: " +  "\r\n";
+					txtlog.value = text + txtlog.value;
+				}
+			}
+			break;
+			//读IC卡
+			case 203:{
+				if(jsonObj.hasOwnProperty("error")){
+					var text = "读IC卡失败: " + jsonObj.error + "\r\n";
+					txtlog.value = text + txtlog.value;
+				}
+				else{
+					var text = "读IC卡成功: " +  "\r\n";
+					var text = "IC卡信息: " + jsonObj.userInfo + "\r\n";
+					txtlog.value = text + txtlog.value;
+				}
+			}
+			break;
+		}
+	}
+
+	ws_cmd.onclose = function()
+	{
+		cmd_svc_connect = false;
+		//alert("未连接指令服务器");
+		txtlog.value = "未连接指令服务器" + txtlog.value;
+	}
+}
+
+
+function ReadCard(){
+	
+	var ComPort = document.getElementById("ComPort").value;
+	var PhotoPath = document.getElementById("PhotoPath").value;
+	
+	var data = '{\"id\": 0, \"ComPort\": ' + ComPort + ', \"PhotoPath\": ' + '\"'+ PhotoPath +  '\"'+'}';
+	ws_cmd.send(data);
+}
+
+function ReadTrack(){
+	
+	var ComPort_T = document.getElementById("ComPort_T").value;
+	var WaitTime = document.getElementById("WaitTime").value;
+	var TrackNo = document.getElementById("TrackNo").value;
+	
+	var data = '{\"id\": 1, \"ComPort\": ' + ComPort_T + ', \"TrackNo\": ' + TrackNo +', \"WaitTime\": ' + WaitTime +'}';
+	ws_cmd.send(data);
+}
+
+function WriteTrack(){
+	
+	var ComPort_T = document.getElementById("ComPort_T").value;
+	var WaitTime = document.getElementById("WaitTime").value;
+	var TrackNo = document.getElementById("TrackNo").value;
+	var TrackData2 = document.getElementById("TrackData2").value;
+	var TrackData3 = document.getElementById("TrackData3").value;
+	
+	var data = '{\"id\": 2, \"ComPort\": ' + ComPort_T + ', \"TrackNo\": ' + TrackNo +', \"TrackData2\": ' + '\"'+ TrackData2 + '\"' +', \"TrackData3\": ' + '\"'+ TrackData3+ '\"'+', \"WaitTime\": ' + WaitTime +'}';
+	ws_cmd.send(data);
+}
+
+function ReadIcInfo(){
+	
+	var ComPort_I = document.getElementById("ComPort_I").value;
+	var WaitTime_I = document.getElementById("WaitTime_I").value;
+	var ExPort = document.getElementById("ExPort").value;
+	var Baud = document.getElementById("Baud").value;
+	var ICType = document.getElementById("ICType").value;
+	var TagList = document.getElementById("TagList").value;
+	var AIDList = document.getElementById("AIDList").value;
+	
+	var data = '{\"id\": 3, \"ComPort\": ' + ComPort_I + ', \"Baud\": ' + Baud + ', \"ICType\": ' + ICType+', \"ExPort\": ' + '\"'+ ExPort + '\"' +', \"TagList\": ' + '\"'+ TagList+ '\"'+', \"AIDList\": ' + '\"'+ AIDList+ '\"'+', \"WaitTime\": ' + WaitTime_I +'}';
+	ws_cmd.send(data);
+}
+
+function ClearText(){
+	
+	document.all['TextArea1'].value = ''; 
+	document.all['PhotoDisplay'].src = ''; 
+}
+
+</SCRIPT>
+</body>
+</HTML>

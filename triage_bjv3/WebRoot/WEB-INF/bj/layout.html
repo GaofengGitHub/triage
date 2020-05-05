@@ -1,0 +1,331 @@
+#define bj_layout(pageIndex)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>急诊专科全流程业务系统 ECS</title>
+	<link rel="stylesheet" href="#path()/static/vendor/newpage/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="#path()/static/vendor/newpage/css/home.css" />
+	<link rel="stylesheet" href="#path()/static/vendor/newpage/css/tfsj.css" />
+	<link href="#path()/static/bj/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="#path()/static/bj/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+	<link href="#path()/static/bj/css/bootstrap-table.css" rel="stylesheet" type="text/css" />
+	<link href="#path()/static/bj/css/iCheck/all.css" rel="stylesheet" type="text/css" />
+	<link href="#path()/static/bj/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="#path()/static/bj/css/bootstrap-table.css" rel="stylesheet" type="text/css" />
+	<link href="#path()/static/bj/css/combo.select.css" rel="stylesheet" type="text/css" />
+	<link href="#path()/static/bj/css/awesome-bootstrap-checkbox.css" rel="stylesheet" type="text/css" />
+	<link href="#path()/extend/toastr/toastr.css" rel="stylesheet">
+	<link href="#path()/static/vendor/newpage/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
+	<script type="text/javascript" src="#path()/static/vendor/newpage/js/jquery.min.js"></script>
+	<script type="text/javascript" src="#path()/static/vendor/newpage/js/bootstrap.min.js"></script>
+	<script src='#path()/static/bj/js/jquery.dad.min.js' type="text/javascript"></script>
+	<script src='#path()/static/bj/js/interaction.js' type="text/javascript"></script>
+	<script src="#path()/static/bj/js/plugins/chartjs/Chart.bundle.js" type="text/javascript"></script>
+	<script src="#path()/static/bj/js/plugins/chartjs/Chart.js" type="text/javascript"></script>
+	<script src='#path()/static/bj/js/bootstrap-table.min.js' type="text/javascript"></script>
+	<script src='#path()/static/bj/js/bootstrap-table-zh-CN.min.js' type="text/javascript"></script>
+	<script src='#path()/static/bj/js/jquery.combo.select.js' type="text/javascript"></script>
+	<script src='#path()/static/bj/js/TweenLite.min.js' type="text/javascript"></script>
+	<script src='#path()/static/bj/js/lem_counter.js' type="text/javascript"></script>
+	<script src="#path()/extend/toastr/toastr.js"></script>
+	<!-- <script src="#path()/extend/laydate/laydate.js"></script> -->
+	<script src='#path()/static/bj/js/echarts.js' type="text/javascript"></script>
+	<link href="#path()/extend/easyui/css/default/datagrid.css" rel="stylesheet">
+	<!-- <script src="#path()/extend/easyui/jquery.easyui.min.js"></script> -->
+	<script src='#path()/static/js/websocket.js' type="text/javascript"></script>
+	<!-- 	<script src="#path()/extend/datepicker/datepicker.all.min.js"  type="text/javascript"></script>
+        <script src="#path()/extend/datepicker/moment.min.js"  type="text/javascript"></script> -->
+	<script src="#path()/static/dist/js/bootstrap3-typeahead.js"></script>
+	<script src="#path()/static/bj/js/Print.js"></script>
+	<script src="#path()/static/bj/js/jquery.qrcode.min.js"></script>
+	<script src="#path()/static/bj/js/jquery.jqprint-0.3.js"></script>
+	<!--日期控件  -->
+	<script src="#path()/static/bj/js/moment.min.js" type="text/javascript"></script>
+	<script src="#path()/static/bj/js/app.min.js" type="text/javascript"></script>
+	<script src="#path()/static/bj/js/components-date-time-pickers.min.js" type="text/javascript"></script>
+	<script src="#path()/static/bj/js/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+	<script src="#path()/static/bj/js/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+	<script src="#path()/static/bj/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+	<script src="#path()/static/bj/js/laydate/laydate.js" type="text/javascript"></script>
+	<script src="#path()/static/bj/js/layer/layer.js" type="text/javascript"></script>
+<!-- 	<link href="#path()/static/bj/js/layer/theme/default/layer.css" rel="stylesheet" type="text/css" /> -->
+	<!--日期控件  -->
+	<!-- 身份证解析 -->
+	<script src="#path()/static/bj/js/IDCardPaser.js" type="text/javascript"></script>
+	<!-- 身份证解析 -->
+	<!-- 国家 -->
+	<script src="#path()/static/bj/js/nationality.js" type="text/javascript"></script>
+	<!-- 国家 -->
+	<!-- 省市县选择 -->
+	<script src="#path()/static/bj/js/distpicker.data.js" type="text/javascript"></script>
+	<script src="#path()/static/bj/js/distpicker.js" type="text/javascript"></script>
+	<!-- 省市县 -->
+	<!-- 新手引导控件 -->
+<!--	<link href="#path()/static/bj/css/guide/introjs.css" rel="stylesheet" type="text/css" />-->
+<!--	<script src="#path()/static/bj/js/guide/intro.min.js" type="text/javascript"></script>-->
+	<script src="#path()/static/vendor/newpage/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="#path()/static/vendor/newpage/bootstrap-select/js/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
+
+
+	<script src="#path()/extend/easyui/jquery.easyui.min.js"></script>
+	<script src="#path()/static/bj/js/weixinAudio.js"></script>
+
+	<link href="#path()/static/dist/css/bootstrap-switch.min.css" rel="stylesheet"></link>
+	<script src="#path()/static/dist/js/bootstrap-switch.min.js"></script>
+	<!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+	<!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+	<!--[if lt IE 9]>
+	<script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body style="background: #eff2f2;">
+<div class="Home clearfix">
+	<aside class="leftAside">
+		<div class="leftLogo" Userbehavior="A27"  onclick="openDividIndex()">
+			<img alt="" src="#(session.hplogourl)" />
+			<p>预检分诊工作站</p>
+		</div>
+		<div class="leftNav">
+			<ul class="iconNav">
+				<li  id="home" class="iconNavItem leftNavActive">
+					<img class="iconNavImg" alt=""
+						 src="#path()/static/vendor/newpage/images/home/fzHome_selected.png"
+						 data-active-img="#path()/static/vendor/newpage/images/home/fzHome_unselected.png"
+					/>
+					<a class="iconName" href="#path()/index/index" >首页</a>
+				</li>
+				<li class="iconNavItem"  id="addPatient" >
+					<img class="iconNavImg" alt=""
+						 src="#path()/static/vendor/newpage/images/home/fzHome_add_unselected.png"
+						 data-active-img="#path()/static/vendor/newpage/images/home/fzHome_add_selected.png"
+					/>
+					<a class="iconName"  href="#path()/divid/index" >新增患者</a>
+				</li>
+<!--				<li class="iconNavItem">-->
+<!--					<img class="iconNavImg" alt="" src="#path()/static/vendor/newpage/images/home/fzHome_writeIn_unselected.png" data-active-img="#path()/static/vendor/newpage/images/home/fzHome_writeIn_selected.png"/>-->
+<!--					<a class="iconName">医嘱录入</a>-->
+<!--				</li>-->
+<!--				<li class="iconNavItem">-->
+<!--					<img class="iconNavImg" alt="" src="#path()/static/vendor/newpage/images/home/home_unselectEMR.png" data-active-img="#path()/static/vendor/newpage/images/home/home_selectEMR.png"/>-->
+<!--					<a class="iconName">电子病历</a>-->
+<!--				</li>-->
+				<li  id="historyrecord" class="iconNavItem">
+						<img class="iconNavImg" alt=""
+							 src="#path()/static/vendor/newpage/images/home/fzHome_history_unselected.png"
+							 data-active-img="#path()/static/vendor/newpage/images/home/fzHome_history_selected.png"
+						/>
+					<a class="iconName" href="#path()/historyrecord/index" >历史记录</a>
+				</li>
+				<li class="iconNavItem" id="report" >
+					<img class="iconNavImg" alt="" src="#path()/static/vendor/newpage/images/home/fzHome_table_unselected.png" data-active-img="#path()/static/vendor/newpage/images/home/fzHome_table_selected.png"/>
+					<a class="iconName" href="#path()/report/index" >统计报表</a>
+				</li>
+<!--				<li class="iconNavItem">-->
+<!--					<img class="iconNavImg" alt="" src="#path()/static/vendor/newpage/images/home/fzHome_zk_unselected.png" data-active-img="#path()/static/vendor/newpage/images/home/fzHome_zk_selected.png"/>-->
+<!--					<a class="iconName">质控管理</a>-->
+<!--				</li>-->
+<!--				<li class="iconNavItem">-->
+<!--					<img class="iconNavImg" alt="" src="#path()/static/vendor/newpage/images/home/fzHome_change_unselected.png" data-active-img="#path()/static/vendor/newpage/images/home/fzHome_change_selected.png"/>-->
+<!--					<a class="iconName">交班管理</a>-->
+<!--				</li>-->
+
+				<li class="iconNavItem" id="events" >
+					<img class="iconNavImg" alt="" src="#path()/static/vendor/newpage/images/home/fzHome_table_unselected.png" data-active-img="#path()/static/vendor/newpage/images/home/fzHome_table_selected.png"/>
+					<a class="iconName" href="#path()/events/index" >突发公共卫生事件</a>
+				</li>
+			</ul>
+			<div class="textNav list-unstyled"  id="depart" style="overflow:hidden;">
+				<div class="sroll">
+					<div class="textNavItem">
+						<span class="navText">抢救室/人</span>
+						<span class="navNum">1</span>
+					</div>
+					<div class="textNavItem">
+						<span class="navText">呼吸内科/人</span>
+						<span class="navNum">1</span>
+					</div>
+					<div class="textNavItem">
+						<span class="navText">留观室/人</span>
+						<span class="navNum">1</span>
+					</div>
+					<div class="textNavItem">
+						<span class="navText">输液室/人</span>
+						<span class="navNum">1</span>
+					</div>
+					<div class="textNavItem">
+						<span class="navText">手术室/人</span>
+						<span class="navNum">1</span>
+					</div>
+					<div class="textNavItem">
+						<span class="navText">呼吸内科/人</span>
+						<span class="navNum">1</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</aside>
+	<div class="rightBody">
+		<header>
+			<div class="HeaderAlert " Userbehavior="A2" onclick="showToastr('true')">
+				<img alt="" src="#path()/static/vendor/newpage/images/home/fzHome_alert.png" />
+				<p id="warnNum2">共有1条报警消息等待处理！</p>
+			</div>
+			<div class="HeaderIcon">
+				<ul>
+					<li Userbehavior="A26" class="popoverItem dropdown messages-menu"><a
+							href="javascript:void(0);" data-toggle="dropdown"> <img
+							src='#path()/static/vendor/newpage/images/home/fzHome_topNav_call110.png'>紧急报警 </a>
+						<div class='dropdown-menu dropdownWarn pull-left warnWin'>
+							<p>紧急连接院内保安系统</p>
+							<p  Userbehavior="A68" onclick="call();"><img alt="" src="#path()/static/vendor/newpage/images/home/fzHome_call110_yes.png" />确认</p>
+							<p Userbehavior="A69"><img alt="" src="#path()/static/vendor/newpage/images/home/fzHome_call110_cancel.png" />取消</p>
+						</div>
+						</li>
+					<li>
+						<img class="iconImg" alt="" src="#path()/static/vendor/newpage/images/home/fzHome_topNav_backHome.png" />
+						<a
+								href="#path()/index/index"
+								type="button"
+								class="btn btn-default iconBtn">
+							返回首页
+						</a>
+					</li>
+					<li Userbehavior="A26" class="popoverItem dropdown messages-menu"><a
+							href="javascript:void(0);" data-toggle="dropdown"> <img
+							style="width: 28px; padding: 4px;"
+							src='#path()/static/vendor/newpage/images/home/fzHome_topNav_userPhoto.png'>#userName() </a>
+						<div class='dropdown-menu dropdownWarn pull-left warnWinfenzhen'>
+								<p>#depart()</p>
+								<p Userbehavior="A70" onclick="window.location.href='#sso()login';"><img alt="" src="#path()/static/vendor/newpage/images/home/fzHome_fzt_tab.png" />切换</p>
+								<p Userbehavior="A71" onclick="window.location.href='#sso()logout';"><img alt="" src="#path()/static/vendor/newpage/images/home/fzHome_fzt_exit.png" />退出</p>
+						</div></li>
+					<li Userbehavior="A26" class="popoverItem dropdown messages-menu"><a
+							href="javascript:void(0);" data-toggle="dropdown"> <img
+							style="width: 28px; padding: 4px;"
+							src='#path()/static/vendor/newpage/images/home/fzHome_topNav_help.png'>帮助 </a>
+						<div class='dropdown-menu dropdownWarn pull-left help'>
+							<p onclick="showVersionModel();">版本说明</p>
+						</div></li>
+				</ul>
+			</div>
+		</header>
+		<div class="containerbody">
+			#@bj_main()
+		</div>
+<!--		<footer>-->
+<!--			<div style="background: #f57f66;">-->
+<!--				<p class="footerName">待分诊<i class="footerNum">5</i>人</p>-->
+<!--			</div>-->
+<!--			<div style="background: #6da66a;">-->
+<!--				<p class="footerName">已分诊<i class="footerNum">461</i>人</p>-->
+<!--			</div>-->
+<!--			<div style="background: #418dd4;">-->
+<!--				<p class="footerName">已接诊<i class="footerNum">456</i>人</p>-->
+<!--			</div>-->
+<!--			<div class="grayItem">-->
+<!--				<p class="footerName">已退号<i class="footerNum">-</i>人</p>-->
+<!--			</div>-->
+<!--			<div class="grayItem">-->
+<!--				<p class="footerName">特殊人员<i class="footerNum">0</i>人</p>-->
+<!--			</div>-->
+<!--			<div class="grayItem">-->
+<!--				<p class="footerName">今日已挂号<i class="footerNum">468</i>人</p>-->
+<!--			</div>-->
+<!--		</footer>-->
+	</div>
+
+</div>
+<!-- 版本说明弹窗 -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="versionModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×
+				</button>
+				<div class="modal-title" id="myModalLabel">
+					<h1 class="update-title">版本说明</h1>
+					<div class="version-top">
+						<label>发布日期</label>
+						<select id="version-select" onclick="changeContent('+rows[i].id+')">
+							<!-- <option value="">2019-08-12   v1.12</option>
+                            <option value="">2019-08-11   v1.11</option>
+                            <option value="">2019-08-10   v1.10</option>
+                            <option value="">2019-08-09   v1.09</option> -->
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body" id="versionContent">
+				按下 ESC 按钮退出。
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+	#include("layout.js");
+	// 头部导航点击切换样式
+	$(".headerNavItem").click(function () {
+		$(this).addClass("headerNavItemActive").siblings().removeClass("headerNavItemActive");
+	})
+	//
+	// // 是否标注
+	// $(".specialIcon").click(function(){
+	// 	console.log("111");
+	// 	$(this).toggleClass("specialIconClick");
+	// })
+	// // 头部点击 小标签
+	// function windowItem(fn){
+	// 	$('[data-toggle="popover"]').each(function () {
+	// 		var element = $(this);
+	// 		var id = element.attr('id');
+	// 		element.popover({
+	// 			trigger: 'manual',
+	// 			placement: 'bottom',
+	// 			html: 'true',
+	// 			// content: fn,
+	//
+	// 		}).on("click",function(){
+	// 			var _this = this;
+	// 			$(this).popover("toggle");
+	// 		})
+	// 	});
+	// }
+
+
+//左下自动滚动run 
+/* $(function(){
+    var text=$(".sroll:first");
+    var clear;
+    text.hover(function(){
+        clearInterval(clear);//鼠标悬停，清除动画，停止滚动
+    },function(){
+        clear=setInterval(function(){
+            var field=text.find("div:first");
+            var high=field.height();
+            text.animate({ marginTop:-high+"px"},800,function(){
+                field.css("marginTop",0).appendTo(text);
+                text.css("marginTop",0);
+            })
+        },1000)//滚动间隔时间
+    }).trigger("mouseleave");
+}); */
+
+</script>
+</body>
+<style>
+	.layui-laydate .layui-this {
+		background-color: #1880de !important;
+		color: #fff!important;
+	}
+</style>
+
+</html>
+#end

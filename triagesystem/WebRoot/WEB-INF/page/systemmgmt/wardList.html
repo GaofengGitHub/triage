@@ -1,0 +1,108 @@
+<script type="text/javascript">
+
+function querywardList() {
+    $('#wardList').datagrid({
+         url: '#path()/systemmgmt/queryWard',
+         allowCellSelect: true,
+         check: {
+             enable: true
+         },
+         //idField: 'id',
+         rownumbers: true,
+         toolbar: '#row1,#row2',
+         nowrap: true, //列内容多时自动折至第二行
+         border: false,
+         pagination:true,
+         pageSize : 10, //页大小
+         pageList : [ 5,10,15,20],
+         fitColumns:true,
+         singleSelect: true,//选择多行
+         columns: [[
+            {field: 'id', hidden: 'true' },
+			{field : 'name',title : '病区名称',align : 'center',width : '20%',sortable : false},
+			{field : 'system',title : '病区归属',align : 'center',width : '10%',sortable : false},
+			{field : 'departbednum',title : '固定床位数',align : 'center',width : '10%',sortable : false},
+			{field : 'addbednum',title : '最大加床数',align : 'center',width : '10%',sortable : false},
+			{field : 'pingcnum',title : '平车数',align : 'center',width : '10%',sortable : false},
+			{field : 'address',title : '病区位置',align : 'center',width : '25%',sortable : false},
+			{field : 'creat_time',title : '创建时间',align : 'center',width : '15%',sortable : false},
+         ]],
+         onAfterEdit : function(index, row) {
+             //endEdit该方法触发此事件
+                 //updateNodeEditOrNew(row);
+                 //刷新树结构
+                 //row.editing = false;
+                 $('#wardList').datagrid('refreshRow', index);
+         }
+     });
+}
+
+function editWard(){
+    var rowData = $("#wardList").datagrid("getSelections");
+	if(rowData.length != 1){
+        toastr.warning("请选中一行数据");
+        return;
+    }
+	var t = 'editWard?id='+rowData[0].id;
+	load(t);   
+}
+
+function deleteWard(){
+    //编辑完之后自动刷新行
+    $('#wardList').datagrid( rowIndex,'refreshRow');
+	var rowData = $("#wardList").datagrid("getSelections");
+	if(rowData.length != 1){
+        toastr.warning("请选中一行数据");
+        return;
+    }
+	if(!confirm("确定要删除数据?")){
+	 	return false;
+	}
+
+	var rowIndex=$('#wardList').datagrid('getRowIndex',rowData[0]);
+	$.ajax({
+		type : "post",
+		url : "#path()/systemmgmt/deleteWard",
+		dataType : "json",
+		async : false,
+		data : {
+			id : rowData[0].id
+		},
+		success : function(result) {
+			if(result.status=="200"){
+				toastr.warning("操作成功");
+			 	//编辑完之后自动刷新行
+		   	 	$('#wardList').datagrid( rowIndex,'refreshRow');
+			}else{
+				toastr.warning(result.message);
+			}
+		   
+		},
+		error : function() {
+			toastr.warning("操作失败");
+		}
+   });
+}
+
+
+
+$(document).ready(function() {
+	querywardList();
+});
+</script>
+	<div class="panelMain" style='padding:30px;'>
+		<table class="easyui-datagrid" id="wardList" title="病区管理"
+			style="width: 98%; height: 98%;">
+		</table>
+		<div id="row2">
+			<a href="javascript:void(0);" onclick="load('editWard');">
+				<button class="btn btn-primary btn-xs">新增</button>
+			</a> 
+			<a href="javascript:void(0);" onclick="editWard();">
+				<button class="btn btn-primary btn-xs">修改</button>
+			</a> 
+			<a href="javascript:void(0);" onclick="deleteWard();">
+				<button class="btn btn-primary btn-xs">删除</button>
+			</a>
+		</div>
+	</div>

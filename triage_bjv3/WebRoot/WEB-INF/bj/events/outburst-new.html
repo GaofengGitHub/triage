@@ -1,0 +1,438 @@
+#@bj_layout('outburst') #define bj_main()
+<script type="text/javascript">
+#include("add.js")
+#include("score.js")
+#include("mews.js")
+#include("pain.js")
+#include("gcs.js")
+</script>
+<script>
+    $(document).ready(function () {
+    	setgradebtncss();
+    	showPjfs();
+		initPf();    	
+    	initMews();
+    	//快速分级默认显示第一级
+    	getSymptom("0","1");
+    	//增加选择 体温 和血氧 分数后的自动算分
+    	/**
+    	$("select[id='sel_tiwen']").change(function () {
+    		getTotalScore();
+    		});
+    	$("select[id='sel_spo2']").change(function () {
+    		getTotalScore();
+    		});
+    	**/   	
+    });
+   
+
+</script>
+<script src="#path()/extend/easyui/jquery.easyui.min.js"></script>
+<link href="#path()/extend/easyui/css/default/easyui.css" rel="stylesheet" id="style_components" type="text/css" />
+<link href="#path()/extend/easyui/css/icon.css" rel="stylesheet" id="style_components" type="text/css" />
+
+
+
+
+
+<input type="hidden" id="p_id" value="" />
+<input type="hidden" id="level_1_id" value="" />
+<input type="hidden" id="level_1_name" value="" />
+<input type="hidden" id="level_2_id" value="" />
+<input type="hidden" id="level_2_name" value="" />
+<input type="hidden" id="level_3_id" value="" />
+<input type="hidden" id="level_3_name" value="" />
+<input type="hidden" id="rownum" value="" />
+<input type="hidden" id="defultpjfs" value="" />
+<div id='loading'
+	style='display:none;width:100%;height:120%;text-align:center;padding-top:20%; position: absolute;alpha(opacity=45); opacity:0.45;background-color:#FFFFFF;z-index:1000;'>
+	<table style='margin:auto;'>
+		<tr>
+			<td><span id='disp'>提交中,请等待...</span>
+			</td>
+		</tr>
+		<tr>
+			<td><img src='#path()/static/images/loading.gif'>
+			</td>
+		</tr>
+	</table>
+</div>
+
+	<section class="content2">
+
+		<div id="page-wrapper" class="outburst2">
+			
+    <nav class="navbar navbar-default">
+	        <div class="container-fluid">
+	            <!-- Collect the nav links, forms, and other content for toggling -->
+	            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	                <form class="navbar-form navbar-left tfsjfrom">
+	                    <!-- <div class="form-group">
+	                        <input type="text" class="form-control" placeholder="Search">
+	                    </div>
+	                    <div class="form-group">
+	                        <input type="text" class="form-control" placeholder="Search">
+	                    </div> -->
+	                   <div class="form-group" style="left:0" e_name="events_insert_name">
+							<input id="name" style='height:36px;border-radius: 4px;'
+								type="text" class="form-control  formInput" placeholder="请输入事件">
+						</div>
+						<div class="form-group" style="margin-left:10px;display: flex;
+    justify-content: space-around;
+    align-items: center;" e_name="events_insert_num"  id="addadd2">
+							<input id="num" style='height:36px;width:calc(100% - 76px);float:left' type="text"
+								class="form-control  formInput" placeholder="请输入人数">
+								<div id="numdiv" style="padding:0 10px;background:#eee;line-height:36px;border-radius:4px;"></div>
+								 <span class="input-group-btn" >
+								<button class="btn btn-sm"  onclick="add8();"  style="float:left" type="button"   id="btn-chat">生成清单</button> </span>
+						</div>
+	                </form>
+	
+	                <ul class="nav navbar-nav navbar-right">
+	                     <li id="addbtn"><a href="javascript:void(0)"  Userbehavior="A163"	onclick="addListShow();;"   >
+	                            <img src="#path()/static/vendor/newpage/images/tfsj/add.png" alt="">
+	                            添加患者</a></li> 
+	                    <li><a href="javascript:void(0)"   Userbehavior="A160"	onclick="openEvents();">
+	                            <img src="#path()/static/vendor/newpage/images/tfsj/back.png" alt="">
+	                            返回</a></li>
+	                    <li><a href="javascript:void(0)"  id="save" Userbehavior="A63" onclick="save();" >
+	                            <img src="#path()/static/vendor/newpage/images/tfsj/save.png" alt="">
+	                            保存</a></li>
+	                </ul>
+	            </div><!-- /.navbar-collapse -->
+	        </div><!-- /.container-fluid -->
+	    </nav>
+
+	    <ol class="breadcrumb">
+	        <li><a href="#">首页</a></li>
+	        <li class="active">突发公共卫生事件</li>
+	    </ol>
+			<div id="tbody">
+							<div class="nodata">
+								<img src="#path()/static/vendor/newpage/images/tfsj/tfsj.png" />
+								<p>暂无清单，请输入人数，生成清单！</p>
+							</div>
+                    </div>
+			    <!-- <div class="panel panel-info">
+        <div class="panel-heading clearfix">
+            <div class="panel-title-tf">
+                <span>序号：1</span>
+                <span>患者编号：10100101010</span>
+                <button type="button" class="btn btn-danger">1级</button>
+            </div>
+            <div class="pull-right">
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">
+                        <img src="#path()/static/vendor/newpage/images/tfsj//delect_select.png" />
+                    </span>
+                </button>
+            </div>
+        </div> -->
+                    
+<!--        <div class="panel-body mypanel">-->
+<!--            <div class="row clearfix">-->
+<!--                <div class="mypanel-6 col-md-7">-->
+<!--                    <div class="col-md-4 col-sm-4 p0">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-2 control-label">就诊卡号</label>-->
+<!--                            <div class="col-sm-8">-->
+<!--                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-2 control-label">出生日期</label>-->
+<!--                            <div class="col-sm-8">-->
+<!--                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-2 control-label">来院方式</label>-->
+<!--                            <select class="form-control">-->
+<!--                                <option>1</option>-->
+<!--                                <option>2</option>-->
+<!--                                <option>3</option>-->
+<!--                                <option>4</option>-->
+<!--                                <option>5</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-4 col-sm-4 p0">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>-->
+<!--                            <div class="col-sm-8">-->
+<!--                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-2 control-label">费用</label>-->
+<!--                            <select class="form-control">-->
+<!--                                <option>1</option>-->
+<!--                                <option>2</option>-->
+<!--                                <option>3</option>-->
+<!--                                <option>4</option>-->
+<!--                                <option>5</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-2 control-label">意识状态</label>-->
+<!--                            <select class="form-control">-->
+<!--                                <option>1</option>-->
+<!--                                <option>2</option>-->
+<!--                                <option>3</option>-->
+<!--                                <option>4</option>-->
+<!--                                <option>5</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-4 col-sm-4 p0">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-2 control-label">就诊卡号</label>-->
+<!--                            <div class="col-sm-8">-->
+<!--                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-2 control-label">出生日期</label>-->
+<!--                            <div class="col-sm-8">-->
+<!--                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-2 control-label">来院方式</label>-->
+<!--                            <select class="form-control">-->
+<!--                                <option>1</option>-->
+<!--                                <option>2</option>-->
+<!--                                <option>3</option>-->
+<!--                                <option>4</option>-->
+<!--                                <option>5</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="mypanel-3 col-md-3">-->
+<!--                    <div class="col-md-6">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-3 control-label">无创血压</label>-->
+<!--                            <div class="form-list">-->
+<!--                                <div class="col-md-5 p0"><input type="text" class="form-control text-center input-text"-->
+<!--                                        name="ssy" placeholder="请输入" maxlength="3" value=""></div>-->
+<!--                                <div class="col-md-2 p0">/</div>-->
+<!--                                <div class="col-md-5 p0"><input type="text" class="form-control text-center input-text"-->
+<!--                                        name="szy" placeholder="请输入" maxlength="3" value=""></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-3 control-label">Email</label>-->
+<!--                            <div class="col-sm-8">-->
+<!--                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-3 control-label">Email</label>-->
+<!--                            <div class="col-sm-8">-->
+<!--                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputEmail3" class="col-sm-3 control-label">Email</label>-->
+<!--                            <div class="col-sm-8">-->
+<!--                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="mypanel-1 col-md-2">-->
+<!--                    <textarea class="form-control" rows="2" placeholder="填写备注"></textarea>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+   <!--  </div> -->
+    
+    
+			
+			<!-- <div class="row outburst-table-box">
+				<div class="panel-table">
+					<div class="panel panel-default">
+						<div class="panel-body p0 tabMain">
+							<div class="table-responsive tableDelay table-box">
+								<table class="table table-outburst1">											
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>就诊卡号</th>
+											<th>姓名</th>
+											<th>性别</th>
+											<th>出生日期</th>
+											<th>费别</th>
+											<th></th>
+											<th>来院方式</th>
+											<th>意识状态</th>
+											<th>既往病史</th>
+											<th>无创血压<br>mmHg</th>
+											<th>心率<br>次/分</th>
+											<th>呼吸频率<br>次/分</th>
+											<th>体温<br>℃</th>
+											<th>分级</th>
+											<th>分诊去向</th>
+											<th>备注</th>
+											<th>编辑</th>
+										</tr>
+									</thead>																																		
+								</table>
+								<div class="table-responsive table-outburst2">
+									<table class="table table-hover titbox">	
+										<colgroup>
+											<col style="width:5%;" />
+											<col style="width:6%;" />
+											<col style="width:5%;" />
+											<col style="width:6%;" />
+											<col style="width:9%;" />
+											<col style="width:6%;" />
+											<col style="width:6%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:9%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:3%;" />
+										</colgroup>	
+										<thead>
+										<tr>
+											<th>序号</th>
+											<th>就诊卡号</th>
+											<th>姓名</th>
+											<th>性别</th>
+											<th>出生日期</th>
+											<th>费别</th>
+											<th></th>
+											<th>来院方式</th>
+											<th>意识状态</th>
+											<th>既往病史</th>
+											<th>无创血压<br>mmHg</th>
+											<th>心率<br>次/分</th>
+											<th>呼吸频率<br>次/分</th>
+											<th>体温<br>℃</th>
+											<th>分级</th>
+											<th>分诊去向</th>
+											<th>备注</th>
+											<th>编辑</th>
+										</tr>
+									</thead>																																				
+										<tbody id="tbody">
+											<tr class="border-no">
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="addList" data-toggle="modal" Userbehavior="A163" onclick="addListShow();" ><i class="fa fa-plus"></i>添加患者</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			 -->
+			<div class="modal fade common-modal addcont" id="addList" style="width:300px">  
+			  <div class="modal-dialog" style="width:300px">  
+			    <div class="modal-content">  
+			      <div class="modal-header">  		      
+				      	目前有<span id=nownum></span>名患者列表  
+				  </div>
+			      <div class="modal-body text-center">  
+			      	<span class="reduce" onclick="reduce();">-</span>
+			      	<input type="text" class="form-control formHalf number" readonly="readonly" id="addnum" value="1" style="padding-left: 25px;">      
+			      	<span class="plus" onclick="plus();">+</span>			      	
+			      </div>  
+			      <div class="modal-footer modal-bottom">
+			     	 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+			      	 <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="add2();">确定</button>
+			      </div>  
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade common-modal" id="delete" style="width:300px"> 
+			  <div class="modal-dialog" style="width:300px">  
+			    <div class="modal-content message_align" style="background:#fff">
+			    	<div class="modal-header record-head"> 
+			    	 	删除记录 		      
+				  	</div>  
+			      <div class="modal-body text-center modal-middle"> 			      	
+			       	 确实删除“序号<span id="delxuhao"></span>”这一条记录？
+			      </div>  
+			      <div class="modal-footer modal-bottom" style="text-align:center">
+			      	 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+					 <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="removerow();">确定</button>
+			      </div>  
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade common-modal addcont" id="clear" style="width:300px;position:absolute; z-index:9999;" >  
+			  <div class="modal-dialog" style="width:300px">  
+			    <div class="modal-content">  
+			      <div class="modal-header record-head" style="margin-bottom:-1px">
+			      	  清除数据		      
+				  </div>
+			      <div class="modal-body text-center">  
+			      	是否清除评级信息?	      	
+			      </div>  
+			      <div class="modal-footer modal-bottom" style="border-bottom-left-radius: 6px;border-bottom-right-radius: 6px;"> 
+			      	 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button> 
+			      	 <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="reset();">确定</button>
+			      </div>  
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade common-modal addcont" id="dosava" style="width:300px;position:absolute; z-index:9999;" >  
+			  <div class="modal-dialog" style="width:300px">  
+			    <div class="modal-content">  
+			      <div class="modal-body text-center">		
+			     	 <p>      	
+			      		<img src="#path()/static/images/success.png"> 
+			      	</p>	
+			      	<h4>保存成功！</h4>		      	
+			      </div>  
+			    </div>
+			  </div>
+			</div>
+			#include("fenzhenpjb.html")
+	</section>
+
+
+<!-- <div class="row">
+					<div class="col-md-12">
+						<div class='text-center footer'>
+							南京晨伟医疗设备有限公司 武汉大学人民医院  版权所有
+							<img src="images/footer.png">
+            			<i class="icon iconfont icon-duihuakuang4 pull-right"></i> 
+						</div>
+					</div>
+				</div>-->
+</div>
+</div>
+#end

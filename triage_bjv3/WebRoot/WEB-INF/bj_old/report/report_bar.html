@@ -1,0 +1,115 @@
+#@bj_layout('index')
+#define bj_main()
+
+<script type="text/javascript">
+#include("report_bar.js")
+</script>
+<aside class="right-side">
+	 <section class="content">
+		<div class="row headTips report-search-top">
+			<div class='col-md-4 version-hide' e_name="statistics_query">
+				<form class="form-inline headSearch" role="">
+					<div style="display:inline-block;vertical-align: middle;">
+						<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+	                       <input type="text" class="form-control" name="from" id="starttime">
+	                       <span class="input-group-addon"> - </span>
+	                       <input type="text" class="form-control" name="to" id="endtime">                    
+	                    </div>
+					</div>
+				
+				   <!--  <input type="text" class="form-control" style='width: 40%;'
+				        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+						id="endtime" placeholder="" AUTOCOMPLETE="OFF">-->
+					<a class="btn btn-sm btn-primary" Userbehavior="A58" href="javascript:void(0);" onclick="tongji();">
+						<i class="fa fa-search"></i>统计
+					</a> 
+				</form>
+			</div>
+		<!-- <div class='col-md-4'>
+				<form class="form-inline headSearch" role="">
+					<div style="display:inline-block;vertical-align: middle;">
+						<div class='input-group input-large date-picker input-daterange' data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+						    <input type="text" class="form-control" id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" id="endtime" placeholder="" AUTOCOMPLETE="OFF">						
+					   </div>
+					</div>
+					<a class="btn btn-sm btn-primary" Userbehavior="A58" href="javascript:void(0);" onclick="tongji();">
+						<i class="fa fa-search"></i>统计
+					</a>				
+				</form>
+			</div> -->
+			<!-- <div class='col-md-8 p0' id="showstatus">
+			</div> -->
+			<div class='col-md-8 p0'>
+                   <div class="col-md-4"></div>
+                   <div class="col-md-2 pull-right version-hide" e_name="statistics_specail_patients_num">
+                       <div class="st-mark">
+                           <p>特殊人员:</p>
+                           <p id="specialpetient" class='allocatNum'>0</p>
+                           <p class='allocatUnit'>人</p>
+                       </div>
+                   </div>
+                   <div class="col-md-2 pull-right version-hide" e_name="statistics_cancel_patients_num">
+                       <div class="st-mark">
+                           <p>已退号:</p>
+                           <p id="yituihao1" class='allocatNum'>-</p>
+                           <p class='allocatUnit'>人</p>
+                       </div>
+                   </div>
+                   <div class="col-md-2 pull-right version-hide" e_name="statistics_receive_patients_num">
+                       <div class="st-mark st-mark-j">
+                           <p>已接诊:</p>
+                           <p id="yijiezhen" class='allocatNum'>0</p>
+                           <p class='allocatUnit'>人</p>
+                       </div>
+                   </div>
+                   <div class="col-md-2 pull-right version-hide" e_name="statistics_divid_patients_num">
+                       <div class="st-mark st-mark-y">
+                           <p>已分诊:</p>
+                           <p id="yifenzhen" class='allocatNum'>0</p>
+                           <p class='allocatUnit'>人</p>
+                       </div>
+                   </div>  
+               </div>
+		</div>
+		<div class="row charBox charBox1 fz-charbox1">
+			<div class="col-md-12">
+
+				<div class='col-md-5 version-hide' e_name="statistics_grade">
+					<h5 class="barTitle">预检分诊级别分布</h5>
+					<div id="linechart" style="width: 100%;height:200px;"></div>
+				</div>
+				<div class='col-md-2 text-center' style="font-size: 0">
+					<div class='charCut'></div>
+				</div>
+				<div class='col-md-5 version-hide' e_name="statistics_state">
+					<h5 class="barTitle">预检分诊状态分布</h5>
+					<div id="linechart2" style="width: 100%;height:200px;"></div>		
+					<!-- <div id="linechart2" width="200" height="60"></div> -->
+					<!-- <div id="main" style="width: 600px;height:300px;"></div> -->
+				</div>
+			</div>
+			<div class="col-md-12" style='border-top: 4px solid #c8c9cb;'>
+				<!-- <div class="col-md-12"> -->
+				<div class='col-md-5 version-hide' e_name="statistics_admission">
+					<h5 class="barTitle">预检分诊来院方式分布</h5>
+					<div id="linechart3" style="width: 100%;height:200px;"></div>
+				</div>
+				<div class='col-md-2 text-center' style="font-size: 0">
+					<div class='charCut1'></div>
+				</div>
+				<div class='col-md-5 version-hide' e_name="statistics_time">
+					<h5 class="barTitle">预检分诊时间分布</h5>
+					<div id="linechart4" style="width: 100%;height:200px;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-main">
+                    <div class="roll">
+                        <ul class="mingdan list-unstyled" style="margin-top: 0px;" id="depart">
+                          
+                        </ul>
+                      </div>
+                </div>
+                   </section>
+                   </aside> 
+#end

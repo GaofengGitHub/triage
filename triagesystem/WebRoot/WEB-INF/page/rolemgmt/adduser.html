@@ -1,0 +1,113 @@
+<script type="text/javascript">
+#include("adduser.js")
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	/* var date = new Date();
+    var seperator1 = "-";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    //昨天
+    if (strDate > 0 && strDate<10) {
+            strDate = "0" + strDate;
+    }
+    var zr = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+	laydate.render({
+		   elem: '#borndate', //指定元素
+		   min: '1901-01-01',
+		   max: zr
+	}); */
+var sel = document.getElementById("addrolerow");
+if(sel&&sel.addEventListener){
+    sel.addEventListener('click',function(e){
+        var ev = e||window.event;
+        var target = ev.target||ev.srcElement;
+        addrolediv();
+    },false)
+}
+showworkdepart("#workdepart1");
+showworkrole("#workidentity1");
+$("#confirmaddrole").click(function(){
+	adduserconfirm();
+})
+})
+
+</script>
+	<div class="panelMain">
+			<div class="contact">
+				<form name="form1" method="post">
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i> 登录名:</label> <input type="text" style="text-align: center;" name="loginname"
+						id="loginname" placeholder="" value="" autocomplete="off" required /><span
+							class="tips" >长度4~12位数字或字母</span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>工号:</label> <input type="text" style="text-align: center;" name="workid"
+						id="workid"	placeholder="" value="" autocomplete="off" required /><span
+							class="tips"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>登录密码:</label> <input type="password" style="text-align: center;" name="yourpass"
+							id="divpassword1" placeholder="******" autocomplete="off" required /><span
+							class="tips">密码由6~12字母或数字组成</span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>密码确认:</label> <input type="password"
+						id="divpassword2" style="text-align: center;" name="yourpass2" placeholder="******" autocomplete="off"
+							required /><span class="tips">两次密码需要相同</span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>姓名:</label>	
+						 <input type="text" style="text-align: center;" name="username" id="username" value="" autocomplete="off" required />
+						 <span class="tips"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;">身份证号码:</label> <input type="text" style="text-align: center;" 
+							value="#(idcard ??)" autocomplete="off" id="identity" required /><span
+							class="tips"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>性别:</label> <input type="radio" name="gender" checked="checked" value="1" required />男
+						&nbsp;&nbsp;<input type="radio" name="gender" value="2" required />女&nbsp;&nbsp;<input type="radio" value="0" name="gender" required />未知<span
+							class="tips"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-right:5px;width: 194px;">出生日期:</label><input type="text" class="date-picker" style="text-align: center;" 
+						 value="#(birthday ??)" id="borndate" autocomplete="off" required /><span
+							class="tips"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>手机号码:</label> <input type="text" style="text-align: center;"
+							onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" 
+						 value="#(mobile ??)" id="mobile" autocomplete="off" required /><span
+							class="tips" ></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;">紧急联系人:</label> <input style="text-align: center;"
+						onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" 
+							placeholder="#(linkman ??)" value="#(linkman ??)" id="linkman" autocomplete="off" required /><span
+							class="tips" ></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>身份/科室:</label> 
+							<div style="display:inline-block">
+								<select class="form-control formTwenty" id="workidentity1" style="width: 200px" required>
+								    <option value="">--请选择身份--</option>
+								</select>
+								<select class="form-control formTwenty" id="workdepart1" style="width: 200px" required>
+									<option value="">--请选择科室--</option>
+								</select>
+							</div>
+							<input type="button" class="btn" id="addrolerow" value="新增" style="margin-bottom: 3px;background-color: #47A0CA;color: #fff">
+							<span id="iddeparterror" class="tips"></span>
+							<div id="addiddepart" style="margin-left: 198px;">
+							</div>
+							<input type="hidden" class="btn" value="1" id="addbiaoshi">
+					</div>
+					<b class="btn" style="margin-left: 150px;"><input type="button" id="confirmaddrole" value="提交" class="btn btn-rule btn-lg"/><button class="btn btn-rule btn-lg" style="margin-left: 5px;" onclick="load('usermgmt');">取消</button></b>
+				</form>
+			</div>
+		</div>

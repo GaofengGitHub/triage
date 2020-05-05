@@ -1,0 +1,229 @@
+<link rel="stylesheet" type="text/css" href="#path()/static/shu2/css/style.css" />
+<link rel="stylesheet" href="#path()/static/dist/css/demo.css" type="text/css">
+<link rel="stylesheet" href="#path()/static/dist/css/metroStyle.css" type="text/css">
+<script type="text/javascript" src="#path()/static/dist/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="#path()/static/dist/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="#path()/static/dist/js/jquery.ztree.exedit.js"></script>
+<script type="text/javascript">
+#include("obs-set-index.js")
+</script>
+<div class="panelMain">
+	<div class="col-md-12">
+		<div class="form-group">
+			<label><i class="red">*</i>留观等级设置：</label> <span class="radio-inline"><input
+				type="radio" name="setgrade" id="lookfour" value="4">四级</span>
+			<span class="radio-inline"><input type="radio" name="setgrade"
+				id="lookfive" value="5">五级</span>
+		</div>
+		<div class="form-group">
+			<label></label>
+			<div class='inlineBlock'>
+				编辑各级名称颜色
+				<div class='clearfix' style="margin-top: 10px;">
+					<div class="pull-left">
+					<span id="paixu1" name="#(ysid1 ??)">排序1</span> 
+					<span> 
+					<input type='text' id ="gradename1" class="form-control formHalf"  style="text-align: center;" value="#(gradename1 ??)" required>
+					</span>
+					</div>
+					<div id="gradecolor1"  class="grade-color-set" style="background-color:#(gradecolor1 ??)"></div>
+					
+				</div>
+				<span class="tips"></span>
+				<div class='clearfix'>
+					<div class="pull-left">
+					<span id="paixu2" name="#(ysid2 ??)">排序2</span> 
+					<span>
+					<input type='text' id ="gradename2" class="form-control formHalf"  style="text-align: center;" value="#(gradename2 ??)" required>
+					</span>
+					</div>
+					<div  id="gradecolor2" class="grade-color-set" style="background-color:#(gradecolor2 ??)"></div>
+					
+				</div>
+				<span class="tips"></span>
+				<div class='clearfix'>
+					<div class="pull-left">
+					<span id="paixu3" name="#(ysid3 ??)">排序3</span> 
+					<span> <input type='text' id ="gradename3" class="form-control formHalf" style="text-align: center;" value="#(gradename3 ??)" required>
+					</span>
+					</div>
+					<div  id="gradecolor3" class="grade-color-set" style="background-color:#(gradecolor3 ??)"></div>
+					
+				</div>
+				<span class="tips"></span>
+				<div class='clearfix'>
+					<div class="pull-left">
+					<span id="paixu4" name="#(ysid4 ??)">排序4</span> <span> <input type='text'
+					id ="gradename4" class="form-control formHalf"  style="text-align: center;" value="#(gradename4 ??)" required>
+					</span></div>
+					<div  id="gradecolor4" class="grade-color-set" style="background-color:#(gradecolor4 ??)"></div>
+					
+				</div>
+				<span class="tips"></span>
+				<div id="aafive" class='clearfix' style="display: none">
+					<div class="pull-left">
+					<span id="paixu5" name="#(ysid5 ??)">排序5</span> <span> <input type='text'
+					id ="gradename5" class="form-control formHalf" style="text-align: center;" value="#(gradename5 ??)" required>
+					</span></div>
+					<div  id="gradecolor5" class="grade-color-set" style="background-color:#(gradecolor5 ??)"></div>
+					
+				</div>
+				<span class="tips"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label style="margin-right: 4px;">分级方式设置：</label><span id="showfenji"></span> 
+			<span>
+				<button class='btn btn-default' data-toggle="modal"
+					data-target="#chosePjb" id="pjb">选择</button><span id="fenjierror" class="tips"></span>
+			</span>
+		</div>
+		<div class="form-group">
+			<label style="margin-right: 4px;">手动调级权限：</label><span id="showtiaoji"></span> 
+			<span>
+				<button class='btn btn-default' data-toggle="modal"
+					data-target="#choseROLE" id="tiaoji">选择</button><span id="tiaojierror" class="tips"></span>
+			</span>
+		</div>
+		<div class="form-group">
+			<label style="margin-right: 4px;"><div>留观去向<button data-target="#rescueSet-tc01" onclick="showalldirectiontable();" data-toggle="modal">配置</button></div></label>
+			<div id="directionlist" style="margin-left: 40px"></div>
+		</div>
+		<div class="form-group">
+			<label style="margin-right: 4px;">帮助说明设置：</label>
+			<span>
+				<button class='btn btn-default' data-toggle="modal"
+					data-target="#choseHelp" id="help">设置</button><span id="con" class="tips"></span>
+			</span>
+		</div>
+	</div>
+	<!--  
+	<div class="form-group panelMainBtn">
+			<button onclick="load('obsSet');" class="btn btn-rule btn-lg">配置</button>
+	</div>
+	-->
+	<div class="modal fade" id="rescueSet-tc01" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title text-center">留观去向</h4>
+			</div>
+			<div class="modal-body">
+				<a href="javascript:void(0);" onclick="addRescueSetitem();" class="add-rescueSet-item">+</a>
+				<div class="tc-table-scroll-box">
+					<table class="table rescueSet-tc-table01">
+						<thead>
+							<tr>
+								<th>&nbsp;</th>
+								<th>去向</th>
+								<th>二级选项</th>
+								<th>备注</th>
+								<th>交接单</th>
+								<th>选择病区</th>
+								<th>&nbsp;</th>
+							</tr>
+						</thead>
+		    			<tbody>
+		                </tbody>
+	            </table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" onclick="confimqxconfig();" class="btn btn-primary">确认</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="modal fade" id="chosePjb" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title text-center" id="myModalLabel2">分级方式排序：</h4>
+			</div>
+			<div class="modal-body">
+				<table id="showpjb" style="width: 100%; height: 60%">
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button onclick="fenjiconfirm();" type="button" class="btn btn-primary" >
+					确认</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="choseROLE" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title text-center" id="myModalLabel2">允许手动调级权限</h4>
+			</div>
+			<div class="modal-body clearfix">
+				<div class="col-md-4">
+		<div class="tjscribe">
+			<p>系统管理</p>
+			<div class="tree well" style="overflow: auto">
+				<ul id="rootUL1"></ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="tjscribe">
+			<p>临床</p>
+			<div class="tree well" style="overflow: auto">
+				<ul id="rootUL2"></ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="tjscribe">
+			<p>科室管理</p>
+			<div class="tree well" style="overflow: auto">
+				<ul id="rootUL3"></ul>
+			</div>
+		</div>
+	</div>
+			</div>
+			<div class="modal-footer">
+				<button onclick="tiaojiconfirm();" type="button" class="btn btn-primary" data-dismiss="modal">
+					确认</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="choseHelp" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title text-center" >帮助说明内容配置</h4>
+			</div>
+			<div class="modal-body" style="overflow-y: auto;max-height: 500px;">
+				<div>更新说明：<span style='padding-left: 400px'>是否弹出<input type="checkbox" checked="checked" style="    width: 20px;height: 21px;" id="state"></span></div>
+				
+				<textarea rows="" cols="" style="margin-top: 10px;width: 560px;height: 132px" id='update'></textarea>
+				
+				<div>版本说明：</div>
+				<textarea rows="" cols="" style="margin-top: 3px;width: 560px;height: 200px" id='version'></textarea>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" onclick="addupdate()">添加更新说明</button>
+				<button class="btn btn-primary" onclick="add()">添加换行</button>
+				<button onclick="saveHelp();" type="button" class="btn btn-primary" data-dismiss="modal">
+					确认</button>
+			</div>
+		</div>
+	</div>
+</div>

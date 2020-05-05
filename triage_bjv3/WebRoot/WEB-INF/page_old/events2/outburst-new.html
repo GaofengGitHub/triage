@@ -1,0 +1,124 @@
+#@layout('outburst')
+#define main()
+<script type="text/javascript">
+#include("add.js")
+#include("score.js")
+#include("mews.js")
+</script>
+<script>
+    $(document).ready(function () {
+    	showPjfs();
+		initPf();    	
+    	initMews();
+    });
+   
+
+</script>
+<input type="hidden" id="p_id" value=""/>
+			<div id="page-wrapper">
+				<div class="row">
+					<ol class="breadcrumb">
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+						<li class="active">突发公共卫生事件:</li>
+					</ol>
+				</div>
+				<div class="row">
+					<div class="table-head">
+						<div class="col-md-3">
+							<span class='labelSearch'>事件 ：</span>
+							<div class="input-group globalSearch">
+								<input id="name" style='height:36px;border-radius: 4px;' type="text" class="form-control  formInput" placeholder="请输入事件">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<span class='labelSearch'>人数：</span>
+							<div class="input-group globalSearch">
+								<input id="num" style='height:36px;' type="text" class="form-control  formInput" placeholder="请输入数字">
+								<span class="input-group-btn">
+		                    	<button class="btn btn-warning btn-sm" id="btn-chat" onclick="add();">生成清单</button>
+		               		</span>
+							</div>
+						</div>
+						<div class='col-md-6'>
+							<div class="text-right button-add1">
+								<button type="button" class="btn btn-info">返回</button>
+								<button type="button" class="btn btn-info" onclick="save();">保存</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-body p0 tabMain">
+								<div class="table-responsive tableDelay">
+									<table class="table table-hover table-outburst1">
+										<colgroup>
+											<col style="width:5%;" />
+											<col style="width:10%;" />
+											<col style="width:10%;" />
+											<col style="width:10%;" />
+											<col style="width:10%;" />
+											<col style="width:19%;" />
+											<col style="width:10%;" />
+											<col style="width:8%;" />
+											<col style="width:8%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>患者编号</th>
+												<th>姓名</th>
+												<th>性别</th>
+												<th>年龄</th>
+												<th>意识状态</th>
+												<th>血压（mmHg）</th>
+												<th>心跳（次/分）</th>
+												<th>呼吸（次/分）</th>
+												<th>分级</th>
+												<th>备注</th>
+											</tr>
+										</thead>
+									</table>
+									<div class="table-body1">
+										<table class="table table-hover">
+											<colgroup>
+												<col style="width:5%;" />
+												<col style="width:10%;" />
+												<col style="width:10%;" />
+												<col style="width:10%;" />
+												<col style="width:10%;" />
+												<col style="width:19%;" />
+												<col style="width:10%;" />
+												<col style="width:8%;" />
+												<col style="width:8%;" />
+												<col style="width:5%;" />
+												<col style="width:5%;" />
+											</colgroup>
+											<tbody id="tbody">
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				#include("fenzhenpjb.html")
+				<div class="row">
+					<div class="col-md-12">
+						<div class='text-center footer'>
+							南京晨伟医疗设备有限公司 武汉大学人民医院  版权所有
+							<!-- <img src="images/footer.png">
+            			<i class="icon iconfont icon-duihuakuang4 pull-right"></i> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+#end

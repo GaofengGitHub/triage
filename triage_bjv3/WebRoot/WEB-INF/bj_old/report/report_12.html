@@ -1,0 +1,122 @@
+<script type="text/javascript">
+#include("report_12.js")
+</script>
+<div class="chart-section">
+    <div class="select-top">
+    	<div class="datetime-box02 clearfix">
+	    	<form class="form-inline headSearch" role="">
+	    		<div style="display:inline-block;vertical-align: middle;">
+					<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+				        <input type="text" class="form-control" name="from" id="starttime">
+				        <span class="input-group-addon"> - </span>
+				        <input type="text" class="form-control" name="to" id="endtime">                    
+				    </div>
+				</div>
+					    <!-- <input type="text" class="form-control" style='width: 40%;'
+					        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+							id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+						<select style="float:none;">
+					            <option value="全部">全部</option>
+					            <option value="抢救室">&nbsp; 抢救室</option>
+					            <option value="抢救室1">&nbsp;&nbsp; &nbsp; &nbsp; 抢救室1</option>
+					            <option value="抢救室2">&nbsp;&nbsp; &nbsp; &nbsp; 抢救室2</option>
+					            <option value="观察室">&nbsp; 观察室</option>
+					            <option value="观察室1">&nbsp;&nbsp; &nbsp; &nbsp; 观察室1</option>
+					            <option value="观察室2">&nbsp;&nbsp; &nbsp; &nbsp; 观察室2</option>
+					     </select>
+						<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+							查询
+						</a>
+					</form>
+	
+	    </div>
+    </div>
+    <div class="clearfix chart-part12">
+    	<div class="pull-left">
+    		<div class="chart-part12-01 report-common-box">
+	            <h1 class="chart-big-title">压疮发生例数&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#" class="title-link">查看明细</a></h1>
+	            <p><span class="counter">0</span>(人次)</p>
+	        </div>
+	        <div class="chart-part12-02 report-common-box">
+	            <h1 class="chart-big-title">院前压疮例数</h1>
+	            <p><span class="counter">2</span>(例)</p>
+	        </div>
+    	</div>
+    	<div class="pull-right">    	
+    		<div class="pull-left report-common-box">
+    			<h1 class="chart-big-title">压疮危险患者比例</h1>
+    			<div class="clearfix chart-part12-table">
+    				<div class="pull-left">
+    					<table class="table table-bordered">						
+							<tbody>					
+								<tr>
+									<td>共接诊(人次)</td>
+									<td class="counter">4637</td>							
+								</tr>							
+							</tbody>
+						</table>
+    				</div>
+    				<div class="pull-left">
+    					<table class="table table-bordered">						
+							<tbody>					
+								<tr>
+									<td>危险(人次)</td>
+									<td class="counter">645</td>							
+								</tr>							
+							</tbody>
+						</table>
+    				</div>					    				
+    			</div>             
+                <div id="report_12_pie1" class="chart-box" style="height:300px">
+                </div>
+    		</div>
+    		<div class="pull-right report-common-box">
+    			<h1 class="chart-big-title">诊断排名</h1>
+    			<div class="clearfix chart-part12-table">
+    				<div class="pull-left">
+	    				<table class="table table-bordered report12-table1">						
+							<tbody>					
+								<tr>
+									<td>低危(人次)</td>
+									<td class="counter">615</td>							
+								</tr>							
+							</tbody>
+						</table>	
+    				</div>
+    				<div class="pull-left">
+    					<table class="table table-bordered report12-table2">						
+							<tbody>					
+								<tr>
+									<td>中危(人次)</td>
+									<td class="counter">20</td>							
+								</tr>							
+							</tbody>
+						</table>
+    				</div>
+    				<div class="pull-left">
+    					<table class="table table-bordered report12-table3">						
+							<tbody>					
+								<tr>
+									<td>高危(人次)</td>
+									<td class="counter">7</td>							
+								</tr>							
+							</tbody>
+						</table>
+    				</div>
+    				<div class="pull-left">
+    					<table class="table table-bordered report12-table4">						
+							<tbody>					
+								<tr>
+									<td>极高危(人次)</td>
+									<td class="counter">3</td>							
+								</tr>							
+							</tbody>
+						</table>
+    				</div>
+    			</div>    		
+                <div id="report_12_pie2" class="chart-box" style="height:300px">
+                </div>
+    		</div>               
+    	</div>    
+    </div>  
+</div>

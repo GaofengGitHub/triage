@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <title>首页</title>
+</head>
+
+<body style="background: #eff2f2;">
+    <div class="Home">
+        <aside class="leftAside">
+            <div class="leftLogo">
+                <img alt="" src="../images/home/home_logo.png" />
+                <p>预检分诊工作站</p>
+            </div>
+            <div class="leftNav">
+                <ul class="iconNav">
+                    <li class="iconNavItem">
+                        <img class="iconNavImg" alt="" src="../images/home/fzHome_unselected.png"  data-active-img="../images/home/fzHome_selected.png"/>
+                        <a class="iconName">首页</a>
+                    </li>
+                    <li class="iconNavItem">
+                        <img class="iconNavImg" alt="" src="../images/home/fzHome_add_unselected.png" data-active-img="../images/home/fzHome_add_selected.png"/>
+                        <a class="iconName">新增患者</a>
+                    </li>
+                    <li class="iconNavItem">
+                        <img class="iconNavImg" alt="" src="../images/home/fzHome_writeIn_unselected.png" data-active-img="../images/home/fzHome_writeIn_selected.png"/>
+                        <a class="iconName">医嘱录入</a>
+                    </li>
+                    <li class="iconNavItem">
+                        <img class="iconNavImg" alt="" src="../images/home/home_unselectEMR.png" data-active-img="../images/home/home_selectEMR.png"/>
+                        <a class="iconName">电子病历</a>
+                    </li>
+                    <li class="iconNavItem">
+                        <img class="iconNavImg" alt="" src="../images/home/fzHome_history_unselected.png" data-active-img="../images/home/fzHome_history_selected.png"/>
+                        <a class="iconName">历史病历</a>
+                    </li>
+                    <li class="iconNavItem">
+                        <img class="iconNavImg" alt="" src="../images/home/fzHome_table_unselected.png" data-active-img="../images/home/fzHome_table_selected.png"/>
+                        <a class="iconName">统计报表</a>
+                    </li>
+                    <li class="iconNavItem">
+                        <img class="iconNavImg" alt="" src="../images/home/fzHome_zk_unselected.png" data-active-img="../images/home/fzHome_zk_selected.png"/>
+                        <a class="iconName">质控管理</a>
+                    </li>
+                    <li class="iconNavItem">
+                        <img class="iconNavImg" alt="" src="../images/home/fzHome_change_unselected.png" data-active-img="../images/home/fzHome_change_selected.png"/>
+                        <a class="iconName">交班管理</a>
+                    </li>
+                </ul>
+                <div class="textNav">
+                    <div class="textNavItem">
+                        <span class="navText">抢救室/人</span>
+                        <span class="navNum">1</span>
+                    </div>
+                    <div class="textNavItem">
+                        <span class="navText">呼吸内科/人</span>
+                        <span class="navNum">1</span>
+                    </div>
+                    <div class="textNavItem">
+                        <span class="navText">留观室/人</span>
+                        <span class="navNum">1</span>
+                    </div>
+                    <div class="textNavItem">
+                        <span class="navText">输液室/人</span>
+                        <span class="navNum">1</span>
+                    </div>
+                    <div class="textNavItem">
+                        <span class="navText">手术室/人</span>
+                        <span class="navNum">1</span>
+                    </div>
+                    <div class="textNavItem">
+                        <span class="navText">呼吸内科/人</span>
+                        <span class="navNum">1</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <header>
+            <div class="HeaderAlert">
+                <img alt="" src="../images/home/fzHome_alert.png" />
+                <a>共有1条报警消息等待处理！</a>
+            </div>
+            <div class="HeaderIcon">
+                <ul>
+                    <li class="popoverItem">
+                        <img class="iconImg" alt="" src="../images/home/fzHome_topNav_call110.png" />
+                        <a 
+                        role="button"
+                        id="call110"
+                        class="btn btn-default iconBtn" 
+                        data-toggle="popover" 
+                        data-placement="bottom"
+                        title="紧急连接院内保安系统"
+                        >
+                            紧急报警
+                        </a>
+                        <!-- <div class="helpWindow systemWin">
+                            <span class="triangle triangle0"></span>
+                            <div>
+                                <p>紧急连接院内保安系统</p>
+                                <p><img alt="" src="../images/home/fzHome_call110_yes.png" />确认</p>
+                                <p><img alt="" src="../images/home/fzHome_call110_cancel.png" />取消</p>
+                            </div>
+                        </div> -->
+                    </li>
+                    <li>
+                        <img class="iconImg" alt="" src="../images/home/fzHome_topNav_backHome.png" />
+                        <button 
+                        type="button" 
+                        class="btn btn-default iconBtn">
+                            返回首页
+                        </button>
+                    </li>
+                    <li class="popoverItem">
+                        <img class="iconImg" alt="" src="../images/home/fzHome_topNav_userPhoto.png" />
+                        <a 
+                        role="button"
+                        id="userna"
+                        class="btn btn-default iconBtn" 
+                        data-toggle="popover" 
+                        data-placement="bottom"
+                        title="紧急分诊台">
+                        用户名
+                        </a>
+                        <!-- <div class="helpWindow warnWin">
+                                <p>紧急分诊台</p>
+                                <p><img alt="" src="../images/home/fzHome_fzt_tab.png" />切换</p>
+                                <p><img alt="" src="../images/home/fzHome_fzt_exit.png" />退出</p>
+                        </div> -->
+                    </li>
+                    <li class="popoverItem">
+                        <img class="iconImg" alt="" src="../images/home/fzHome_topNav_help.png" />
+                        <a 
+                        role="button"
+                        id="userhelp"
+                        class="btn btn-default iconBtn" 
+                        data-toggle="popover" 
+                        data-placement="bottom"
+                        title="版本说明">
+                        帮助
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="maintain row">
+            <!-- 表格 -->
+            <div class="mainTable ">
+                <!-- 表格头部 -->
+                <div class="tableHeader row">
+                    <div class="tableNav col-md-6">
+                        <ul class="headerNav">
+                            <li class="headerNavItem"><a>待分诊</a></li>
+                            <li class="headerNavItem"><a>已分诊</a></li>
+                            <li class="headerNavItem"><a>已接诊</a></li>
+                            <li class="headerNavItem"><a>全部</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-10 searchItem">
+                        <div class="searchInput">
+                            <input type="text" class="form-control" placeholder="身份证/医保卡/就诊卡/姓名">
+                        </div>
+                        <div class="searchBtn">
+                            <span class="searchBthItem">
+                                <img alt="" src="../images/home/home_search.png" />
+                                <a>查询</a>
+                            </span>
+                            <span class="searchBthItem">
+                                <img alt="" src="../images/home/home_btn_all.png" />
+                                <a>全部</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="eremind">智能提醒区 &nbsp;<img alt="" src="../images/home/down.png" /></div>
+                </div>
+                <!-- 表格主体 -->
+                <div class="tableMain">
+                    <ul class="tableMainNav">
+                        <li class="theadItem aitem">序号</li>
+                        <li class="theadItem bitem">分诊级别</li>
+                        <li class="theadItem citem">个人信息</li>
+                        <li class="theadItem ditem">来院方式</li>
+                        <li class="theadItem eitem">分诊去向</li>
+                        <li class="theadItem fitem">待接诊时间</li>
+                        <li class="theadItem gitem">挂号时间</li>
+                        <li class="theadItem hitem"></li>
+                    </ul>
+                    <ul class="tabcontain">
+                        <li class="tableContent">
+                            <span class="specialIcon" >
+                                <!-- <img alt="" src="../images/home/fzHome_special_unwrite.png" /> -->
+                            </span>
+                            <span class="aitem paddingStyle">1</span>
+                            <div class="bitem paddingStyle">
+                                <span class="editTxt">改</span>
+                                <span class="Level1 levelStyle">1 &nbsp;级</span>
+                            </div>
+                            <div class="citem paddingStyle userInfo">
+                                <span>赵玉来</span>
+                                <span style="padding: 0 5px;">56岁</span>
+                                <img class="man" alt="" src="../images/home/fzHome_man.png" />
+                                <span class="fenzhen yifenzhen">已分诊</span>
+                            </div>
+                            <span class="ditem paddingStyle">110</span>
+                            <span class="eitem paddingStyle">抢救室一</span>
+                            <span class="fitem paddingStyle">00:06:21</span>
+                            <span class="gitem paddingStyle">今日 00:02</span>
+                            <div class="hitem rightIcon">
+                                <a>
+                                    <img class="aicon" alt="" src="../images/home/home_do_receive.png" />
+                                </a>
+                                <a>
+                                    <img class="bicon" alt="" src="../images/home/home_do_print.png" />
+                                </a>
+                                <a>
+                                    <img class="cicon" alt="" src="../images/home/home_do_sign.png" />
+                                </a>
+                                <a>
+                                    <img class="dicon" alt="" src="../images/home/home_do.png" />
+                                </a>
+                                <a>
+                                    <img class="delIcon" alt="" src="../images/home/home_do_delete.png" />
+                                </a>
+
+                            </div>
+                        </li>
+                        <li class="tableContent">
+                            <span class="specialIcon">
+                                <!-- <img alt="" src="../images/home/fzHome_special_write.png" /> -->
+                            </span>
+                            <span class="aitem paddingStyle">2</span>
+                            <div class="bitem paddingStyle">
+                                <span class="editTxt isShow">改</span>
+                                <span class="Level2 levelStyle">2 &nbsp;级</span>
+                            </div>
+                            <div class="citem paddingStyle userInfo">
+                                <span>王丹丹</span>
+                                <span style="padding: 0 5px;">56岁</span>
+                                <img class="woman" alt="" src="../images/home/fzHome_woman.png" />
+                                <span class="fenzhen yijiezhen">已接诊</span>
+                            </div>
+                            <span class="ditem paddingStyle">自行来院</span>
+                            <span class="eitem paddingStyle">抢救室二</span>
+                            <span class="fitem paddingStyle">00:06:21</span>
+                            <span class="gitem paddingStyle">2019/12/10 00:02</span>
+                            <div class="hitem rightIcon">
+                                <a>
+                                    <img class="aicon" alt="" src="../images/home/home_do_receive.png" />
+                                </a>
+                                <a>
+                                    <img class="bicon" alt="" src="../images/home/home_do_print.png" />
+                                </a>
+                                <a>
+                                    <img class="cicon" alt="" src="../images/home/home_do_sign.png" />
+                                </a>
+                                <a>
+                                    <img class="dicon" alt="" src="../images/home/home_do.png" />
+                                </a>
+                                <a class="delIcon">
+                                    <img alt="" src="../images/home/fzHome_do_deleteUnselected.png" />
+                                </a>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- 右边弹窗 -->
+            <aside class="rightAside" style="display: none;">
+                <p class="rightAsideTitle">智能提醒区</p>
+                <div class="adiseContent">
+                    <p>上次入院时间: 2018-05-15 09:33:42</p>
+                    <p>上次出院时间: 2018-05-15 09:33:42</p>
+                    <p>住院天数: 3天</p>
+                    <p>入院方式: 自行来院</p>
+                    <p>入院科别: 呼吸内科</p>
+                    <p>疾病编码: 565656565</p>
+                    <p>血型: AB</p>
+                    <p>药物过敏史: 青霉素类</p>
+                    <p>辅助检查: 四维彩色超声</p>
+                    <p>手术部位:</p>
+                </div>
+                <div class="textareaItem">
+                    <textarea class="form-control" rows="3" style="border-bottom: none;">其他事项:</textarea>
+                    <textarea class="form-control" rows="3" style="border-bottom: none;">主要诊断:</textarea>
+                    <textarea class="form-control" rows="3">用药情况:</textarea>
+                </div>
+            </aside>
+        </div>
+       
+        <footer>
+            <div style="background: #f57f66;">
+                <p class="footerName">待分诊<i class="footerNum">5</i>人</p>
+            </div>
+            <div style="background: #6da66a;">
+                <p class="footerName">已分诊<i class="footerNum">461</i>人</p>
+            </div>
+            <div style="background: #418dd4;">
+                <p class="footerName">已接诊<i class="footerNum">456</i>人</p>
+            </div>
+            <div class="grayItem">
+                <p class="footerName">已退号<i class="footerNum">-</i>人</p>
+            </div>
+            <div class="grayItem">
+                <p class="footerName">特殊人员<i class="footerNum">0</i>人</p>
+            </div>
+            <div class="grayItem">
+                <p class="footerName">今日已挂号<i class="footerNum">468</i>人</p>
+            </div>
+        </footer>
+    </div>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script>
+        // 目录导航点击切换样式 上
+        $(".iconNavItem").click(function () {
+            $(this).addClass("leftNavActive").siblings().removeClass("leftNavActive");
+            $(this).find(".iconNavImg").attr("src",$(this).find(".iconNavImg").data("activeImg"));
+        })
+        // 下
+        $(".textNav>div").click(function () {
+            $(this).addClass("leftNavDown").siblings().removeClass("leftNavDown");
+        })
+
+        // 头部导航点击切换样式
+        $(".headerNavItem").click(function () {
+            $(this).addClass("headerNavItemActive").siblings().removeClass("headerNavItemActive");
+        })
+        
+        // 是否标注
+        $(".specialIcon").click(function(){
+            console.log("111");
+            $(this).toggleClass("specialIconClick");
+        })
+        // 头部点击 小标签
+        function windowItem(fn){
+            $('[data-toggle="popover"]').each(function () {
+                var element = $(this);
+                var id = element.attr('id');
+                element.popover({
+                    trigger: 'manual',
+                    placement: 'bottom', 
+                    html: 'true',
+                    // content: fn,
+
+                }).on("click",function(){
+                    var _this = this;
+                    $(this).popover("toggle");
+                })
+            });
+        }
+
+        function call110Content() {
+            return "<div><p><img alt='' src='../images/home/分诊首页-紧急报警-确认.png' />"+"确认"+"</p><p><img alt='' src='../images/home/分诊首页-紧急报警-取消.png' />"+"取消"+"</p></div>";
+        }
+        // windowItem(call110Content());
+        $("#call110").click(function(){
+            $(this).popover({
+                trigger: 'manual',
+                placement: 'bottom', 
+                html: 'true',
+                content: call110Content(),
+            }).on("click",function(){
+                var _this = this;
+                $(this).popover("toggle");
+            })
+        })
+    </script>
+</body>
+
+</html>

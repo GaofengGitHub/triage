@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>急诊专科全流程业务系统 ECS</title>
+		<link href="#path()/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="#path()/static/dist/css/sb-admin-2.css" rel="stylesheet">
+		<link href="#path()/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="#path()/static/dist/fonts/iconfont.css" rel="stylesheet">
+		<script src="#path()/static/vendor/jquery/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				
+			});
+			function keyLogin(){
+				if(event.keyCode == 13){
+					$("#sButton").click();
+				}
+			};
+			
+			window.alert = function(name){
+			    var iframe = document.createElement("IFRAME");
+			    iframe.style.display="none";
+			    iframe.setAttribute("src", 'data:text/plain,');
+			    document.documentElement.appendChild(iframe);
+			    window.frames[0].window.alert(name);
+			    iframe.parentNode.removeChild(iframe);
+			}
+			function loginValidate(){
+				 $.ajax({
+			         type: "post",
+			         url: "#path()/userPassword",
+			         data:{
+			        	 user:$('#username').val(),
+			        	 password:$('#password').val(),
+			        	 usergroup:$('#usergroup').val()
+			         },
+			         dataType: "json",
+			         success: function(result){
+			        	 if(result.login == 'success'){
+			        		 $("#form0").submit();
+			        	 }else{
+			        		 alert("用户名或密码错误！");
+			        		 return false;
+			        	 }
+			         },
+			         error: function(e){
+			        	 return false;
+			         }
+			     });
+			}
+			function cancel(){
+				$('.try-box').hide();
+			}
+			function submit(){
+				$.ajax({
+			         type: "post",
+			         url: "#path()/login/queryEncryptionCdkey",
+			         data:{
+			        	 encryption_cd_key:$('#encryption_cd_key').val()
+			         },
+			         dataType: "json",
+			         success: function(result){
+			        	 if(result.status=="200"){
+			        		 $('.try-box-success').show();
+			        		  setTimeout("successhide()",2000);
+			        	 }else{
+			        		  $('.error-text').show();
+			        	 }
+			         },
+			         error: function(e){
+			        	 return false;
+			         }
+			     });
+				//$('.try-box').hide();
+				
+			}
+			function successhide(){
+			$('.try-box').hide();
+			$('.try-box-success').hide();
+			
+			}
+		</script>
+    
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+
+	  	<style type="text/css">
+	   		html,body {
+               font-size: 12px;
+               width:100%;
+               height:100%;
+               overflow: hidden;
+               margin:0px;
+               padding:0px;
+           }
+        </style>
+	</head>
+	<body onkeydown="keyLogin();">
+		<form action="#path()/login" method="post" id="form0">
+			<div class='login-bg'>				
+			</div>
+			<div class='clearfix mediate'>
+					<div class='boxRight'>
+					<div class='pull-left'>
+						<div class='visualize-new'>
+							<p class='wel'>WELCOME</p>
+							<p class='systemName-new'>急诊专科全流程业务系统</p>
+						</div>
+					</div>
+					<div class='pull-left'>
+						<div class='formMenu-new'>
+							<div class='form-group loginInput'>
+								<img src='#path()/static/images/user.png'>
+								<input type='text' id="username" name="username" placeholder="请输入用户名">
+							</div>
+							<div class='form-group loginInput loginInpSpace' >
+								<img src='#path()/static/images/password.png'>
+								<input type='password' id="password" name="password" placeholder="请输入密码">
+							</div>
+							<!-- <div class='form-group loginInput loginInpSpace' >
+								<img src='#path()/static/images/password.png'>
+								<select id="usergroup">
+									<option value="急诊护士">急诊护士</option>
+									<option value="急诊医生">急诊医生</option>
+									<option value="输液室护士">输液室护士</option>
+								</select>
+							</div> -->
+							<button class='btn loginBtn' id="sButton" onclick="loginValidate();" type="button">登录</button>
+						</div>
+						<div class="try-box">
+							<span class="try-tip"><img src='#path()/static/images/warning_icon.png'>试用期到期，请立即联系信息科负责人！</span>
+							<input class="form-control" placeholder="请输入激活码" id="encryption_cd_key"/>
+							<div class="error-text">您输入的激活码错误</div>
+							<div class="try-btns">
+								<span class="cancel-btn" onclick="cancel();">取消</span>
+								<span class="submit-btn" onclick="submit();">确定</span>
+							</div>
+						</div>
+						<div class="try-box-success">
+							<div>激活成功！</div>
+						</div>
+					</div>
+					</div>
+					<!-- <div class='loginFooter'>
+						<div class='copyright'>
+							南京晨伟医疗设备有限公司  <span>版权所有</span>
+						</div>
+					</div> -->
+				</div>
+			<!-- <div class='container-fluid'>
+				<div class='row'>
+					<div class='col-md-12 p0'>
+					
+					</div>
+				</div>
+			</div> -->
+		</form>
+	</body>
+</html>
+

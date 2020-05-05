@@ -1,0 +1,472 @@
+#@bj_layout('index')
+#define bj_main()
+<div class="maintain row clearfix">
+    <!-- 表格 -->
+    <div class="mainTable ">
+        <!-- 表格头部 -->
+        <div class="tableHeader row">
+            <div class="tableNav col-md-6">
+                <ul class="headerNav" id="menu_tab">
+                    <li class="headerNavItem " id="wait1"><a data-toggle="tab" href="#waithome" Userbehavior="A28">待分诊</a></li>
+                    <li class="headerNavItem" id="about1"><a data-toggle="tab" href="#about" Userbehavior="A29">已分诊</a></li>
+                    <li class="headerNavItem" id ="profile1"><a data-toggle="tab" href="#profile" Userbehavior="A30">已接诊</a></li>
+                    <li class="headerNavItem headerNavItemActive" id="all"><a data-toggle="tab" href="#contact" Userbehavior="A31">全部</a></li>
+                </ul>
+            </div>
+            <div class="col-md-10 searchItem">
+                <div class="searchInput">
+                    <input id="cardnumText" type="text" class="form-control" placeholder="身份证/医保卡/就诊卡/姓名"  oninput="initTable()"  onporpertychange="initTable()">
+                </div>
+                <div class="searchBtn">
+                            <span class="searchBthItem" id="seach">
+                                <img alt="" src="#path()/static/vendor/newpage/images/home/home_search.png" />
+                                <a>查询</a>
+                            </span>
+                    <span class="searchBthItem">
+                                <img alt="" src="#path()/static/vendor/newpage/images/home/home_btn_all.png" />
+                                <a>全部</a>
+                            </span>
+                </div>
+            </div>
+            <div class="eremind">智能提醒区 &nbsp;<img alt="" src="#path()/static/vendor/newpage/images/home/down.png" /></div>
+        </div>
+        <!-- 表格主体 -->
+<!--        <div class="tableMain">-->
+<!--            <ul class="tableMainNav">-->
+<!--                <li class="theadItem aitem">序号</li>-->
+<!--                <li class="theadItem bitem">分诊级别</li>-->
+<!--                <li class="theadItem citem">个人信息</li>-->
+<!--                <li class="theadItem ditem">来院方式</li>-->
+<!--                <li class="theadItem eitem">分诊去向</li>-->
+<!--                <li class="theadItem fitem">待接诊时间</li>-->
+<!--                <li class="theadItem gitem">挂号时间</li>-->
+<!--                <li class="theadItem hitem"></li>-->
+<!--            </ul>-->
+<!--            <ul class="tabcontain">-->
+<!--            </ul>-->
+<!--        </div>-->
+        <div class="panel-body2" style='padding:0;position:relative;height: 710px'>
+            <div class="tab-content" style="height: 100%">
+                <img src='#path()/static/bj/images/fz_step03_pic.png' class="fz-step03-pic"  data-step="3" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;3、待分诊患者信息操作&lt;/h1&gt;&lt;p&gt; 点击“分诊”菜单，可补录患者分诊信息，点击“☆”，可标记特殊患者，点击“删除”菜单，可确认删除待分诊患者记录。&lt;/p&gt;&lt;/div&gt;" data-position="left"/>
+                <div id="waithome" class="tab-pane active">
+                    <div class="panel-body2 table-responsive p0">
+                        <table class="table table-striped"  data-height="650" id = "wait-patients"  style="border-collapse: separate !important; padding: 0; border-spacing: 0px 6px;">
+                        </table>
+                    </div>
+                </div>
+                <div id="about" class="tab-pane clearfix">
+                    <div class="panel-body2 table-responsive p0" >
+                        <table class="table table-striped"  data-height="650" id = "divid-patients"  style="border-collapse: separate !important; padding: 0; border-spacing: 0px 6px;">
+                        </table>
+                    </div>
+                </div>
+                <div id="profile" class="tab-pane clearfix">
+                    <div class="panel-body2 table-responsive p0">
+                        <table class="table table-striped" data-height="650" id = "recived-patients"  style="border-collapse: separate !important; padding: 0; border-spacing: 0px 6px;">
+                        </table>
+                    </div>
+                </div>
+                <div id="contact" class="tab-pane clearfix">
+                    <div class="panel-body2 table-responsive p0">
+                        <table class="table table-striped" data-height="650" id = "all-patients"  style="border-collapse: separate !important; padding: 0; border-spacing: 0px 6px;">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    
+    <!-- 右边弹窗 -->
+    <aside class="rightAside" style="display: none;">
+        <p class="rightAsideTitle">智能提醒区</p>
+        <div class="adiseContent">
+            <p>上次入院时间:  <input type="text" class="form-control" id="sczy" placeholder="" readonly="readonly"></p>
+            <p>上次出院时间: <input type="text" class="form-control" id="sccy" placeholder="" readonly="readonly"></p>
+            <p>住院天数:  <input type="text" class="form-control" id="" placeholder="" readonly="readonly"></p>
+            <p>入院方式:  <input type="text" class="form-control" id="ryfs" placeholder="" readonly="readonly"></p>
+            <p>入院科别:   <input type="text" class="form-control" id="departname1" placeholder="" readonly="readonly"></p>
+            <p>疾病编码: <input type="text" class="form-control" id="" placeholder="" readonly="readonly"></p>
+            <p>血型: <input type="text" class="form-control" id="" placeholder="" readonly="readonly"></p>
+            <p>药物过敏史: <input type="text" class="form-control" id="" placeholder="" readonly="readonly"></p>
+            <p>辅助检查: <input type="text" class="form-control" id="" placeholder="" readonly="readonly"></p>
+            <p>手术部位: <input type="text" class="form-control" id="" placeholder="" readonly="readonly"></p>
+        </div>
+        <div class="textareaItem">
+            <textarea class="form-control" rows="3" style="border-bottom: none;">其他事项:</textarea>
+            <textarea class="form-control" rows="3" style="border-bottom: none;">主要诊断:</textarea>
+            <textarea class="form-control" rows="3">用药情况:</textarea>
+        </div>
+    </aside>
+	
+</div>
+
+ <!-- 弹窗 -->
+	 <div class="windowBox">
+	 
+		 <div class="specialWindow mywindow">
+		 	<p class="specialTitle">报特殊
+		 	<span class="specialClose">X</span></p>
+		 	<div class="typeMain">
+			 	<ul class="tyleOuter">
+			 		<li class="typeItem">欠费患者</li>
+				 	<li class="typeItem">特殊患者</li>
+				 	<li class="typeItem">甲流患者</li>
+				 	<li class="typeItem">乙流患者</li>
+				 	<li class="typeItem">本院</li>
+				 	<li class="typeItem">外宾</li>
+				 	<li class="typeItem">大小</li>
+			 	</ul>
+				 <div class="sureBtn"><a class="okBtn">确认</a></div>
+		 	</div>
+		 </div>
+		 
+		  <div class="yijiezhenWindow mywindow">
+		 	<p class="specialTitle">标记已接诊
+		 	<span class="specialClose">X</span></p>
+		 	<div class="yijiezhengTime">
+		 		<p>
+		 			分诊时间：2018年3月1日
+			 		<span>17:30</span>
+			 	</p>
+			 	<div class="pickTime">
+			 		<span>接诊时间:</span>
+			 		<input type="text" id="dataPicker" name="datetimepicker" value="" class="form-control" />
+			 	</div>
+			 	<div class="sureBtn">
+				 	<input type="hidden" id="tep_id"/>
+	         		<input type="hidden" id="caozuo"/>
+	         		<a class="picktimebtn">确认</a>
+         		</div>
+		 	</div>
+		 </div>
+		 
+		 <div class="deleteWindow mywindow" style="display:none">
+		 	<p>确认删除</p>
+		 	<div>
+			 	<p>是否确认删除患者分诊信息，将患者退回“待分诊”状态？</p>
+			 	<div><a>确认</a></div>
+		 	</div>
+		 </div>
+		 
+		
+		 
+		 <div class="signWindow mywindow" style="display:none">
+		 	签字图片
+		 </div>
+	 
+	  </div>
+
+<footer>
+    <div style="background: #f57f66;">
+        <p class="footerName">待分诊<i class="footerNum" id="wait">5</i>人</p>
+    </div>
+    <div style="background: #6da66a;">
+        <p class="footerName">已分诊<i class="footerNum" id="divid">461</i>人</p>
+    </div>
+    <div style="background: #418dd4;">
+        <p class="footerName">已接诊<i class="footerNum" id="receive">456</i>人</p>
+    </div>
+    <div class="grayItem">
+        <p class="footerName">已退号<i class="footerNum" id="back1">-</i>人</p>
+    </div>
+    <div class="grayItem">
+        <p class="footerName">特殊人员<i class="footerNum" id="special">0</i>人</p>
+    </div>
+    <div class="grayItem">
+        <p class="footerName">今日已挂号<i class="footerNum" id="register1">468</i>人</p>
+    </div>
+</footer>
+<div class="mapBox">
+    <div class="maptit">
+        <i class="glyphicon glyphicon-remove"></i>
+    </div>
+    <div class="map">
+    </div>
+</div>
+<div class="modal fade common-modal" id="teModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width:300px">
+    <div class="modal-dialog" style="width:100%">
+        <div class="modal-content message_align">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span Userbehavior="A75" aria-hidden="true">×</span></button>
+                <h4 class="modal-title">标记已接诊</h4>
+            </div>
+            <div class="modal-body">
+                <div id="temessage">
+                    <div class='clearfix'><p>分诊时间：<span id='show_dividtime'></span></p><div class='form-group'>接诊时间：
+                        <div id="time_div">
+                            <input  id="jiezhen_time" type="text"  name="" placeholder="选择时间" class="form-control "></div></div></div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="tep_id"/>
+                <input type="hidden" id="caozuo"/>
+                <!-- <button Userbehavior="A74" type="button" class="btn btn-default" data-dismiss="modal">取消</button> -->
+                <a Userbehavior="A73" onclick="teurlSubmit()" class="btn btn-primary">确定</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade common-modal" id="go_rct1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width:300px">
+    <div class="modal-dialog" style="width:100%">
+        <div class="modal-content message_align">
+
+            <div class="modal-body">
+                <h4>是否将患者分入抢救站?</h4>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="tep_id"/>
+                <input type="hidden" id="caozuo"/>
+                <button Userbehavior="A74" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <a Userbehavior="A73" onclick="okGoRct()" class="btn btn-primary">确定</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade common-modal" id="teModel1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width:300px">
+    <div class="modal-dialog" style="width:100%">
+        <div class="modal-content message_align">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="temessage1"></div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="tep_id"/>
+                <input type="hidden" id="caozuo"/>
+                <a onclick="hideteModel1()" class="btn btn-primary">确定</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 信息删除确认 -->
+<div class="modal fade common-modal" id="delcfmModel" style="width:500px">
+    <div class="modal-dialog" style="width:500px">
+        <div class="modal-content message_align">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">删除确认</h4>
+            </div>
+            <div class="modal-body">
+                <p id="mes"></p>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="cardnum"/>
+                <input type="hidden" id="status"/>
+                <input type="hidden" id="p_id"/>
+                <input type="hidden" id="id"/>
+                <input type="hidden" id="userId" value="#userId()"></input>
+                <input type="hidden" id="hisid" value=""></input>
+                <input type="hidden" id="eventid" value=""></input>
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">取消</button> -->
+                <a  onclick="urlSubmit()" class="btn btn-primary" data-dismiss="modal">确定</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- 信息删除确认 -->
+<div class="modal fade common-modal" id="promptModel" style="width:500px">
+    <div class="modal-dialog" style="width:500px">
+        <div class="modal-content message_align">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span onclick="promptModelUserbehavior(this);" aria-hidden="true">×</span></button>
+                <h4 class="modal-title">报特殊</h4>
+            </div>
+            <div class="modal-body">
+                <div id="promptmassage" class="clearfix"></div>
+                <input type="hidden" id="confirmpromptModel" value="" />
+                <input type="hidden" id="methodname" value="">
+                <input type="hidden" id="methoduseid" value="">
+                <input type="hidden" id="methoddata" value="">
+            </div>
+            <div class="modal-footer">
+                <!-- <a class="btn btn-default" onclick="promptModelUserbehavior(this);" data-dismiss="modal">取消</a> -->
+                <a class="btn btn-primary" onclick="confirmassagetrue();">确定</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+#include("dayinfzd.html")
+<div id="pingji" class="gradeLevel">
+    <p>原系统评级：<span id="old"></span></p>
+    <p>修改后评级：<span id="new"></span></p>
+    <p>修改原因：<span id="reson"></span></p>
+    <p>修改医生：<span id="doctor"></span></p>
+    <p>修改时间：<span id="time"></span></p>
+    <p>修改日期：<span id="date"></span></p>
+</div>
+<div id="img" style="    width: 230px;
+    height: 130px;
+    background: #ffffff;
+    position: fixed;
+    top: 30%;
+    left: 80%;
+    transform: translate(-50%);
+    z-index: 1;display:none">
+    <div class="modal-header">
+        <h4 class="modal-title">家属签字</h4>
+    </div>
+    <span ><img  id="signimg"></span>
+
+</div>
+<!-- 更新说明弹窗 -->
+<div class="modal fade" id="updatemModel" style="width:460px">
+    <div class="modal-dialog" style="width:460px">
+        <div class="modal-content message_align">
+            <!-- <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>   -->
+            <div class="modal-body">
+                <h1 class="update-title">更新说明</h1>
+                <div class="update-top">
+                    <span id="publish_date"></span>
+                    <span id="version_num"></span>
+                </div>
+                <p id="updateContent"></p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" data-dismiss="modal">确定</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<script>
+    $(function () {
+        $(".eremind").click(function () {
+            if(!$(".rightAside").is(":visible")){
+                $(".rightAside").show();
+                $(".mainTable").css({width:"77%"})
+            }else {
+                $(".rightAside").hide();
+                $(".mainTable").css({width:"100%"})
+            }
+
+        })
+    })
+</script>
+    <script>
+        #include("index.js")
+    </script>
+    <style>
+        .changeColor td{
+            background: #569fd5!important;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+
+            //获取样式
+            setgradebtncss2();
+
+            //$("#homeUrl").trigger("click");
+
+            initTable();
+
+            //定时刷新
+            setInterval(function(){
+                reflashTable();
+            }, 30000);
+
+            $("#openIndex").addClass("active");
+
+            $("#seach").bind("click",function(){
+                if(!window.sessionStorage["pnum"]){
+                    //记录 搜索患者 操作点次数
+                    saveUserbehavior("A1");
+                }
+                initTable();
+                $("#wait1").removeClass("active");
+                $("#about1").removeClass("active");
+                $("#profile1").removeClass("active");
+
+                $("#all").addClass("active");
+
+                $("#waithome").removeClass("tab-pane active");
+                $("#waithome").addClass("tab-pane clearfix");
+                $("#about").removeClass("tab-pane active");
+                $("#about").addClass("tab-pane clearfix");
+                $("#profile").removeClass("tab-pane active");
+                $("#profile").addClass("tab-pane clearfix");
+                $("#contact").removeClass("tab-pane clearfix");
+                $("#contact").addClass("tab-pane active");
+
+            });
+
+            //$(".calling").hide();
+
+            $(".calling").click(function(){
+                $(this).hide();
+                $(".video").show();
+            })
+            $(".turnOff").click(function(){
+                $(".video").hide();
+            })
+
+            var befrom ='#(befrom ??)';
+
+            if(befrom.length>0){
+
+                if(befrom=="about1"){
+                    $("#about1").find("a").trigger("click");
+                }else if(befrom=="profile1"){
+                    $("#profile1").find("a").trigger("click");
+                }else if(befrom=="all"){
+                    $("#all").find("a").trigger("click");
+                }else{
+                    $("#wait1").find("a").trigger("click");
+                }
+
+            }else{
+                $("#wait1").find("a").trigger("click");
+            }
+
+            //点击危险报警提示里的患者后 进入此方法 然后table 中的 全部 要被选中
+            if(window.sessionStorage["pnum"]){
+                var pnum = sessionStorage.getItem("pnum");
+                $("#cardnumText").val(pnum);
+                $("#seach").click();
+                $("#cardnumText").val("");
+                sessionStorage.removeItem("pnum");
+            }
+
+        });
+
+        //百度地图API功能
+        function loadJScript() {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "//api.map.baidu.com/api?v=2.0&ak=DDYYAcd9dzsf36OmOFSUjYG4iZo4rfcI";
+            document.body.appendChild(script);
+        }
+        function init() {
+            // 百度地图API功能
+            var map = new BMap.Map("BMap", {enableMapClick:false,minZoom:13,maxZoom:15});//构造底图时，关闭底图可点功能
+
+            var point1 = new BMap.Point(118.810111,31.96619);
+            var point2 = new BMap.Point(118.802794,31.949435); // 创建点坐标     晨伟 坐标
+            map.centerAndZoom(point2,15);                 // 初始化地图,设置中心点坐标和地图级别。
+            map.enableScrollWheelZoom();                 //启用滚轮放大缩小
+            var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+            driving.search(point1, point2);
+        }
+        window.onload = loadJScript;  //异步加载地图
+
+    </script>
+
+
+
+
+    <div class="calling" style="display:none">
+        <img src="#path()/static/images/calling.png" >
+    </div>
+    <div class="video">
+        <img src="#path()/static/images/video.png">
+        <div class="turnOff upoff"></div>
+        <div class="turnOff downoff"></div>
+    </div>
+#end

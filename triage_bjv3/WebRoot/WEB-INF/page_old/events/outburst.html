@@ -1,0 +1,86 @@
+#@layout('outburst')
+#define main()
+<style>
+.datagrid-btable tr {
+height: 30px;
+}
+.seach_div_data{
+height: 340px !important;
+overflow: auto;
+}
+.seach_div_header{
+height: 25px !important;
+}
+</style>
+<script type="text/javascript">
+#include("outburst.js")
+$("body").css("background","#fff");
+</script>
+
+#include("window.html")
+<div id="page-wrapper" class="outburst">
+				<div class="row">
+					<ol class="breadcrumb">
+						<li>
+							<a href="index.html">首页</a>
+						</li>
+						<li class="active">突发公共卫生事件：</li>
+					</ol>
+				</div>
+				<div class="row button-add">
+					<div class="col-md-5 triage-time">
+						<span class='labelSearch'>分诊时间 ：从</span>
+						<div style="display:inline-block;vertical-align: middle;">
+							<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd" style="line-height:34px;">
+		                       <input type="text" class="form-control" name="from" id="btn-input-begin">
+		                       <span class="input-group-addon"> - </span>
+		                       <input type="text" class="form-control" name="to" id="btn-input-end">                    
+		                    </div>
+						</div>
+											
+						<!-- <div class="input-group globalSearch" style="left:12px">
+							<input id="btn-input-begin" style='height:36px;border-radius: 4px;' type="text" class="form-control  formInput">
+						</div>
+						<span class='labelSearch' style="left:22px">到</span>
+						<div class="input-group globalSearch" style="left:30px">
+							<input id="btn-input-end" style='height:36px;border-radius: 4px;' type="text" class="form-control  formInput">
+						</div> -->
+					</div>
+					<div class="col-md-4">
+						<span class='labelSearch'>事件：</span>
+						<div class="input-group globalSearch col-md-8" style="left:55px">
+							<input id="btn-input-name" style='height:36px;' type="text" class="form-control  formInput" placeholder="请输入事件名称">
+							<span class="input-group-btn">
+		                    	<button class="btn btn-sm btn-chat" onclick="queryEvents();">
+		                    		<i class="icon-search" ></i>
+		                    	</button> 
+		               		</span>
+						</div>
+					</div>
+					<div class='col-md-3'>
+						<div class="text-right">
+							<button type="button" class="btn btn-info btn-lg" onclick="toAdd();" >新增事件</button>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-bottom:20px;">
+					<div class="col-lg-12">
+
+							<div class="b-panel-body p0 table-set table-create">
+							<table class="table table-hover" id="tb0">
+							</table>
+					
+						</div>
+					</div>
+				</div>
+				<!--<div class="row">
+					<div class="col-md-12">
+						<div class='text-center footer'>
+							南京晨伟医疗设备有限公司 武汉大学人民医院  版权所有
+							<img src="images/footer.png">
+            			<i class="icon iconfont icon-duihuakuang4 pull-right"></i>
+						</div>
+					</div>
+				</div> -->
+</div>
+#end

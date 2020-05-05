@@ -1,0 +1,24 @@
+<script type="text/javascript">
+#include("function.js")	
+$(document).ready(function() {
+        	pjbList();
+});
+</script>
+	<div class="panelMain">
+		<table class="easyui-datagrid" id="pjbList" title="用户管理"
+			style="width: 98%; height: 98%;"></table>
+		<div id="row1" style="display: inline-block;">
+			系统分级评级表<input class="userName" placeholder="关键字" /> <a href="">
+				<button class="btn btn-primary btn-xs">查询</button>
+			</a>
+		</div>
+		<div id="row2">
+			<a href="javascript:void(0);" onclick="pjbload('addYJFZPJB');">
+				<button class="btn btn-primary btn-xs">新增</button>
+			</a> <a href="javascript:void(0);" onclick="modInfo();">
+				<button class="btn btn-primary btn-xs">修改</button>
+			</a> <a href="javascript:void(0);" onclick="disablepjb();">
+				<button class="btn btn-primary btn-xs">停用</button>
+			</a>
+		</div>
+	</div>

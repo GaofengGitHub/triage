@@ -1,0 +1,101 @@
+<script type="text/javascript">
+
+function queryDeviceList() {
+    $('#deviceList').datagrid({
+         url: '#path()/systemmgmt/queryDevice',
+         allowCellSelect: true,
+         check: {
+             enable: true
+         },
+         //idField: 'id',
+         rownumbers: true,
+         toolbar: '#row1,#row2',
+         nowrap: true, //列内容多时自动折至第二行
+         border: false,
+         pagination:true,
+         pageSize : 10, //页大小
+         pageList : [ 5,10,15,20],
+         fitColumns:true,
+         singleSelect: true,//选择多行
+         columns: [[
+            {field: 'id', hidden: 'true' },
+			{field : 'uniqueid',title : '设备号',align : 'center',width : '30%',sortable : false},
+			{field : 'device_type',title : '设备类型',align : 'center',width : '15%',sortable : false},
+			{field : 'owener',title : '使用者',align : 'center',width : '15%',sortable : false},
+			{field : 'status',title : '是否启用',align : 'center',width : '10%',sortable : false},
+			{field : 'creat_time',title : '创建时间',align : 'center',width : '30%',sortable : false},
+         ]],
+         onAfterEdit : function(index, row) {
+             //endEdit该方法触发此事件
+                 //updateNodeEditOrNew(row);
+                 //刷新树结构
+                 //row.editing = false;
+                 $('#deviceList').datagrid('refreshRow', index);
+         }
+     });
+}
+
+function editDevice(){
+    var rowData = $("#deviceList").datagrid("getSelections");
+	if(rowData.length != 1){
+        toastr.warning("请选中一行数据");
+        return;
+    }
+	var t = 'editDevice?id='+rowData[0].id;
+	load(t);   
+}
+
+function deleteDevice(){
+    //编辑完之后自动刷新行
+    $('#deviceList').datagrid( rowIndex,'refreshRow');
+	var rowData = $("#deviceList").datagrid("getSelections");
+	if(rowData.length != 1){
+        toastr.warning("请选中一行数据");
+        return;
+    }
+	if(!confirm("确定要删除数据?")){
+	 	return false;
+	}
+
+	var rowIndex=$('#deviceList').datagrid('getRowIndex',rowData[0]);
+	$.ajax({
+		type : "post",
+		url : "#path()/systemmgmt/deleteDevice",
+		dataType : "json",
+		async : false,
+		data : {
+			id : rowData[0].id
+		},
+		success : function(result) {
+			toastr.warning("操作成功");
+		    //编辑完之后自动刷新行
+		    $('#deviceList').datagrid( rowIndex,'refreshRow');
+		},
+		error : function() {
+			toastr.warning("操作失败");
+		}
+   });
+}
+
+
+
+$(document).ready(function() {
+	queryDeviceList();
+});
+</script>
+	<div class="panelMain" style='padding:30px;'>
+		<table class="easyui-datagrid" id="deviceList" title="移动终端管理"
+			style="width: 98%; height: 98%;">
+		</table>
+		<div id="row2">
+			<a href="javascript:void(0);" onclick="load('editDevice');">
+				<button class="btn btn-primary btn-xs">新增</button>
+			</a> 
+			<a href="javascript:void(0);" onclick="editDevice();">
+				<button class="btn btn-primary btn-xs">修改</button>
+			</a> 
+			<a href="javascript:void(0);" onclick="deleteDevice();">
+				<button class="btn btn-primary btn-xs">删除</button>
+			</a>
+		</div>
+	</div>

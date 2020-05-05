@@ -1,0 +1,53 @@
+<script type="text/javascript">
+#include("report_4.js")
+</script>
+<script type="text/javascript" src="../static/js/china.js" ></script>
+<!-- <script src='#path()/static/bj/js/echarts-all.js' type="text/javascript"></script> -->
+<div class="chart-section">
+    <div class="select-top">
+    	<div class="datetime-box clearfix">
+        <form class="form-inline headSearch" role="">
+        <div style="display:inline-block;vertical-align: middle;">
+			<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+		        <input type="text" class="form-control" name="from" id="starttime">
+		        <span class="input-group-addon"> - </span>
+		        <input type="text" class="form-control" name="to" id="endtime">                    
+		    </div>
+		</div>
+				    <!-- <input type="text" class="form-control" style='width: 40%;'
+				        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+						id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+					<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+						查询
+					</a>
+				</form>
+    </div>
+    </div>
+    <div class="clearfix chart-part04">
+        <div class="chart-part04-01 report-common-box">
+            <h1 class="chart-big-title">急诊患者来源</h1>
+            <div class="clearfix ">
+                <div class="pull-left background" style="background: url('../static/images/zhoubian.jpg') no-repeat center!important;background-size: 100% 100%!important;">
+                    <div class="map-box " id="chart1">
+                    </div>
+                </div>
+                <div class="pull-left" style="background: url('../static/images/qu.jpg') no-repeat center!important;background-size: 100% 100%!important;">
+                    <div class="map-box" id="chart2">
+                        
+                    </div>
+                </div>
+                <div class="pull-left">
+                    <div class="map-box" id="chart3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chart-part04-02 report-common-box">
+            <h1 class="chart-big-title">急诊患者来院方式&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#" class="title-link">查看明细</a></h1>
+            <div class="chart-box"  id="chart4" style="height: 90%">
+            </div>
+        </div>
+
+    </div>
+
+</div>

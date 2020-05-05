@@ -1,0 +1,167 @@
+<script type="text/javascript">
+#include("report_7.js")
+</script>
+<div class="chart-section">
+    <div class="select-top">
+    	<div class="datetime-box clearfix">
+        <form class="form-inline headSearch" role="">
+        <div style="display:inline-block;vertical-align: middle;">
+			<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+		        <input type="text" class="form-control" name="from" id="starttime">
+		        <span class="input-group-addon"> - </span>
+		        <input type="text" class="form-control" name="to" id="endtime">                    
+		    </div>
+		</div>
+				    <!-- <input type="text" class="form-control" style='width: 40%;'
+				        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+						id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+					<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+						查询
+					</a>
+				</form>
+    </div>
+    </div>
+    <div class="clearfix chart-part07">
+        <div class="pull-left chart-part07-01">
+        	<div class="report-common-box">
+        		<h1>接诊平均时间</h1>
+        		<div class="chart-box" id="option_1"></div>
+			<table class="table table-bordered report-common-table">
+				<thead>
+					<tr>
+						<th>级别</th>
+						<th>1级</th>
+						<th>2级</th>
+						<th>3级</th>
+						<th>4级</th>
+						<th>非急诊</th>
+					</tr>
+				</thead>
+				<tbody>					
+					<tr>
+						<td>平均接诊时间（min)</td>
+						<td class="counter">0</td>
+						<td class="counter">5</td>
+						<td class="counter">22</td>
+						<td class="counter">95</td>
+						<td class="counter">120</td>
+					</tr>
+					<tr>
+						<td>标准线</td>
+						<td class="counter">0</td>
+						<td class="counter">10</td>
+						<td class="counter">30</td>
+						<td class="counter">60</td>
+						<td>-</td>
+					</tr>
+				</tbody>
+			</table>
+        	</div>
+            
+		</div>
+        <div class="pull-left chart-part07-02">
+        	<div class="report-common-box">
+        		<h1>科室候诊峰值</h1>
+        		<div class="chart-box" id="option_2"></div>
+			<table class="table table-bordered report-common-table">
+				<thead>
+					<tr>
+						<th></th>
+						<th>急诊内科</th>
+						<th>急诊外科</th>
+						<th>急诊神经内科</th>
+						<th>急诊妇科</th>
+						<th>急诊产科</th>
+						<th>急诊皮肤科</th>
+						<th>急诊耳鼻喉科</th>
+						<th>急诊眼科</th>
+						<th>急诊口腔科</th>
+						<th>急诊精神</th>						
+					</tr>
+				</thead>
+				<tbody>				
+					<tr>
+						<td>候诊人数</td>
+						<td class="counter">141</td>
+						<td class="counter">95</td>
+						<td class="counter">23</td>
+						<td class="counter">30</td>
+						<td class="counter">17</td>
+						<td class="counter">56</td>
+						<td class="counter">65</td>
+						<td class="counter">45</td>
+						<td class="counter">22</td>
+						<td class="counter">12</td>
+					</tr>
+					<tr>
+						<td>标准线</td>
+						<td class="counter">60</td>
+						<td class="counter">60</td>
+						<td class="counter">25</td>
+						<td class="counter">12</td>
+						<td class="counter">10</td>
+						<td class="counter">30</td>
+						<td class="counter">30</td>
+						<td class="counter">18</td>
+						<td class="counter">18</td>
+						<td class="counter">15</td>
+					</tr>
+				</tbody>
+			</table>
+        	</div>
+            
+		</div>
+    </div>
+    <div class="chart-part07-03">
+    	<div class="report-common-box">
+        	<h1>科室分诊接诊量</h1>
+        	<div class="chart-box" id="option_3" style="height:calc(100% - 150px)"></div>
+			<table class="table table-bordered report-common-table">
+				<thead>
+					<tr>
+						<th></th>
+						<th>急诊内科</th>
+						<th>急诊外科</th>
+						<th>急诊神经内科</th>
+						<th>急诊妇科</th>
+						<th>急诊产科</th>
+						<th>急诊皮肤科</th>
+						<th>急诊耳鼻喉科</th>
+						<th>急诊眼科</th>
+						<th>急诊口腔科</th>
+						<th>急诊精神</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>分诊人数</td>
+						<td class="counter">2547</td>
+						<td class="counter">1831</td>
+						<td class="counter">994</td>
+						<td class="counter">534</td>
+						<td class="counter">366</td>
+						<td class="counter">543</td>
+						<td class="counter">554</td>
+						<td class="counter">321</td>
+						<td class="counter">332</td>
+						<td class="counter">134</td>
+					</tr>
+					<tr>
+						<td>接诊人数</td>
+						<td class="counter">2533</td>
+						<td class="counter">1820</td>
+						<td class="counter">1012</td>
+						<td class="counter">514</td>
+						<td class="counter">376</td>
+						<td class="counter">531</td>
+						<td class="counter">542</td>
+						<td class="counter">332</td>
+						<td class="counter">341</td>
+						<td class="counter">122</td>
+					</tr>
+				</tbody>
+			</table>	
+        </div>
+        
+	</div>
+</div>

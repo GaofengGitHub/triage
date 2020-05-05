@@ -1,0 +1,1938 @@
+#@bj_layout('divid')
+#define bj_main()
+<link href="#path()/static/bj/css/tooltips.css" rel="stylesheet" type="text/css" />
+<link href="#path()/static/vendor/newpage/css/xinzeng.css" rel="stylesheet" type="text/css" />
+<link href="#path()/static/vendor/newpage/css/vingo/newPatient.css" rel="stylesheet" type="text/css" />
+<script src="#path()/extend/easyui/jquery.easyui.min.js"></script>
+<script src="#path()/static/bj/js/JsBarcode.all.min.js"></script>
+<link type="text/css" href="#path()/static/vendor/newpage/jquery-slider-score/css/style.css" rel="stylesheet" />
+<script>
+    #include("dividload.js")
+</script>
+<script>
+    #include("dividfunction.js")
+</script>
+<script>
+    #include("score.js")
+</script>
+<script>
+    #include("mews.js")
+</script>
+<script>
+    #include("ggReader.js")
+</script>
+<script>
+    #include("fastksfj.js")
+</script>
+<script>
+    $(document).ready(function () {
+    	//演示
+    	 $('.weixinAudio').weixinAudio({
+    		   autoplay:false,
+    		   //src:'#path()/static/vendor/newpage/sound.mp3',
+    		   });
+    	
+    	//初始化edts评分表 
+    	initPf();
+		//初始化mesw评分表
+    	initMews();
+		//快速分级
+		initFastksfj();
+    	$("#addPatient").addClass("active");
+    	
+    	setgradebtncss2();
+    	
+    	//新手引导
+    	/* if('#userId()'=='10092'||'#userId()'=='10062'||'#userId()'=='10063'){
+    		newman1();
+    	} */
+    	 var guide = "#(guide ??)";
+		if(guide==1){
+			newman1();
+		}
+		if(project_name=='zy'){
+			connect_cmd_svc();
+			$(".wh").hide();
+			// $("#gender").html('<option value="9">未说明</option><option value="1">男</option><option value="2">女</option>');
+			$("#category").html('<option value="01">城镇职工基本医疗保险</option><option value="02">城镇居民基本医疗保险</option><option value="03">新型农村合作医疗</option><option value="04">公务员医疗补助</option><option value="05">企业补充医疗保险</option><option value="06">大额补充医疗保险</option><option value="07" selected="selected">商业医疗保险</option><option value="99">其他</option>')
+			
+		}
+		if(project_name=='wh'){
+			$(".zy").hide();
+			// $("#gender").html('<option value="未说明">未说明</option><option value="男">男</option><option value="女">女</option>');
+			$("#category").html('<option value="1">职工医疗保险</option><option value="2">居民医疗保险</option><option value="3">农村合作医疗</option><option value="4">贫困救助</option><option value="5">商业医疗保险</option><option value="6">全公费</option><option value="7" selected="selected">全自费</option><option value="8">其他</option>')
+		} 
+		load();                                   
+    });
+    
+ // 修改分级 选择分级样式
+    $(".choosepj").click(function(){
+    	console.log("1111");
+    	$(this).removeClass("sysytempj0").siblings().addClass("sysytempj0");
+    })
+    
+    /*function edit(val){
+         if(val){
+             $("#hydb1").css({'display':'block'});
+         } else {
+             $("#hydb1").css({'display':'none'});
+         }
+    }*/
+
+
+</script>
+
+<style type="text/css">
+
+		.db {
+			display: block;
+		}
+
+		.weixinAudio {
+			line-height: 1.5;
+		}
+
+		.audio_area {
+			display: inline-block;
+			width: 100%;
+			vertical-align: top;
+			margin: 0px 1px 0px 0;
+			font-size: 0;
+			position: relative;
+			font-weight: 400;
+			text-decoration: none;
+			-ms-text-size-adjust: none;
+			-webkit-text-size-adjust: none;
+			text-size-adjust: none;
+		}
+
+		.audio_wrp {
+			border: 1px solid #ebebeb;
+			background-color: #fcfcfc;
+			overflow: hidden;
+			padding: 12px 20px 12px 12px;
+		}
+
+		.audio_play_area {
+			float: left;
+			margin: 9px 22px 10px 5px;
+			font-size: 0;
+			width: 18px;
+			height: 25px;
+		}
+
+		.playing .audio_play_area .icon_audio_default {
+			display: block;
+		}
+
+		.audio_play_area .icon_audio_default {
+			background: transparent url(#path()/static/bj/images/iconloop.png) no-repeat 0 0;
+			width: 18px;
+			height: 25px;
+			vertical-align: middle;
+			display: inline-block;
+			-webkit-background-size: 54px 25px;
+			background-size: 54px 25px;
+			background-position: -36px center;
+		}
+
+		.audio_play_area .icon_audio_playing {
+			background: transparent url(#path()/static/bj/images/iconloop.png) no-repeat 0 0;
+			width: 18px;
+			height: 25px;
+			vertical-align: middle;
+			display: inline-block;
+			-webkit-background-size: 54px 25px;
+			background-size: 54px 25px;
+			-webkit-animation: audio_playing 1s infinite;
+			background-position: 0px center;
+			display: none;
+		}
+
+		.audio_area .pic_audio_default {
+			display: none;
+			width: 18px;
+		}
+
+		.tips_global {
+			color: #8c8c8c;
+		}
+
+		.audio_area .audio_length {
+			float: right;
+			font-size: 14px;
+			margin-top: 3px;
+			margin-left: 1em;
+		}
+
+		.audio_info_area {
+			overflow: hidden;
+		}
+
+		.audio_area .audio_title {
+			font-weight: 400;
+			font-size: 17px;
+			margin-top: -2px;
+			margin-bottom: -3px;
+			width: auto;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			word-wrap: normal;
+		}
+
+		.audio_area .audio_source {
+			font-size: 14px;
+		}
+
+		.audio_area .progress_bar {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			background-color: #0cbb08;
+			height: 2px;
+		}
+
+		.playing .audio_play_area .icon_audio_default {
+			display: none;
+		}
+
+		.playing .audio_play_area .icon_audio_playing {
+			display: inline-block;
+		}
+
+		@-webkit-keyframes audio_playing {
+			30% {
+				background-position: 0px center;
+			}
+			31% {
+				background-position: -18px center;
+			}
+			61% {
+				background-position: -18px center;
+			}
+			61.5% {
+				background-position: -36px center;
+			}
+			100% {
+				background-position: -36px center;
+			}
+		}
+	</style>
+
+
+		<input type="hidden" id="returnUrl" value=""></input>
+		<input type="hidden" value="" id="td_id"/>	
+		<input type="hidden" value="" id="td_name"/>				
+		<input type="hidden" id="edtsgrade" name="group" value="" />
+		<input type="hidden" id="mewsgrade" name="group" value="" />
+		<input type="hidden" id="quickgrade" name="group" value="" />
+		<input type="hidden" id="signgrade" name="group" value="" />
+		<input type="hidden" id="humigrade" name="group" value="" />		
+		<input type="hidden" value="" id="autograde"/>
+		<input type="hidden" value="" id="finalgrade"/>
+		<input type="hidden" value="" id="gradename"/>
+		<input type="hidden" id="level_1_id" value="" />
+		<input type="hidden" id="level_1_name" value="" />
+		<input type="hidden" id="level_2_id" value="" />
+		<input type="hidden" id="level_2_name" value="" />
+		<input type="hidden" id="level_3_id" value="" />
+		<input type="hidden" id="level_3_name" value="" />
+		<input type="hidden" id="userId" value="#userId()"></input>
+		<input type="hidden" id="id" value=""></input>
+		<input type="hidden" id="sighid" value=""></input>
+		<input type="hidden" id="handleid" value=""></input>
+		<input type="hidden" id="signUrl" value=""></input>
+		<input type="hidden" id="cixu" value="0"></input>
+		<input type="hidden" id="maxcixu" value="1"></input>
+		<input type="hidden" id=status value=""></input>
+		<input type="hidden" id="feijz" value="1" />
+		<input type="hidden" id="hisid" value="" />
+		<input type="hidden" id="GCS_1" value="0" />
+		<input type="hidden" id="GCS_2" value="0" />
+		<input type="hidden" id="GCS_3" value="0" />
+		<input type="hidden" id="source" value=""></input>	
+		<input type="hidden" id="evevtsid" value=""></input>	
+		<input type="hidden" id="ename" value=""></input>	
+		<input type="hidden" id="enum" value=""></input>
+		<input type="hidden" id="TextArea1" value=""></input>
+		<input type="hidden" id="registertime" value=""></input>
+		<input type="hidden" id="PAADMVisitNumber" value=""></input>
+		
+<!-- 语音弹窗 -->	
+<div class="weixinAudio" id="talk-content" style="display:none">
+	<audio src="" id="media" width="1" height="1" preload></audio>
+	<span id="audio_area" class="db audio_area">
+		<span class="audio_wrp db">
+		<span class="audio_play_area">
+			<i class="icon_audio_default"></i>
+			<i class="icon_audio_playing"></i>
+	    </span>
+		<!-- <span id="audio_length" class="audio_length tips_global"></span> -->
+		<span class="db audio_info_area">
+	         <strong class="db audio_title" style="margin-top: 8px;">请说出患者症状</strong>
+	         <!-- <span class="audio_source tips_global">From/麦克风</span> -->
+		</span>
+	</span>
+</div>
+		
+		<!-- 信息删除确认 -->  
+<div class="modal fade common-modal" id="delcfmModel" style="width:300px;">  
+  <div class="modal-dialog" style="width:300px">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="opencard()">×</span></button>
+        <h4 class="modal-title">提示信息
+		</h4>  
+      </div>  
+      <div class="modal-body">  
+        <p id="mes"></p>  
+      </div>  
+      <div class="modal-footer">  
+         <a class="btn btn-default btn-moretext" data-dismiss="modal" id="showquxiaobutton" style="display: none;">取消</a>
+         <a id="showquedingbutton" onclick="urlSubmit()" class="btn btn-primary btn-moretext" data-dismiss="modal">确定</a>  
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div><!-- /.modal -->
+
+
+
+<div class="modal fade common-modal" id="delcfmModel" style="width:300px;">  
+  <div class="modal-dialog" style="width:300px">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">提示信息</h4>  
+      </div>  
+      <div class="modal-body">  
+        <p id="mes"></p>  
+      </div>  
+      <div class="modal-footer">  
+         <a class="btn btn-default btn-moretext" data-dismiss="modal" id="showquxiaobutton" style="display: none;">取消</a>
+         <a id="showquedingbutton" onclick="urlSubmit()" class="btn btn-primary btn-moretext" data-dismiss="modal">确定</a>  
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div><!-- /.modal -->
+<div class="modal fade common-modal" id="delcfmModel2" style="width:360px;" data-backdrop="static">  
+  <div class="modal-dialog" style="width:360px">  
+    <div class="modal-content message_align">  
+      <!-- <div class="modal-header">  
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">提示信息</h4>  
+      </div>  --> 
+      <div class="modal-body">
+        <p id="mes2"></p>
+      </div>  
+      <div class="modal-footer">  
+      	<a class="btn btn-primary btn-moretext" id="godyfzd" style="display: none" onclick="dayindividshow();">打印分诊单</a>
+      	<!-- <a class="btn btn-primary" onclick="dayindividshow();" style="display: none" id="godyfzd" href="#fz-print-tc" data-toggle="modal">打印分诊单</a> -->
+        <a onclick="urlSubmit2()" class="btn btn-success" data-dismiss="modal">确定</a> 
+      </div>  
+    </div>
+  </div> 
+</div>
+<div class="modal fade common-modal" id="delcfmModel3" style="width:360px;">  
+   <div class="modal-dialog" style="width:360px">  
+    <div class="modal-content message_align">  
+      <!-- <div class="modal-header">  
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">提示信息</h4>  
+      </div>  --> 
+      <div class="modal-body" style="border-radius:4px;" id="tan_div">
+        <p id="mes3"></p>
+        <p id="mes4"><img src='#path()/static/bj/images/red_error_icon.png' />请补全患者信息后打印!</p>
+      </div>  
+      <!-- <div class="modal-footer">  
+      	<a class="btn btn-primary" onclick="dayindividshow();" style="display: none" id="godyfzd" href="#fz-print-tc" data-toggle="modal">111</a>
+        <a onclick="urlSubmit2()" class="btn btn-success" data-dismiss="modal"></a> 
+      </div>  --> 
+    </div>
+  </div> 
+</div>
+#include("../index/dayinfzd.html")
+<div id="pingji" style="width: 230px;height: 130px;background: #ffffff;position: fixed;top: 30%;left: 80%;transform: translate(-50%);z-index: 1;display:none"> 
+    <div class="modal-header">  
+        <h4 class="modal-title">家属签字</h4>  
+      </div> 
+  <span><img  id="signimg"></span>  
+</div>
+
+<div id="jsqz" class="sib"> 
+    <div class="modal-header"> 
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span onclick="checkmodalEnliststatus(this);" aria-hidden="true">×</span></button> 
+       家属签字>
+      </div>
+      <div  style="width: 500px; height: 230px; background: white;top: 14%; left: 4%; position: absolute;
+        text-align: center;line-height: 200px;font-size: x-large;">签字板功能暂未开放</div>
+	<div style="margin-top: 250px;margin-left: 400px">
+		<button data-dismiss="modal" class="btn btn-default" onclick="checkmodalEnliststatus(this);" type="button">清除</button>
+		<button data-dismiss="modal" class="btn btn-primary" onclick="checkmodalEnliststatus(this);" type="button"">确认</button>
+	</div>
+</div>
+<div class="modal fade common-modal" id="againpj" style="width:300px">  
+  <div class="modal-dialog" style="width:300px">  
+    <div class="modal-content message_align">  
+      <div class="modal-body text-center modal-middle">  
+      	即将进入再一次评级
+      	</div>  
+      <div class="modal-footer text-center modal-bottom">
+      	 <button data-dismiss="modal" class="btn btn-default" type="button" onclick="againpj(2)">取消</button>  
+         <button data-dismiss="modal" class="btn btn-primary btn-moretext" type="button" onclick="againpj(1)">再次评级</button>		
+      </div>  
+    </div>
+  </div>
+</div>
+<div class="modal fade common-modal" id="read" style="width:300px">  
+  <div class="modal-dialog" style="width:300px">  
+    <div class="modal-content message_align">    
+      <div class="modal-body text-left modal-middle">  
+      	已读取上次评级内容，请根据患者情况进行调整
+      	</div>  
+      <div class="modal-footer">  
+         <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="read()">确认</button>
+      </div>  
+    </div>
+  </div>
+</div>
+  
+                    <aside class="right-side">
+                <section class="content" style="color:#7a7a7a">
+                    
+                    <div class="rowbox addpatient-index">
+                        <div class="col-md-12 p0 clearfix">
+                        
+                        	<!-- center_left -->
+                          <div class='col-md-6 p0 jqddad'>
+	                          	<div class="panel ambulancen" style="display:none">
+	                                <header class="panel-heading">院前信息</header>
+	                                <div class='panel-body p0'>
+	                                    <div class='col-md-12 areaWarn'>                                       
+	                                        <div class="form-group clearfix">
+	                                        	  <div class='col-md-6 p0 rank'>
+	                                                  <label for="" class="col-md-4 control-label" >到达现场时间:</label>
+	                                                  <div class="col-md-8">
+	                                                      <input type="text" class="form-control" placeholder="" id="pre_arrivetime">
+	                                                  </div>
+	                                              </div>
+	                                          	  <div class='col-md-6 p0 rank'>
+	                                                  <label for="" class="col-md-4 control-label">初步诊断:</label>
+	                                                  <div class="col-md-8">
+	                                                      <input type="text" class="form-control" placeholder="" id="pre_zhenduan">
+	                                                  </div>
+	                                              </div>                                                                                      
+	                                        </div>
+										<div class="form-group clearfix">
+											<div class='col-md-6 p0 rank'>
+												<label for="" class="col-md-4 control-label">病情判断:</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control" placeholder="" id="pre_panduan">
+												</div>
+											</div>
+											<div class="col-md-6 p0 rank">										
+												<label class="col-md-4 control-label">绿色通道:</label>
+												<div class="col-md-8">
+													<input class="form-control" type="text" placeholder="" id="pre_greenchannel">
+												</div>
+											</div>
+										</div>
+										<div class="form-group clearfix" style="border-bottom:none">
+											<div class='col-md-6 p0'>
+												<label for="" class="col-md-4 control-label">派车号:</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control" placeholder="" id="pre_carNo">
+												</div>
+											</div>
+											<div class='col-md-6 p0'>
+												<label for="" class="col-md-4 control-label">院前急救人员:</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control" placeholder="" id="pre_doctor">
+												</div>
+											</div>										
+										</div>									
+								</div>
+	                                </div>
+	                            </div>
+	                            <!-- 基本信息 -->
+	                            <div class="panel" style="position:relative;" data-step="1" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;1、患者基本信息填写&lt;/h1&gt;&lt;p&gt;填写分诊患者基本信息，可直接读取或输入患者就诊卡，如是首次就诊录入患者基本信息，否则会自动加载患者基本信息。&lt;/p&gt;&lt;/div&gt;">
+	                                <header class="panel-heading" style="display:block;height:50px">基本信息
+	                                <a style="margin-left:10px;font-size:12px;color:#bdbdbd"><i class="mastIcon">*</i>为必填项</a> 
+									</header>
+	                                 <!-- <div class="pull-right info-more-box">
+										  <span class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										    <img src='#path()/static/bj/images/info_more_btn.png' />
+										  </span>
+										  <ul class="dropdown-menu">
+										    <li><a href="#" onclick="addCardInfo();"><img src='#path()/static/bj/images/info_more_icon01.png' /><span>就诊卡办理</span></a></li>
+										    <li><a href="#" onclick="listCardInfo();"><img src='#path()/static/bj/images/info_more_icon02.png' /><span>办卡记录</span></a></li> 
+										  </ul>
+									</div> -->
+									<div class="pull-right divid-left-topText wh">
+										<a onclick="registerModal();"><img alt="" src="#path()/static/vendor/newpage/images/divid/add-header-guahao.png"/>挂号</a>
+										<a onclick="cardModal();"><img alt="" src="#path()/static/vendor/newpage/images/divid/add-header-banka.png"/>办卡</a>
+										<a><img alt="" src="#path()/static/vendor/newpage/images/divid/add-header-other.png"/></a>
+									</div>
+									<!-- <div class="pull-right divid-left-topText zy">
+											<a onclick="readCard(2);">读身份证</a>
+									</div> -->
+	                                <div class='panel-body p0 jbxx' style="margin-top:5px;border-radius:4px;background:#fff">
+	                                    <div class='col-md-12 areaWarn info-left-part01'>
+	                                        <div class="form-group clearfix">
+	                                            <div class='col-md-5 p0 rank flex ' style="position:relative">
+	                                                  <label for="" class="col-md-3 control-label obj-label text-center">
+	                                                    <button type="button" class="btn" onclick="readCard(1);">
+	                                                    <i class="mastIcon">* </i>就诊卡 </button>
+	                                                  </label>
+	                                                  <div class="col-md-8 p0-r" style="position:relative;">
+	                                                      <input type="text" class="form-control" onchange="readCard();" id="cardnum" autocomplete="off">
+	                                                  	  <span class="jiuzhenka">读卡</span>
+	                                                  </div>
+	                                                  
+	                                              </div>
+	                                              <div class='col-md-4 p0 rank flex'>
+	                                                  <label for="" class="col-md-3 control-label"><i class="mastIcon">* </i>姓名</label>
+	                                                  <div class="col-md-7">
+	                                                      <input type="text" class="form-control" id="fullname" autocomplete="off">
+	                                                  </div>
+	                                              </div>
+	                                              <div class='col-md-3 p0 rank' >
+	                                                  <label for="" class="col-md-3 control-label"><i class="mastIcon">* </i>性别</label>
+	                                                  <div class="col-md-6 p0-r selectGender" style="padding:0">
+	                                                  	<a class="gender-man"></a>
+	                                                  	<a class="gender-woman"></a>
+                                                          <input type="text" id="gender" value="男" style="display: none">
+	                                                  </div>
+	                                              </div>
+	                                              
+	                                        </div>
+	                                        <div class="form-group clearfix ">
+	                                        	  <div class='col-md-4 p0 rank flex'>
+	                                                  <label for="" class="col-md-2 control-label"><i class="mastIcon">* </i>费别 &nbsp;&nbsp;</label>
+	                                                  <select class="form-control  formHalf col-md-8" id="category" style="min-width:initial;width:auto">
+															
+														</select>
+	                                              </div>
+	                                               <div class="col-md-5 p0 rank flex">
+														<label class="col-md-4 control-label flex" ><select
+															class="form-control" id="card_type"  style="border:1px solid #ccc;width:75px;">
+																<option value='01'>身份证</option>
+																<option value='02'>护照</option>
+														</select>
+														</label>
+														<div class="col-md-7 left-leave p0">
+															<input class="form-control" id="idcard" type="text" value="" autocomplete="off">
+														</div>
+	                                              </div>
+	                                           
+	                                              <div class='col-md-3 p0 rank flex' style="float:right">
+	                                                  <label for="" class="col-md-3 control-label" style="min-width:30px;width:45%;"><i class="mastIcon">* </i>年龄</label>
+	                                                  <div class="col-md-8 " style="width:50%">
+	                                                      <input type="text" class="form-control" id="age" placeholder="" readonly="readonly" style="background:#fff;cursor:default;">
+	                                                  </div>
+	                                              </div>
+	                                              
+	                                        </div>
+											<div class="form-group clearfix">
+												<div class='col-md-5 p0 rank flex'>
+													<label for="" class="col-md-4 control-label"><i class="mastIcon">* </i>联系电话</label>
+													<div class="col-md-7 p0-r">
+														<input type="text" class="form-control" id="tel" autocomplete="off"
+															placeholder="">
+													</div>
+												</div>
+												<div class="col-md-5 p0-r rank flex">
+	                                                  <label for="" class="col-md-3 p0 control-label">出生日期 &nbsp; </label>
+	                                                  <div class="col-md-8 p0">
+	                                                  		<div>
+	                                                  			<!-- <input class="form-control mt2" size="16" type="text" placeholder="选择日期" data-date-format="yyyy-mm-dd" id="bornday" /> -->
+	         													 <input   id="bornday" size="16"  type="text" autocomplete="off" name="" placeholder="选择日期" class="form-control" > 
+	        												</div>
+	                                                  </div>
+												</div>
+												
+											</div>
+											<div class="form-group clearfix">
+											<div class="col-md-11 p0 rank" style="width:100%;">
+												<div class="col-md-3 p0 rank danweibox flex" style="width:20%">
+													 <label for="" class="col-md-5 control-label" style="min-width:auto;width:30%;padding:0 !important">体重</label>
+	                                                 <div class="col-md-6 p0-r" style="padding:0;width:60%;">
+	                                                     <input type="text" class="form-control" id="tz" placeholder="数值" autocomplete="off">
+	                                                 </div>
+	                                                <i class="danwei">Kg</i>
+												</div>
+												<div class='col-md-3 p0 rank danweibox flex'  style="text-align: right;width:20%">
+													<label class="col-md-6 control-label" style="min-width:auto;width:30%;">身高</label>
+													<div class="col-md-6 p0-r" style="padding:0;width:60%">
+														<input class="form-control formW" id="sg" type="text" value="" placeholder="数值" autocomplete="off">
+													</div>
+													<i class="danwei">cm</i>
+                                             	</div>
+												<div class='col-md-5 p0 rank flex' style="width:34%">
+													<label for="" class="col-md-5 control-label" style="min-width:50px;width:38%;">家属电话</label>
+													<div class="col-md-7  p0-r">
+														<input type="text" class="form-control" id="parenttel" autocomplete="off"
+															placeholder="">
+													</div>
+												</div>
+												<div class='col-md-5 p0 rank flex' style="width:25%;padding:0 !important;">
+													<label for="" class="col-md-6 control-label">紧急联系人</label>
+													<div class="col-md-5 p0">
+														<input type="text" class="form-control" id="memberstel" autocomplete="off"
+															placeholder="">
+													</div>
+												</div>
+												</div>
+											</div>
+											<div class="form-group clearfix flex">
+												<div class='col-md-12 p0 rank'>
+													<label for="" class="col-md-2 control-label">家庭住址</label>
+													<div class="col-md-9 p0">
+														<input type="text" class="form-control" id="address" autocomplete="off"
+															placeholder="">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="checkDiv04 clearfix"> 
+													<div  id="ThreeNoFlag" class="col-md-3 col-li boxItemOne">
+														<!-- <span class="checked-static"> <input type="checkbox" name='ThreeNoFlag' value="Y"> <i></i> </span> -->
+														<label class="control-label" style="vertical-align: middle;cursor: pointer;" >三无人员</label>
+													</div>
+													<div id="GreenChFlag" class="col-md-3 col-li boxItemOne ">
+														<!-- <span class="checked-static"> <input type="checkbox" name='GreenChFlag' value="Y"> <i></i> </span>  -->
+														<label class="control-label" style="vertical-align: middle;cursor: pointer;">绿色通道</label>
+													</div>
+												</div>  
+											</div>
+											<div class="form-group clearfix demo-class" style="border-bottom:none;display:none">
+										<!--<div class='col-md-4 p0 rank'>
+												<label for="" class="col-md-4 control-label" style="width:80px">药物过敏史:</label>
+												<div class="col-md-8  p0-r" style="width:calc(100% - 80px)">
+													<input type="text" class="form-control" id="allergic_history"
+														placeholder="">
+												</div>
+											</div>-->
+	 										
+											<div class="checkDiv3 clearfix " style="display:inline-block" > 
+												<div class="col-md-1 col-li  "
+													style="width:100%;line-height:12px;">
+													<span class="checked-static"> <input type="checkbox"
+														name="events" value="突发事件" id="events_check"> <i></i> </span>
+													&nbsp;
+													<label class="control-label" style="vertical-align: middle;cursor: pointer;">突发事件:</label>
+												</div>
+											</div>  
+											<span class='clearfix' style="display:inline-block"> 
+												<div class="pull-left events-box-dropdown">
+													<input id="events1" autocomplete="off"
+														data-provide="typeahead" type="text"
+														class="formHalf form-control demo-noshow-class" style="display:none;width:300px;"
+														placeholder="请输入事件名"  />
+												</div> </span>
+										</div>
+	
+									</div> 
+	                                </div>
+	                            </div>
+	                             <!-- 生命体征 -->
+                           <div class="clearfix">
+                            <div class="panel curtainBox livetz" data-step="4" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;4、生命体征&lt;/h1&gt;&lt;p&gt;连接对应生命体征设备，导入生命体征，或直接填写生命体征，并有数据偏高偏低提示。&lt;/p&gt;&lt;/div&gt;">
+                                <div class="curtain1">
+									<div class="flexcon">
+										<h3>生命体征</h3>
+										<i class="fa fa-chevron-down"></i>
+									</div>
+									</div>
+                                <div class='panel-body p0 panel-h curtain-main' id="smtz" style="width:84%;margin-left:7%;position:relative;">
+	                                    <div class='col-md-12 areaWarn areaWarn2'>
+	                                        <div class="form-group clearfix">
+	                                            <div class='col-md-4 p-5'>
+	                                                <div class="st-sign-mark st-1">
+	                                                    <p id="maibo_p ellip-text">HR 心率</p>
+	                                                    <input class="allocatNum Inpt1" value=""  id="maibo"  placeholder="_" style=" color: #40b25d;">
+	                                                    <span class="allocatNum Inpt3"   id="no_maibo"  style="display:none"></span>
+	                                                    <p class="allocatUnit" >次/分钟</p>
+	                                                </div>
+	                                              </div>
+	                                              <div class='col-md-4 p-5'>
+	                                                <div class="st-sign-mark st-2">
+	                                                    <p id="spo2_p">SpO2 血氧饱和度</p>
+	                                                     <input class="allocatNum Inpt1" value=""  id="spo2" placeholder="_"   style="color: #1fa9d8;" oninput="if(value>100)value=100" >
+	                                                     <span class="allocatNum Inpt3"   id="no_spo2"  style="display:none"></span>
+	                                                    <p class="allocatUnit">%</p>
+	                                                </div>
+	                                              </div>
+	                                              <div class='col-md-4 p-5'>
+	                                                <div class="st-sign-mark st-3">
+	                                                    <p id="huxi_p ellip-text">RR 呼吸频率</p>
+	                                                     <input class="allocatNum Inpt1" value=""  id="huxi" placeholder="_" style="color: #1e9b8b;">
+	                                                     <span class="allocatNum Inpt3"   id="no_huxi"  style="display:none"></span>
+	                                                    <p class="allocatUnit">次/分钟</p>
+	                                                </div>
+	                                              </div>
+	                                              <div class='col-md-4 p-5'>
+	                                                <div class="st-sign-mark st-4">
+	                                                    <p id="ellip-text shousuoya_p ">NIBP 无创血压</p>
+	                                                    <input class="allocatNum Inpt2" id="shousuoya" type="text" value="" placeholder="_" Style="font-size: 20px !important;color: #ec6d20;">
+	                                                     <span class="allocatNum Inpt4"   id="no_shousuoya"  style="display:none"></span>
+	                        							/
+	                        							<input class="allocatNum Inpt2" id="shuzhangya" type="text" value="" placeholder="_" Style="font-size: 20px !important;color: #ec6d20;">
+	                        							 <span class="allocatNum Inpt4"   id="no_shuzhangya"  style="display:none"></span>
+	                                                    <p class="allocatUnit">mmHg</p>
+	                                                </div>
+	                                              </div>
+	                                              <div class='col-md-4 p-5'>
+	                                                <div class="st-sign-mark st-6">
+	                                                    <p id="tiwen_p ellip-text">TEMP 体温</p>
+	                                                     <input class="allocatNum Inpt2" value=""  placeholder="_" id="tiwen" style="color: #ae941b;" onchange="limitInput(this)">
+	                                                     <span class="allocatNum Inpt4"   id="no_tiwen"  style="display:none"></span>
+	                                                    <p class="allocatUnit">°C</p>
+	                                                </div>
+	                                              </div>
+	                                              <div class='col-md-4 p-5'>
+	                                                <div class="st-sign-mark st-5">
+	                                                    <p class="ellip-text">etCO2 呼末二氧化碳</p>
+	                                                    <input class="allocatNum Inpt2" value=""   placeholder="_" id="pcn" style="color: #0f759b;">
+	                                                    <span class="allocatNum Inpt4"   id="no_pcn"  style="display:none"></span>
+	                                                    <p class="allocatUnit">mmHg</p>
+	                                                </div>
+	                                              </div>
+	                                        </div>
+	                                    </div>
+	                                    <div class='col-md-12'>
+	                                      <span class='facility'>设备连接正常......</span>
+	                                    </div>
+	                                    <div class="fenzhentaiInput">
+	                                        <select class="form-control input-sm col-md-10 p0">
+	                                            <option>分诊台</option>
+	                                        </select>
+                                     	 </div>
+	                          
+                                 <button onclick="readMach();" class="btn btn-primary btn-sm pull-right life-btn importLive" style="height:35px;"></button>
+                                </div>
+                                
+                            </div>
+                            <div class="addFastLive" id="gradeMark_d" >
+                            	<p class="fastLiveTxt" id="gradeMarkppp" onclick="modalFastksfj()">快速分级</p>
+                              	<img alt="" src="#path()/static/vendor/newpage/images/divid/add-fastLevel.png" style="position:absolute;bottom:10%;left:35%;"/>
+                           </div>
+                        </div>
+                     </div>
+                     
+	                           
+                            <!-- center_middle -->
+                            <div class='col-md-4 direction-h'>
+                            	<!-- 来院方式 -->
+	                            <div class="col-md-12 panel" style="padding:0" data-step="2" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;2、来院方式填写&lt;/h1&gt;&lt;p&gt;填写患者来源，来院方式，来院原因。患者来源及来源方式必填，来院原因选填。&lt;/p&gt;&lt;/div&gt;" data-position="right">
+	                               <div class="col-md-6 dropdown downIcon" id="laiyuanfsul">
+								        <button class="btn btn-default dropdown-toggle dropdownItem" style="width:100%;border-left:4px solid #2f80fe;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								          	<text>来院方式</text>
+								          <span class="caret"></span>
+								        </button>
+								        <ul class="dropdown-menu addDropDown" aria-labelledby="dropdownMenu1" style="height:auto !important;">
+								          <li><a href="#">步行</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">扶走</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">轮椅</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">平车</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">儿童抱入走</a></li>
+								        </ul>
+								    </div>
+							       <div class="col-md-6 dropdown downIcon" style="padding:0 0 0 5px;" id="laiyuanul">
+								        <button class="btn btn-default dropdown-toggle dropdownItem" style="width:100%;border-left:4px solid #2f80fe;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								          	<text>来 源</text>
+								          <span class="caret"></span>
+								        </button>
+								        <ul class="dropdown-menu addDropDown" aria-labelledby="dropdownMenu1" style="height:auto !important;">
+								          <li><a href="#">自行来院</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">120救护车</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">外院转运</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">自行来院</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">120</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">110</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">鄂州</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">院内</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">东院</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">固始</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">汉川</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">钟祥</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">其他</a></li>
+								        </ul>
+								    </div>
+	                            </div>
+	                            
+	                            <!-- 意识状态 -->
+	                            <div class="panel curtainBox" style="margin-top:50px;height:auto;" data-step="3" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;3、病情描述&lt;/h1&gt;&lt;p&gt;填写分诊患者意识状态，既往病史信息，都为必填项。&lt;/p&gt;&lt;/div&gt;" data-position="right">
+                              		<div class="col-md-12 dropdown downIcon" id="yishiztul">
+								        <button class="btn btn-default dropdown-toggle dropdownItem" style="width:100%;border-left:4px solid #2f80fe;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								          	<text>意识状态</text>
+								          <span class="caret"></span>
+								        </button>
+								        <ul class="dropdown-menu addDropDown" aria-labelledby="dropdownMenu1" style="height:auto !important;">
+								          <li><a href="#">清醒</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">模糊</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">昏迷</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">谵妄</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">嗜睡</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">昏睡</a></li>
+								        </ul>
+								    </div>
+                              	</div>
+                              	 <!-- 既往病史 -->
+	                            <div class="panel curtainBox" style="margin-top:105px;" data-step="3" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;3、病情描述&lt;/h1&gt;&lt;p&gt;填写分诊患者意识状态，既往病史信息，都为必填项。&lt;/p&gt;&lt;/div&gt;" data-position="right">
+                              		<div class="col-md-12 dropdown downIcon"  id="jiwbsul">
+								        <!-- <button class="btn btn-default dropdown-toggle dropdownItem" style="width:100%;border-left:4px solid #2f80fe;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								          	<text>既往病史1</text>
+								          <span class="caret"></span>
+								        </button> -->
+								        <!-- <ul class="dropdown-menu addDropDown" aria-labelledby="dropdownMenu1" style="height:auto !important;">
+								          <li><a href="#">无</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">糖尿病</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">COPD</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">冠心病</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">高血压</a></li>
+								          <li role="separator" class="divider"></li>
+								          <li><a href="#">哮喘</a></li>
+								        </ul> -->
+								        <select class="selectpicker  show-tick my-select  " id="jwbsSelect"  data-style="btn-default" style="width:100%;border-left:4px solid #2f80fe;color:#333;" multiple data-selected-text-format="values"  title="既往病史" >
+											  <option>无</option>
+											  <option>糖尿病</option>
+											  <option>COPD</option>
+											  <option>冠心病</option>
+											  <option>高血压</option>
+											  <option>哮喘</option>
+										</select>
+								    </div>
+                              	</div>
+                              	 <!-- 药物过敏史 -->
+	                            <div class="panel curtainBox" style="margin-top:160px;" data-step="3" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;3、病情描述&lt;/h1&gt;&lt;p&gt;填写分诊患者意识状态，既往病史信息，都为必填项。&lt;/p&gt;&lt;/div&gt;" data-position="right">
+                              		<div class="col-md-12 dropdown downIcon" id="yaowugmsul">
+								        <!-- <button class="btn btn-default dropdown-toggle dropdownItem" style="width:100%;border-left:4px solid #2f80fe;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								          	<text>药物过敏史</text>
+								          <span class="caret"></span>
+								        </button> -->
+										<select class="selectpicker  show-tick my-select"  data-style="btn-default" multiple data-selected-text-format="values"  title="药物过敏史">
+											  <option>无</option>
+											  <option>不详</option>
+											  <option>头孢</option>
+											  <option>PG</option>
+											  <option>红霉素</option>
+											  <option>青霉素</option>
+											  <option>链霉素</option>
+											  <option>磺胺</option>
+											  <option>阿奇霉素</option>
+											  <option>炎琥宁</option>
+											  <option>其他</option>
+										</select>
+<!--								        <ul class="dropdown-menu addDropDown" aria-labelledby="dropdownMenu1" style="height:auto !important;">-->
+<!--								          <li><a href="#">无</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">不详</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">头孢</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">PG</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">红霉素</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">青霉素</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">链霉素</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">磺胺</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">阿奇霉素</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">炎琥宁</a></li>-->
+<!--								          <li role="separator" class="divider"></li>-->
+<!--								          <li><a href="#">其他</a></li>-->
+<!--								        </ul>-->
+								    </div>
+                              	</div>
+                              	<!-- 系统判断依据 -->
+	                            <div class="panel curtainBox" style="margin-bottom:0;margin-top:210px;position:relative;">
+	                               <div class="col-md-12" style="padding:0;">
+                                     	<input class="form-control textareaType"  style="height:55px;padding-left:100px;border:none;"/>
+                                     	<span class="systemJustify">系统判断依据</span>
+                                   </div>
+	                            </div>
+	                            <!-- 备注 -->
+	                            <div class="panel curtainBox" style="margin-bottom:0;margin-top:270px;">
+	                              <div class='panel-body p0 curtain-main areaWarn' id="hljl2" style="padding:0 !important;">
+	                              	<div class="form-group clearfix last-group">
+	                                	<div class="col-md-12" style="padding:0;">
+	                                      	<textarea class="form-control textareaType" id="hljl" maxlength="1000" style="height:90px;border:none;padding:10px 5px 5px 45px;"></textarea>
+	                                    	<span class="systemJustify1">备注</span>
+	                                    </div>
+	                                </div>
+	                              </div>
+	                            </div>
+                           		
+			                   	<!-- 分诊时间 -->
+			                    <div class="panel panel-time" id ="dividtime1" data-step="10" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;10、分诊时间修改&lt;/h1&gt;&lt;p&gt;分诊时间默认显示当前时间，也可对分诊时间进行修改。&lt;/p&gt;&lt;/div&gt;" data-position="top">
+							<div class='panel-body' id="fzsj" style="padding:0 !important;">
+								<div class='clearfix gist' style="background: #fff;">
+									<lable style="float:left;padding-top:8px;">分诊时间： </lable>
+									<!-- <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker mt1 "  id="m1_time" >
+	         								<input  id="dividtime" type="text" autocomplete="off" name="" placeholder="选择时间" class="form-control c-datepicker-data-input"  >
+									</div> -->
+									<!-- <div class="input-group date form_datetime bs-datetime mt1" id="m1_time" data-date="2018-09-16 05:25" data-date-format="yyyy-mm-dd HH:ii">
+	                                    <input type="text" size="16" class="form-control" id="dividtime">
+	                                    <span class="input-group-addon">
+	                                       <button class="btn default date-set" type="button">
+	                                           <i class="fa fa-calendar"></i>
+	                                       </button>
+	                                    </span>
+	                                </div> -->
+									<input type="text" size="16" style="float:left;width:150px;" class="form-control mt1 m1_time_new" id="dividtime" onBlur="time()" >
+									<!-- 屏蔽20190516.lixj -->
+									<!-- <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker mt1 "  id="m1_time" style="display:none">
+	         								<input  id="dividtime" type="text" autocomplete="off" name="" placeholder="选择时间" class="form-control c-datepicker-data-input"  >
+									</div>
+									<div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker  " id="m2_time" >
+	         								<input  id="dividtimee" type="text" autocomplete="off" name="" placeholder="选择时间" class="form-control c-datepicker-data-input" readonly="readonly" >
+									</div>-->
+									<div class="checkDiv2 clearfix demo-class" style="display:none">
+									<div class="col-md-2 col-li" style="width:100%;line-height:12px;margin:5px 0;padding-left:2px;">
+											 <span
+												class="checked-static" id="span_supplement"> <input type="checkbox"
+												name='enter' value="补录" id="supplement"> <i></i> </span>
+												&nbsp;<label id="bulu" class="control-label" style="vertical-align: middle;cursor: pointer;">补录</label>
+									</div>
+									</div> 
+									<div id="lastnurseqianm" style="display: none;padding-top: 5px"><lable>上次记录者签名： </lable>
+											<span id="lastnurse"></span>
+											<lable style="padding-left:10px">当前编辑者签名： </lable>
+											<span id="nurse2">#userName()</span></div>
+											<div id="nurseqianm" style="display: block;padding-top: 8px;"><lable class="fzNurse">分诊护士： </lable>
+											<span id="dividenurse">#userName()</span></div>
+									<div class="checkDiv2 clearfix">
+									<div class="col-md-2 col-li " style="width:100%;line-height:12px;display:none;margin:5px 0 0;padding-left:2px;" id="div_go_rct">
+											 <span
+												class="checked-static" id="span_go_rct"> <input type="checkbox"
+												name='enter' value="入抢救室" id="go_rct"> <i></i> </span>
+												&nbsp;<label id="lab_go_rct" class="control-label" style="vertical-align: middle;cursor: pointer;">入抢救室</label>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>					
+								<!-- 保存暂存 -->
+								<div class='panel butt1' style="margin-bottom:0">
+									<div class='panel-body clas'>
+										<div class="actBtn" data-step="11" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;11、保存或暂存分诊记录&lt;/h1&gt;&lt;p&gt;点击保存提交分诊记录，点击暂存临时保存已填写的分诊信息，可后续进行补充保存提交。&lt;/p&gt;&lt;/div&gt;" data-position="top">
+										  <button type="submit" class="btn btn-primary btn-lg" onclick="backevents()" id="backevents" style="display: none;">返回</button>
+			                              <button type="submit" class="btn btn-primary btn-lg saveBtn" onclick="doDraf()" id="dodraf">暂存</button>
+			                              <button type="submit" class="btn btn-primary btn-lg saveBtn" onclick="goDoSave()">保存</button>
+		                            	</div>
+		                            </div>
+	                            </div>
+                            </div>
+                            
+                            <!-- center_right -->
+                            <div class='col-md-2 p0 give' style="background:#fff;">
+                            <img src='#path()/static/bj/images/fz_step05_fast_pic.png' class="fz-step05-fast-pic" data-step="5" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;5、快速分级&lt;/h1&gt;&lt;p&gt;快速完成对患者病情定级操作。&lt;/p&gt;&lt;/div&gt;" data-position="left"/>
+                            <div class="panel" data-step="7" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;7、分级结果显示&lt;/h1&gt;&lt;p&gt;根据患者病情记录及选择的分级的依据，系统自动生成对应分级结果。&lt;/p&gt;&lt;/div&gt;" data-position="left">
+                                <div class='panel-body' style="cursor:pointer;" >
+                                    <div class='col-md-12 areaWarn2 p0'>
+                                          <div class="st-grade" data-toggle="modal" onclick="modalGrade();" id="grade">
+                                         	 <div class='st-icon' style="cursor:pointer;display:block;">
+                                                <span class='setIcon iconT icon1'></span>分级
+                                              </div>
+                                          </div>
+                                          <div class="modal fade common-modal" id="modalGrade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" onclick="checkmodalGradestatus(this);" aria-hidden="true">×</button>
+                                                        <span class="modal-title">修改分级</span>
+                                                    </div>
+                                                    <div class="modal-body clearfix">
+                                                     <div class='row m-b-25'>
+													<div class='col-md-4 col-md-offset-1 ' style="margin-left:0">
+														<div class='gradetxt'>系统评级</div>
+														<div style="padding-left:0"><!--  id="atuogradearea" -->
+															<p class="sysytempj sysytempj4">4 级</p>
+														</div>
+													</div>
+													<div class='col-md-7'>
+														<div class='gradetxt'>修改评级为</div>
+														<div style="padding-left:0;"><!--  id="finalgradearea" -->
+															<p class="sysytempj sysytempj1 choosepj">1 级</p>
+															<p class="sysytempj sysytempj2 choosepj">2 级</p>
+															<p class="sysytempj sysytempj3 choosepj">3 级</p>
+															<p class="sysytempj sysytempj4 choosepj">4 级</p>
+														</div>
+													</div>
+												</div>
+                                                      <!--   <div class='row m-b-15' id="gradearea">
+                                                         
+                                                      </div> -->
+                                                      <div class='m-b-15 p0' style="margin-left:15px;width:35%;">
+                                                        <div>
+                                                        <select class="form-control input-sm m-b-10" id="changereason">
+                                                          <option value="选择修改原因" id="loginname" >选择修改原因</option>
+                                                          <option value="病情减轻">病情减轻</option>
+                                                          <option value="病情加重">病情加重</option>
+                                                          <option value="操作失误">操作失误</option>
+	                                                      <option value="其他">其他</option>
+                                                      </select>
+                                                      </div>
+                                                      <span id="noreason" style="color: red;"></span>
+                                                      </div>
+                                                      <div class='row'>
+                                                        <div class='col-md-12'>
+                                                        <textarea class="form-control textareaType" id="reasondetail">修改原因:</textarea>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    	<button style="background:#3b6e9a;"  class="btn btn-primary" type="button" onclick="checkmodalGradestatus(this);" id="okbtn">确认</button>
+                                                        <button style="background:#99bedc;" data-dismiss="modal" class="btn btn-default" type="button" onclick="checkmodalGradestatus(this);">取消</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel rateItem" style="margin-bottom:0">
+                                <div class='panel-body'>
+                                    <div class='col-md-12 p0' id="rateMain"> 
+                                    	<div id ="quick_d" style="width: 328px;display:none; position: absolute; top: -31px;right: 45px;z-index: 9;"><img src='#path()/static/bj/images/kuai.png' class="quick-right-img" ></div>                                         
+                                          <div data-step="6" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;6、其它分级&lt;/h1&gt;&lt;p&gt;通过疼痛评分、GCS评分，FAST评分，EDTS评分，对患者病情，分级指标评估，对患者病情进行详细评估。&lt;/p&gt;&lt;/div&gt;" data-position="left">
+                                          	<div class="st-mark st-mark-t setItem" data-toggle="modal" onclick="modalScore();" id ="pain">
+                                              <div class='st-icon' style="cursor:pointer;">
+                                                <span class='setIcon iconT icon2'></span>疼痛评分
+                                              </div>
+                                          </div>
+                                          <div class="modal fade common-modal" id="modalScore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <button type="button" class="close" data-dismiss="modal" onclick="checkmodalScorestatus(this);" aria-hidden="true">×</button>
+                                                        <span class="modal-title">疼痛评分</span>
+                                                    </div>
+                                                    <div class="modal-body clearfix">
+                                                      <div class='row' id="face">
+                                                        <div class='col-md-2'>
+                                                          <img src='#path()/static/vendor/newpage/images/divid/untong0.png'>
+                                                          <p class='text-center'>无痛</p>
+                                                        </div>
+                                                        <div class='col-md-2'>
+                                                          <img src='#path()/static/vendor/newpage/images/divid/untong1.png'>
+                                                          <p class='text-center'>有点痛</p>
+                                                        </div>
+                                                        <div class='col-md-2'>
+                                                          <img src='#path()/static/vendor/newpage/images/divid/untong2.png'>
+                                                          <p class='text-center'>轻度疼痛</p>
+                                                        </div>
+                                                        <div class='col-md-2'>
+                                                          <img src='#path()/static/vendor/newpage/images/divid/untong3.png'>
+                                                          <p class='text-center'>中度疼痛</p>
+                                                        </div>
+                                                        <div class='col-md-2'>
+                                                          <img src='#path()/static/vendor/newpage/images/divid/untong4.png'>
+                                                          <p class='text-center'>重度疼痛</p>
+                                                        </div>
+                                                        <div class='col-md-2'>
+                                                          <img src='#path()/static/vendor/newpage/images/divid/untong5.png'>
+                                                          <p class='text-center'>剧烈疼痛</p>
+                                                        </div>
+                                                      </div>
+                                                      <div class='row numBox'>
+<!--                                                      	<div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>0</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>1</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>2</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>3</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>4</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>5</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>6</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>7</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>8</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>9</span></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class='col-md-1'>-->
+<!--                                                          <a href="javascript:void(0);" ><span class='num'>10</span></a>-->
+<!--                                                        </div>-->
+                                                        <div class="User_ratings User_grade" id="div_fraction2">
+															<div class="ratings_bars">
+																<div class="scale" id="bar2">
+																	<div></div>
+																	<span id="btn2"></span>
+																</div>
+															</div>
+														</div>
+                                                      </div>
+														
+                                                      <div class="col-md-12 p0 reviewResult">
+                                                          <span class="red">疼痛评分:</span>
+                                                          <span class="resultNum" id="Pain_Score">0</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button data-dismiss="modal" class="btn btn-default" onclick="checkmodalScorestatus(this);" type="button">取消</button>
+                                                        <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="checkmodalScorestatus(this);">确认</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="st-mark st-mark-d setItem" data-toggle="modal" onclick="modalGCS();" id="GCS">
+                                              <div class='st-icon'  id="beginGCS" style="cursor:pointer;">
+                                                <span class='setIcon iconT icon3'></span>GCS评分
+                                              </div>
+                                          </div>
+                                              <div class="modal fade common-modal" id="modalGCS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" onclick="checkmodalGCSstatus(this);" aria-hidden="true">×</button>
+                                                        <span class="modal-title">GCS评分</span>
+                                                    </div>
+                                                    <div class="modal-body clearfix">
+                                                      <div class='row'>
+                                                        <div class='col-md-12 text-center'>
+                                                          <div class='reviewBox'>
+                                                            <div class='review clearfix' id="gcs_eye">
+                                                              <div class="GCSheader">
+                                                                <span class="GCStitle">>>睁眼反应</span>
+                                                                <span class="GCStitleRight">请选择“睁眼反应”</span>
+                                                              </div>
+                                                              <div>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_1',1,this)" id="GCS_1_1">总不睁眼<i class="scoreItem">1分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_1',2,this)" id="GCS_1_2">疼痛刺激(不要刺激面部)时睁眼<i class="scoreItem">2分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_1',3,this)" id="GCS_1_3">言语刺激时睁眼<i class="scoreItem">3分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_1',4,this)" id="GCS_1_3">自发睁眼<i class="scoreItem">4分</i></p>
+                                                              </div>
+                                                            </div>
+                                                            <div class='review clearfix' id="gcs_lau">
+                                                              <div class="GCSheader">
+                                                                <span class="GCStitle">>>言语反应</span>
+                                                                <span class="GCStitleRight">请选择“言语反应”</span>
+                                                              </div>
+                                                              <div>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_2',1,this)" id="GCS_2_1">无言语<i class="scoreItem">1分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_2',2,this)" id="GCS_2_2">无法理解的声音<i class="scoreItem">2分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_2',3,this)" id="GCS_2_3">能听清，不连贯的词语<i class="scoreItem">3分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_2',4,this)" id="GCS_2_4">能交谈，答非所问<i class="scoreItem">4分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_2',5,this)" id="GCS_2_5">能交谈，定向力正常<i class="scoreItem">5分</i></p>
+                                                              </div>
+                                                            </div>
+                                                            <div class='review clearfix' id="gcs_not">
+                                                              <div class="GCSheader">
+                                                              	<span class="GCStitle">>>非偏瘫侧运动反应</span>
+                                                                <span class="GCStitleRight">请选择“非偏瘫侧运动反应”</span>
+                                                              </div>
+                                                              <div>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_3',1,this)" id="GCS_3_1">对任何疼痛无运动反应<i class="scoreItem">1分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_3',2,this)" id="GCS_3_2">痛刺激时有伸展反应（去大脑）<i class="scoreItem">2分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_3',3,this)" id="GCS_3_3">痛刺激时有屈曲反应（去皮质）<i class="scoreItem">3分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_3',4,this)" id="GCS_3_4">痛刺激有逃避反应<i class="scoreItem">4分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_3',5,this)" id="GCS_3_5">痛刺激时能拨开医生的手<i class="scoreItem">5分</i></p>
+                                                                <p class="GSCItem" onclick="addGCS('GCS_3',6,this)" id="GCS_3_6">遵从指令<i class="scoreItem">6分</i></p>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <p class='col-md-12 reviewRemark'>
+                                                          <span>注：总分15分</span>
+                                                          <span>13-15：轻</span>
+                                                          <span>9-12：中</span>
+                                                          <span>3-8：重</span>
+                                                          <span>9分或以下为昏迷</span>
+                                                        </p>
+                                                        <div class='col-md-12 reviewResult'>
+                                                          <span style="font-size:14px;">评分结果:</span>
+                                                          <span class='resultNum' id="GCS_Score">0</span>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                     	<button style="background:#3b6e9a;" class="btn btn-primary"   type="button" onclick="checkmodalGCSstatus(this);">确认</button>
+                                                        <button style="background:#99bedc;" id="can_gcs" data-dismiss="modal" class="btn btn-default" onclick="checkmodalGCSstatus(this);" type="button">取消</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                          </div>
+                                          <div class="st-mark st-mark-fast setItem st-mark-fast-bg" data-toggle="modal" data-target="#modalFAST" id ="fast">
+                                              <div class='st-icon' style="cursor:pointer;">
+                                                <span class='setIcon iconT icon4'></span>FAST
+                                              </div>
+                                          </div>
+                                          <div class="modal fade common-modal" id="modalFAST" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" onclick="clearFAST1();" aria-hidden="true">×</button>
+                                                        <span class="modal-title">FAST</span>
+                                                    </div>
+                                                    <div class="modal-body clearfix">
+                                                      <div class="fast-tc-content">
+                                                      
+                                                      		<div class="col-check clearfix">	
+	                                                      		<img src="#path()/static/vendor/newpage/images/divid/FAST-F.png" class="FASTImg"/>	
+	                                                      		<div class="FASTright">
+	                                                      			<p class="FASTtitle">面瘫/口角歪斜<i class="FASTsamll">Face is uneven</i></p>                                          			
+																	<label class="control-label">您(他)是否能够微笑？<span>是否感觉一侧面部无力或者麻木？</span></label>	
+																	<span class="myselected">
+																		<input type="checkbox" value="F" name="fast">
+																	</span>  		
+	                                                      		</div> 
+															</div>
+															
+															<div class="col-check clearfix">	
+	                                                      		<img src="#path()/static/vendor/newpage/images/divid/FAST-A.png" class="FASTImg"/>	
+	                                                      		<div class="FASTright">
+	                                                      			<p class="FASTtitle">肢体无力<i class="FASTsamll">Arm is weak</i></p>                                          			
+																	<label class="control-label">您（他）能顺利举起双手吗？<span>是否感觉一只手没有力气或根本无法抬起？</span></label>	
+																	<span class="myselected">
+																		<input type="checkbox" value="A" name="fast">
+																	</span>  		
+	                                                      		</div> 
+															</div>
+															
+															<div class="col-check clearfix">	
+	                                                      		<img src="#path()/static/vendor/newpage/images/divid/FAST-S.png" class="FASTImg"/>	
+	                                                      		<div class="FASTright">
+	                                                      			<p class="FASTtitle">言语不清<i class="FASTsamll">Speech is strange</i></p>                                          			
+																	<label class="control-label">您（他）能流利对答吗？<span>是否说话困难或言语含糊不清？</span></label>
+																	<span class="myselected">
+																		<input type="checkbox" value="S" name="fast">
+																	</span>  		
+	                                                      		</div> 
+															</div>
+															
+															<div class="col-check clearfix">	
+	                                                      		<img src="#path()/static/vendor/newpage/images/divid/FAST-T.png" class="FASTImg"/>	
+	                                                      		<div class="FASTright">
+	                                                      			<p class="FASTtitle">迅速求助
+	                                                      				<i style="color:#fe4847;font-size:20px;font-weight:600;">120</i>
+	                                                      				<span class="FASTsamll">Time to call
+	                                                      					<i style="color:#fe4847;font-size:12px;font-weight:600;">120</i>
+	                                                      				</span>
+                                                      				</p>                                          			
+																	<label class="control-label" style="padding:0">如果上述三项中有一项存在，<span>请您立即拨打急救电话120</span></label>
+																	<span class="myselected">
+																		<input type="checkbox" value="T" name="fast">
+																	</span>  		
+	                                                      		</div> 
+															</div>
+															
+                                                      </div>
+                                                    </div>
+                                                    <div class="modal-footer" style="padding:20px;">
+                                                    	<button style="background:#20588b" class="btn btn-primary"  data-dismiss="modal" type="button" onclick="okFAST()">确认</button>
+                                                        <button style="background:#99bedc" data-dismiss="modal" class="btn btn-default" onclick="clearFAST1();" type="button">取消</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                          </div>
+                                          
+                                          <div class="st-mark st-mark-h setItem" data-toggle="modal" onclick="modalEdts();" id ="edts">
+                                              <div class='st-icon' style="cursor:pointer;">
+                                                <span class='setIcon iconT icon5'></span>EDTS
+                                              </div>
+                                          </div>
+                                           <div class="st-mark st-mark-i setItem" data-toggle="modal" onclick="modalMews();" id ="mews" title="急诊预检分级分诊指标评估表" style="height: 76px;">
+                                              <div class='st-icon p-top-pg' style="cursor:pointer;line-height: 1.6;">
+                                                	<div class='setIcon iconT icon6' style="float:left;margin-top:10px"></div>
+                                                	<div>
+	                                                	<p>急诊预检</p>
+	                                                	<p>分级分诊评估</p>
+                                                	</div>
+                                                	
+                                              </div>
+                                          </div>
+                                          </div>
+                                         
+                                          <div class="st-mark st-mark-f setItem setGone" id="chooseDepart" data-step="9" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;9、分诊去向&lt;/h1&gt;&lt;p&gt;根据患者病情及分级结果，选择患者分诊去向。&lt;/p&gt;&lt;/div&gt;" data-position="left">
+                                              <div class='st-icon' style="cursor:pointer;">
+                                                <span class='setIcon iconT icon7'></span>分诊去向
+                                                
+                                              </div>
+                                              <!-- 分诊去向 -->
+				                            <div class='directionBox'>
+				                               <ul class='list-unstyled direction' id="department">
+				                                  <li>分诊去向</li>
+				                               </ul>
+				                            </div>
+                                          </div>
+                                          
+                                          <div class="st-mark st-mark-q aItem" data-toggle="modal" id="print" style="height:50px" onclick="showWD();">
+                                            <div class='st-icon' style="cursor:pointer;">
+                                           		<span class='setIcon iconT icon9'></span>打印腕带
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="st-mark st-mark-q aItem" data-toggle="modal" onclick="modalEnlist();" style="height:50px" id="picDiv">
+                                            <div class='st-icon'  onclick="showSign();" style="cursor:pointer;">
+                                              <div id="sgin"></div>
+                                           		<span class='setIcon iconT icon8'></span>家属签字
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="st-mark st-mark-q aItem" data-toggle="modal" onclick="change();" style="height:50px" id="jzann">
+                                            <div class='st-icon'  style="cursor:pointer;">
+                                           		<span class='setIcon iconT icon10'></span>
+												<span class="changeName">非急诊</span>
+                                            </div>
+                                          </div>
+											
+                                        <div class="modal fade common-modal" id="modalPrintwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" onclick="clearFAST1();" aria-hidden="true">×</button>
+                                                        <span class="modal-title">打印预览</span>
+                                                    </div>
+                                                    <div class="modal-body clearfix">
+                                                      <div class="printwd-tc-content">
+                                                      		<div class="printwd-tc-code-box clearfix">
+                                                      		<div id="printwd_head" style="margin-top: 6px; width: 255px;">
+                                                      		<div class="printwd-tc-code clearfix"  style='height: 100px'>
+                                                      				<div class="pull-left">
+	                                                      				<div class="clearfix">
+	                                                      					<div class="pull-left">
+		                                                      					<span id="p_name"></span>
+		                                                      					<span id="p_age"></span>
+		                                                      				</div>
+		                                                      				<div class="pull-right">
+		                                                      					<span id="p_grade"></span>级
+		                                                      				</div>
+	                                                      				</div>
+	                                                      				<p id="p_cardnum" style='width: 160px'></p>
+	                                                      			</div>
+	                                                      			<div class="pull-right" id="code">
+	                                                      			</div>
+	                                                      			<img id="image" src="" />
+	                                                      		</div>
+                                                      		</div >
+                                                      			
+                                                      		</div>
+                                                      		<div class="printwd-tc-wd">
+                                                      			<div class="printwd-big-bg">
+                                                      				<div class="printwd-small-bg">
+                                                      					<div>粘贴区</div>
+                                                      				</div>
+                                                      				<div class="printwd-whitecircle"><i></i><i></i><i></i></div>
+                                                      			</div>
+                                                      		</div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                                                        <button class="btn btn-primary"  data-dismiss="modal" type="button" onclick="dayinconfirmwd();">打印</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                          </div>
+								
+										
+									<!--多次分级隐藏 -->
+									<div id="showsffenji" class="right-grade" style="display: none;">
+										<a id="handle0" href="#" onclick="gotofenjipage(this);">
+											<div class="pull-left label-left"  id="left" style="height: 46px;width: 17%;color: #fff;padding: 12px 0; float: left">
+												<div style="display: none;">
+													<p id="handle1"></p>
+												</div>
+												<p>&lt;</p>
+											</div> 
+										</a>
+										<div id="content" class="pull-left label-content" style=" width: 58%; height: 46px;margin:0 4%;  float:left; border-radius: 4px; padding: 12px 0; border-left-width: 30px">
+											<div style="display: none;">
+											<p>
+												<i class="fa fa-stop">
+												</i><span id="handle2"></span>
+											</p>
+											</div>
+											<p id="handle3">第一次评级</p>
+										</div>
+										<a id="handle4" href="#" onclick="gotofenjipage(this);">
+											<div class="pull-left label-right" style="   height: 46px;float:left;color: #fff;width: 17%; border-radius: 4px;padding: 12px 0;" id="right">
+											<div style="display: none;">
+												<p id="handle5">-</p>
+											</div>
+												<p>&gt;</p>
+											</div> </a>
+									</div>
+								<div class="cover"></div>
+							</div>
+
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+              </div>
+                
+                </section>
+            </aside>
+<div class="modal fade common-modal" id="modalEdts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 1300px;">
+ <div class="modal-dialog" style="width: 98%;height: 87%;">
+     <div class="modal-content" 
+     style="width: 100%;height: 100%;background-color: #ffffff;font-family: '微软雅黑'','microsoft yahei';">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="checkmodalEdtsstatus(this);">×</button>
+                <span class="modal-title">EDTS评分</span>
+         </div>
+         <div class="modal-body clearfix " style="height:calc(100% - 75px)">
+         <!-- <div class="col-md-12 clearfix tabMain"> -->
+             <div class="gradingBox clearfix " style="height: 100%;">
+          		#include("score.html")
+          	 </div>      
+         <!-- </div> -->
+         </div>
+         <div class="modal-footer">
+             <button data-dismiss="modal" class="btn btn-default" type="button" onclick="checkmodalEdtsstatus(this);">取消</button>
+             <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="checkmodalEdtsstatus(this);">确认</button>
+         </div>
+         </div>
+     </div>
+ </div>
+<div class="modal fade common-modal" id="modalMews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 1300px;">
+ <div class="modal-dialog" style="width: 98%;height: 87%;">
+     <div class="modal-content" style="width: 100%;height: 100%;background-color: #ffffff;font-family: '微软雅黑'','microsoft yahei';">
+                <div class="modal-header">
+           		 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="checkmodalMewsstatus(this);">×</button>
+                <span class="modal-title">急诊预检分级分诊指标评估表</span>
+         </div>
+         <div class="modal-body clearfix" style="height:calc(100% - 75px)">
+         <!-- <div class="col-md-12 clearfix tabMain"> -->
+             <div class="gradingBox clearfix" style="height: 100%;">
+          		#include("mews.html")
+          	 </div>      
+         <!-- </div> -->
+         </div>
+         <div class="modal-footer">
+             <button data-dismiss="modal" class="btn btn-default" type="button" onclick="checkmodalMewsstatus(this);" >取消</button>
+             <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="checkmodalMewsstatus(this);">确认</button>
+         </div>
+         </div>
+     </div>
+ </div>
+<!--  挂号 -->
+ <div class="modal fade common-modal" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+     <div class="modal-content" style="width: 100%;height: 100%;background-color: #ffffff;font-family: '微软雅黑'','microsoft yahei';">
+            <div class="modal-header">
+            	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <span class="modal-title">挂号</span>
+         	</div>
+         <div class="modal-body clearfix">
+          	<div class="form-horizontal">
+			  <div class="addcard-form clearfix">
+			  	<div class="index-addcard-form">
+			  		<div class="form-group">
+					    <label class="control-label">就诊卡号 ：</label>
+					    <div class="pull-left">
+					     	<label id="cardnum2" class="control-label"></label>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label">就诊类型 ：</label>
+					    <div class="pull-left">
+					      <select  class="form-control" id="PAADMEncounterTypeCode">
+					      	<option value="O">门诊</option>
+					      	<option value="I">住院</option>
+					      	<option value="H">体检</option>
+					      	<option value="E">急诊</option>
+					      </select>
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label">挂号类别：</label>
+					    <div class="pull-left">
+					      <select  class="form-control" id="PAADMOPTypeCode">
+					      	<!-- 
+					      	<option value="DYJZKJZH">东院急诊科急诊号</option>
+					      	<option value="FKMZDJZH75">妇科门诊(东)急诊号</option>
+					      	<option value="GRKMZJZH">感染科门诊急诊号</option>
+					      	<option value="YKMZDJZH">眼科门诊(东)急诊号</option>
+					      	<option value="EKMZDJZH">儿科门诊(东)急诊号</option>
+					      	<option value="JZKYZH">急诊科义诊号</option>
+					      	<option value="EBYHTJWKMZDJZH">耳鼻咽喉+头颈外科门诊(东)急诊号</option>
+					      	<option value="EKMZJZH">儿科门诊急诊号</option>
+					      	-->
+					      	<option value="JZKJZH">急诊科急诊号</option>
+					      	<option value="FCKMZJZH75">妇产科门诊急诊号</option>
+					      	<option value="EBYHTJWKMZJZH">耳鼻咽喉+头颈外科门诊急诊号</option>
+					      	<option value="JSKMZJZH">精神科门诊急诊号</option>
+					      	<option value="KQKJZHKQ">口腔科急诊号(口腔)</option>
+					      	<option value="PFXBKMZJZH">皮肤性病科门诊急诊号</option>
+					      	<option value="SJNKMZJZH">神经内科门诊急诊号</option>
+					      	<option value="YKMZJZH">眼科门诊急诊号</option>
+					      </select>
+					    </div>
+					 </div>
+					 
+					 <div class="addcard-btns">
+					 	<button class="btn btn-default" data-dismiss="modal">取消</button>
+					 	<button class="btn btn-primary" onclick="registerPat();">确认</button>
+					 </div> 
+			  	</div>			  	
+			  	
+			  </div>
+			  
+			</div>
+         </div>         
+         </div>
+     </div>
+ </div>
+<!--  就诊卡办理 -->
+<div class="modal fade common-modal" id="cardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+     <div class="modal-content" style="width: 100%;height: 100%;background-color: #ffffff;font-family: '微软雅黑'','microsoft yahei';">
+         <div class="modal-header">
+            	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <span class="modal-title">就诊卡办理</span>
+         </div>
+         <div class="modal-body clearfix">
+          	<div class="form-horizontal">
+			  <div class="addcard-form clearfix">
+			  	<div class="index-addcard-form">
+			  		<div class="form-group">
+					    <label class="control-label"><span>*</span>卡类型:</label>
+					    <div class="pull-left">
+					      <span id="print"></span> 
+					      <input id='switch' name='status' type='checkbox' data-size='small' value=''>
+					    </div>
+					 </div>
+			  		<div class="form-group">
+					    <label class="control-label"><span class="linshi">*</span>就诊卡号:</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入就诊卡" id="PATCardNo" maxlength="15">
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label"><span >*</span>姓名</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入患者姓名" id="PATPatientName" maxlength="15" style="display:inline-block;width:calc(100% - 72px);margin-right:10px"
+					      >
+					    	<button type="button" class="btn btn-primary btn-sm " onclick="NoName();">无名氏 </button>
+					    </div>
+					 </div>
+					 
+					 <div class="form-group">
+					    <label class="control-label "><span class="linshi">*</span>患者证件类型</label>
+					    <div class="pull-left">
+					     <select class="form-control" id="PATIDCardType">
+								<option value="01">居民身份证</option>
+								<option value="02">居民户口簿</option>
+								<option value="03">护照</option>
+								<option value="04">军官证</option>
+								<option value="05">驾驶证</option>
+								<option value="06">港澳居民来往内地通行证</option>
+								<option value="07">台湾居民来往内地通行证</option>
+							</select>
+					    </div>
+					 </div>
+					<div class="form-group">
+					    <label class="control-label"><span class="linshi">*</span>患者证件号码</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入患者证件号码" id="PATIDCardNo">
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label"><span>*</span>性别</label>
+					    <div class="pull-left" >
+					    	<select class="form-control" id="PATSexCode">
+								<option value="男">男</option>
+								<option value="女">女</option>
+							</select>
+					    </div>
+					 </div>
+					  <div class="form-group">
+					    <label class="control-label"><span>*</span>出生日期</label>
+					    <div class="pull-left">
+							<input class="form-control mt2" size="16" type="text" placeholder="选择日期" data-date-format="yyyy-mm-dd" id="PATBirthDay" />
+						</div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label"><span>*</span>联系电话</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入联系电话" id="PATTelPhone">
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <label class="control-label"><span>*</span>患者类型</label>
+					    <div class="pull-left">
+					      <select class="form-control" id="PATSocialStatus">
+					      	<option>请选择</option>
+					      	<option value="01">普通患者</option>
+					      	<option value="02">职工医保</option>
+					      	<option value="03">居民医保</option>
+					      	<!-- <option value="04">公费患者</option> -->
+					      	<option value="23">本院职工</option>
+					      	<option value="25">湖北省医保</option>
+					      	<option value="30">大学生医保</option>
+					      	<option value="36">商保</option>
+					      	<option value="09">其他患者</option>
+					      	<option value="10">急救患者</option>
+					      	<option value="05">医保离休</option>
+					      	<option value="07">军休</option>
+					      </select>
+					    </div>
+					 </div>
+					 <div class="form-group yibaokahao">
+					    <label class="control-label"><span>*</span>医保卡号</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入医保卡号" id="PATInsuCardNo">
+					    </div>
+					 </div>	
+					 <div class="form-group Contact">
+					    <label class="control-label"><span>*</span>监护人姓名</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入监护人姓名" id="ContactName">
+					    </div>
+					 </div>
+					 <div class="form-group Contact">
+					    <label class="control-label"><span>*</span>监护人手机号</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入监护人手机号" id="ContactTelNo">
+					    </div>
+					 </div>
+					 <div class="form-group Contact">
+					    <label class="control-label"><span>*</span>监护人证件类型</label>
+					    <div class="pull-left">
+					      <select class="form-control" id="ContactIDType">
+								<option value="01">居民身份证</option>
+								<option value="02">居民户口簿</option>
+								<option value="03">护照</option>
+								<option value="04">军官证</option>
+								<option value="05">驾驶证</option>
+								<option value="06">港澳居民来往内地通行证</option>
+								<option value="07">台湾居民来往内地通行证</option>
+							</select>
+					    </div>
+					 </div>
+					 <div class="form-group Contact">
+					    <label class="control-label"><span>*</span>监护人证件号</label>
+					    <div class="pull-left">
+					      <input type="text" class="form-control" placeholder="请输入监护人证件号" id="ContactIDNo">
+					    </div>
+					 </div>
+					  
+					 <div class="addcard-btns">
+					 	<button class="btn btn-default" data-dismiss="modal">取消</button>
+					 	<button class="btn btn-primary" onclick="addHisCard();">确认</button>
+					 </div> 
+			  	</div>			  	
+			  	
+			  </div>
+			  
+			</div>
+         </div>         
+         </div>
+     </div>
+ </div>
+<!-- 打印条形码 -->
+<div class="modal fade common-modal" id="modalPrintbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<span class="modal-title">打印预览</span>
+			</div>
+			<div class="modal-body clearfix">
+				<div class="printbar-tc-content" id="printbar">
+					<div class="form-group">
+						<label>病人ID：</label>
+						<span>0000099495</span>
+					</div>
+					<div class="form-group">
+						<label>姓名：</label>
+						<span>测试2</span>
+					</div>
+					<div class="form-group">
+						<label>卡号：</label>
+						<span>0000099495</span>
+					</div>
+					 <img id="imgcode" />
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+				<button class="btn btn-primary" data-dismiss="modal" type="button" onclick="dayinconfirmbar();">打印</button>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- 分级 -->
+<div class="modal fade common-modal" id="fastpjModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:100%;margin-left:25%;">
+<div class="modal-dialog" style="width: 1024px;height: 95%;">
+     <div class="modal-content" style="width: 100%;height: 100%;background-color: #ffffff;font-family: '微软雅黑'','microsoft yahei';">
+         <div class="modal-header" style="width:100%;">
+                <span class="modal-title">快速分级</span>
+         </div>
+         <div class="modal-body clearfix " style="width:100%;">
+         <!-- <div class="col-md-12 clearfix tabMain"> -->
+             <div class="gradingBox clearfix " style="width:100%;">
+             #include("fastksfj.html")
+          		                             <!--  <div class='classifyBox newquickgrade-content undemo-class' id="qc" style="display:none;">
+                              	  <div><a onclick="tiaozhuanfenji();" style="cursor:pointer;color:#000;display:none" id="wzqj">完整评级>></a></div>
+                                  <ul class="list-unstyled classify1" id="classify1" >
+                                  		<li>快速分级><input e_name="divid_patient_grade_ruler_quick_query" id="seach_lv1" value="" class="classify-class version-hide"/></li>
+                                  		
+       	 							</ul>
+       	 							<ul class="list-unstyled classify2"  id="classify2" >
+       	 								<li>主诉><input e_name="divid_patient_grade_ruler_quick_query" id="seach_lv2" value="" class="classify-class version-hide"/></li>
+       	 								<li id="10000000002" e_name="divid_patient_grade_ruler_quick_owen" class="addtype-input classify-class version-hide"><input id="zdy2" type="text" maxlength="20" placeholder="自定义主诉"></li>
+       	 							</ul>
+       	 							<ul class="list-unstyled classify3"  id="classify3" >
+       	 								<li>评分依据><input e_name="divid_patient_grade_ruler_quick_query" id="seach_lv3" value="" class="classify-class version-hide"/></li>
+       	 								<li id="10000000003" class="ksfjgrade-box clearfix classify-class">
+       	 									<input type="text"  id="zdy3" maxlength="20" placeholder="自定义评分依据">
+       	 									<button type="button" name="ksfjgrade" grade="1001" class="btn btn-xs">一级</button>
+											<button type="button" name="ksfjgrade" grade="1002" class="btn btn-xs">二级</button>
+										    <button type="button" name="ksfjgrade" grade="1003" class="btn btn-xs">三级</button>
+									        <button type="button" name="ksfjgrade" grade="1004" class="btn btn-xs">四级</button>
+									        <button type="button" onclick="zdyksfj();" class="btn btn-xs">></button>
+       	 								</li>
+       	 							</ul>
+                              </div> -->
+          	 </div>      
+         </div>
+
+         </div>
+     </div>
+</div>
+
+<script>
+// 			var canvas = document.getElementById('canvas');
+//
+// canvas.addEventListener('mousemove', onMouseMove, false);
+// canvas.addEventListener('mousedown', onMouseDown, false);
+// canvas.addEventListener('mouseup', onMouseUp, false);
+//
+// canvas.addEventListener('touchstart',onMouseDown,false);
+// canvas.addEventListener('touchmove',onMouseMove,false);
+// canvas.addEventListener('touchend',onMouseUp,false)
+//
+//
+// canvas.height = 768;
+// canvas.width = 1366;
+// canvas.shadowColor="black";
+// var ctx = canvas.getContext('2d');
+
+//ctx.lineWidth = 3.0; // 设置线宽
+//ctx.strokeStyle = "#fc1741"; // 设置线的颜色
+
+scale = function (btn, bar, title) {
+	this.btn = document.getElementById(btn);
+	this.bar = document.getElementById(bar);
+	this.title = document.getElementById(title);
+	this.face = $("#face");
+	this.step = this.bar.getElementsByTagName("DIV")[0];
+	this.init();
+};
+scale.prototype = {
+	init: function () {
+		var f = this, g = document, b = window, m = Math;
+		f.btn.onmousedown = function (e) {
+			var x = (e || b.event).clientX;
+			var l = this.offsetLeft;
+			var max = f.bar.offsetWidth - this.offsetWidth;
+			g.onmousemove = function (e) {
+				var thisX = (e || b.event).clientX;
+				var to = m.min(max, m.max(-2, l + (thisX - x)));
+				f.btn.style.left = to + 'px';
+				f.ondrag(m.round(m.max(0, to / max) * 100), to);
+				b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+			};
+			g.onmouseup = new Function('this.onmousemove=null');
+		};
+	},
+	ondrag: function (pos, x) {
+		this.step.style.width = Math.max(0, x) + 'px';
+		this.title.innerHTML = pos / 10 + '';
+		this.changeface(pos / 20)
+	},
+	changeface: function (pos) {
+		$.each(this.face.find("img"),function (index,item) {
+			if(index<=pos){
+				$(item).attr("src", $(item).attr("src").replace(/\/untong/g,"/tong"));
+			}else {
+				$(item).attr("src", $(item).attr("src").replace(/\/tong/g,"/untong"));
+			}
+		});
+	}
+};
+new scale('btn2', 'bar2', 'Pain_Score');
+
+var flag = false;
+function onMouseMove(evt)
+{
+	evt.preventDefault();
+	if (flag)
+	{
+		var p = pos(evt);
+		ctx.lineTo(p.x, p.y);
+		ctx.lineWidth = 1.0; // 设置线宽
+		ctx.shadowColor = "#000000";
+		ctx.shadowBlur = 1;
+		ctx.shadowOffsetX = 6;
+		ctx.stroke();
+	}
+}
+ 
+function onMouseDown(evt)
+{
+	evt.preventDefault();
+	ctx.beginPath();
+	var p = pos(evt);
+	ctx.moveTo(p.x, p.y);
+	flag = true;
+}
+ 
+ 
+function onMouseUp(evt)
+{
+	evt.preventDefault();
+	flag = false;
+}
+
+var saveImage = document.getElementById('s'); 
+saveImage.addEventListener('click',function()
+{
+	var type = 'png';
+	download(type);
+},false);
+
+// 图片下载操作,指定图片类型
+function download(type) {
+	// 设置保存图片的类型
+	var imgdata = canvas.toDataURL(type);
+	var imageDateB64 = imgdata.substring(22);
+	var id ='#(id)';
+	var type ='#(type)';
+	$.ajax({
+        type: "post",
+        url: "#path()/divid/upload",
+        data:{
+       	 imageDataurl:imageDateB64
+        },
+        dataType: "json",
+        success: function(result){
+        	// console.log(result);
+        	if((result!=null)&&(result.status==200)){
+        		$("#picDiv").html("");
+				str = '<p class="allocatTitle">';
+				str += '<span onclick="showSign();">家属签字></span>';
+				str += '</p>';
+				str += '<p class="namePic" onclick="show();">';
+				str +=  '<img  src="#path()'+result.rows.path+'" style="height: 50px;">';
+				str += '</p>';
+				$("#picDiv").html(str);
+		    	var str = "";
+		    	str += "<img src=\""+result.rows.path+"\">";
+		    	$("#sgin").html(str);
+		    	$("#signUrl").val(result.rows.path);
+        		//window.location.href="#path()/divid/index?path="+result.rows.path+"&id="+id+"&type="+type;
+        		$("#allpage").show();
+				//	window.location.href="#path()/divid/sign?id="+id+"&type="+xgpj;
+	 			$("#sign").hide();
+        	}
+        },
+        error: function(){
+        }
+    });
+}
+ 
+var clear = document.getElementById('c');
+clear.addEventListener('click',function()
+{
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+},false);
+ 
+ 
+function pos(event)
+{
+	var x,y;
+	if(isTouch(event)){
+		x = event.touches[0].pageX;
+		y = event.touches[0].pageY;
+	}else{
+		x = event.layerX;
+		y = event.layerY;
+	}
+	return {x:x,y:y};
+}
+ 
+function isTouch(event)
+{
+	var type = event.type;
+	if(type.indexOf('touch')>=0){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+ 
+function getWidth()
+{
+	var xWidth = null;
+	if (window.innerWidth !== null) {
+		xWidth = window.innerWidth;
+	}
+	else {
+		xWidth = document.body.clientWidth;
+	}
+	return xWidth;
+}
+
+	// 生成条形码
+	$("#imgcode").JsBarcode("0000099495", {
+	      displayValue: false
+	});
+</script>
+
+#end

@@ -1,0 +1,175 @@
+ #@bj_layout('outburst')
+ #define bj_main()
+ <nav class="navbar navbar-default">
+	 <div class="container-fluid">
+		 <!-- Collect the nav links, forms, and other content for toggling -->
+		 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			 <form class="navbar-form navbar-left">
+				 <div class="form-group">
+					 <input type="text" class="form-control" placeholder="Search">
+				 </div>
+				 <div class="form-group">
+					 <input type="text" class="form-control" placeholder="Search">
+				 </div>
+			 </form>
+
+			 <ul class="nav navbar-nav navbar-right">
+				 <li><a href="#">
+					 <img src="#path()/static/vendor/newpage/images/tfsj/add.png" alt="">
+					 添加患者</a></li>
+				 <li><a href="#">
+					 <img src="#path()/static/vendor/newpage/images/tfsj/back.png" alt="">
+					 返回</a></li>
+				 <li><a href="#">
+					 <img src="#path()/static/vendor/newpage/images/tfsj/save.png" alt="">
+					 保存</a></li>
+			 </ul>
+		 </div><!-- /.navbar-collapse -->
+	 </div><!-- /.container-fluid -->
+ </nav>
+
+ <ol class="breadcrumb">
+	 <li><a href="#">首页</a></li>
+	 <li class="active">突发公共卫生事件</li>
+ </ol>
+
+ <div class="panel panel-info">
+	 <div class="panel-heading clearfix">
+		 <div class="panel-title-tf">
+			 <span>序号：1</span>
+			 <span>患者编号：10100101010</span>
+			 <button type="button" class="btn btn-danger">1级</button>
+		 </div>
+		 <div class="pull-right">
+			 <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">
+                        <img src="#path()/static/vendor/newpage/images/tfsj/delect_select.png" />
+                    </span>
+			 </button>
+		 </div>
+	 </div>
+	 <div class="panel-body mypanel">
+		 <div class="row clearfix">
+			 <div class="mypanel-6 col-md-7">
+				 <div class="col-md-4 col-sm-4 p0">
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-2 control-label">就诊卡号</label>
+						 <div class="col-sm-8">
+							 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+						 </div>
+					 </div>
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-2 control-label">出生日期</label>
+						 <div class="col-sm-8">
+							 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+						 </div>
+					 </div>
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-2 control-label">来院方式</label>
+						 <select class="form-control">
+							 <option>1</option>
+							 <option>2</option>
+							 <option>3</option>
+							 <option>4</option>
+							 <option>5</option>
+						 </select>
+					 </div>
+				 </div>
+				 <div class="col-md-4 col-sm-4 p0">
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+						 <div class="col-sm-8">
+							 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+						 </div>
+					 </div>
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-2 control-label">费用</label>
+						 <select class="form-control">
+							 <option>1</option>
+							 <option>2</option>
+							 <option>3</option>
+							 <option>4</option>
+							 <option>5</option>
+						 </select>
+					 </div>
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-2 control-label">意识状态</label>
+						 <select class="form-control">
+							 <option>1</option>
+							 <option>2</option>
+							 <option>3</option>
+							 <option>4</option>
+							 <option>5</option>
+						 </select>
+					 </div>
+				 </div>
+				 <div class="col-md-4 col-sm-4 p0">
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-2 control-label">就诊卡号</label>
+						 <div class="col-sm-8">
+							 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+						 </div>
+					 </div>
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-2 control-label">出生日期</label>
+						 <div class="col-sm-8">
+							 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+						 </div>
+					 </div>
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-2 control-label">来院方式</label>
+						 <select class="form-control">
+							 <option>1</option>
+							 <option>2</option>
+							 <option>3</option>
+							 <option>4</option>
+							 <option>5</option>
+						 </select>
+					 </div>
+				 </div>
+			 </div>
+			 <div class="mypanel-3 col-md-3">
+				 <div class="col-md-6">
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-3 control-label">无创血压</label>
+						 <div class="form-list">
+							 <div class="col-md-5 p0"><input type="text" class="form-control text-center input-text"
+															 name="ssy" placeholder="请输入" maxlength="3" value=""></div>
+							 <div class="col-md-2 p0">/</div>
+							 <div class="col-md-5 p0"><input type="text" class="form-control text-center input-text"
+															 name="szy" placeholder="请输入" maxlength="3" value=""></div>
+						 </div>
+					 </div>
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+						 <div class="col-sm-8">
+							 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+						 </div>
+					 </div>
+				 </div>
+				 <div class="col-md-6">
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+						 <div class="col-sm-8">
+							 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+						 </div>
+					 </div>
+					 <div class="form-group">
+						 <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+						 <div class="col-sm-8">
+							 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+						 </div>
+					 </div>
+
+				 </div>
+			 </div>
+			 <div class="mypanel-1 col-md-2">
+				 <textarea class="form-control" rows="2" placeholder="填写备注"></textarea>
+			 </div>
+		 </div>
+	 </div>
+ </div>
+
+
+
+ #end

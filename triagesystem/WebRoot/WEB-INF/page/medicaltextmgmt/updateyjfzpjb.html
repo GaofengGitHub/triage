@@ -1,0 +1,34 @@
+<script type="text/javascript">
+#include("updateyjfzpjb.js")
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+$("#updyjfzpjb").click(function(){
+	updyjfzpjbconfirm();
+})
+})
+</script>
+	
+	<div class="panelMain">
+			<div class="contact">
+				<form name="form1" method="post">
+					<div class="form-group">
+						<label style="margin-left: 50px;">预检分诊评级表编号：</label> <input type="text" readonly="readonly" style="background-color: #F6F6F6;color: #000;width:254px;text-align: center;" id="jfzpjbid" name="name"
+						    value="#(pjbid ??)" autocomplete="off" required /><span
+							class="tips" id="name"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;">预检分诊评级表名称：</label> <input type="text" style="width:254px;text-align: center;" id="jfzpjbname" name="name"
+							placeholder="#(name ??)" value="#(name ??)" autocomplete="off" required /><span
+							class="tips" id="name"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 66px;">地址：</label> <input type="text" style=" width: 254px;text-align: center;" id="jfzpjbaddress" name="address"
+							placeholder="#(address ??)" value="#(address ??)" autocomplete="off" required /><span
+							class="tips" id="address"></span>
+					</div>
+					<b class="btn" style="margin-left: 140px;margin-top: 200px;"><input id="updyjfzpjb" type="button" value="提交" class="btn btn-rule btn-lg"/> <button class="btn btn-rule btn-lg" onclick="load('yjfzpjbmgmt');">取消</button></b>
+				</form>
+			</div>
+		</div>

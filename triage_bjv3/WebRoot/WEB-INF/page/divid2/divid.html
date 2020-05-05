@@ -1,0 +1,422 @@
+#@layout('divid')
+#define main()
+<script>
+#include("pageload.js")
+#include("function.js")
+#include("score.js")
+#include("validate.js")
+#include("mews.js")
+</script>
+<script>
+    $(document).ready(function () {
+    	//设置按钮样式
+    	setgradebtncss();
+    	//初始化页面
+    	pageload();
+    	//添加验证
+    	//initValidate();
+    	//不需要评分模块时，请注销 initPf()
+    	initPf();
+    	//初始化mesw评分表
+    	initMews();
+    });
+   
+
+</script>
+<input type="hidden" id="time" value=""></input>
+<input type="hidden" id="id" value=""></input>
+<input type="hidden" id="sighid" value=""></input>
+<input type="hidden" id="handleid" value=""></input>
+
+<input type="hidden" id="level_1_id" value=""/>
+<input type="hidden" id="level_1_name" value=""/>
+<input type="hidden" id="level_2_id" value=""/>
+<input type="hidden" id="level_2_name" value=""/>
+<input type="hidden" id="level_3_id" value=""/>
+<input type="hidden" id="level_3_name" value=""/>
+
+<input type="hidden" id="autograde" value=""/>
+<input type="hidden" id="qggrade" value=""/>
+<input type="hidden" id="etdsgrade" value=""/>
+<input type="hidden" id="mewsgrade" value=""/>
+<input type="hidden" id="finalgrade" value=""/>
+<input type="hidden" id="deptment" value=""/>
+<input type="hidden" id="defultpjfs" value=""/>
+<input type="hidden" id="defultpjfsname" value=""/>
+        <div id="page-wrapper">
+            <div class="row">
+            <!--  
+            	<ol class="breadcrumb">
+					<li>
+						<a href="#path()/index/index">首页</a>
+					</li>
+					<li class="active">患者分级</li>
+				</ol>
+				-->
+            </div>
+            <div class="row">
+                <div class="col-lg-4 pr0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">患者信息</div>
+                        <div class="panel-body direction" style="height:354px">
+                        	<div class="form-group-sm clearfix  form-group">
+                        		<div class="col-md-12  " style='margin-bottom:10px'>
+                        			<label>身份证/医保卡/就诊卡:</label>
+                        			<input class="form-control formHalf"  type="text" id="cardnum" name="cardnum"></input>
+                        			<button onclick="readCard();" class="btn btn-info">读卡</button>
+                        		</div>
+                        		<div class="col-md-5 pr0">
+                        			<label>患者姓名:</label>
+                        			<input class="form-control formHalf"  type="text" id="fullname" maxlength="32" style="width:100px"></input>
+                        		</div>
+                        		<div class="col-md-4">
+                        			<label>性别:</label>
+                        			<select class="form-control formHalf" id="gender" style="width:75px">
+                        					<option value="未说明">未说明</option>
+											<option value="男">男</option>
+											<option value="女">女</option>
+									</select>
+                        		</div>
+                        		<div class="col-md-3">
+                        			<label>年龄:</label>
+                        			<input class="form-control formHalf"  type="text" id="age" readonly style="width:40px"></input>
+                        		</div>
+                        		<div class="col-md-5 pr0">
+                        			<label >出生日期:</label>
+                        			<input class="form-control formHalf"  type="text" id="bornday" style="width:100px" ></input> 
+                        		</div>
+                        		<div class="col-md-7">
+                        			<label>费别:</label>
+	                        			<select class="form-control formHalf" id="category" style="width:176px">
+											<option value="1">城镇职工基本医疗保险</option>
+											<option value="2">城镇居民基本医疗保险</option>
+											<option value="3">新型农村合作医疗</option>
+											<option value="4">贫困救助</option>
+											<option value="5">商业医疗保险</option>
+											<option value="6">全公费</option>
+											<option value="7">全自费</option>
+											<option value="8">其他</option>
+										</select>
+                        		</div>
+                        		<div class="col-md-5 pr0">
+                        			<label>联系方式:</label>
+                        			<input class="form-control formHalf" id="tel" type="text" value="" style="width:100px">
+                        		</div>
+                        		<div class="col-md-7 ">
+                        			<label>家属联系方式:</label>
+                        			<input class="form-control formHalf" id="memberstel" type="text" value="" style="width:120px">
+                        		</div>
+                        	</div>
+                        	
+                        	<div class="form-group-sm clearfix ">
+                        	
+                        		<div class="col-md-12" style="margin: 8px 0">
+                        			<label>来源：</label>
+                        			<div class='inlineBlock radioDiv'>
+		                        		<button class='btn btn-xs btn-xs-l' name="source" value="步行">自行来院</button>
+		                        		<button class='btn btn-xs btn-xs-l' name="source" value="120">120</button>
+		                        		<button class='btn btn-xs btn-xs-l' name="source" value="东院">东院</button>
+		                        		<button class='btn btn-xs btn-xs-l' name="source" value="汉川">汉川</button>
+		                        		<button class='btn btn-xs btn-xs-l' name="source" value="钟祥">钟祥</button>
+		                        		<button class='btn btn-xs btn-xs-l' name="source" value="鄂州">鄂州</button>
+		                        		<button class='btn btn-xs btn-xs-l' name="source" value="固始">固始</button>
+		                        		<button class='btn btn-xs btn-xs-l' name="source" value="院内">院内</button>
+		                        		<button class='btn btn-xs btn-xs-l' name="source" value="110">110</button>
+                        			</div>
+                        			<!--  
+                        			<input class="form-control formHalf" id="tel" type="text" value="" 
+                        			style="float:right;width:70px;display:true "/>
+                        			-->
+                        		</div>
+                        		<div class="col-md-12" >
+                        			<label>来院方式：</label>
+                        			
+                        			<div class='inlineBlock radioDiv'>
+		                        		<button class='btn btn-xs' name="lyfs" value="步行">步行</button>
+		                        		<button class='btn btn-xs' name="lyfs" value="扶行">扶走</button>
+		                        		<button class='btn btn-xs' name="lyfs" value="轮椅">轮椅</button>
+		                        		<button class='btn btn-xs' name="lyfs" value="担架床">平车</button>
+                        			</div>
+                        			<!--  
+                        			<input class="form-control formHalf" id="tel" type="text" value="" 
+                        			style="float:right;width:70px;display:true "/>
+                        			-->
+                        		</div>
+                        		<div class="col-md-12 pr0" style="margin: 8px 0">
+                        			<label>绿色通道：</label>
+                        			<div class='inlineBlock radioDiv'>
+		                        		<button class='btn btn-xs' name="lstd" value="心血管">心血管</button>
+		                        		<button class='btn btn-xs' name="lstd" value="脑出血">脑出血</button>
+		                        		<button class='btn btn-xs' name="lstd" value="孕产妇">孕产妇</button>
+		                        		<button class='btn btn-xs' name="lstd" value="急性心梗">急性心梗</button>
+		                        		<button class='btn btn-xs' name="lstd" value="创伤">创伤</button>
+                        			</div>
+                        		</div>
+                        		<div class="col-md-12">
+                        			<label>其&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;他：</label>
+                        			<div class='inlineBlock radioDiv'>
+		                        		<button class='btn btn-xs' name="others" value="创伤">三无人员</button>
+		                        		<button class='btn btn-xs' name="others" value="发热门诊">发热门诊</button>
+		                        		<button class='btn btn-xs' name="others" value="AIDS">AIDS</button>
+		                        		<button class='btn btn-xs' name="others" value="肝炎">肝炎</button>
+                        			</div>
+                        		</div>
+                        		<div class="col-md-12" style="margin: 8px 0">
+                        			<label>意识状态：</label>
+                        			<div class='inlineBlock radioDiv'>
+		                        		<button class='btn btn-xs' name="consciousness"  value="清醒">清醒</button>
+		                        		<button class='btn btn-xs' name="consciousness"  value="昏迷">昏迷</button>
+		                        		<button class='btn btn-xs' name="consciousness"  value="谵妄">谵妄</button>
+		                        		<button class='btn btn-xs' name="consciousness"  value="嗜睡">嗜睡</button>
+		                        		<button class='btn btn-xs' name="consciousness"  value="昏睡">昏睡</button>
+                        			</div>
+                        		</div>
+                        		<div class="col-md-12 pr0 records">
+                        			<label>既&nbsp;&nbsp;往&nbsp;&nbsp;史：</label>
+                        			<div class='inlineBlock checkDiv '>
+		                        		<button class='btn btn-xs ' style="margin-left: 5px;"  name="anamnesis"  value="糖尿病">糖尿病</button>
+		                        		<button class='btn btn-xs ' name="anamnesis"  value="高血压">高血压</button>
+		                        		<button class='btn btn-xs ' name="anamnesis"  value="冠心病">冠心病</button>
+		                        		<button class='btn btn-xs ' name="anamnesis"  value="COPD">COPD</button>
+		                        		<button class='btn btn-xs ' name="anamnesis"  value="哮喘">哮喘</button>
+		                        		<button class='btn btn-xs ' name="anamnesis"  value="其他">其他</button>
+                        			</div>
+                        		</div>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="panel-header">
+                    		<div class="pull-right"><i class="fa fa-gear fa-fw" title="设置"></i></div>
+                        </div>
+                        <div class="panel-body direction" style="height:354px;width:100%;">
+                        	<div class="gradingBox clearfix">
+                        		#include("score.html")
+                        		#include("grade.html")
+                        		#include("mews.html")
+                        		#include("default.html")
+                        	</div>
+                        	<div class="col-md-12">
+                        		<label>更多评级方式：</label>
+                        		<div class="gradingWay">
+                        		</div>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+         <div class="row">
+                <div class="col-lg-4 pr0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">患者体征</div>
+                        <div class="panel-body direction sign">
+                        	<div class="form-group-sm clearfix  groupPartition">
+                        		<div class="col-md-10 col-md-offset-2">
+                        			<select class="form-control formHalf formW" style="width:124px">
+										<option>分诊台POCT1</option>    
+										<option>分诊台POCT2</option>
+										<option>分诊台POCT3</option>
+										<option>分诊台POCT4</option>
+									</select>
+                        			<a>链接正常</a>
+                        			<button class="btn btn-info" onclick="readMach();">采集数据</button>
+                        		</div>
+                        	</div>
+                        	<div class="form-group-sm clearfix " style="margin-bottom: 20px;margin-top: 20px;">
+                        		<div class="col-md-6">
+                        			<label>身高:</label>
+                        			<input class="form-control formHalf formW" id="sg" type="text" value="">cm
+                        		</div>
+                        		<div class="col-md-6">
+                        			<label>体重:</label>
+                        			<input class="form-control formHalf formW" id="tz" type="text" value="">kg
+                        		</div>
+                        	</div>
+                        	<div class="form-group-sm clearfix " style="margin-bottom: 14px;">
+                        		<div class="col-md-2 pr0 text-center">
+                        			<h5>呼吸</h5>
+                        			<input class="form-control formHalf" id="huxi" type="text" value="">
+                        			<h5>次/分</h5>
+                        		</div>
+                        		<div class="col-md-2 p0 text-center">
+                        			<h5>体温</h5>
+                        			<input class="form-control formHalf" id="tiwen" type="text" value="">
+                        			<h5>℃</h5>
+                        		</div>
+                        		<div class="col-md-2 p0 text-center">
+                        			<h5>心率</h5>
+                        			<input class="form-control formHalf" id="maibo" type="text" value="">
+                        			<h5>次/分</h5>
+                        		</div>
+                        		<div class="col-md-3 p0 text-center">
+                        			<h5>舒张压/收缩压</h5>
+                        			<input class="form-control formHalf" id="shuzhangya" type="text" value="">
+                        			/<input class="form-control formHalf" id="shousuoya" type="text" value="">
+                        			<h5>mmHg</h5>
+                        		</div>
+                        		<div class="col-md-2 p0 text-center">
+                        			<h5>SPO2</h5>
+                        			<input class="form-control formHalf" id="spo2" type="text" value="">
+                        			<h5>%</h5>
+                        		</div>
+                        	</div>
+                        	<!--  
+                        	<div class="form-group-sm clearfix" style="margin-bottom: 3px;">
+                        			
+                        		<div class="col-md-3 pr0">
+                        			<label>CRP:</label>
+                        			<input class="form-control formHalf" id="crp" type="text" value="">
+                        		</div>	
+                        		<div class="col-md-3 p0">
+                        			<label>IL-6:</label>
+                        			<input class="form-control formHalf" id="il6" type="text" value="">
+                        		</div>	
+                        		<div class="col-md-3 p0">
+                        			<label>CEA:</label>
+                        			<input class="form-control formHalf" id="cea" type="text" value="">
+                        		</div>	
+                        		<div class="col-md-3 p0">
+                        			<label>AFP:</label>
+                        			<input class="form-control formHalf" id="afp" type="text" value="">
+                        		</div>
+                        	</div>
+                        	<div class="form-group-sm clearfix" style="margin-bottom: 3px;">
+                        		<div class="col-md-3 pr0">
+                        			<label>MYo:</label>
+                        			<input class="form-control formHalf" id="myo" type="text" value="">
+                        		</div>
+                        		<div class="col-md-3 p0">
+                        			<label>D-dimer:</label>
+                        			<input class="form-control formHalf" id="ddimer" type="text" value="">
+                        		</div>	
+                        		<div class="col-md-3 p0">
+                        			<label>Fer:</label>
+                        			<input class="form-control formHalf" id="fer" type="text" value="">
+                        		</div>
+                        		<div class="col-md-3 p0">
+                        			<label>Ck-MB:</label>
+                        			<input class="form-control formHalf" id="ckmb" type="text" value="">
+                        		</div>	
+                        		<div class="col-md-3 p0">
+                        			<label>NT-proBNP:</label>
+                        			<input class="form-control formHalf" id="ntprobnp" type="text" value="">
+                        		</div>
+                        	</div>
+                        	<div class="form-group-sm clearfix">
+                        		  
+                        		<div class="col-md-3 pr0">
+                        			<label>Hs-cTnl:</label>
+                        			<input class="form-control formHalf" id="hsctnl" type="text" value="">
+                        		</div>
+                        		
+                        		<div class="col-md-3 pr0">
+                        			<label>SPO2:</label>
+                        			<input class="form-control formHalf" id="spo2" type="text" value="">%
+                        		</div>
+                        		<div class="col-md-3 p0">
+                        			<label>PCN:</label>
+                        			<input class="form-control formHalf" id="pcn" type="text" value="">
+                        		</div>
+                        		<div class="col-md-3 p0">
+                        			<label>cTNT:</label>
+                        			<input class="form-control formHalf" id="ctnt" type="text" value="">
+                        		</div>
+                        		<div class="col-md-3 p0">
+                        			<label>CA系列:</label>
+                        			<input class="form-control formHalf" id="ca" type="text" value="">
+                        		</div>
+                        		 
+                        	</div>
+                        	-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">评级分诊</div>
+                        <div class="panel-body ">
+                        	<div class="col-md-3 pr0 pl5">
+                        		<div class="modules">
+                        			<p>评级描述：</p>
+                        			<div class="result clearfix" id="symptom">
+                        			<!--  
+                        				<div class="alert alert-dismissable" id="last_score_div">
+											急性病理生理状态总积分 =
+											<span id="last_score">
+											0</span>
+										</div>
+										<!--  
+										<div class="alert alert-dismissable" id="mews_score_div">
+											MEWS总积分 =
+											<span id="mews_score">
+											0</span>
+										</div>
+										-->
+                        			</div>
+                        		</div>
+                        	</div>
+                        	<div class="col-md-6 pr0 pl5">
+                        		<div class="modules judge">
+                        			<div class="form-group groupClass1" style="margin-bottom: 9px;">
+                        				<label>综合评级：</label>
+                        			</div>
+                        			<div class="form-group groupClass2" style="margin-bottom: 9px;">
+                        				
+                        			</div>
+                        			<div class="form-group-sm groupClass">
+                        				
+									<input class="easyui-combobox" id="changereason" prompt="请输入手工调级原因" style="width:300px;"
+   									data-options="valueField:'lable',textField:'value',
+    								data:[{
+               		 					lable:'症状加重',
+                						value:'症状加重'
+            						},
+            						{
+                						lable:'症状减轻',
+                						value:'症状减轻'
+            						},
+           							{
+                						lable:'操作失误',
+                						value:'操作失误'
+            						},
+            						{
+                						lable:'其他',
+                						value:'其他'
+            						}
+        						]"/>
+                        			</div>
+                        			
+                        		</div>
+                        	</div>
+                        	<div class="col-md-3 pl5">
+                        		<div class="modules">
+                        			<textarea class="imitateInput"  maxlength="150" id="hljl" onfocus="document.getElementById('note').style.display='none'" onblur="if(value=='')document.getElementById('note').style.display='block'"></textarea>
+                        		<div id="note" class="note">
+           								 <font color="#777">此处可填写护理记录</font>
+       							 </div>
+                        		<div style="position: relative; top: 95px;" >
+                       				<label>分诊护士： </label>
+                       				<span id="nurse">#userName()</span>
+                       			</div>
+                       			</div>
+                        	</div>
+                        	<div class="col-md-9 pl5">
+                        		<div class="modules examine clearfix">
+                        			<span class="examineTitle">分诊去向：</span>
+                        			<ul class="list-unstyled pull-left" id="depart">
+                        			</ul>
+                        		</div>
+                        	</div>
+                        	<div class="col-md-3">
+                        		<div class="save">
+                        			<a href="#" onclick="doDraf()">暂存</a>
+                        			<button class="btn btn-info btn-lg" onclick="doSave()">保存</button>
+                        		</div>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div></div>
+#end

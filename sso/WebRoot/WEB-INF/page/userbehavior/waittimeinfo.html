@@ -1,0 +1,73 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	if(window.sessionStorage["waitinfostarttime"]){
+		var starttime = sessionStorage.getItem('waitinfostarttime');
+		$("#startt").text(starttime);
+		$("#starttime").val(starttime);
+	}
+	if(window.sessionStorage["waitinfoendtime"]){
+		var endtime = sessionStorage.getItem('waitinfoendtime');
+		$("#endd").text(endtime);
+		$("#endtime").val(endtime);
+	}
+	if(window.sessionStorage["waitinfostation"]){
+		var station = sessionStorage.getItem('waitinfostation');
+		var stationname = sessionStorage.getItem('waitinfostationname');
+		$("#station").val(station);
+		$("#stationn").text(stationname);
+	}else{
+		$("#stationn").text("全部");
+	}
+	if(window.sessionStorage["waitinfopagename"]){
+		var pagename = sessionStorage.getItem('waitinfopagename');
+		$("#pagename").val(pagename);
+		$("#page").text(pagename);
+	}else{
+		$("#page").text("全部");
+	}
+	queryTypeBehavior("user");
+	showwaittimeinfo();
+})
+</script>
+<input type="hidden" id="starttime">
+<input type="hidden" id="endtime">
+<input type="hidden" id="station">
+<input type="hidden" id="pagename">
+<div class="table table-repeive Info">
+	页面停留时间
+	<div class="form-inline headSearch" role="">
+		时间段：<span style='width: 120px;'id="starttime"></span>-
+			<span style='width: 120px;' id="endtime"></span>
+	          工作站：<span style='width: 120px;' id="stationn"></span>
+		 页面：<span style='width: 120px;' id="page"></span>
+	</div>
+	<div>
+		<form class="bs-example bs-example-form" role="form">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="input-group">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								 用户下拉菜单<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" id="userlist">
+							</ul>
+						</div><!-- /btn-group -->
+						<input type="text" id="username" class="form-control">
+					</div><!-- /input-group -->
+				</div><!-- /.col-lg-6 --><br>
+			</div><!-- /.row -->
+		</form>
+	</div>
+	<a class="btn btn-sm btn-primary" href="javascript:void(0);"
+		onclick="showwaittimeinfo();"> <i class="fa fa-search"></i>查询
+	</a>
+</div>
+<div class="row">
+	<div class="recordData tab-content">
+    	<div class="tab-pane" style="display:block">
+	    	<table class="table table-striped" id="showwaittimeinfo" data-height="420">
+	    	</table>
+	    </div>
+    </div>
+</div>

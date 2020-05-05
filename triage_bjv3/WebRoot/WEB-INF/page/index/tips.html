@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ECS</title>
+    <link href="#path()/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="#path()/static/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="#path()/static/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="#path()/static/vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="#path()/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="#path()/static/dist/fonts/iconfont.css" rel="stylesheet">
+    <script src="#path()/static/vendor/jquery/jquery.min.js"></script>
+    <script src="#path()/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="#path()/static/dist/js/interaction.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style>
+    .vigilant{
+        position:relative;
+        color:red;
+    }
+    .vigilantitle{
+        font-size:26px;
+        line-height:30px;
+        padding-top:100px;
+    }
+    .category{
+        font-size:32px;
+        font-weight: bold;
+        line-height:160px;
+    }
+    .category span{
+        margin:0 20px;
+    }
+    .vigilant_tipsNum{
+        width:70px;
+        height:70px;
+        line-height:70px;
+        text-align:center;
+        position:absolute;
+        right:0;
+        background:#ccc;
+        font-size:26px;
+        font-weight: bold;
+    }
+
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+	//初始化页面
+	pageload();
+	
+	$("#btn").bind("click",function(){ 
+		$.ajax({
+	        type: "post",
+	        url: "#path()/index/updateWarnInfo",
+	        data:{
+	        	id:$("#id").val()
+	        },
+	        dataType: "json",
+	        success: function(result){
+	        	//console.log(result.rows);
+	        	if((result!=null)&&(result.status==200)){
+	        		pageload();
+	        	}else{
+	        		
+	        	}
+	        },
+	        error: function(){
+	        }
+	    });
+	});
+	
+	
+    setInterval(function(){
+    	pageload();
+    	//alert(1);
+    }, 10000);
+    	
+});
+
+function pageload(){
+	 $.ajax({
+	        type: "post",
+	        url: "#path()/index/queryWarnInfo",
+	        data:{
+	        },
+	        dataType: "json",
+	        success: function(result){
+	        	console.log(result.rows);
+	        	if((result!=null)&&(result.status==200)){
+	        		$(".vigilant_tipsNum").text(result.total);
+	        		if(result.total>0){
+	        			$("#btn").attr("disabled", false); 
+	        			$("#id").val(result.rows.id);
+	        			$("#1").text(result.rows.dept);
+	        			$("#2").text(result.rows.sender);
+	        			$("#3").text("报警");
+	        		}else{
+	        			$("#id").val("");
+	        			$("#1").text("");
+	        			$("#3").text("");
+	        			$("#2").text("暂无报警");
+	        			$("#btn").attr("disabled", true); 
+	        		}
+	        	}else{
+	        		
+	        	}
+	        },
+	        error: function(){
+	        }
+	    });
+}
+
+</script>
+
+</head>
+<body>
+    <div id="wrapper">
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class='vigilant'>
+                        <div class='vigilant_tipsNum'>0</div>
+                        <p class='vigilantitle'></p>
+                        <div class='category'>
+                        <input type="hidden" value=""  id="id"/>
+                            <span id="1"></span>
+                            <span id="2"></span>
+                            <span id="3"></span>
+                        </div>
+                    </div>
+                    <div class='col-md-12 text-center'>
+                        <button type="button" class="btn btn-info"  id="btn">收到报警，立即处理</button>
+                    </div>
+                </div>
+                
+            </div>
+
+        
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+#@layout('historyrecord')
+#define main()
+<script type="text/javascript">
+#include("historyrecord.js")
+</script>
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class='labelSearch'>搜索患者：</span>
+                    <div class="input-group globalSearch">
+                        <input id="searchText" style='height:36px;' type="text" class="form-control  formInput" onkeydown="return keyclick(event)" placeholder="请输入患者信息查找...">
+		                <span class="input-group-btn"  data-toggle="modal" data-target="#seach_patient" onclick="querypatienthistory()">
+		                    <button class="btn btn-warning btn-sm" id="btn-chat">搜索</button>
+		                </span>
+		            </div>
+                </div>
+            </div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="b-panel b-panel-default">
+					<div class="b-panel-heading" id="grade_all">历史记录</div>
+					<div class="b-panel-body p0">
+						<!-- <div class="table-responsive tableDelay"> -->
+							<table class="table table-hover " id="tb0">
+
+							</table>
+						<!-- </div> -->
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<div class="modal fade common-modal" id="promptModel" style="width:300px;margin:auto;">  
+		  <div class="modal-dialog" style="width:300px">  
+		    <div class="modal-content message_align">  
+		      <div class="modal-header">  
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+		        <h4 class="modal-title">提示信息</h4>  
+		      </div>  
+		      <div class="modal-body">  
+		        <p id="promptmassage"></p>
+		        <input type="hidden" id="historyid" value="">
+		      </div>  
+		      <div class="modal-footer">  
+		         <a  onclick="canceldelhistory()" class="btn btn-default" data-dismiss="modal">取消</a>  
+		         <a  onclick="confirmdelhistory()" class="btn btn-primary" data-dismiss="modal">确定</a>  
+		      </div>  
+		    </div><!-- /.modal-content -->  
+		  </div><!-- /.modal-dialog -->  
+		</div><!-- /.modal -->
+#end

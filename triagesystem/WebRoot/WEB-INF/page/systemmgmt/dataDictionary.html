@@ -1,0 +1,133 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#updyjfzpjb").click(function(){
+			addDictionaryConfirm();
+		});
+	});
+	
+	/*
+	function rr(val){
+		 if (!val.match(/^[\u4e00-\u9fa5]{2,4}$/))
+		    return "简称只能输入两个汉字";
+		 }
+		 return "";
+     }*/
+
+	function addDictionaryConfirm(){
+		var name = $('#name').val();
+		var val = $('#val').val();
+		var sort = $('#sort').val();
+		var descr = $('#descr').val();
+		var note = $('#note').val();
+		var num = $('#num').val();
+		var addr= $("#addr").val();
+		var enable = "";
+	    var enables = document.getElementsByName("enable");
+	    for(var i=0;i<enables.length;i++){
+	    	if(enables[i].checked){
+	    		enable = enables[i].value;
+	    	}
+	}
+	/* if(feiknum("标签名","limit24",name,$("#name").next()))
+	{return;}; */
+	if(feiknum("数据值","number4",val,$("#val").next()))
+	{return;};
+	if(feiknum("类型","limit24",sort,$("#sort").next()))
+	{return;};
+	if(feiknum("描述","limit24",descr,$("#descr").next()))
+	{return;};
+	/*
+	if(feiknum("备注信息","limit24",note,$("#note").next()))
+	{return;};*/
+	if(addr==""){
+		var aa ="简称不能为空";
+		$("#tips").text(aa)
+		$("#tips").css("color","red");
+		return true; 
+	} 
+	if(feiknum("排序","limit6",num,$("#num").next()))
+	{return;};
+	$.ajax({
+	     type: "post",
+	     url: "#path()/systemmgmt/addDataDictionaryConfirm",
+	     dataType: "json",
+	     data:{
+	    	 name:name,
+	    	 val:val,
+	    	 sort:sort,
+	    	 descr:descr,
+	    	 note:note,
+	    	 num:num,
+	    	 addr:addr,
+	    	 enable:enable
+	     },
+	     success: function(result){
+	    	 alert(result.message);
+	    	 if(result.status=="200"){
+	    		 load('dataDictionary');
+	    	 }else{
+	    		
+	    	 }
+	     },
+	     error: function(){
+	    	 return false;
+	     }
+	 }); 
+}
+</script>
+	<div class="panelMain">
+			<div class="contact">
+				<form name="form1" method="post">
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>标签名：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="name" name="name"
+							placeholder="#(name ??)" value="#(name ??)" autocomplete="off" required /><span
+							class="tips" id="name"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>数据值：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="val" name="val"
+							placeholder="#(val ??)" value="#(val ??)" autocomplete="off" required /><span
+							class="tips" id="val"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>类型：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="sort" name="sort"
+							placeholder="#(sort ??)" value="#(sort ??)" autocomplete="off" required /><span
+							class="tips" id="sort"></span>
+					</div>
+					<div class="form-group">(2:来源、3:来院方式、20:病情判断 、21:绿色通道 、22:意识状态、23:外伤部位、24：外伤类型
+							、25：陪同人员、26：体内连接管种类、27急救措施)</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>描述：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="descr" name="descr"
+							placeholder="#(descr ??)" value="#(descr ??)" autocomplete="off" required /><span
+							class="tips" id="descr"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;">备注信息：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="note" name="note"
+							placeholder="#(note ??)" value="#(note ??)" autocomplete="off" required /><span
+							class="tips" id="note">(院前使用的需填写YQ)</span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>简称：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="addr" name="addr"
+						 placeholder="#(addr ??)" value="#(addr ??)" autocomplete="off" required />
+						 <span class="tips" id="tips"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>是否启用：</label>
+						<input type="radio" id="enable"     name="enable" value="1" required checked>是</input>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" id="disenabled" name="enable" value="0" required>否</input>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>排序：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="num" name="num"
+							placeholder="#(num ??)" value="#(num ??)" autocomplete="off" required /><span
+							class="tips" id="num"></span>
+					</div>
+					<b class="btn" style="margin-left: 140px;margin-top: 200px;"><input id="updyjfzpjb" type="button" value="提交" class="btn btn-rule btn-lg"/> <button class="btn btn-rule btn-lg" onclick="load('dataDictionary');">取消</button></b>
+				</form>
+			</div>
+		</div>

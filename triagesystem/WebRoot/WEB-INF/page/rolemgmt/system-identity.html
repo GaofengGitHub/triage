@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="#path()/static/dist/css/demo.css" type="text/css">
+<link rel="stylesheet" href="#path()/static/dist/css/metroStyle.css" type="text/css">
+<script type="text/javascript" src="#path()/static/dist/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="#path()/static/dist/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="#path()/static/dist/js/jquery.ztree.exedit.js"></script>
+
+<script type="text/javascript">
+#include("system-identity.js")	
+</script>
+<div class="panelMain">
+	<!-- <div id="workstation"></div> -->
+	<div class="col-md-4">
+		<div class="circumscribe">
+			<p>系统管理</p>
+			<span name="systemmgmttree" class="tip"></span>
+			<ul id="systemmgmttree" class="ztree"></ul>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="circumscribe">
+			<p>临床</p>
+			<span name="linchuangtree" class="tip"></span>
+			<ul id="linchuangtree" class="ztree"></ul>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="circumscribe">
+			<p>科室管理</p>
+			<span name="departmentmgmttree" class="tip"></span>
+			<ul id="departmentmgmttree" class="ztree"></ul>
+		</div>
+	</div>
+</div>

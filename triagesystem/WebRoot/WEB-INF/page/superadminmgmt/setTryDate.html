@@ -1,0 +1,26 @@
+<script type="text/javascript">
+	#include("setTryDate.js")
+</script>
+
+<div class="panelMain setversion-section">
+	<h3>湖北省人民医院试用分诊<span id='v_name'></span></h3>
+	<div style="display:inline-block;vertical-align: middle;" id='update'>
+		<div class="input-group input-large date-picker input-daterange"
+			data-date="2018-12-12" data-date-format="yyyy-mm-dd"
+			style="line-height:34px;">
+			<input type="text" class="form-control" name="from" id="starttime">
+			<span class="input-group-addon"> 至  </span> <input type="text"
+				class="form-control" name="to" id="endtime">
+		</div>
+		<div class="form-group ">
+				<button onclick="updatetrydate();" class="btn btn-rule btn-lg">保存</button>
+		</div>
+	</div>
+	<div id='look'>
+		<span id='looktime'></span>
+		<div class="form-group ">
+				<button onclick="showupdatetrydate();" class="btn btn-rule btn-lg">修改</button>
+		</div>
+	</div>
+</div>
+

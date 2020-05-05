@@ -1,0 +1,349 @@
+<script type="text/javascript">
+#include("circleprogress.js")
+$(document).ready(
+		function() {	
+			//圆形进度条
+			 var percent = parseInt($('.mask :first-child').text());
+		        var baseColor = $('.circle-bar').css('background-color');
+
+		        if( percent<=50 ){
+		            $('.circle-bar-right').css('transform','rotate('+(percent*3.6)+'deg)');
+		        }else {
+		            $('.circle-bar-right').css({
+		                'transform':'rotate(0deg)',
+		                'background-color':baseColor
+		            });
+		            $('.circle-bar-left').css('transform','rotate('+((percent-50)*3.6)+'deg)');
+		        }
+			
+//			showDepart();
+//			setgradebtncss2();
+			var date = new Date();
+			var seperator1 = "-";
+			var month = date.getMonth() + 1;
+			var strDate = date.getDate();
+			if (month >= 1 && month <= 9) {
+				month = "0" + month;
+			}
+			//昨天
+			if (strDate > 0) {
+				if (strDate < 11) {
+					if (strDate > 1) {
+						strDate = strDate - 1;
+					}
+					strDate = "0" + strDate;
+				} else {
+					strDate = strDate - 1;
+				}
+			}
+			//一月跨年问题
+			if (month == "01") {
+				var byyr = (date.getFullYear() - 1) + seperator1 + "12"
+						+ seperator1 + strDate;
+			} else {
+				//一个月前
+				if (month < "10") {
+					//解决个位数月份少0的问题，变成01。liuxj20190216
+					var byyr = date.getFullYear() + seperator1 + '0'
+							+ (month - 1) + seperator1 + strDate;
+
+				} else {
+					var byyr = date.getFullYear() + seperator1 + (month - 1)
+							+ seperator1 + strDate;
+				}
+			}
+
+			var zr = date.getFullYear() + seperator1 + month + seperator1
+					+ strDate;
+			//    zr="2018-12-03";
+			/* var laystarttime = laydate.render({
+				elem : '#starttime', //指定元素
+				min : '1901-01-01',
+				max : zr,
+				value : byyr,
+				btns : [ 'clear', 'confirm' ],
+				done : function(value, date) {
+					layendtime.config.min = {
+						year : date.year,
+						month : date.month - 1, //关键  
+						date : date.date,
+						hours : 0,
+						minutes : 0,
+						seconds : 0
+					};
+				}
+			});
+
+			var layendtime = laydate.render({
+				elem : '#endtime', //指定元素
+				min : '1901-01-01',
+				max : zr,
+				value : zr,
+				done : function(value, date) {
+					if (value == "") {
+						var date2 = new Date();
+						var month = date2.getMonth();
+						var strDate = date2.getDate();
+						if (month >= 1 && month <= 9) {
+							month = "0" + month;
+						}
+						if (strDate >= 0 && strDate <= 9) {
+							if (strDate > 1) {
+								strDate = strDate - 1;
+							}
+							strDate = "0" + strDate;
+						}
+						laystarttime.config.max = {
+							year : date2.getFullYear(),
+							month : month, //关键  
+							date : strDate,
+							hours : 0,
+							minutes : 0,
+							seconds : 0
+						};
+					} else {
+						laystarttime.config.max = {
+							year : date.year,
+							month : date.month - 1, //关键  
+							date : date.date,
+							hours : 0,
+							minutes : 0,
+							seconds : 0
+						};
+					}
+				}
+			}); */
+			$("#endtime").datepicker({setDate:new Date(),autoclose:true,format: 'yyyy-mm-dd'});
+		    $("#starttime").datepicker({setDate:new Date(byyr),autoclose:true,format: 'yyyy-mm-dd'});
+			$("#starttime").attr("placeholder", byyr);
+			$("#endtime").attr("placeholder", zr);
+			$('.counter').lemCounter({
+				value_to_from_content: true,//从0 到 插件数字
+				animate_duration: 0.5,//特效时间
+				locale: "en-US"//美式数字
+			});
+		})
+</script>
+<div class="chart-section">
+    <div class="select-top">
+    	<div class="datetime-box clearfix">
+        <form class="form-inline headSearch" role="">
+        <div style="display:inline-block;vertical-align: middle;">
+			<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+		        <input type="text" class="form-control" name="from" id="starttime">
+		        <span class="input-group-addon"> - </span>
+		        <input type="text" class="form-control" name="to" id="endtime">                    
+		    </div>
+		</div>
+				    <!-- <input type="text" class="form-control" style='width: 40%;'
+				        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+						id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+					<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+						查询
+					</a>
+				</form>
+    </div>
+    </div>
+    <div class="clearfix chart-part03-new">
+        <div class="chart-part03-new-content clearfix">
+            <div class="pull-left">
+                <div class="clearfix">
+                    <div class="pull-left report-common-box">
+                        <h1>快速分级准确率&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#" class="title-link">查看不符合明细</a></h1>
+                        <div class="clearfix">
+                            <div class="pull-left chart-part03-new-img">
+                                <img src="#path()/static/bj/images/quick_grade_bg.png" class="quick-grade-img" />
+                                <img src="#path()/static/bj/images/percent_line01.png" class="percent-line01" />
+                                <span>96%</span>
+                            </div>
+                            <div class="pull-left chart-part03-new-img-right">
+                                <div class="pull-left report-common-text">
+                                    <p>共计使用(例)</p>
+                                    <span class="counter">8156</span>
+                                </div>
+                                <div class="pull-right report-common-text">
+                                    <p>符合综合分级结果(例)</p>
+                                    <span class="counter">8038</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="pull-right report-common-box">
+                        <h1>快速分级自定义情况&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#" class="title-link">查看明细</a></h1>
+                        <div class="clearfix">
+                            <div class="pull-left report-common-text">
+                                <p>分类自定义</p>
+                                <span class="counter">23</span>
+                            </div>
+                            <div class="pull-left report-common-text">
+                                <p>主诉自定义</p>
+                                <span class="counter">33</span>
+                            </div>
+                            <div class="pull-right report-common-text">
+                                <p>评分依据自定义</p>
+                                <span class="counter">40</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="report-common-box chart-part03-new-bottom">
+                    <h1>自定义频率前五位&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#" class="title-link">查看全部</a></h1>
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>呼吸系统</td>
+                            <td>痰多不能咳出</td>
+                            <td>痰多不能咳出，窒息</td>
+                            <td class="counter">24</td>
+                        </tr>
+                        <tr>
+                            <td>神经系统</td>
+                            <td>语言障碍</td>
+                            <td>失语，勾音困难，语言紊乱</td>
+                            <td class="counter">22</td>
+                        </tr>
+                        <tr>
+                            <td>理化/中毒</td>
+                            <td>物质 误用</td>
+                            <td>黄疸</td>
+                            <td class="counter">16</td>
+                        </tr>
+                        <tr>
+                            <td>精神心声科</td>
+                            <td>情绪转变</td>
+                            <td>情感障碍</td>
+                            <td class="counter">13</td>
+                        </tr>
+                        <tr>
+                            <td>精神心声科</td>
+                            <td>痴呆</td>
+                            <td>轻度，无生活障碍</td>
+                            <td class="counter">7</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="pull-right">
+                <div class="report-common-box">
+	                <h1>手工调级情况&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#" class="title-link">查看明细</a></h1>
+	                <div class="clearfix chart-part03-new-right-content">
+	                    <div class="pull-left">
+							<div class="pie-wrap">
+					            <div class="pie" id="number-pie" data-value="0.03"></div>					            
+					        </div>
+	                    </div>
+	                    <div class="pull-right">
+	                        <div class="pull-left report-common-text">
+	                            <p>手动调级(例)</p>
+	                            <span class="counter">30</span>
+	                        </div>
+	                        <div class="pull-right report-common-text">
+	                            <p>共计分级(例)</p>
+	                            <span class="counter">8156</span>
+	                        </div>
+	                    </div>
+	                </div>
+                </div>
+                <div class="report-common-box chart-part03-new-bottom">
+                    <h1>调级原因前五位&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#" class="title-link">查看全部</a></h1>
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>疼痛剧烈</td>
+                            <td class="counter">12</td>
+                        </tr>
+                        <tr>
+                            <td>癫痫发作</td>
+                            <td class="counter">8</td>
+                        </tr>
+                        <tr>
+                            <td>持续抽搐</td>
+                            <td class="counter">3</td>
+                        </tr>
+                        <tr>
+                            <td>病情好转</td>
+                            <td class="counter">5</td>
+                        </tr>
+                        <tr>
+                            <td>无痛</td>
+                            <td class="counter">2</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- <div class="clearfix chart-part03">
+        <div class="chart-part03-01">
+            <h1 class="chart-big-title">快速分级准确率<a href="#" class="title-link">查看不符合明细</a></h1>
+            <div class="clearfix chart-part03-01-content">
+                <img src="#path()/static/bj/images/quick_grade_bg.png" />
+                <div>
+                    <h1>96%</h1>
+                </div>
+                <div>
+                    <p><b>共计使用</b><span>8156</span>例</p>
+                    <p><b>符合综合分级结果</b><span>8038</span>例</p>
+                </div>
+            </div>
+        </div>
+        <div class="chart-part03-02 clearfix">
+            <div class="pull-left">
+                <h1 class="chart-big-title">快速分级自定义情况<a href="#" class="title-link">查看明细</a></h1>
+                <div>
+                    <p><b>分类自定义</b><span>23</span></p>
+                    <p><b>主诉自定义</b><span>33</span></p>
+                    <p><b>评分依据自定义</b><span>40</span></p>
+
+                </div>
+            </div>
+            <div class="pull-right">
+                <h1 class="chart-big-title">手工调级情况<a href="#" class="title-link">查看明细</a></h1>
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <p><b>共计分级</b><span>8156</span>例</p>
+                        <p><b>手动调级</b><span>30</span>例</p>
+                    </div>
+                    <div class="pull-left">
+                        <h1>0.36%</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chart-part03-03 clearfix">
+            <div class="pull-left">
+                <h1 class="chart-big-title">自定义频率前5位<a href="#" class="title-link">查看全部</a></h1>
+                <p>呼吸系统   丨痰多不能咳出丨 痰多不能咳出,窒息</p>
+                <p>神经系统   丨   语言障碍    丨 失语,勾音困难,语言紊乱</p>
+                <p>理化/中毒  丨 物质误用      丨 黄疸</p>
+                <p>精神心声科丨 情绪转变     丨 情感障碍</p>
+                <p>精神心声科丨 痴呆            丨 轻度：无生活能力障碍</p>
+            </div>
+            <div class="pull-left">
+                <h1 class="chart-big-title">调级原因前5位<a href="#" class="title-link">查看全部</a></h1>
+                <p>疼痛剧烈</p>
+                <p>癫痫发作</p>
+                <p>持续抽搐</p>
+                <p>病情好转</p>
+                <p>无痛</p>
+            </div>
+        </div>
+    </div> -->
+
+</div>
+<!-- 初始化各种百分比的饼状图 -->
+	<script type="text/javascript">
+		
+		var pie1 = new Pie({
+			el : '#number-pie',
+			animite : true
+		});
+		pie1.init();
+
+
+
+	</script>

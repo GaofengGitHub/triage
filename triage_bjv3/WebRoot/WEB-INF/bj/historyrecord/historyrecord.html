@@ -1,0 +1,104 @@
+#@bj_layout('index')
+#define bj_main()
+<script type="text/javascript">
+	#include("historyrecord.js")
+</script>
+	<section class="content history">
+		<div class="row headTips historyrecord-top" style="margin-bottom: 0px;">
+			<div class='col-md-5 p0'></div>
+			<div class='col-md-7 p0'>
+				<form class="form-inline headSearch pull-right" role="">
+<!--					<div style="display:inline-block;vertical-align: middle;">-->
+<!--						<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd" style="line-height:34px;">-->
+<!--							<input type="text" class="form-control" name="from" id="starttime">-->
+<!--							<span class="input-group-addon"> - </span>-->
+<!--							<input type="text" class="form-control" name="to" id="endtime">-->
+<!--						</div>-->
+<!--					</div>-->
+					<div class="my-data-picker" style="width: 48%">
+						<img  src="#path()/static/vendor/newpage/images/tfsj/data.png" alt="">
+						 <div class="my-data-picker my-data-picker-text">
+							<div class=" input-daterange "  data-date="2018-12-12" data-date-format="yyyy/mm/dd"  >
+								<input id="starttime"
+									   type="text"
+									   name="from"
+									   class=" formInput">
+							</div>
+							<span class='data-to'>-</span>
+							<div class=" input-daterange " data-date="2018-12-12" data-date-format="yyyy/mm/dd">
+								<input id="endtime" name="to"
+									   type="text" class="formInput">
+							</div>
+						</div>
+
+					</div>
+					<input type="text" class="form-control" style="width:300px;" id="content" placeholder="身份证/医保卡/就诊卡/姓名"  onporpertychange="tongji()">
+					<!--  <input type="text" class="form-control" style='width: 40%;'
+                         id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+                         id="endtime" placeholder="" AUTOCOMPLETE="OFF">-->
+					<a class="btn btn-sm btn-primary btn-search" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+						<i class="fa fa-search"></i>查询
+					</a>
+				</form>
+			</div>
+		</div>
+		<div class="charBox historyrecord-table-box" >
+			<div class="tab-pane active">
+				<div class="panel-body2 table-responsive p0">
+					<table class="table table-striped newhistory"  cellspacing="0"  rowspacing="0"  style="border-collapse: separate !important; padding: 0; border-spacing: 0px 6px;" id = "patientRecordList">
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer col-md-12 p0 historyrecord-top-right">
+			<div class="col-md-3 p0">
+				<div class="st-mark st-mark-y" style="background: #6da66a;">
+					<p>已分诊:</p>
+					<p id="yifenzhen" class='allocatNum'>0</p>
+					<p >人</p>
+				</div>
+			</div>
+			<div class="col-md-3 p0" >
+				<div class="st-mark st-mark-j" style="background: #418dd4;">
+					<p>已接诊:</p>
+					<p id="yijiezhen" class='allocatNum'>0</p>
+					<p >人</p>
+				</div>
+			</div>
+			<div class="col-md-3 p0">
+				<div class="st-mark" >
+					<p>已退号:</p>
+					<p id="yituihao1" class='allocatNum'>-</p>
+					<p >人</p>
+				</div>
+			</div>
+			<div class="col-md-3 p0">
+				<div class="st-mark">
+					<p>特殊人员:</p>
+					<p id="specialpetient" class='allocatNum'>0</p>
+					<p>人</p>
+				</div>
+			</div>
+		</div>
+		<!-- 信息删除确认 -->
+		<div class="modal fade common-modal" id="promptModel" style="width:600px">
+			<div class="modal-dialog mymodal-del">
+				<div class="modal-content message_align">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span Userbehavior="A154" aria-hidden="true">×</span></button>
+						<h4 class="modal-title">提示</h4>
+					</div>
+					<div class="modal-body">
+						<p id="promptmassage"></p>
+						<input type="hidden" id="historyid" value="">
+					</div>
+					<div class="modal-footer">
+						<a  onclick="confirmdelhistory()" Userbehavior="A152" class="btn btn-primary" data-dismiss="modal">确定</a>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	</section>
+
+#end

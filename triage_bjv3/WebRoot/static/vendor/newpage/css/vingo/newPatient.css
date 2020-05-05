@@ -1,0 +1,54 @@
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 523px;
+}
+
+/* .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-danger, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-danger:active, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-danger:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-danger:hover, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-dark, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-dark:active, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-dark:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-dark:hover, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-info, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-info:active, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-info:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-info:hover, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-primary, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-primary:active, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-primary:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-primary:hover, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-secondary, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-secondary:active, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-secondary:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-secondary:hover, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-success, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-success:active, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-success:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder.btn-success:hover {
+    color: #333;
+} */
+.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+    color: #333;
+}
+.bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+    overflow: hidden;
+    text-align: center;
+}
+
+.directionBox{
+  position: absolute;
+    z-index: 3;
+    right: 261px;
+    top: -8px;
+    /* bottom: 6px; */
+    width: 220px;
+}
+#chooseDepart{
+	position:relative;
+}
+#qc{
+  z-index: 10;
+  background:#fff;
+  border:none;
+  padding:0;
+  overflow: hidden;
+  
+}
+.ksfjgrade-box>.btn-vin{
+	color:white;
+	font-size:16px;
+	text-align:center;
+	width:64px;
+	height:30px;
+	background:#a0b4d4;
+}
+.ksfjgrade-box>.btn-1001-selected{
+	background: #f3303d;
+}
+.ksfjgrade-box>.btn-1002-selected{
+	background: #ff883d;
+}
+.ksfjgrade-box>.btn-1003-selected{
+	background: #f5c401;
+}
+.ksfjgrade-box>.btn-1004-selected{
+	background: #78a97d;
+}

@@ -1,0 +1,227 @@
+<script type="text/javascript">
+#include("report_0.js")
+</script>
+<div class="chart-section">
+        <div class="select-top">
+	    	<div class="datetime-box02 clearfix" style="width:100%">
+		    	<form class="form-inline headSearch" role="">
+		    		<div style="display:inline-block;vertical-align: middle;">
+						<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+					        <input type="text" class="form-control" name="from" id="starttime">
+					        <span class="input-group-addon"> - </span>
+					        <input type="text" class="form-control" name="to" id="endtime">                    
+					    </div>
+					</div>
+						    <!-- <input type="text" class="form-control" style='width: 40%;'
+						        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+								id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+							<select style="float:none;min-width:120px;width:auto;">
+						            <option value="请选择症状">请选择症状</option>
+						            <option value="呼吸困难">呼吸困难</option>
+						            <option value="紫绀">紫绀</option>
+						            <option value="咳嗽、咳痰">咳嗽、咳痰</option>
+						            <option value="低血压＜90/60mmHg">低血压＜90/60mmHg</option>
+						            <option value="面色苍白">面色苍白</option>
+						            <option value="大汗（冷汗）">大汗（冷汗）</option>
+						            <option value="濒死感">濒死感</option>
+						            <option value="胸闷、心悸">胸闷、心悸</option>
+						            <option value="水肿">水肿</option>
+						            <option value="外伤">外伤</option>
+						            <option value="反酸、嗳气">反酸、嗳气</option>
+						            <option value="恶心、呕吐">恶心、呕吐</option>
+						     </select>
+							<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+								查询
+							</a>
+							<a class="report-top-search-btn" href="javascript:void(0);">
+								导出
+							</a>
+						</form>
+		
+		    </div>
+	    </div>
+        <div class="clearfix chart-part00">
+        	<div class="pull-left">
+        		<div class="chart-part00-left-top">
+        			<ul>
+        				<li><span>呼吸系统疾病</span><span>5</span><span>例</span></li>
+        				<li><span>心血管系统疾病</span><span>12</span><span>例</span></li>
+        				<li><span>创伤系统</span><span>1</span><span>例</span></li>
+        				<li><span>消化系统</span><span>3</span><span>例</span></li>
+        			</ul>
+        		</div>
+        		<div class="chart-part00-left-bottom">
+        			<ul>
+        				<li><span>呼吸困难：</span><span>2</span><span>例</span></li>
+        				<li><span>紫绀：</span><span>12</span><span>例</span></li>
+        				<li><span>咳嗽、咳痰：</span><span>1</span><span>例</span></li>
+        				<li><span>面色苍白：</span><span>1</span><span>例</span></li>
+        				<li><span>濒死感：</span><span>2</span><span>例</span></li>
+        				<li><span>大汗(冷汗)：</span><span>1</span><span>例</span></li>
+        				<li><span>胸闷、心悸：</span><span>1</span><span>例</span></li>
+        				<li><span>水肿：</span><span>1</span><span>例</span></li>
+        				<li><span>外伤：</span><span>1</span><span>例</span></li>
+        				<li><span>反酸、嗳气：</span><span>1</span><span>例</span></li>
+        				<li><span>恶心、呕吐：</span><span>1</span><span>例</span></li>
+        			</ul>
+        		</div>
+        	</div>
+        	<div class="pull-right">
+	        	<div class="chart-part00-right-table">
+	        		<table class="table report-common-table report-common-table-notdbg">
+		        		<thead>
+		        			<tr>
+		        				<th>姓名</th>
+		        				<th>年龄</th>
+		        				<th>症状</th>
+		        				<th>伴随症状</th>
+		        				<th>分诊级别</th>
+		        				<th>首选系统</th>
+		        				<th>次选系统</th>
+		        			</tr>
+		        		</thead>
+						<tbody>
+							<tr>
+								<td>陈有理</td>
+								<td>26</td>
+								<td>胸痛</td>
+								<td>呼吸困难</td>
+								<td>I级</td>
+								<td>呼吸系统</td>
+								<td>心血管系统</td>
+							</tr>
+							<tr>
+								<td>吴力敌</td>
+								<td>46</td>
+								<td>胸痛</td>
+								<td>紫绀</td>
+								<td>II级</td>
+								<td>呼吸系统</td>
+								<td>心血管系统</td>
+							</tr>
+							<tr>
+								<td>姚勇</td>
+								<td>50</td>
+								<td>胸痛</td>
+								<td>咳嗽、咳痰</td>
+								<td>III级</td>
+								<td>呼吸系统</td>
+								<td>心血管系统</td>
+							</tr>
+							<tr>
+								<td>肖德胜</td>
+								<td>51</td>
+								<td>胸痛</td>
+								<td>低血压&lt;90/60mmHg</td>
+								<td>I级</td>
+								<td>心血管系统</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>王大秦</td>
+								<td>51</td>
+								<td>胸痛</td>
+								<td>面色苍白</td>
+								<td>II级</td>
+								<td>心血管系统</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>雷婷</td>
+								<td>55</td>
+								<td>胸痛</td>
+								<td>大汗(冷汗)</td>
+								<td>II级</td>
+								<td>心血管系统</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>徐伟</td>
+								<td>57</td>
+								<td>胸痛</td>
+								<td>胸闷、心悸</td>
+								<td>III级</td>
+								<td>心血管系统</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>李天明</td>
+								<td>57</td>
+								<td>胸痛</td>
+								<td>胸闷、心悸</td>
+								<td>III级</td>
+								<td>心血管系统</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>钱来福</td>
+								<td>62</td>
+								<td>胸痛</td>
+								<td>水肿</td>
+								<td>III级</td>
+								<td>心血管系统</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>顾开明</td>
+								<td>62</td>
+								<td>胸痛</td>
+								<td>外伤</td>
+								<td>III级</td>
+								<td>创伤系统</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>吴处</td>
+								<td>66</td>
+								<td>胸痛</td>
+								<td>反酸</td>
+								<td>III级</td>
+								<td>消化系统</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>蔡筱林</td>
+								<td>65</td>
+								<td>胸痛</td>
+								<td>嗳气</td>
+								<td>III级</td>
+								<td>消化系统</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>秦相林</td>
+								<td>64</td>
+								<td>胸痛</td>
+								<td>恶心、呕吐</td>
+								<td>III级</td>
+								<td>心血管系统</td>
+								<td>消化系统</td>
+							</tr>
+							<tr>
+								<td>时小晴</td>
+								<td>77</td>
+								<td>胸痛</td>
+								<td>呼吸困难、紫绀</td>
+								<td>I级</td>
+								<td>呼吸系统</td>
+								<td>心血管系统</td>
+							</tr>
+							<tr>
+								<td>秦相林</td>
+								<td>76</td>
+								<td>胸痛</td>
+								<td>咳嗽、咳痰、紫绀</td>
+								<td>I级</td>
+								<td>呼吸系统</td>
+								<td>心血管系统</td>
+							</tr>
+							
+						</tbody>
+					</table>
+	        	</div>
+				<div class="table-page">共15例</div>
+        	</div>
+        </div>
+        
+    </div>

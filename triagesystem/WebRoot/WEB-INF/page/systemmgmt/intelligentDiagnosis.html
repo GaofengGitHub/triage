@@ -1,0 +1,329 @@
+<script type="text/javascript">
+#include("intelligentDiagnosis.js")
+</script>
+<script src="#path()/static/dist/js/bootstrap3-typeahead.js"></script>
+<div class="intellDia-content">
+	<div class="search-box clearfix">
+		<div class="pull-left">
+			<label>规则关键字</label>
+			<input type="text" />
+		</div>
+		<div class="pull-left">
+			<label>诊断结果</label>
+			<input type="text" />
+		</div>
+		<button class="btn btn-primary btn-xs">查询</button>
+		<button class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#addRole">新增智能诊断规则</button>
+	</div>
+	<table class="table table-bordered intellDia-table">
+		<thead>
+			<tr>
+		    	<th>序号</th>
+		    	<th>规则</th>
+		    	<th>诊断结果</th>
+		    	<th>智能提示位置</th>
+		    	<th>操作</th>
+		  	</tr>
+		</thead>
+	  <tbody>
+		  <tr>
+		    <td>1</td>
+		    <td>【条件1】和【（条件2）或（条件3）或（条件4）】和【条件5】和【（条件6）或（条件7）】和【条件8】和【条件9】</td>
+		    <td>诊断1</td>
+		    <td>页面3-操作3  </td>
+		    <td>
+		    	<button class="btn btn-primary btn-xs">停用</button>
+		    	<button class="btn btn-primary btn-xs">修改</button>
+		    	<button class="btn btn-primary btn-xs">删除</button>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>2</td>
+		    <td>【条件1】和【（条件2）或（条件3）或（条件4）】和【条件5】和【（条件6）或（条件7）】和【条件8】和【条件9】</td>
+		    <td>诊断1</td>
+		    <td>页面3-操作3  </td>
+		    <td>
+		    	<button class="btn btn-primary btn-xs">停用</button>
+		    	<button class="btn btn-primary btn-xs">修改</button>
+		    	<button class="btn btn-primary btn-xs">删除</button>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>3</td>
+		    <td>【条件1】和【（条件2）或（条件3）或（条件4）】和【条件5】和【（条件6）或（条件7）】和【条件8】和【条件9】</td>
+		    <td>诊断1</td>
+		    <td>页面3-操作3  </td>
+		    <td>
+		    	<button class="btn btn-primary btn-xs">停用</button>
+		    	<button class="btn btn-primary btn-xs">修改</button>
+		    	<button class="btn btn-primary btn-xs">删除</button>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>4</td>
+		    <td>【条件1】和【（条件2）或（条件3）或（条件4）】和【条件5】和【（条件6）或（条件7）】和【条件8】和【条件9】</td>
+		    <td>诊断1</td>
+		    <td>页面3-操作3  </td>
+		    <td>
+		    	<button class="btn btn-primary btn-xs">停用</button>
+		    	<button class="btn btn-primary btn-xs">修改</button>
+		    	<button class="btn btn-primary btn-xs">删除</button>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>5</td>
+		    <td>【条件1】和【（条件2）或（条件3）或（条件4）】和【条件5】和【（条件6）或（条件7）】和【条件8】和【条件9】</td>
+		    <td>诊断1</td>
+		    <td>页面3-操作3  </td>
+		    <td>
+		    	<button class="btn btn-primary btn-xs">停用</button>
+		    	<button class="btn btn-primary btn-xs">修改</button>
+		    	<button class="btn btn-primary btn-xs">删除</button>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>6</td>
+		    <td>【条件1】和【（条件2）或（条件3）或（条件4）】和【条件5】和【（条件6）或（条件7）】和【条件8】和【条件9】</td>
+		    <td>诊断1</td>
+		    <td>页面3-操作3  </td>
+		    <td>
+		    	<button class="btn btn-primary btn-xs">停用</button>
+		    	<button class="btn btn-primary btn-xs">修改</button>
+		    	<button class="btn btn-primary btn-xs">删除</button>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>7</td>
+		    <td>【条件1】和【（条件2）或（条件3）或（条件4）】和【条件5】和【（条件6）或（条件7）】和【条件8】和【条件9】</td>
+		    <td>诊断1</td>
+		    <td>页面3-操作3  </td>
+		    <td>
+		    	<button class="btn btn-primary btn-xs">停用</button>
+		    	<button class="btn btn-primary btn-xs">修改</button>
+		    	<button class="btn btn-primary btn-xs">删除</button>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>8</td>
+		    <td>【条件1】和【（条件2）或（条件3）或（条件4）】和【条件5】和【（条件6）或（条件7）】和【条件8】和【条件9】</td>
+		    <td>诊断1</td>
+		    <td>页面3-操作3  </td>
+		    <td>
+		    	<button class="btn btn-primary btn-xs">停用</button>
+		    	<button class="btn btn-primary btn-xs">修改</button>
+		    	<button class="btn btn-primary btn-xs">删除</button>
+		    </td>
+		  </tr>
+	  </tbody>
+	  
+	</table>
+	<div class="modal fade" id="addRole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title text-center">新增智能诊断规则</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>规则</td>
+								<td>
+									<button class="btn btn-primary add-role-list-item" onclick="addRoleAnd()">添加【且】条件</button>
+									<div class="role-list">
+										<div class="role-list-defaut">
+											<div class="role-list-item clearfix">
+												<select>
+										            <option selected="" value="选择页面">选择页面</option>
+										            <option value="分诊首页">分诊首页</option>
+										            <option value="患者分诊页">患者分诊页</option>
+										            <option value="抢救首页">抢救首页</option>
+										            <option value="抢救护理记录页">抢救护理记录页</option>
+										            <option value="抢救评级页">抢救评级页</option>
+										            <option value="抢救措施流程页">抢救措施流程页</option>
+										            <option value="留观首页">留观首页</option>
+										            <option value="急诊电子病历页">急诊电子病历页</option>
+										            <option value="留观患者综合信息页">留观患者综合信息页</option>
+										        </select>
+												<select>
+										            <option selected="" value="选择字段">选择字段</option>
+										            <option value="患者性别">患者性别</option>
+										            <option value="患者年龄">患者年龄</option>
+										            <option value="患者缴费方式">患者缴费方式</option>
+										            <option value="患者来院方式">患者来院方式</option>
+										            <option value="绿色通道进入条件">绿色通道进入条件</option>
+										            <option value="意识状态">意识状态</option>
+										            <option value="既往史">既往史</option>
+										            <option value="身高">身高</option>
+										            <option value="体重">体重</option>
+										            <option value="收缩压">收缩压</option>
+										            <option value="舒张压">舒张压</option>
+										            <option value="脉搏">脉搏</option>
+										            <option value="体温">体温</option>
+										            <option value="快速分级判断依据">快速分级判断依据</option>
+										            <option value="疼痛评分">疼痛评分</option>
+										            <option value="分诊去向">分诊去向</option>
+										        </select>
+												<select>
+										            <option selected="" value="=">=</option>
+										            <option value="＞">＞</option>
+										            <option value="≥">≥</option>
+										            <option value="＜">＜</option>
+										            <option value="≤">≤</option>
+										            <option value="数值范围">数值范围</option>
+										        </select>
+												<input type="text" placeholder="输入阈值" />
+												<button class="btn btn-outline btn-primary" onclick="addRoleOr()">添加（或）</button>
+											</div>
+											<div class="role-list-item role-list-item-or clearfix">
+												<span>或</span>
+												<select>
+										            <option selected="" value="选择页面">选择页面</option>
+										            <option value="分诊首页">分诊首页</option>
+										            <option value="患者分诊页">患者分诊页</option>
+										            <option value="抢救首页">抢救首页</option>
+										            <option value="抢救护理记录页">抢救护理记录页</option>
+										            <option value="抢救评级页">抢救评级页</option>
+										            <option value="抢救措施流程页">抢救措施流程页</option>
+										            <option value="留观首页">留观首页</option>
+										            <option value="急诊电子病历页">急诊电子病历页</option>
+										            <option value="留观患者综合信息页">留观患者综合信息页</option>
+										        </select>
+												<select>
+										            <option selected="" value="选择字段">选择字段</option>
+										            <option value="患者性别">患者性别</option>
+										            <option value="患者年龄">患者年龄</option>
+										            <option value="患者缴费方式">患者缴费方式</option>
+										            <option value="患者来院方式">患者来院方式</option>
+										            <option value="绿色通道进入条件">绿色通道进入条件</option>
+										            <option value="意识状态">意识状态</option>
+										            <option value="既往史">既往史</option>
+										            <option value="身高">身高</option>
+										            <option value="体重">体重</option>
+										            <option value="收缩压">收缩压</option>
+										            <option value="舒张压">舒张压</option>
+										            <option value="脉搏">脉搏</option>
+										            <option value="体温">体温</option>
+										            <option value="快速分级判断依据">快速分级判断依据</option>
+										            <option value="疼痛评分">疼痛评分</option>
+										            <option value="分诊去向">分诊去向</option>
+										        </select>
+												<select>
+										            <option selected="" value="=">=</option>
+										            <option value="＞">＞</option>
+										            <option value="≥">≥</option>
+										            <option value="＜">＜</option>
+										            <option value="≤">≤</option>
+										            <option value="数值范围">数值范围</option>
+										        </select>
+												<input type="text" placeholder="输入阈值" />
+												<a href="javascript:void(0);" onclick="delRoleOr(this)" class="del-role-list-item">&times;</a>
+											</div>
+										</div>
+										<div class="role-list-and-add">
+											<div class="role-list-item role-list-item-and clearfix">
+												<div class="role-line">且<i></i></div>
+												<select>
+										            <option selected="" value="选择页面">选择页面</option>
+										            <option value="分诊首页">分诊首页</option>
+										            <option value="患者分诊页">患者分诊页</option>
+										            <option value="抢救首页">抢救首页</option>
+										            <option value="抢救护理记录页">抢救护理记录页</option>
+										            <option value="抢救评级页">抢救评级页</option>
+										            <option value="抢救措施流程页">抢救措施流程页</option>
+										            <option value="留观首页">留观首页</option>
+										            <option value="急诊电子病历页">急诊电子病历页</option>
+										            <option value="留观患者综合信息页">留观患者综合信息页</option>
+										        </select>
+												<select>
+										            <option selected="" value="选择字段">选择字段</option>
+										            <option value="患者性别">患者性别</option>
+										            <option value="患者年龄">患者年龄</option>
+										            <option value="患者缴费方式">患者缴费方式</option>
+										            <option value="患者来院方式">患者来院方式</option>
+										            <option value="绿色通道进入条件">绿色通道进入条件</option>
+										            <option value="意识状态">意识状态</option>
+										            <option value="既往史">既往史</option>
+										            <option value="身高">身高</option>
+										            <option value="体重">体重</option>
+										            <option value="收缩压">收缩压</option>
+										            <option value="舒张压">舒张压</option>
+										            <option value="脉搏">脉搏</option>
+										            <option value="体温">体温</option>
+										            <option value="快速分级判断依据">快速分级判断依据</option>
+										            <option value="疼痛评分">疼痛评分</option>
+										            <option value="分诊去向">分诊去向</option>
+										        </select>
+												<select>
+										            <option selected="" value="=">=</option>
+										            <option value="＞">＞</option>
+										            <option value="≥">≥</option>
+										            <option value="＜">＜</option>
+										            <option value="≤">≤</option>
+										            <option value="数值范围">数值范围</option>
+										        </select>
+												<input type="text" placeholder="输入阈值" />
+												<button class="btn btn-outline btn-primary" onclick="addRoleOr02(this)">添加（或）</button>
+											</div>
+										</div>	
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table intellDia-table02">
+						<tbody>
+							<tr>
+								<td>诊断结果</td>
+								<td><input id="reason11" type="text" placeholder="ICD-10 编码PLUS" /></td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table intellDia-table03">
+						<tbody>
+							<tr>
+								<td>智能提示位置</td>
+								<td>
+									<div class="intellDia-table03-list-box">
+										<div class="intellDia-table03-list">
+											<select>
+									            <option value="选择页面">选择页面</option>
+									            <option value="全部页面">全部页面</option>
+									            <option value="分诊首页">分诊首页</option>
+									            <option value="患者分诊页">患者分诊页</option>
+									            <option value="抢救首页">抢救首页</option>
+									            <option value="抢救护理记录页">抢救护理记录页</option>
+									            <option value="抢救评级页">抢救评级页</option>
+									            <option value="抢救措施流程页">抢救措施流程页</option>
+									            <option value="留观首页">留观首页</option>
+									            <option value="急诊电子病历页">急诊电子病历页</option>
+									            <option value="留观患者综合信息页">留观患者综合信息页</option>
+									        </select>
+									        <select>
+									            <option value="选择操作">选择操作</option>
+									            <option value="进入/刷新页面">进入/刷新页面</option>
+									            <option value="关闭页面">关闭页面</option>
+									            <option value="新增">新增</option>
+									            <option value="暂存">暂存</option>
+									            <option value="保存">保存</option>
+									            <option value="采集数据">采集数据</option>
+									            <option value="诊断">诊断</option>
+									        </select>
+									        <button class="btn btn-outline btn-primary" onclick="addPage()">添加多处</button>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" onclick="confimqxconfig();" class="btn btn-primary">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+</div>

@@ -1,0 +1,30 @@
+<script type="text/javascript">
+#include("function.js")
+$(document).ready(function() {
+	departlist();
+	$('#loadFile').after('<input type="file" id="load_xls" name="file" style="display:none" onchange ="uploadFile()">');
+	$('#loadFile').click(function(){
+	    document.getElementById("load_xls").click();
+	});
+});
+</script>
+	<div class="panelMain" style='padding:30px;'>
+		<table class="easyui-datagrid" id="departList" title="科室信息管理"
+			style="width: 98%; height: 98%;"></table>
+		<div id="row1" style="display: inline-block;">
+			<input id="searchText" class="userName" placeholder="科室名称" /> <a href="javascript:void(0);" onclick="departlist();">
+				<button class="btn btn-primary btn-xs">查询</button>
+			</a>
+		</div>
+		<div id="row2">
+			<a href="javascript:void(0);" onclick="load('addDepart');">
+				<button class="btn btn-primary btn-xs">新增</button>
+			</a> <a href="javascript:void(0);" onclick="modInfo();">
+				<button class="btn btn-primary btn-xs">修改</button>
+			</a> <a href="javascript:void(0);" onclick="disabledepart();">
+				<button class="btn btn-primary btn-xs">停用/启用</button>
+			</a> <a href="javascript:void(0);">
+				<button id="loadFile" class="btn btn-primary btn-xs">导入</button>
+			</a>
+		</div>
+	</div>

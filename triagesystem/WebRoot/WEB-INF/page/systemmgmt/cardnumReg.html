@@ -1,0 +1,60 @@
+<script type="text/javascript">
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	 
+	$('#length').val("#(cardnumreg.length ??)");
+	$('#reg').val("#(cardnumreg.reg ??)");
+	
+
+	$("#savecardnumReg").click(function(){
+		savecardnumReg();
+	});
+});
+
+function savecardnumReg(){
+	var length = $('#length').val();
+	var reg = $('#reg').val();
+	if(feiknum("就诊卡号位数设置","number4",length,$("#length").next())){return;};
+	if(feiknum("就诊卡标识码设置","cardBum",reg,$("#reg").next())){return;};
+	$.ajax({
+	     type: "post",
+	     url: "#path()/systemmgmt/savecardnumReg",
+	     dataType: "json",
+	     data:{
+	    	 reg:reg,
+	    	 length:length                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,
+	     },
+	     success: function(result){
+	    	 $(".tips").each(function(){
+	    		 $(this).empty();
+	    	 });
+	    	 toastr.warning(result.message);
+	    	 
+	     },
+	     error: function(){
+	    	 return false;
+	     }
+	 }); 
+}
+</script>
+	<div class="panelMain">
+			<div class="contact">
+				<form name="form1" method="post">
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>就诊卡号位数设置：</label>
+						 <input type="text" style="width:200px;text-align: center;" id="length" name="length"
+							placeholder="" value="" autocomplete="off" required />
+						<span class="tips" ></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>就诊卡标识码设置：</label>
+						 <input type="text" style="width:200px;text-align: center;" id="reg" name="reg"
+							autocomplete="off" required /><span
+							class="tips" ></span>
+					</div>
+					<b class="btn" style="margin-left: 140px;margin-top: 200px;"><input id="savecardnumReg" type="button" value="保存" class="btn btn-rule btn-lg"/> </b>
+				</form>
+			</div>
+		</div>

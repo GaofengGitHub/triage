@@ -1,0 +1,796 @@
+<style>
+.navHei {
+    min-height: 248px;
+}
+.modal-center {
+    margin-bottom: 0;
+    background: #d7e3e9;
+    border-radius: 6px;
+    border: none;
+}
+.modal-center .navbar-header {
+    width: 100%;
+    background: #47a0ca;
+    border-top-left-radius: 6px;
+    color: #fff;
+    float: inherit;
+}
+.modal-center .navbar-header .navbar-brand {
+    padding: 0 10px;
+    font-size: 15px;
+}
+.navName .navbar-brand {
+    height: 40px;
+    line-height: 40px;
+}
+.navbar-brand {
+    padding: 0 35px;    
+    height: 58px;
+    /* line-height: 58px; */
+    white-space: nowrap;
+}
+.trickBtn {
+    padding-top: 15px;
+}
+.process {
+    height: 152px;
+}
+.course{
+	list-style:none;
+	display:flex;
+	justify-content:space-between;
+}
+.course li{
+	float:left;
+	text-align:center;
+}
+.course .path{
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	margin:0 auto 10px;
+	background:#46a0ca;
+	color:#fff;
+	/*display:table-cell;
+	vertical-align: middle;*/
+}
+.course .without{
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	margin:0 auto 10px;
+	background:#ccc;
+	color:#333;
+}
+.course li.partition{
+	line-height:52px;
+}
+.course .path.pt5,.course .without.pt5{
+	padding-top:5px;
+}
+
+.process .course .part{
+	width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    background: #46a0ca;
+    color: #fff;
+}
+.process .course .nopart{
+	width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    background: #fff;
+    color: #99999;
+}
+.process .course .pt6{
+	padding-top:8px
+}
+/* .process .course .arrow{
+	width: 13px;
+	height: 13px;
+	background: url(../../images/arrow2.png) no-repeat;
+	background-size: 100% 100%;
+	margin-top: 24px;
+} */
+/* .process .course .active .arrow{
+	background: url(../../images/arrow1.png) no-repeat;
+	background-size: 100% 100%;
+} */
+.process .course li p{
+	color: #999999;
+}
+
+.titBtn li{
+	float: left;
+	background: #46a0ca;
+	padding: 13px 16px;
+	border-radius: 6px;
+	margin-right: 10px;
+	color: #fff;
+	cursor: pointer;
+}
+.titBtn li:last-child{
+	margin-right: 0;	
+}
+.titBtn li.active{
+	background: #0e4f6d;
+}
+.tit-default{
+	padding: 13px 16px;
+	background: #46a0ca;
+	color: #fff;
+	border-radius: 6px;
+	cursor: pointer;
+}
+.panTop{
+	background: #fff;
+	margin-top: 16px;
+	margin-bottom: 0;
+	box-shadow: none;
+	display: none;
+	position: relative;
+	height:380px;
+}
+.panTop .tit-bottom{
+	margin-bottom: 10px;
+}
+.flow {
+    height: 350px;
+    overflow: auto;
+}
+.flow li{
+	position: relative;
+	cursor:pointer;
+	overflow:hidden;
+}
+.flow .preface{
+	position: absolute;
+	top: 6px;
+	left: 2%;
+}
+/* .flow .flow-circle{
+	width: 10px;
+	height: 10px;
+	background: #46a0ca;
+	border-radius: 10px;
+	margin-left: 3px;
+}
+.flow .flow-img{
+	width: 16px;
+	height: 100px;
+	background: url(../../images/flow.png) no-repeat;
+	background-size:100% 100%;
+} */
+.flow .flow-time{
+	color: #46a0ca;
+	font-size: 16px;
+}
+.flow .flow-time .tt{
+	text-indent: 1em;
+}
+.flow .flow-name{
+	font-size: 16px;
+}
+.flow .flow-content .pull-left{
+	margin-left: 3%;
+}
+.flow .flow-content .pull-left p{
+	line-height: 1.5em;
+}
+.flow .flow-content .pull-left p sup{
+	top: -0.1em;
+    font-size: 150%;
+}
+.link{
+	position: absolute;
+	bottom: 30px;
+	right:3%;
+}
+.link .btn,.link2 .btn{
+	background: #46a0ca;
+	padding: 5px 8px;
+}
+.link .btn i{
+	margin: 0 auto;
+	color: #fff;
+	font-size: 30px;
+}
+.checkhead{
+	background:#46a0ca;
+	color: #fff;
+    height: 45px;
+    line-height: 45px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.checkhead i{
+	font-size: 17px;
+    padding-left: 20px;
+}
+.panel.check{padding:10px;}
+.checkTitle{
+	font-weight: bold;
+}
+.checkTitle sup{
+	font-size:25px;
+	vertical-align: -9px;
+}
+.trickBtn .btn-primary{
+	background:#d7e3e9;
+	color: #0e4f6d;
+	border:none;
+	box-shadow:none;
+}
+.trickBtn .btn-primary.active{
+	background:#47a0ca;
+	color: #fff;
+}
+.warn{
+	color:red;
+}
+.checkresult{
+	width:100%;
+}
+.checkresult span{
+	background:#d7e3e9;
+	border:solid 1px #46a0ca;
+	padding: 3px 10px;
+    float: left;
+    cursor: pointer;	
+}
+.checkresult .bg-danger{
+	background:#a61313;
+	color:#fff;
+}
+.checkresult .bg-info{
+	background:#46a0ca;
+	color:#fff;
+}
+.checkresult .bg-no{
+	color:#999999;
+	background:transparent;
+	border:solid 1px #999999;
+}
+</style>
+<div class="modal fade common-modal" id="report_9_panel"
+	style="min-width: 1300px; width: 96%; z-index: 1051;" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 100%; height: 82%;">
+		<div class="modal-content" style="width: 100%; height: 100%;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+			</div>
+			<div class="modal-body patient-content clearfix">
+				<div class="row">
+					<div id="firstpanel">
+						<div id="panelone" class="col-md-2 changeDiag midInfo p0">
+							<nav class="modal-center navHei" role="navigation">
+								<div class="navbar-header navName">
+									<div class="navbar-brand nav-justified">
+										<div class="pull-left" id="name">liili</div>
+										<div class="pull-right">
+											<span class="label" id="gender">男</span> <span class="label"
+												id="age">8岁</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12 clearfix" style="cursor: pointer;"
+									id="enter" onclick="entering()">
+									<ul class="list-unstyled infoList">
+										<li><span>身份证/社保卡/就诊卡：</span>
+											<p id="cardnum" style="font-weight: bold;">1232134564646878</p>
+										</li>
+										<li><span>联系电话：</span> <span id="tel"
+											style="font-weight: bold;">15545454632</span></li>
+										<li><span>主&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;诉：</span>
+											<span id="zhusu" style="font-weight: bold;"></span></li>
+										<li><span>抢救医生：</span> <span id="doctor"
+											style="font-weight: bold;">孙德旺</span></li>
+										<li><span>抢救护士：</span> <span id="nurse"
+											style="font-weight: bold;">李丽 </span></li>
+										<li><span>诊&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;断：</span>
+											<span id="diagnosis" style="font-weight: bold;">脑神经衰弱</span>
+										</li>
+										<li id="warn" class="warn">轻度疼痛,日常生活轻度依赖,压疮低危</li>
+									</ul>
+									<div class="warning1">危</div>
+								</div>
+							</nav>
+							<div class="trickBtn">
+								<p>
+									<button type="button" name="oper" class="btn btn-block btn-lg">打印腕带</button>
+								</p>
+								<p>
+									<button type="button" name="oper" onclick="baoteshu();"
+										class="btn btn-block btn-lg btn-primary">报特殊</button>
+								</p>
+							</div>
+						</div>
+						<div id="partMain">
+							<div class="col-md-7 pr0">
+								<div class="row">
+									<div class="col-md-12 clearfix">
+										<div class="process">
+											<!-- <div class='division'></div> -->
+											<ul class="course clearfix" id="timesjincheng">
+												<li><p class="part" style="line-height: 60px;">挂号</p>
+													<p>——</p>
+													<p></p></li>
+												<li class="partition active"><i class="arrow active"></i></li>
+												<li onclick="triageMethod()" style="cursor: pointer;"><p
+														class="part" style="line-height: 60px;">分诊</p>
+													<p id="startDateRQ">2019-04-18</p>
+													<p>14:29</p></li>
+												<li class="partition active"><i class="arrow"></i></li>
+												<li><p class="part pt6">
+														入抢<br>救室
+													</p>
+													<p>23分钟</p>
+													<p id="startTimeRQ">14:52</p></li>
+												<li class="partition active"><i class="arrow"></i></li>
+												<li><p class="part pt6">
+														开始<br>抢救
+													</p>
+													<p>30分钟</p>
+													<p>15:22</p></li>
+												<li class="partition active"><i class="arrow"></i></li>
+												<li onclick="rescueMethod()" style="cursor: pointer;"><p
+														class="part pt6">
+														抢救<br>结束
+													</p>
+													<p>20分钟</p>
+													<p>15:42</p></li>
+												<li class="partition active"><i class="arrow"></i></li>
+												<li><p style="cursor: pointer;" class="part pt6"
+														onclick="dreliqiang();">
+														离开<br>抢救室
+													</p>
+													<p>20</p>
+													<p>16:02</p></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 clearfix">
+										<ul class="titBtn">
+											<li id="qjgc" class="active">抢救过程</li>
+											<li>评估分级</li>
+											<li>护理记录</li>
+										</ul>
+										<div class="pull-right tit-default active"
+											id="biaozhunliucheng" style="margin: 0px 10px;" img="1"
+											processname="急性心肌梗死">标准流程</div>
+										<div class="pull-right tit-default" data-toggle="modal"
+											data-target="#repress" id="zidingyi" style="display: none">自定义</div>
+									</div>
+								</div>
+								<div class="col-md-12 clearfix">
+									<div class="row">
+										<div class="panel panTop" style="display: block;">
+											<div class="panel-body" id="processMain">
+												<ul class="flow">
+													<li data-id="570932778103734272"><div class="preface">
+															<p class="flow-circle"></p>
+															<p class="flow-img"></p>
+														</div>
+														<div class="flow-content">
+															<p class="clearfix">
+																<span class="flow-time pull-left">2019-04-25
+																	11:22:59</span><span class="flow-name pull-left">介入治疗</span><span
+																	class="flow-name pull-right">孙德旺</span>
+															</p>
+															<p class="nursecont">早期PCI</p>
+														</div></li>
+													<li data-id="570932769912258560"><div class="preface">
+															<p class="flow-circle"></p>
+															<p class="flow-img"></p>
+														</div>
+														<div class="flow-content">
+															<p class="clearfix">
+																<span class="flow-time pull-left">2019-04-25
+																	11:22:57</span><span class="flow-name pull-left">介入治疗评估</span><span
+																	class="flow-name pull-right">孙德旺</span>
+															</p>
+															<p class="nursecont">给予最理想药物治疗后仍有明显进行性的或反复发生缺血</p>
+														</div></li>
+													<li data-id="570932758705078272"><div class="preface">
+															<p class="flow-circle"></p>
+															<p class="flow-img"></p>
+														</div>
+														<div class="flow-content">
+															<p class="clearfix">
+																<span class="flow-time pull-left">2019-04-25
+																	11:22:54</span><span class="flow-name pull-left">收住监护室进行危险分层：高危：</span><span
+																	class="flow-name pull-right">孙德旺</span>
+															</p>
+															<p class="nursecont">室性心动过速</p>
+														</div></li>
+													<li data-id="570932745925033984"><div class="preface">
+															<p class="flow-circle"></p>
+															<p class="flow-img"></p>
+														</div>
+														<div class="flow-content">
+															<p class="clearfix">
+																<span class="flow-time pull-left">2019-04-25
+																	11:22:50</span><span class="flow-name pull-left">非
+																	ST段抬高心肌梗死（ NSTEMI）或高危性不稳定型心绞痛（ UA）辅助治疗（根据禁忌症调整）</span><span
+																	class="flow-name pull-right">孙德旺</span>
+															</p>
+															<p class="nursecont">氯吡格雷</p>
+														</div></li>
+													<li data-id="570932728099241984"><div class="preface">
+															<p class="flow-circle"></p>
+															<p class="flow-img"></p>
+														</div>
+														<div class="flow-content">
+															<p class="clearfix">
+																<span class="flow-time pull-left">2019-04-25
+																	11:22:48</span><span class="flow-name pull-left">分析首次心电图</span><span
+																	class="flow-name pull-right">孙德旺</span>
+															</p>
+															<p class="nursecont">ST段压低或T波倒置;实际用时：9870分钟</p>
+														</div></li>
+													<li data-id="570932720956342272"><div class="preface">
+															<p class="flow-circle"></p>
+															<p class="flow-img"></p>
+														</div>
+														<div class="flow-content">
+															<p class="clearfix">
+																<span class="flow-time pull-left">2019-04-25
+																	11:22:46</span><span class="flow-name pull-left">快速评估
+																	（＜10分钟）</span><span class="flow-name pull-right">孙德旺</span>
+															</p>
+															<p class="nursecont">审核完整的溶栓清单、核查禁忌证;实际用时：9870分钟</p>
+														</div></li>
+													<li data-id="570932712240578560"><div class="preface">
+															<p class="flow-circle"></p>
+															<p class="flow-img"></p>
+														</div>
+														<div class="flow-content">
+															<p class="clearfix">
+																<span class="flow-time pull-left">2019-04-25
+																	11:22:39</span><span class="flow-name pull-left">次级&nbsp;紧急处理</span><span
+																	class="flow-name pull-right">孙德旺</span>
+															</p>
+															<p class="nursecont">阿司匹林10mg 嚼服</p>
+														</div></li>
+													<li data-id="570932683668979712"><div class="preface">
+															<p class="flow-circle"></p>
+															<p class="flow-img"></p>
+														</div>
+														<div class="flow-content">
+															<p class="clearfix">
+																<span class="flow-time pull-left">2019-04-25
+																	11:22:37</span><span class="flow-name pull-left">气道阻塞/呼吸异常
+																	抢救措施</span><span class="flow-name pull-right">孙德旺</span>
+															</p>
+															<p class="nursecont">清除气道异物，保持气道通畅，大管径管吸痰</p>
+														</div></li>
+													<li data-id="568813678359478272"><div class="preface">
+															<p class="flow-circle"></p>
+														</div>
+														<div class="flow-content">
+															<p class="clearfix">
+																<span class="flow-time pull-left">2019-04-19
+																	15:02:25</span><span class="flow-name pull-left">紧急评估</span><span
+																	class="flow-name pull-right">孙德旺</span>
+															</p>
+															<p class="nursecont">A:气道阻塞</p>
+														</div></li>
+												</ul>
+												<a href="#" onclick="load3();" id="addlc" name="oper"><div
+														class="link">
+														<button type="button" class="btn btn-lg">
+															<i class="glyphicon glyphicon-plus"></i>
+														</button>
+													</div></a>
+											</div>
+										</div>
+										<div class="panel panTop" style="display: none;">
+											<div class="panel-body">
+												<ul class="flow1" id="qjypgfenji">
+
+												</ul>
+												<a href="#" onclick="load2();" name="oper">
+													<div class="link loadhref">
+														<button type="button" class="btn btn-lg">
+															<i>+</i><span>评估分级</span>
+														</button>
+													</div>
+												</a> <a href="#" onclick="loadbqpg();" name="oper">
+													<div class="link2 loadhref">
+														<button type="button" class="btn btn-lg">
+															<i>+</i><span>病情评估</span>
+														</button>
+													</div>
+												</a>
+											</div>
+										</div>
+
+										<div class="panel panTop" style="display: none;">
+											<div class="panel-body">
+												<ul class="panel-level flow1" id="hljlshowlist">
+													<li><a href="javascript:void(0);"
+														onclick="gotohljl(this);" id="570932777843687424"><p
+																class="tit-bottom">
+																<span name="currenttime">2019-04-25 11:22:59</span><span
+																	class="pull-right" name="nursesigh">孙德旺</span>
+															</p>
+															<p style="color: #999999">体征：</p>
+															<p style="color: #999999">
+																措施：<span class="panel-cont"><span
+																	name="liuchengmeasures">早期PCI</span><span
+																	name="hljlmeasures"></span></span>
+															</p></a><a></a></li>
+													<li><a href="javascript:void(0);"
+														onclick="gotohljl(this);" id="570932745664987136"><p
+																class="tit-bottom">
+																<span name="currenttime">2019-04-25 11:22:50</span><span
+																	class="pull-right" name="nursesigh">孙德旺</span>
+															</p>
+															<p style="color: #999999">体征：</p>
+															<p style="color: #999999">
+																措施：<span class="panel-cont"><span
+																	name="liuchengmeasures">氯吡格雷</span><span
+																	name="hljlmeasures"></span></span>
+															</p></a><a></a></li>
+													<li><a href="javascript:void(0);"
+														onclick="gotohljl(this);" id="570932720629186560"><p
+																class="tit-bottom">
+																<span name="currenttime">2019-04-25 11:22:46</span><span
+																	class="pull-right" name="nursesigh">孙德旺</span>
+															</p>
+															<p style="color: #999999">体征：</p>
+															<p style="color: #999999">
+																措施：<span class="panel-cont"><span
+																	name="liuchengmeasures">审核完整的溶栓清单、核查禁忌证;实际用时：9870分钟</span><span
+																	name="hljlmeasures"></span></span>
+															</p></a><a></a></li>
+													<li><a href="javascript:void(0);"
+														onclick="gotohljl(this);" id="570932711846313984"><p
+																class="tit-bottom">
+																<span name="currenttime">2019-04-25 11:22:39</span><span
+																	class="pull-right" name="nursesigh">孙德旺</span>
+															</p>
+															<p style="color: #999999">体征：</p>
+															<p style="color: #999999">
+																措施：<span class="panel-cont"><span
+																	name="liuchengmeasures">阿司匹林10mg 嚼服 </span><span
+																	name="hljlmeasures"></span></span>
+															</p></a><a></a></li>
+													<li><a href="javascript:void(0);"
+														onclick="gotohljl(this);" id="570932683207606272"><p
+																class="tit-bottom">
+																<span name="currenttime">2019-04-25 11:22:37</span><span
+																	class="pull-right" name="nursesigh">孙德旺</span>
+															</p>
+															<p style="color: #999999">体征：</p>
+															<p style="color: #999999">
+																措施：<span class="panel-cont"><span
+																	name="liuchengmeasures">清除气道异物，保持气道通畅，大管径管吸痰</span><span
+																	name="hljlmeasures"></span></span>
+															</p></a><a></a></li>
+												</ul>
+												<a href="#" onclick="load();" name="oper">
+													<div class="link">
+														<button type="button" class="btn btn-lg">
+															<i class="glyphicon glyphicon-plus"></i>
+														</button>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3 pr0">
+								<div class="checkhead clearfix">
+									<div class="pull-left">
+										<i class="fa fa-rotate-right"></i>
+									</div>
+								</div>
+								<div class="panel check">
+									<div class="panel-heading p0 checkTitle">
+										<sup>.</sup><i>生命体征</i><sup>.</sup>
+									</div>
+									<div class="panel-body p0 checkTable">
+										<table class="table reveal">
+											<tbody>
+												<tr>
+													<td>血压</td>
+													<td><span id="newshousy">120</span>/<span
+														id="newshuzy">80</span></td>
+													<td>mmHg</td>
+												</tr>
+												<tr>
+													<td>心率</td>
+													<td id="newxv">60</td>
+													<td>次/分</td>
+												</tr>
+												<tr>
+													<td>血氧</td>
+													<td id="newxueyang">95</td>
+													<td>%</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="panel check">
+									<div class="panel-heading p0 checkTitle">
+										<sup>.</sup><i>检验结果</i><sup>.</sup>
+									</div>
+									<div class="panel-body p0 checkTable">
+										<div id="modalcheck3" class="checkresult">
+											<span class="bg-no" name="order_name" id="20121217G0241064">大便常规-住院</span><span
+												class="bg-no" name="order_name" id="20121217G0061108">尿常规</span><span
+												name="order_name" id="00000000G99912126769-6">痰培养</span><span
+												name="order_name" id="20121225G0013408" class="">电6项</span><span
+												name="order_name" id="20190404G0013408"
+												class="active bg-info">血常规</span>
+										</div>
+										<div id="modalcheck4" class="tabel-part">
+											<table class="table reveal" style="display: none;"
+												checkid="20121217G0241064">
+												<thead>
+													<tr>
+														<th colspan="5" timeid="20121217G0241064">2012:12:17
+															10:08:33</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>暂无结果</td>
+													</tr>
+												</tbody>
+											</table>
+											<table class="table reveal" style="display: none;"
+												checkid="20121217G0061108">
+												<thead>
+													<tr>
+														<th colspan="5" timeid="20121217G0061108">2012:12:17
+															13:29:15</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>暂无结果</td>
+													</tr>
+												</tbody>
+											</table>
+											<table class="table reveal" style="display: none;"
+												checkid="00000000G99912126769-6">
+												<thead>
+													<tr>
+														<th colspan="5" timeid="00000000G99912126769-6">2012:12:23
+															11:37:46</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><span>镜检结果表明该标本口咽分泌物污染明显</span></td>
+													</tr>
+													<tr>
+														<td><span>口腔正常细菌生长</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<table class="table reveal" style="display: none;"
+												checkid="20121225G0013408">
+												<thead>
+													<tr>
+														<th colspan="5" timeid="20121225G0013408">2012:12:25
+															13:18:04</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><span>钙</span></td>
+														<td class="samred"><span>2.70</span>↑</td>
+														<td><span>mmol/L</span></td>
+													</tr>
+													<tr>
+														<td><span>钾</span></td>
+														<td class="green"><span>3.30</span>↓</td>
+														<td><span>mmol/L</span></td>
+													</tr>
+													<tr>
+														<td><span>磷</span></td>
+														<td><span>0.97</span></td>
+														<td><span>mmol/L</span></td>
+													</tr>
+													<tr>
+														<td><span>氯</span></td>
+														<td class="green"><span>92.9</span>↓</td>
+														<td><span>mmol/L</span></td>
+													</tr>
+													<tr>
+														<td><span>镁</span></td>
+														<td class="samred"><span>1.20</span>↑</td>
+														<td><span>mmol/L</span></td>
+													</tr>
+													<tr>
+														<td><span>钠</span></td>
+														<td><span>135.5</span></td>
+														<td><span>mmol/L</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<table class="table reveal" style=""
+												checkid="20190404G0013408">
+												<thead>
+													<tr>
+														<th colspan="5" timeid="20190404G0013408">2019:04:04
+															8:37:55</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><span>红细胞计数(RBC)</span></td>
+														<td><span>4.5</span></td>
+														<td><span>10^12/L</span></td>
+													</tr>
+													<tr>
+														<td><span>红细胞压积(HTC)</span></td>
+														<td><span>4.5</span></td>
+														<td><span>%</span></td>
+													</tr>
+													<tr>
+														<td><span>平均红细胞体积(MCV)</span></td>
+														<td><span>4.5</span></td>
+														<td><span>FL</span></td>
+													</tr>
+													<tr>
+														<td><span>红细胞分布宽度(RBC)</span></td>
+														<td><span>16</span></td>
+														<td><span>%</span></td>
+													</tr>
+													<tr>
+														<td><span>血红蛋白浓度(RBC)</span></td>
+														<td class="green"><span>120</span>↓</td>
+														<td><span>9/L</span></td>
+													</tr>
+													<tr>
+														<td><span>白细胞计数(WBC)</span></td>
+														<td class="samred"><span>18.3</span>↑</td>
+														<td><span>10^9/L</span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="panel check">
+									<div class="panel-heading p0 checkTitle">
+										<sup>.</sup><i>检查结果</i><sup>.</sup>
+									</div>
+									<div class="panel-body p0 checkTable">
+										<table class="table reveal">
+											<tbody>
+												<tr>
+													<td>脑部CT</td>
+												</tr>
+												<tr>
+													<td>核磁共振（腰椎T3）</td>
+												</tr>
+												<tr>
+													<td>彩色多普勒（肝胆脾胰）</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.modal -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

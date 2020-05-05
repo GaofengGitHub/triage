@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>急诊专科全流程业务系统 ECS</title>
+		<link href="#path()/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="#path()/static/dist/css/sb-admin-2.css" rel="stylesheet">
+		<link href="#path()/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="#path()/static/dist/fonts/iconfont.css" rel="stylesheet">
+		<script src="#path()/static/vendor/jquery/jquery.min.js"></script>
+		
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+		<style type="text/css">
+		   html,body {
+                overflow: hidden;
+            }
+        </style>
+		<script type="text/javascript" >
+		function jump(url,depart,userName,userFullName,roleName,userId,departId,roleId){      
+			 $.ajax({
+		        timeout: 3000,
+		        async: false,
+		        type: "POST",
+		        url: "#path()/depart",
+		        data: {
+		            depart: depart,
+		            userName: userName,
+		            userFullName: userFullName,
+		            roleName:roleName,
+		            userId:userId,
+		            departId:departId,
+		            roleId:roleId
+		        },
+		        success: function (data) {
+		        	
+		        }
+		    });
+			window.open(url,'_self','toolbar=no,menubar=no,scrollbars=yes,resizable=yes,location=no,status=no');
+		}
+		</script>
+	</head>
+	<body>		
+	<div class='login-bg jur-bg'>		
+	</div>
+	<div class='clearfix mediate2'>
+			<div class='boxCenter'>
+				<div class='outlineBox3'>
+					<a href='javascript:jump("#(rightList.get(0)[3])","#(rightList.get(0)[2])","#(rightList.get(0)[4])","#(rightList.get(0)[5])","#(rightList.get(0)[1])","#(rightList.get(0)[6])","#(rightList.get(0)[7])","#(rightList.get(0)[8])")' 
+						class='outline-1' style='top:154px;'>
+						<img class='center-block' src='#path()/static/images/#(rightList.get(0)[9]).png'>
+						<h4>#(rightList.get(0)[0])</h4>
+						<h4>#(rightList.get(0)[1])</h4>
+						<h4>#(rightList.get(0)[2])</h4>
+					</a>
+					<a href='javascript:jump("#(rightList.get(2)[3])","#(rightList.get(2)[2])","#(rightList.get(2)[4])","#(rightList.get(2)[5])","#(rightList.get(2)[1])","#(rightList.get(2)[6])","#(rightList.get(2)[7])","#(rightList.get(2)[8])")' class='outline-3' style='top:50px;left:285px'>
+						<img class='center-block' src='#path()/static/images/#(rightList.get(2)[9]).png'>
+						<h4>#(rightList.get(2)[0])</h4>
+						<h4>#(rightList.get(2)[1])</h4>
+						<h4>#(rightList.get(2)[2])</h4>
+					</a>
+					<a href='javascript:jump("#(rightList.get(1)[3])","#(rightList.get(1)[2])","#(rightList.get(1)[4])","#(rightList.get(1)[5])","#(rightList.get(1)[1])","#(rightList.get(1)[6])","#(rightList.get(1)[7])","#(rightList.get(1)[8])")' class='outline-2' style='top:154px;left:485px'>
+						<img class='center-block' src='#path()/static/images/#(rightList.get(1)[9]).png'>
+						<h4>#(rightList.get(1)[0])</h4>
+						<h4>#(rightList.get(1)[1])</h4>
+						<h4>#(rightList.get(1)[2])</h4>
+					</a>
+				</div>							
+			</div>
+			<!-- <div class='loginFooter'>
+				<div class='copyright'>
+					南京晨伟医疗设备有限公司  <span>版权所有</span>
+				</div>
+			</div> -->
+		</div>
+	</body>
+</html>
+
+

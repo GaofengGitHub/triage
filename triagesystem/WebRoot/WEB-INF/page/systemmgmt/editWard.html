@@ -1,0 +1,121 @@
+<script type="text/javascript">
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$('#wardId').val("#(id ??)");
+	$('#name').val("#(ward.name ??)");
+	$('#system').val("#(ward.system ?? '抢救')");
+	if($('#system').val()=="留观"){
+		$('#pc_div').show();
+	}
+	
+	$('#departbednum').val("#(ward.departbednum ??)");
+	$('#addbednum').val("#(ward.addbednum ??)");
+	$('#address').val("#(ward.address ??)");
+	$('#pingcnum').val("#(ward.pingcnum ??)");
+	$("#saveward").click(function(){
+		saveward();
+	});
+	
+	$("#system").change(function(){
+		if($('#system').val()=="留观"){
+			$('#pc_div').show();
+		}else{
+			$('#pc_div').hide();
+		}
+	});
+	
+});
+
+function saveward(){
+	var id = $('#wardId').val();
+	var name = $('#name').val();
+	var tname = name.replace(/Ⅰ/g, '1').replace(/Ⅱ/g, '2').replace(/Ⅲ/g, '3').replace(/Ⅳ/g, '4')
+	.replace(/Ⅵ/g, '6').replace(/Ⅶ/g, '7').replace(/Ⅷ/g, '8').replace(/Ⅸ/g, '9');
+	var system = $('#system').val();
+	var departbednum = $('#departbednum').val();
+	var addbednum = $('#addbednum').val();
+    var address = $('#address').val();
+    var pingcnum = "0";
+    if(feiknum("病区名称","limit24",tname,$("#name").next())){return;};
+    if(feiknum("病区位置","limit24",system,$("#system").next())){return;};
+    if(feiknum("固定床位数","positive8",departbednum,$("#departbednum").next())){return;};
+    if(feiknum("最大加床数","positive9",addbednum,$("#addbednum").next())){return;};
+    if(system=="留观"){
+    	pingcnum = $('#pingcnum').val();
+    	if(feiknum("最大平车数","positive9",pingcnum,$("#pingcnum").next())){return;};
+    }
+	$.ajax({
+	     type: "post",
+	     url: "#path()/systemmgmt/saveWard",
+	     dataType: "json",
+	     data:{
+	    	 id:id,
+	    	 name:name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,
+	    	 system:system,
+	    	 departbednum:departbednum,
+	    	 addbednum:addbednum,
+	    	 pingcnum:pingcnum,
+	    	 address:address
+	     },
+	     success: function(result){
+	    	 toastr.warning(result.message);
+	    	 if(result.status=="200"){
+	    		 load('wardList');
+	    	 }else{
+	    		
+	    	 }
+	     },
+	     error: function(){
+	    	 return false;
+	     }
+	 }); 
+}
+</script>
+	<div class="panelMain">
+			<div class="contact">
+				<form name="form1" method="post">
+					<div class="form-group">
+						<input type="hidden"  value="#(id ??)" id="wardId" name="wardId">
+						<label style="margin-left: 50px;"><i class="red">*</i>病区名称：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="name" name="name"
+							placeholder="" value="" autocomplete="off" required />
+						<span class="tips" ></span>
+					</div>
+					
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>病区归属：</label>
+						 <select id="system">
+						 	<option value="抢救">抢救</option>
+						 	<option value="留观">留观</option>
+						 </select>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>固定床位数：</label>
+						 <input type="text" style="width:54px;text-align: center;" id="departbednum" name="departbednum"
+							autocomplete="off" required /><span
+							class="tips" ></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>最大加床数：</label>
+						 <input type="text" style="width:54px;text-align: center;" id="addbednum" name="addbednum"
+							autocomplete="off" required /><span
+							class="tips" ></span>
+					</div>
+					<div class="form-group" id="pc_div" style="display:none">
+						<label style="margin-left: 50px;"><i class="red">*</i>最大平车数：</label>
+						 <input type="text" style="width:54px;text-align: center;" id="pingcnum" name="addbednum"
+							autocomplete="off" required /><span
+							class="tips" ></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>病区位置：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="address" name="address"
+							autocomplete="off" /><span
+							class="tips" ></span>
+					</div>
+					<b class="btn" style="margin-left: 140px;margin-top: 200px;"><input id="saveward" type="button" value="提交" class="btn btn-rule btn-lg"/> <button class="btn btn-rule btn-lg" onclick="load('wardList');">取消</button></b>
+				</form>
+			</div>
+		</div>

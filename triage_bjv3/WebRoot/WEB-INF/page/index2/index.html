@@ -1,0 +1,208 @@
+#@layout('index')
+#define main()
+<style>
+.datagrid-btable tr {
+	height: 30px;
+}
+.seach_div_data{
+	height: 340px !important;
+	overflow: auto;
+}
+.seach_div_header{
+	height: 25px !important;
+}
+</style>
+<script>
+    #include("function.js")
+</script>
+<script>
+    $(document).ready(function () {
+    	//失去焦点
+    	$(document).bind('click',function(e){
+    		 $('#divshow').hide();                                                    
+    		
+    	});
+    	
+    	
+    	$("#divshow").on("click",function(e){
+            e.stopPropagation();
+    	});
+    	
+    	
+    	
+    	//初始化按钮
+    	setgradebtncss2();
+    	showPatient();
+    	showDifGradePatient('tb1','1001');
+    	showDifGradePatient('tb2','1002');
+    	showDifGradePatient('tb3','1003,1004,1005');
+    	setGradeCount();
+    	setGradeAllCount();
+    	showDepart();
+    	
+    	seachPatient();
+    	//配置今日分诊，接诊数量
+    	setDividAndReciveCount();
+    	//配置弹窗 5000 1000
+    	toastr.options = {
+    			  "closeButton": true,
+    			  "debug": false,
+    			  "positionClass": "toast-bottom-right",
+    			  "onclick": null,
+    			  "showDuration": "300",
+    			  "hideDuration": "100",
+    			  "timeOut": "5000",
+    			  "extendedTimeOut": "1000",
+    			  "showEasing": "swing",
+    			  "hideEasing": "linear",
+    			  "showMethod": "fadeIn",
+    			  "hideMethod": "fadeOut"
+    			}
+    	
+    	showToastr(true);
+  	//定时刷新 
+  	/*
+    	 setInterval(function(){
+    		showPatient();
+    	    showDifGradePatient('tb1','1');
+    	    showDifGradePatient('tb2','2');
+    	    showDifGradePatient('tb3','3,4,5');
+    	    setGradeCount();
+    	    //showToastr();
+    		 }, 30000);
+    	*/
+    	/**
+    	 setInterval(function(){
+     	    showToastr();
+     		 }, 20000);
+    	  */
+    });
+   
+    //延迟
+    function sleep(n) { //n表示的毫秒数
+        var start = new Date().getTime();
+        while (true) if (new Date().getTime() - start > n) break;
+    }
+</script>
+#include("window.html")
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="input-group globalSearch">
+		                <input id="searchText" style='height:31px;' maxlength="19" type="text"  class="form-control input-sm formInput" placeholder="请输入患者信息查找...">
+		                <span class="input-group-btn" data-toggle="modal" data-target="#seach_patient" onclick="seachPatient()">
+		                    <button class="btn btn-warning btn-sm" id="btn-chat">
+			                    <img src="#path()/static/images/icon_search.png">
+		                    </button>
+		                </span>
+		            </div>
+                </div>
+            </div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="b-panel b-panel-default">
+					<div class="b-panel-heading" id="grade_all"></div>
+					<div class="b-panel-body p0">
+						<div class="table-responsive tableDelay">
+							<table class="table table-hover " id="tb0">
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 pr0">
+				<div class="b-panel b-panel-red">
+					<div class="b-panel-heading" id="grade_1">
+					待接诊-<span id="g1"></span>
+					<div class="pull-right">
+					<div class="roll pull-right">
+							<ul class="mingdan fz12 list-unstyled" id="g1_list">
+							</ul>
+						</div>
+					</div>
+					</div>
+					<div class="b-panel-body p0">
+						<div class="table-responsive tableDelayRank">
+							<table class="table table-hover" id="tb1">
+							</table>
+						</div>
+						<!-- 点击按钮弹窗 -->
+						<div id='divshow' class="togBtn" style="display: none;width: 226px;">
+							<button type="button" class="btn btn-info btn-xs" onclick="openUrl(this)" id="upfj" value="">修改分级</button>
+							<button type="button" class="btn btn-info btn-xs" onclick="receive(this)" id="receive" value="">接诊</button>
+							<button type="button" class="btn btn-outline btn-default btn-xs">腕带</button>
+							<button type="button" class="btn btn-outline btn-default btn-xs">报</button>
+							<button type="button" class="btn btn-outline btn-default btn-xs">退</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 pr0">
+				<div class="b-panel b-panel-yellow">
+					<div class="b-panel-heading" id="grade_2">
+					待接诊-<span id="g2"></span>
+					<div class="pull-right">
+						<div class="roll pull-right">
+							<ul class="mingdan fz12 list-unstyled" id="g2_list">
+							</ul>
+						</div>
+						</div>
+					</div>
+					<div class="b-panel-body p0">
+						<div class="table-responsive tableDelayRank">
+							<table class="table table-hover" id="tb2">
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="b-panel b-panel-default">
+					<div class="b-panel-heading" id="grade_3_4_5">
+					待接诊-<span id="g345"></span>
+					<div class="pull-right">
+						<div class="roll pull-right">
+							<ul class="mingdan fz12 list-unstyled" id="g345_list">
+							</ul>
+						</div>
+					</div>
+					</div>
+					<div class="b-panel-body p0">
+						<div class="table-responsive tableDelayRank">
+							<table class="table table-hover" id="tb3">
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-9">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						科室待接诊情况
+						<div class="pull-right">
+						</div>
+					</div>
+					<div class="panel-body departmentType whole" style="height:62px;overfolw:auto"></div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						今日已分诊
+						<div class="pull-right">今日已接诊</div>
+					</div>
+					<div class="panel-body whole">
+						<span class="diagnoseNum" id="divid_count">0</span> 
+						<span class="diagnoseNum pull-right" id="receive_count">0</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+	</div>
+
+            
+#end

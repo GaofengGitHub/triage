@@ -1,0 +1,550 @@
+#@bj_layout('index')
+#define bj_main()
+   
+<script>
+    #include("index.js")
+</script>
+<style>
+        .changeColor td{
+            background: #569fd5!important;
+        }
+</style>
+
+<script>
+    $(document).ready(function () {
+    	
+    	//获取样式
+    	setgradebtncss2();
+    	
+    	//$("#homeUrl").trigger("click");
+    	
+    	initTable();
+    	
+      	//定时刷新 
+     	setInterval(function(){
+     		reflashTable();
+     	 }, 30000);
+     		 
+     	$("#openIndex").addClass("active");
+    	
+    	$("#seach").bind("click",function(){
+    		if(!window.sessionStorage["pnum"]){
+    			//记录 搜索患者 操作点次数
+    			saveUserbehavior("A1");
+        	}
+    		   initTable();
+    		   $("#wait1").removeClass("active");
+    		   $("#about1").removeClass("active");
+    		   $("#profile1").removeClass("active");
+    		   
+    		   $("#all").addClass("active");
+    		   
+    		   $("#home").removeClass("tab-pane active");
+    		   $("#home").addClass("tab-pane clearfix");
+    		   $("#about").removeClass("tab-pane active");
+    		   $("#about").addClass("tab-pane clearfix");
+    		   $("#profile").removeClass("tab-pane active");
+    		   $("#profile").addClass("tab-pane clearfix");
+    		   $("#contact").removeClass("tab-pane clearfix");
+    		   $("#contact").addClass("tab-pane active");
+    		   
+    	});   		
+    	
+    	//$(".calling").hide();
+    	
+    	$(".calling").click(function(){
+    		$(this).hide();
+    		$(".video").show();
+    	})
+    	$(".turnOff").click(function(){
+    		$(".video").hide();
+    	})
+    	
+        var befrom ='#(befrom ??)';
+        
+        if(befrom.length>0){
+        	
+        	if(befrom=="about1"){
+        		$("#about1").find("a").trigger("click");
+        	}else if(befrom=="profile1"){
+        		$("#profile1").find("a").trigger("click");
+        	}else if(befrom=="all"){
+        		$("#all").find("a").trigger("click");
+        	}else{
+        		$("#wait1").find("a").trigger("click");
+        	}
+        	
+        }else{
+        	$("#wait1").find("a").trigger("click");
+        }
+        
+        //点击危险报警提示里的患者后 进入此方法 然后table 中的 全部 要被选中
+        if(window.sessionStorage["pnum"]){
+    		var pnum = sessionStorage.getItem("pnum");
+    		$("#cardnumText").val(pnum);
+    		$("#seach").click();
+    		$("#cardnumText").val("");
+    		sessionStorage.removeItem("pnum");
+    	}
+
+    });
+    
+  //百度地图API功能
+	function loadJScript() {
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = "//api.map.baidu.com/api?v=2.0&ak=DDYYAcd9dzsf36OmOFSUjYG4iZo4rfcI";
+		document.body.appendChild(script);
+	}
+	function init() {
+		// 百度地图API功能
+		var map = new BMap.Map("BMap", {enableMapClick:false,minZoom:13,maxZoom:15});//构造底图时，关闭底图可点功能
+		
+		var point1 = new BMap.Point(118.810111,31.96619);
+		var point2 = new BMap.Point(118.802794,31.949435); // 创建点坐标     晨伟 坐标         	
+	    map.centerAndZoom(point2,15);                 // 初始化地图,设置中心点坐标和地图级别。
+	    map.enableScrollWheelZoom();                 //启用滚轮放大缩小
+	    var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+		driving.search(point1, point2);
+	}  
+	window.onload = loadJScript;  //异步加载地图
+    
+</script>
+
+
+ 
+
+<div class="calling" style="display:none">
+	<img src="#path()/static/images/calling.png" >
+</div>
+<div class="video">
+	<img src="#path()/static/images/video.png">
+	<div class="turnOff upoff"></div>
+	<div class="turnOff downoff"></div>
+</div>
+
+	 <aside class="right-side">
+                <section class="content">
+                	<img src='#path()/static/bj/images/fz_step05_pic.png' class="fz-step05-pic" data-step="5" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;5、患者上次就诊信息智能提醒&lt;/h1&gt;&lt;p&gt;点击智能提醒区，可查看患者上次就诊信息。&lt;/p&gt;&lt;/div&gt;" data-position="top"/>
+                	<img src='#path()/static/bj/images/fz_step08_pic.png' class="fz-step08-pic" data-step="8" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;8、危急报警提示&lt;/h1&gt;&lt;p&gt;对于危急患者，如等待接诊时间超过设定值，在这里弹框进行报警提示，点击每条记录可查看对应报警患者信息。&lt;/p&gt;&lt;/div&gt;" data-position="left"/>
+                	<img src='#path()/static/bj/images/fz_step09_pic.png' class="fz-step09-pic" data-step="9" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;9、工作站切换&lt;/h1&gt;&lt;p&gt;点击登录者账号名称，可切换进入其它授权工作站，也可退出当前登录。&lt;/p&gt;&lt;/div&gt;" data-position="left" />
+                    <div class="row headTips fzindex-top">
+                        <div class='col-md-5' data-step="4" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;4、分诊患者搜索&lt;/h1&gt;&lt;p&gt; 可输入患者姓名或就诊卡号、身份证号、医保卡号等内容，查询分诊患者信息。&lt;/p&gt;&lt;/div&gt;">
+                            <form class="form-inline headSearch" role="form">
+                                      <label class="sr-only" for="exampleInputEmail2">身份证/医保卡/就诊卡</label>
+                                      <input type="email" class="form-control version-hide" style='width:40%;' id="cardnumText" placeholder="身份证/医保卡/就诊卡/姓名"  oninput="initTable()" onporpertychange="initTable()" e_name="index_query_name">
+                                      <!-- <label class="sr-only" for="exampleInputPassword2">姓名</label>
+                                      <input type="text" class="form-control" style='width:20%;' id="fullnameText" placeholder="姓名"> -->
+                                  <button  type="button" class="btn btn-primary btn-sm"><i class="fa fa-search" id="seach"></i></button>
+<!--                                    <button  type="button" class="btn btn-sm btn-primary btn-sm"><span Userbehavior="A180" onclick="seach2();">全部</span></button>
+ --><!--                                   <input type="button" id="seachAll"  onclick="delcfm('该功能建设中，敬请期待！') " class="btn btn-primary btn-sm" style='margin-left:16px;' value="全院检索"></input> -->
+                              </form>
+                              <div style="display: none;"><span><input name="importfile" id="importfile" type="file"></span>
+                              <button type="button" onclick="importexcel();" class="btn btn-primary btn-sm"><span>确定导入</span></button>
+                              </div>
+                        </div>
+                        <div class='col-md-7 p0 status' data-step="1" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;1、 分诊接诊人数统计&lt;/h1&gt;&lt;p&gt; 统计待分诊人数、已分诊人数、已接诊人数、已退号人数、特殊人员人数、今日已挂号人次数。&lt;/p&gt;&lt;/div&gt;">
+                            <div class="col-md-2 pull-right p0-l version-hide" e_name="index_his_patients_num">
+                               <div class="st-mark">
+                                    <p>今日已挂号:</p>
+                                    <p class='allocatNum' id="register1">-</p>
+                                    <p class='allocatUnit'>人</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2 pull-right p0-l version-hide" e_name="index_specail_patients_num">
+                                <div class="st-mark">
+                                    <p>特殊人员:</p>
+                                    <p class='allocatNum' id="special">&nbsp;</p>
+                                    <p class='allocatUnit'>人</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2 pull-right p0-l version-hide" e_name="index_cancel_patients_num">
+                                <div class="st-mark">
+                                    <p>已退号:</p>
+                                    <p class='allocatNum' id="back1">-</p>
+                                    <p class='allocatUnit'>人</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2 pull-right p0-l version-hide" e_name="index_receive_patients_num">
+                                <div class="st-mark st-mark-j">
+                                    <p>已接诊:</p>
+                                    <p class='allocatNum' id="receive">&nbsp;</p>
+                                    <p class='allocatUnit'>人</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2 pull-right p0-l version-hide" e_name="index_divid_patients_num">
+                                <div class="st-mark st-mark-y">
+                                    <p>已分诊:</p>
+                                    <p class='allocatNum' id="divid">&nbsp;</p>
+                                    <p class='allocatUnit'>人</p>
+                                </div>
+                            </div>                            
+                            <div class="col-md-2 pull-right p0-l version-hide" e_name="index_wait_patients_num">
+                                <div class="st-mark st-mark-d">
+                                    <p>待分诊:</p>
+                                    <p class='allocatNum' id="wait">&nbsp;</p>
+                                    <p class='allocatUnit'>人</p>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>  
+                    <div class="general fzindex-content">                           
+						<section class="panel">
+	                        <header class="panel-heading tab-bg-dark-navy-blue headTab" data-step="2"  data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;2、 分诊记录查看&lt;/h1&gt;&lt;p&gt; 可点击分类菜单，分布查看待分诊、已分诊、已接诊，及全部记录。&lt;/p&gt;&lt;/div&gt;">
+	                            <ul class="nav nav-tabs" id="menu_tab">
+	                                <li id="wait1">
+	                                    <a data-toggle="tab" href="#home" Userbehavior="A28">待分诊</a>
+	                                </li>
+	                                <li id="about1">
+	                                    <a data-toggle="tab" href="#about" Userbehavior="A29">已分诊</a>
+	                                </li>
+	                                <li class="" id ="profile1">
+	                                    <a data-toggle="tab" href="#profile" Userbehavior="A30">已接诊</a>
+	                                </li>
+	                                <li class="" id="all">
+	                                    <a data-toggle="tab" href="#contact" Userbehavior="A31">全部</a>
+	                                </li>
+	                            </ul>
+	                        </header>
+	                        <div class="panel-body" style='padding:0;position:relative;'>
+	                            <div class="tab-content">
+	                            	<img src='#path()/static/bj/images/fz_step03_pic.png' class="fz-step03-pic"  data-step="3" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;3、待分诊患者信息操作&lt;/h1&gt;&lt;p&gt; 点击“分诊”菜单，可补录患者分诊信息，点击“☆”，可标记特殊患者，点击“删除”菜单，可确认删除待分诊患者记录。&lt;/p&gt;&lt;/div&gt;" data-position="left"/>
+	                                <div id="home" class="tab-pane active">
+	                                    <div class="panel-body table-responsive p0">
+	                          		  		<table class="table table-striped"  data-height="300" id = "wait-patients">
+	                  						</table>
+	              						</div>
+	            				</div>
+	                            <div id="about" class="tab-pane clearfix">
+	                                <div class="panel-body table-responsive p0" >
+	                          		  	<table class="table table-striped"  data-height="300" id = "divid-patients">
+	                  					</table>
+	              					</div>
+	              				</div>
+	                            <div id="profile" class="tab-pane clearfix">
+	                                <div class="panel-body table-responsive p0">
+		                          		<table class="table table-striped" data-height="300" id = "recived-patients">
+		                  				</table>
+	              					</div>
+	                           </div>
+	                                <div id="contact" class="tab-pane clearfix">
+	                                     <div class="panel-body table-responsive p0">
+	                          		  <table class="table table-striped" data-height="300" id = "all-patients">
+	                  				</table>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </section>
+	                    <div class="panel remindme version-hide" e_name="index_remind_area">
+	                        <header class="panel-heading">智能提醒区<i class="fa fa-chevron-up chevron"></i></header><!-- <i class="fa fa-gear fa-fw" title="设置"></i> -->
+	                        <div class='panel-body p0 pancont'>
+	                            <div class='col-md-9 areaWarn'>
+	                                <div class="form-group clearfix form-intel">
+	                                    <div class='col-md-3 p0'>
+	                                          <label for="" class="col-md-4 control-label">上次入院:</label>
+	                                          <div class="col-md-8 p0-r" style="padding-left:10px">
+	                                              <input type="text" class="form-control" id="sczy" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                      <div class='col-md-3 p0-r'>
+	                                          <label for="" class="col-md-4 control-label">入院方式:</label>
+	                                          <div class="col-md-8 p0-r">
+	                                              <input type="text" class="form-control" id="ryfs" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                      <div class='col-md-3 p0-r'>
+	                                          <label for="" class="col-md-4 control-label">入院科别:</label>
+	                                          <div class="col-md-8 p0-r">
+	                                              <input type="text" class="form-control" id="departname1" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                        <div class='col-md-3'>
+	                                          <label for="" class="col-md-4 control-label">疾病编码:</label>
+	                                          <div class="col-md-8 p0-r">
+	                                              <input type="text" class="form-control" id="" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                </div>
+	                                <div class="form-group clearfix form-intel">
+	                                    <div class='col-md-3 p0'>
+	                                          <label for="" class="col-md-4 control-label">上次出院:</label>
+	                                          <div class="col-md-8 p0-r" style="padding-left:10px">
+	                                              <input type="text" class="form-control" id="sccy" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                      <div class='col-md-3 p0-r'>
+	                                          <label for="" class="col-md-4 control-label">出院科别:</label>
+	                                          <div class="col-md-8 p0-r">
+	                                              <input type="text" class="form-control" id="departname2" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                      <div class='col-md-3 p0-r'>
+	                                          <label for="" class="col-md-4 control-label">住院天数:</label>
+	                                          <div class="col-md-8 p0-r">
+	                                              <input type="text" class="form-control" id="" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                      <div class='col-md-3'>
+	                                          <label for="" class="col-md-4 control-label">血型:</label>
+	                                          <div class="col-md-8 p0-r">
+	                                              <input type="text" class="form-control" id="" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                </div>
+	                                <div class="form-group clearfix form-intel" style="border-bottom:none;">                                       
+	                                      <div class='col-md-3 p0'>
+	                                          <label for="" class="col-md-4 control-label">药物过敏史:</label>
+	                                          <div class="col-md-8 p0-r" style="padding-left:10px">
+	                                              <input type="text" class="form-control" id="" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                      <div class='col-md-3 p0-r'>
+	                                          <label for="" class="col-md-4 control-label">辅助检查:</label>
+	                                          <div class="col-md-8 p0-r">
+	                                              <input type="text" class="form-control" id="" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                      <div class='col-md-3 p0-r'>
+	                                          <label for="" class="col-md-4 control-label">手术部位:</label>
+	                                          <div class="col-md-8 p0-r">
+	                                              <input type="text" class="form-control" id="" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                      <div class='col-md-3'>
+	                                          <label for="" class="col-md-4 control-label">其他事项:</label>
+	                                          <div class="col-md-8 p0-r">
+	                                              <input type="text" class="form-control" id="" placeholder="" readonly="readonly">
+	                                          </div>
+	                                      </div>
+	                                </div>
+	                            </div>
+	                            <div class='col-md-3 p0'>
+	                                <form class="form-horizontal diagnosis" role="form">
+	                                  <div class="form-group" style="margin-left:0;margin-right:0;">
+	                                      <label for="" class="col-md-3 control-label">主要诊断:</label>
+	                                      <div class="col-md-9 p0-r">
+	                                        <textarea class='form-control' readonly="readonly" style="cursor:default;resize:none;"></textarea>
+	                                      </div>
+	                                  </div>
+	                                  <div class="form-group" style="margin-left:0;margin-right:0;">
+	                                      <label for="" class="col-md-3 control-label">用药情况:</label>
+	                                      <div class="col-md-9 p0-r">
+	                                          <textarea class='form-control' readonly="readonly" style="cursor:default;resize:none;"></textarea>
+	                                      </div>
+	                                  </div>
+	                            </form>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+              <div class="footer-main version-hide" e_name="index_department_patients_num" data-step="6" data-intro="&lt;div class=&quot;step-info-content&quot;&gt;&lt;h1&gt;6、急诊门诊待接诊人数显示&lt;/h1&gt;&lt;p&gt;显示当天实时急诊各门诊科室待接诊人员人数统计数据。&lt;/p&gt;&lt;/div&gt;" data-position="top">
+                    <div class="roll">
+                        <ul class="mingdan list-unstyled" style="margin-top: 0px;" id="depart">
+                            <li>
+                                <div class='deskItem'>
+                                    <span><img src='#path()/static/bj/images/iconHeart.png'>抢救室</span>1人
+                                </div>
+                                <div class='deskItem'>
+                                   <span><img src='#path()/static/bj/images/iconHeart.png'>抢救室</span>1人
+                                </div>
+                                <div class='deskItem'>
+                                    <span><img src='#path()/static/bj/images/iconHeart.png'>抢救室</span>1人
+                                </div>
+                            </li>
+                            <li>
+                                <div class='deskItem'>
+                                    <span><img src='#path()/static/bj/images/iconHeart.png'>抢救室</span>1人
+                                </div>
+                                <div class='deskItem'>
+                                   <span><img src='#path()/static/bj/images/iconHeart.png'>抢救室</span>1人
+                                </div>
+                                <div class='deskItem'>
+                                    <span><img src='#path()/static/bj/images/iconHeart.png'>抢救室</span>1人
+                                </div>
+                            </li>
+                        </ul>
+                      </div>
+                </div>
+                </section>
+                
+            </aside>
+<div class="mapBox">  
+  <div class="maptit">
+  	<i class="glyphicon glyphicon-remove"></i>
+  </div> 
+  <div class="map">			    			    	
+  </div>
+</div>
+<div class="modal fade common-modal" id="teModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width:300px">  
+  <div class="modal-dialog" style="width:100%">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span Userbehavior="A75" aria-hidden="true">×</span></button>  
+        <h4 class="modal-title">标记已接诊</h4>  
+      </div>  
+      <div class="modal-body">  
+        <div id="temessage"> 
+        	<div class='clearfix'><p>分诊时间：<span id='show_dividtime'></span></p><div class='form-group'>接诊时间：
+			<div id="time_div">	
+			<input  id="jiezhen_time" type="text"  name="" placeholder="选择时间" class="form-control "></div></div></div>
+			
+        </div>
+          
+      </div>  
+      <div class="modal-footer">  
+         <input type="hidden" id="tep_id"/>
+         <input type="hidden" id="caozuo"/>
+         <button Userbehavior="A74" type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+         <a Userbehavior="A73" onclick="teurlSubmit()" class="btn btn-primary">确定</a>  
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div><!-- /.modal -->
+<div class="modal fade common-modal" id="go_rct1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width:300px">  
+  <div class="modal-dialog" style="width:100%">  
+    <div class="modal-content message_align">  
+      
+      <div class="modal-body">  
+       <h4>是否将患者分入抢救站?</h4> 
+      </div>  
+      <div class="modal-footer">  
+         <input type="hidden" id="tep_id"/>
+         <input type="hidden" id="caozuo"/>
+         <button Userbehavior="A74" type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+         <a Userbehavior="A73" onclick="okGoRct()" class="btn btn-primary">确定</a>  
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div>
+<div class="modal fade common-modal" id="teModel1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width:300px">  
+  <div class="modal-dialog" style="width:100%">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+        <h4 class="modal-title"></h4>  
+      </div>  
+      <div class="modal-body">  
+        <div id="temessage1"></div>
+          
+      </div>  
+      <div class="modal-footer">  
+         <input type="hidden" id="tep_id"/>
+         <input type="hidden" id="caozuo"/>
+         <a onclick="hideteModel1()" class="btn btn-primary">确定</a>  
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div><!-- /.modal -->
+<!-- 信息删除确认 -->  
+<div class="modal fade common-modal" id="delcfmModel" style="width:300px">  
+  <div class="modal-dialog" style="width:300px">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+        <h4 class="modal-title">提示信息</h4>  
+      </div>  
+      <div class="modal-body">  
+        <p id="mes"></p>  
+      </div>  
+      <div class="modal-footer">  
+         <input type="hidden" id="cardnum"/>
+         <input type="hidden" id="status"/>
+         <input type="hidden" id="p_id"/>
+         <input type="hidden" id="id"/>
+         <input type="hidden" id="userId" value="#userId()"></input>
+         <input type="hidden" id="hisid" value=""></input>
+         <input type="hidden" id="eventid" value=""></input>
+         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+         <a  onclick="urlSubmit()" class="btn btn-primary" data-dismiss="modal">确定</a>  
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div><!-- /.modal -->
+<!-- 信息删除确认 -->  
+<div class="modal fade common-modal" id="promptModel" style="width:300px">  
+  <div class="modal-dialog" style="width:300px">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span onclick="promptModelUserbehavior(this);" aria-hidden="true">×</span></button>  
+        <h4 class="modal-title">提示信息</h4>  
+      </div>  
+      <div class="modal-body">  
+        <div id="promptmassage" class="clearfix"></div>
+        <input type="hidden" id="confirmpromptModel" value="" />
+        <input type="hidden" id="methodname" value="">  
+        <input type="hidden" id="methoduseid" value=""> 
+        <input type="hidden" id="methoddata" value="">  
+      </div>  
+      <div class="modal-footer"> 
+      	 <a class="btn btn-default" onclick="promptModelUserbehavior(this);" data-dismiss="modal">取消</a>  
+         <a class="btn btn-primary" onclick="confirmassagetrue();">确定</a>          
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div><!-- /.modal -->	
+#include("dayinfzd.html")
+<div id="pingji" class="gradeLevel"> 
+  <p>原系统评级：<span id="old"></span></p>
+  <p>修改后评级：<span id="new"></span></p>
+  <p>修改原因：<span id="reson"></span></p>
+  <p>修改医生：<span id="doctor"></span></p>
+  <p>修改时间：<span id="time"></span></p>
+  <p>修改日期：<span id="date"></span></p>
+</div>
+<div id="img" style="    width: 230px;
+    height: 130px;
+    background: #ffffff;
+    position: fixed;
+    top: 30%;
+    left: 80%;
+    transform: translate(-50%);
+    z-index: 1;display:none"> 
+    <div class="modal-header">  
+        <h4 class="modal-title">家属签字</h4>  
+      </div> 
+  <span ><img  id="signimg"></span>
+  
+</div>
+<!-- 更新说明弹窗 -->	
+<div class="modal fade" id="updatemModel" style="width:460px">  
+  <div class="modal-dialog" style="width:460px">  
+    <div class="modal-content message_align">  
+      <!-- <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+      </div>   -->
+      <div class="modal-body">
+     	 <h1 class="update-title">更新说明</h1> 
+       	 <div class="update-top">
+       	 	<span id="publish_date"></span>
+       	 	<span id="version_num"></span>
+       	 </div>
+        <p id="updateContent"></p>  
+      </div>  
+      <div class="modal-footer">  
+         <a class="btn btn-primary" data-dismiss="modal">确定</a>  
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div>
+
+<!-- 更新说明弹窗 -->	
+<div class="modal fade" id="MapModel" style="width:960px">  
+  <div class="modal-dialog" style="width:960px">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+      </div> 
+      <div class="modal-body">
+     	<div id="BMap" style="width: 100%;height: 800px;overflow: hidden;margin:0;font-family:'微软雅黑'"></div>
+        <p id="updateContent"></p>  
+      </div> 
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div>
+  
+ 
+
+
+           
+#end
+ 

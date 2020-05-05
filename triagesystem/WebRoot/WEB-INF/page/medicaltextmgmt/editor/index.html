@@ -1,0 +1,99 @@
+<script type="text/javascript">
+
+function queryEditorList() {
+    $('#editorList').datagrid({
+         url: '#path()/medicaltextmgmt/queryEditor',
+         allowCellSelect: true,
+         check: {
+             enable: true
+         },
+         //idField: 'id',
+         rownumbers: true,
+         toolbar: '#row1,#row2',
+         nowrap: true, //列内容多时自动折至第二行
+         border: false,
+         pagination:true,
+         pageSize : 10, //页大小
+         pageList : [ 5,10,15,20],
+         fitColumns:true,
+         singleSelect: true,//选择多行
+         columns: [[
+            {field: 'id', hidden: 'true' },
+			{field : 'type',title : '模版类型',align : 'center',width : '40%',sortable : false},
+			{field : 'name',title : '模版名称',align : 'center',width : '60%',sortable : false}
+			
+         ]],
+         onAfterEdit : function(index, row) {
+             //endEdit该方法触发此事件
+                 //updateNodeEditOrNew(row);
+                 //刷新树结构
+                 //row.editing = false;
+                 $('#editorList').datagrid('refreshRow', index);
+         }
+     });
+}
+
+function editEditor(){
+    var rowData = $("#editorList").datagrid("getSelections");
+	if(rowData.length != 1){
+        toastr.warning("请选中一行数据");
+        return;
+    }
+	var t = 'toeditor?id='+rowData[0].id;
+	load(t);   
+}
+
+function deleteEditor(){
+    //编辑完之后自动刷新行
+    $('#editorList').datagrid( rowIndex,'refreshRow');
+	var rowData = $("#editorList").datagrid("getSelections");
+	if(rowData.length != 1){
+        toastr.warning("请选中一行数据");
+        return;
+    }
+	if(!confirm("确定要删除数据?")){
+	 	return false;
+	}
+
+	var rowIndex=$('#editorList').datagrid('getRowIndex',rowData[0]);
+	$.ajax({
+		type : "post",
+		url : "#path()/medicaltextmgmt/deleteEditor",
+		dataType : "json",
+		async : false,
+		data : {
+			id : rowData[0].id
+		},
+		success : function(result) {
+			toastr.warning("操作成功");
+		    //编辑完之后自动刷新行
+		    $('#editorList').datagrid( rowIndex,'refreshRow');
+		},
+		error : function() {
+			toastr.warning("操作失败");
+		}
+   });
+}
+
+
+
+$(document).ready(function() {
+	queryEditorList();
+});
+</script>
+	<div class="panelMain" style='padding:30px;'>
+		<table class="easyui-datagrid" id="editorList" title="模版管理"
+			style="width: 98%; height: 98%;">
+		</table>
+		<div id="row2">
+			<a href="javascript:void(0);" onclick="load('toeditor');">
+				<button class="btn btn-primary btn-xs">新增</button>
+			</a> 
+			<a href="javascript:void(0);" onclick="editEditor();">
+				<button class="btn btn-primary btn-xs">修改</button>
+			</a> 
+			<a href="javascript:void(0);" onclick="deleteEditor();">
+				<button class="btn btn-primary btn-xs">删除</button>
+			</a>
+		</div>
+	</div>

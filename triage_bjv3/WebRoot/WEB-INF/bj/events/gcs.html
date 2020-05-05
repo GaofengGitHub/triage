@@ -1,0 +1,126 @@
+<input type="hidden" id="GCS_1" value="0" />
+<input type="hidden" id="GCS_2" value="0" />
+<input type="hidden" id="GCS_3" value="0" />
+
+<div class=""
+	style="text-align: left;display:none"
+	id="gcspf">
+	<div class="modal-body clearfix">
+		<div class='row'>
+			<div class='col-md-12 text-center'>
+				<div class='reviewBox'>
+					<div class='review clearfix'>
+						<div class='col-md-4'>
+							<span class='diseaseTitle'>睁眼反应</span>
+						</div>
+						<div class='col-md-2 disease2 p0'>
+							<div class="radiobox" onclick="addGCS('GCS_1',1)">
+								<label> <input type="radio" name="GCS_1" value="1"
+									checked=""><i></i> 1 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_1',2)">
+								<label> <input type="radio" name="GCS_1" value="2"
+									checked=""><i></i> 2 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_1',3)">
+								<label> <input type="radio" name="GCS_1" value="3"
+									checked=""><i></i> 3 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_1',4)">
+								<label> <input type="radio" name="GCS_1" value="4"
+									checked=""><i></i> 4 </label>
+							</div>
+						</div>
+						<div class='col-md-6 disease p0'>
+							<p onclick="addGCS('GCS_1',1)">总不睁眼</p>
+							<p onclick="addGCS('GCS_1',2)">疼痛刺激(不要刺激面部)时睁眼</p>
+							<p onclick="addGCS('GCS_1',3)">言语刺激时睁眼</p>
+							<p onclick="addGCS('GCS_1',4)">自发睁眼</p>
+						</div>
+					</div>
+					<div class='review clearfix'>
+						<div class='col-md-4'>
+							<span class='diseaseTitle'>语言反应</span>
+						</div>
+						<div class='col-md-2 disease2 p0'>
+							<div class="radiobox" onclick="addGCS('GCS_2',1)">
+								<label> <input type="radio" name="GCS_2" value="1"><i></i>
+									1 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_2',2)">
+								<label> <input type="radio" name="GCS_2" value="2"><i></i>
+									2 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_2',3)">
+								<label> <input type="radio" name="GCS_2" value="3"><i></i>
+									3 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_2',4)">
+								<label> <input type="radio" name="GCS_2" value="4"><i></i>
+									4 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_2',5)">
+								<label> <input type="radio" name="GCS_2" value="5"><i></i>
+									5 </label>
+							</div>
+						</div>
+						<div class='col-md-6 disease p0'>
+							<p onclick="addGCS('GCS_2',1)">无言语</p>
+							<p onclick="addGCS('GCS_2',2)">无法理解的声音</p>
+							<p onclick="addGCS('GCS_2',3)">能听清，不连贯的词语</p>
+							<p onclick="addGCS('GCS_2',4)">能交谈，答非所问</p>
+							<p onclick="addGCS('GCS_2',5)">能交谈，定向力正常</p>
+						</div>
+					</div>
+					<div class='review clearfix'>
+						<div class='col-md-4'>
+							<span class='diseaseTitle'>非偏瘫侧运动反应</span>
+						</div>
+						<div class='col-md-2 disease2 p0'>
+							<div class="radiobox" onclick="addGCS('GCS_3',1)">
+								<label> <input type="radio" name="GCS_3" value="1"><i></i>
+									1 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_3',2)">
+								<label> <input type="radio" name="GCS_3" value="2"><i></i>
+									2 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_3',3)">
+								<label> <input type="radio" name="GCS_3" value="3"><i></i>
+									3 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_3',4)">
+								<label> <input type="radio" name="GCS_3" value="4"><i></i>
+									4 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_3',5)">
+								<label> <input type="radio" name="GCS_3" value="5"><i></i>
+									5 </label>
+							</div>
+							<div class="radiobox" onclick="addGCS('GCS_3',6)">
+								<label> <input type="radio" name="GCS_3" value="6"><i></i>
+									6 </label>
+							</div>
+						</div>
+						<div class='col-md-6 disease p0'>
+							<p onclick="addGCS('GCS_3',1)">对任何疼痛无运动反应</p>
+							<p onclick="addGCS('GCS_3',2)">痛刺激时有伸展反应（去大脑）</p>
+							<p onclick="addGCS('GCS_3',3)">痛刺激时有屈曲反应（去皮质）</p>
+							<p onclick="addGCS('GCS_3',4)">痛刺激有逃避反应</p>
+							<p onclick="addGCS('GCS_3',5)">痛刺激能拨开医生的手</p>
+							<p onclick="addGCS('GCS_3',6)">遵从指令</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p class='col-md-12 reviewRemark'>
+				<span>注：总分15分</span> <span>13-15：轻</span> <span>9-12：中</span> <span>3-8：重</span>
+				<span>8分或以下为昏迷</span>
+			</p>
+			<div class='col-md-12 reviewResult'>
+				<span class='red'>评分结果:</span> <span class='resultNum'
+					id="GCS_Score">0</span>
+			</div>
+		</div>
+	</div>
+</div>

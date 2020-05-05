@@ -1,0 +1,138 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$.ajax({
+	     type: "post",
+	     url: "#path()/systemmgmt/queryallstation",
+	     dataType: "json",
+	     async:false,
+	     data:{
+	     },
+	     success: function(result){
+	    	 if(result.status=="200" && result.rows!=null){
+                 var strhtml = "";
+	    		 for(var i=0;i<result.rows.length;i++){
+	    			 strhtml+='<input type="checkbox" value="'+result.rows[i].id+'" name="workstation" />&nbsp;'+result.rows[i].name;
+	    			 if(i<result.rows.length-1){
+	    				 strhtml+="&nbsp;&nbsp;";
+	    			 }
+	    		 }
+	    		 $("#stationlist").html(strhtml);
+	    	 }
+	     },
+	     error: function(){
+	    	// toastr.warning("新增失败！");
+	    	 return false;
+	     }
+	 }); 
+	$("#confirmadddepart").click(function(){
+		adddepartConfirm();
+	})
+});
+
+
+/* $('#keshibed').change(function(){
+    if($(this).is(":checked")){  
+         $("#keshibednum").css("display","");
+     }else{  
+    	 $("#keshibednum").css("display","none");  
+     }
+ });   */
+ 
+function adddepartConfirm(){
+	var departname = $('#departname').val();
+	if(feiknum("科室名称","limit18",departname,$("#departname").next())){return;};
+	var readyclinicalreceptionmax = $('#readyclinicalreceptionmax').val();
+	if(feiknum("科室待接诊数上限","positive8",readyclinicalreceptionmax,$("#readyclinicalreceptionmax").next())){return;};
+	var clinicalreceptionmax = $('#clinicalreceptionmax').val();
+	/* if(clinicalreceptionmax!=""){
+		if(feiknum("科室接诊数上限","positive8",clinicalreceptionmax,$("#clinicalreceptionmax").next())){return;};
+	} */
+	var keshibed = $('#keshibed').is(':checked');
+	var departbednum="0";
+	var addbednum="0";
+	/* if(keshibed){
+	    departbednum = $('#departbednum').val();
+	    addbednum = $('#addbednum').val();
+	    
+	    if(feiknum("床位数","positive8",departbednum,$("#departbederror"))){return;};
+	    if(feiknum("加床数","positive9",addbednum,$("#departbederror"))){return;};
+	} */
+	var workstation="";
+	$("input:checkbox[name='workstation']:checked").each(function() {
+		if(workstation!=""){
+			workstation=workstation+","+$(this).val();
+		}else{
+			workstation=workstation+$(this).val();
+		}
+		
+	});
+	if(feiknum("科室类别","notEmpty",workstation,$("#workstationerror"))){return;};
+	$(".tips").text("");
+	$.ajax({
+	     type: "post",
+	     url: "#path()/systemmgmt/adddepartconfirm",
+	     dataType: "json",
+	     data:{
+	    	 departname:departname,
+	    	 readyclinicalreceptionmax:readyclinicalreceptionmax,
+	    	 clinicalreceptionmax:clinicalreceptionmax,
+	    	 workstation:workstation,
+	    	 departbednum:departbednum,
+	    	 addbednum:addbednum
+	     },
+	     success: function(result){
+	    	 if(result.status=="200"){
+	    		 load('keshiInfo');
+	    	 }else{
+	    		toastr.warning(result.message);
+	    	 }
+	     },
+	     error: function(){
+	    	// toastr.warning("新增失败！");
+	    	 return false;
+	     }
+	 }); 
+}
+</script>
+	<div class="panelMain">
+			<div class="contact">
+				<form name="form1" method="post">
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>科室名称:</label> 
+						    <input type="text" id="departname" name="departname" style="text-align: center;" placeholder="#(departname ??)" value="#(departname ??)" autocomplete="off"  required/>
+			                <span class="tips" ></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>科室待接诊数上限:</label> 
+						    <input type="text" id="readyclinicalreceptionmax" style="text-align: center;" name="readyclinicalreceptionmax" 
+						    onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" 
+						    placeholder="#(readyclinicalreceptionmax ??)" value="#(readyclinicalreceptionmax ??)" autocomplete="off"  required/>
+						    <span class="tips" ></span>
+					</div>
+					<div class="form-group" style="display: none;">
+						<label style="margin-left: 50px;">科室接诊数上限:</label> 
+						    <input type="text" id="clinicalreceptionmax" style="text-align: center;" name="clinicalreceptionmax" 
+						    value="0"/>
+						    <span class="tips"></span>
+					</div>
+					<div class="form-group" style="display: none;">
+						<label style="margin-left: 50px;"><input type="checkbox" id="keshibed"/>&nbsp;科室床位 </label>
+							<span id="keshibednum" style="display:none ;"><span style="margin-left: 25px;">床位数<input type="text" 
+							style="width: 73px;margin-left: 10px;text-align: center;" id="departbednum" value="0"/></span>
+							<span style="margin-left: 25px;">可容纳加床数<input type="text" style="width: 73px;margin-left: 10px;text-align: center;"
+							id="addbednum" value="0"/></span></span><span
+							class="tips" id="departbederror"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>科室类别: </label><span id="stationlist"></span>
+						<span class="tips" style="margin-left: 10px;" id="workstationerror"></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;">所属医院:#(session.hpname)</label>
+					</div>
+					
+					<b class="btn" style="margin-left: 100px;"><input type="button" id="confirmadddepart" value="提交" class="btn btn-rule btn-lg"/> 
+						<button class="btn btn-rule btn-lg" onclick="load('keshiInfo');">取消</button></b>
+				</form>
+			</div>
+		</div>

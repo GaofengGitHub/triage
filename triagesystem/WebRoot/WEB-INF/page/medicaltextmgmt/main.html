@@ -1,0 +1,96 @@
+#@header('medicalmgmt')
+#define main()
+<script type="text/javascript">
+#include("function.js")	
+</script>
+<script src="#path()/static/dist/js/interaction.js"></script>
+    <div id="wrapper">
+        <div id="page-wrapper">
+            <div class="row">
+                <!-- <ol class="breadcrumb">
+					<li>
+						<a href="href="javascript:void(0);" onclick="window.location.href='#path()/systemmgmt'">系统管理</a>
+					</li>
+					<li class="active">病历文书管理</li>
+					<li class="active">预检分诊评级表</li>
+				</ol> -->
+            </div>
+            <div class="row">
+            	<div class="col-md-2 pr0">
+            		<ul class="managementMenu">
+            			<li class="title">病历文书管理</li>
+            			<li>
+            				<a href="javascript:void(0);" onclick="window.location.href='#path()/medicaltextmgmt'"><i class="fa fa-angle-double-right"></i>预检分诊评级表</a>
+            			</li>
+            			<li>
+            				<a href="javascript:void(0);" onclick="editorload();"><i class="fa fa-angle-double-right"></i>急诊病历</a>
+            			</li>
+            			<li>
+            				<a href="javascript:void(0);" onclick="errorload();"><i class="fa fa-angle-double-right"></i>留观病历</a>
+            			</li>
+            		</ul>
+            	</div>
+            	<div class="col-md-10">
+            	<div id="twopanel">
+                    <div class="panelMain" style="padding:30px;">
+                        	<table class="easyui-datagrid" id="pjbList" title="系统分级评级表" style="width: 98%; height: 98%;"></table>
+							<div id="row1" style="display: inline-block;">
+								<input id="searchText" class="userName" placeholder="系统分级评级表名称" />
+								<a href="javascript:void(0);" onclick="pjbList();">
+                        			<button class="btn btn-primary btn-xs">查询</button>
+                        		</a>
+							</div>
+							<div id="row2">
+								<a href="javascript:void(0);" onclick="pjbload('addYJFZPJB');">
+                        			<button class="btn btn-primary btn-xs">新增</button>
+                        		</a>
+                        		<a href="javascript:void(0);" onclick="modInfo();">
+                        			<button class="btn btn-primary btn-xs">修改</button>
+                        		</a>
+                        		<a href="javascript:void(0);" onclick="disablepjb();">
+                        			<button class="btn btn-primary btn-xs">停用/启用</button>
+                        		</a>
+							</div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+            	<div class="col-md-12">
+            		<div class='text-center footer'>
+            			南京晨伟医疗设备有限公司  版权所有         北京协和医院  监制
+            			<img src="#path()/static/images/footer.png">
+            			<i class="icon iconfont icon-duihuakuang4 pull-right"></i>
+            		</div>
+            	</div>
+            	</div>
+            </div> -->
+        </div>
+        <script type="text/javascript">
+        $(document).ready(function() {
+        	pjbList();
+        });
+        function load(t) {
+			$('#twopanel').panel({
+				href:'#path()/medicaltextmgmt/'+t
+			});
+		}
+		function pjbload(t) {
+			$('#twopanel').panel({
+				href:'#path()/yjfzpjb/'+t
+			});
+		}
+		function errorload() {
+			$('#twopanel').panel({
+				href:'#path()/error'
+			});
+		}
+		
+		function editorload() {
+			$('#twopanel').panel({
+				href:'#path()/medicaltextmgmt/editormain'
+			});
+		}
+		</script>
+    </div>
+#end

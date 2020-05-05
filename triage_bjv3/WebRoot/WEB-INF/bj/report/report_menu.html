@@ -1,0 +1,32 @@
+#@bj_layout('index') #define bj_main()
+
+<script type="text/javascript">
+#include("function.js")
+</script>
+<aside class="right-side report-right-side">
+	<section class="content report-section">
+	<div class="report-left-menu">
+			<ul>
+			<li onclick="reportload('report_0')" style="cursor:pointer;" class="active">系统分类统计</li>
+				<li onclick="reportload('report_1')" style="cursor:pointer;" >季/年基本情况</li>
+				<li onclick="reportload('report_2')" style="cursor:pointer;">预检分诊应用</li>
+				<li onclick="reportload('report_3')" style="cursor:pointer;">快速分级应用</li>
+				<li onclick="reportload('report_4')" style="cursor:pointer;">患者来源分析</li>
+				<li onclick="reportload('report_5')" style="cursor:pointer;">患者结构分析</li>
+				<li onclick="reportload('report_6')" style="cursor:pointer;">患者去向统计</li>
+				<li onclick="reportload('report_7')" style="cursor:pointer;">科室接诊情况</li>
+				<li onclick="reportload('report_8')" style="cursor:pointer;">急诊抢救情况</li>
+				<li onclick="reportload('report_9')" style="cursor:pointer;">72小时重返原因</li>
+				<li onclick="reportload('report_10')" style="cursor:pointer;">急诊病种分析</li>
+				<li onclick="reportload('report_11')" style="cursor:pointer;">病种诊疗情况</li>
+				<li onclick="reportload('report_12')" style="cursor:pointer;">压疮情况统计</li>
+				<li onclick="reportload('report_13')" style="cursor:pointer;">急诊科资源分析</li>
+				<li onclick="reportload('report_14')" style="cursor:pointer;">工作量统计</li>
+				<li onclick="reportload('report_15')" style="cursor:pointer;">护士个人分诊量</li>
+				<li onclick="reportload('report_16')" style="cursor:pointer;">突发事件统计</li>
+			</ul>
+			</div>
+			<div id="reportpanel" style="margin-left: 125px;"></div>
+	</section>
+</aside>
+#end

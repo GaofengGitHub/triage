@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sso">
+    <output-path>$PROJECT_DIR$/classes/artifacts/sso</output-path>
+    <root id="archive" name="sso.war" />
+  </artifact>
+</component>

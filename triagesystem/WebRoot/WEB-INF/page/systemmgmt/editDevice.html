@@ -1,0 +1,86 @@
+<script type="text/javascript">
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$('#deviceId').val("#(id ??)");
+	$('#uniqueid').val("#(device.uniqueid ??)");
+	$('#device_type').val("#(device.device_type ?? 'phone')");
+	$('#owener').val("#(device.owener ??)");
+	$('#status').val("#(device.status ?? 1)");
+	
+	$("#saveDevice").click(function(){
+		saveDevice();
+	});
+	
+});
+
+function saveDevice(){
+	var id = $('#deviceId').val();
+	var uniqueid = $('#uniqueid').val();
+	var device_type = $('#device_type').val();
+	var owener = $('#owener').val();
+	var status = $('#status').val();
+	if(feiknum("设备号","limit24",uniqueid,$("#uniqueid").next())) return;
+	if(feiknum("使用者","limit24",owener,$("#owener").next())) return;;
+ 
+	
+	$.ajax({
+	     type: "post",
+	     url: "#path()/systemmgmt/saveDevice",
+	     dataType: "json",
+	     data:{
+	    	 id:id,
+	    	 uniqueid:uniqueid,
+	    	 device_type:device_type,
+	    	 owener:owener,
+	    	 status:status,
+	     },
+	     success: function(result){
+	    	 toastr.warning(result.message);
+	    	 if(result.status=="200"){
+	    		 load('deviceList');
+	    	 }else{
+	    		
+	    	 }
+	     },
+	     error: function(){
+	    	 return false;
+	     }
+	 }); 
+}
+</script>
+	<div class="panelMain">
+			<div class="contact">
+				<form name="form1" method="post">
+					<div class="form-group">
+						<input type="hidden"  value="#(id ??)" id="deviceId" name="deviceId">
+						<label style="margin-left: 50px;"><i class="red">*</i>设备号：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="uniqueid" name="uniqueid"
+							placeholder="" value="" autocomplete="off" required />
+						<span class="tips" ></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>设备类型：</label>
+						 <select id="device_type">
+						 	<option value="phone">phone</option>
+						 	<option value="pad">pad</option>
+						 </select>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>使用者：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="owener" name="owener"
+							autocomplete="off" required /><span
+							class="tips" ></span>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>是否启用：</label>
+						 <select id="status">
+						 	<option value="1">启用</option>
+						 	<option value="0">禁用</option>
+						 </select>
+					</div>
+					<b class="btn" style="margin-left: 140px;margin-top: 200px;"><input id="saveDevice" type="button" value="提交" class="btn btn-rule btn-lg"/> <button class="btn btn-rule btn-lg" onclick="load('deviceList');">取消</button></b>
+				</form>
+			</div>
+		</div>

@@ -1,0 +1,197 @@
+<script src="#path()/static/bj/js/iCheck/app.min.js"></script>
+<script src="#path()/static/bj/js/iCheck/icheck.min.js"></script>
+<script src="#path()/static/bj/js/iCheck/form-icheck.min.js"></script>
+<style>
+
+/* .chart-part11>div{width:calc((100% - 10px)/3);margin-right:5px}
+.chart-part11>div.chart-part11-03{margin-right: 0}
+.chart-part11{margin-top:10px} */
+.occupy{line-height:230px;margin-top: 0;}
+.occupy span{font-size:26px;}
+.occupy span{color:#f0b943}
+/* .chart-part11-02 .occupy span{color:#43b6a2}
+.chart-part11-03 .occupy span{color:#669aef} */
+.occupy span font{font-size:44px;margin-right:10px;}
+/* .report-common-box .chart-box{height:240px;padding:20px}
+h1{text-align:left} */
+
+</style>
+<script type="text/javascript">
+#include("report_8.js")
+</script>
+<div class="chart-section">
+    <div class="select-top">
+    	<div class="datetime-box03 clearfix">
+        <form class="form-inline headSearch" role="">
+        	<div style="display:inline-block;vertical-align: middle;">
+				<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+			        <input type="text" class="form-control" name="from" id="starttime">
+			        <span class="input-group-addon"> - </span>
+			        <input type="text" class="form-control" name="to" id="endtime">                    
+			    </div>
+			</div>
+				    <!-- <input type="text" class="form-control" style='width: 40%;'
+				        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+						id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+						<div class="icheck-inline" style="display:inline-block">
+							<label>
+								<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+								抢救室1
+							</label>
+							<label>
+								<input type="checkbox" class="icheck" data-checkbox="icheckbox_flat-blue">
+								抢救室2
+							</label>
+						</div>					
+					<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+						查询
+					</a>
+				</form>
+        
+    </div>
+    </div>
+    <div class="clearfix chart-part08">
+        <div class="chart-part08-01 clearfix">
+            <div class="pull-left">
+                <div class="chart-part08-01-content report-common-box">
+                    <h1 class="chart-big-title">抢救室成功率</h1>
+                    <div class="clearfix">
+                        <div class="percent-text pull-left">
+                        	<div class="circle-bar02">
+							    <div class="circle-bar-left02"></div>
+							    <div class="circle-bar-right02"></div>
+							    <div class="mask02">
+							        <span class="percent02">99%</span>
+							    </div>
+							</div>                        
+                        </div>
+                        <div class="pull-right percent-text-right">
+                            <p>抢救例数<span class="counter">2132</span></p>
+                            <p>成功例数<span class="counter">2116</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="report-common-box">
+                <h1>抢救室滞留时间平均数</h1>
+						<div class="occupy">
+							<div>
+								<span><font class="counter">1.4</font>小时</span>
+							</div>
+						</div>
+	                          
+	            </div>
+                <div class="chart-part08-01-content report-common-box">
+                    <h1 class="chart-big-title">抢救死亡率<span class="small-text">入抢后72小时内死亡</span></h1>
+                    <div class="clearfix">
+                        <div class="percent-text pull-left">
+                            <div class="circle-bar03">
+							    <div class="circle-bar-left03"></div>
+							    <div class="circle-bar-right03"></div>
+							    <div class="mask03">
+							        <span class="percent03">1%</span>
+							    </div>
+							</div>                        
+                        </div>
+                        <div class="pull-right percent-text-right oneline-text">
+                            <p>死亡例数<span class="counter">21</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right">
+            	<div class="report-common-box clearfix chart-part08-02-content">
+	                <!-- <h1 class="chart-big-title">动态评估抢救患者等级变化分析</h1> -->
+	                <div class="pull-left">
+						<h1 class="chart-big-title" style="font-size:18px;font-weight: bold;margin-top:3px;margin-bottom:30px;">诊断排名</h1>
+	                <table class="table table-bordered report-common-table report-common-table-notdbg chart-part08-rank chart-part08-big-table">
+						<thead>
+							<tr>
+								<th>诊断</th>
+								<th>人数(人次)</th>
+							</tr>
+						</thead>
+						<tbody>					
+							<tr>
+								<td>急性酒精中毒</td>
+								<td class="counter">121</td>							
+							</tr>
+							<tr>
+								<td>过敏性休克</td>
+								<td class="counter">87</td>							
+							</tr>
+							<tr>
+								<td>心脏呼吸骤停</td>
+								<td class="counter">65</td>							
+							</tr>
+							<tr>
+								<td>脑震荡</td>
+								<td class="counter">54</td>							
+							</tr>
+							<tr>
+								<td>胃炎</td>
+								<td class="counter">34</td>							
+							</tr>
+						</tbody>
+					</table>	     
+	                </div>
+	                  <div class="pull-right">
+	                  	<div class="chart-box" id="option_1" style="height:100px;"></div>	
+	                	<table class="table table-bordered report-common-table report-common-table-notdbg" style="margin-top:-16px;">
+							<thead>
+								<tr>
+									<th>变化方式</th>
+									<th>等级下降</th>
+									<th>等级未变</th>
+									<th>等级上升</th>
+								</tr>
+							</thead>
+							<tbody>						
+								<tr>
+									<td>人数</td>
+									<td class="counter">2081</td>
+									<td class="counter">33</td>
+									<td class="counter">18</td>
+								</tr>
+							</tbody>
+						</table>
+	                  </div>              
+	            </div>
+	            <div class="report-common-box">
+	                <h1 class="chart-big-title">抢救病种分析</h1>
+	                <div class="chart-box" id="option_3" style="height:calc(100% - 150px)">图表</div>
+					<table class="table table-bordered report-common-table report-common-table-notdbg">
+						<thead>
+							<tr>
+								<th>急性心肌梗死</th>
+								<th>急性上消化道出血</th>
+								<th>危重孕产妇</th>
+								<th>急性呼衰</th>
+								<th>急性左心衰</th>
+								<th>急性脑卒中</th>
+								<th>多发伤</th>
+								<th>急性颅脑外伤</th>
+								<th>急性创伤</th>
+							</tr>
+						</thead>
+						<tbody>						
+							<tr>
+								<td class="counter">35</td>
+								<td class="counter">34</td>
+								<td class="counter">24</td>
+								<td class="counter">44</td>
+								<td class="counter">45</td>
+								<td class="counter">26</td>
+								<td class="counter">45</td>
+								<td class="counter">43</td>
+								<td class="counter">55</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+            </div>
+        </div>
+        
+
+    </div>
+
+</div>

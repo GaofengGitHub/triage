@@ -1,0 +1,274 @@
+#@bj_layout('outburst') #define bj_main()
+<script type="text/javascript">
+#include("add.js")
+#include("score.js")
+#include("mews.js")
+#include("pain.js")
+#include("gcs.js")
+</script>
+<script>
+    $(document).ready(function () {
+    	setgradebtncss();
+    	showPjfs();
+		initPf();    	
+    	initMews();
+    	//快速分级默认显示第一级
+    	getSymptom("0","1");
+    	//增加选择 体温 和血氧 分数后的自动算分
+    	/**
+    	$("select[id='sel_tiwen']").change(function () {
+    		getTotalScore();
+    		});
+    	$("select[id='sel_spo2']").change(function () {
+    		getTotalScore();
+    		});
+    	**/   	
+    });
+   
+
+</script>
+<script src="#path()/extend/easyui/jquery.easyui.min.js"></script>
+<link href="#path()/extend/easyui/css/default/easyui.css" rel="stylesheet" id="style_components" type="text/css" />
+<link href="#path()/extend/easyui/css/icon.css" rel="stylesheet" id="style_components" type="text/css" />
+
+
+
+
+
+<input type="hidden" id="p_id" value="" />
+<input type="hidden" id="level_1_id" value="" />
+<input type="hidden" id="level_1_name" value="" />
+<input type="hidden" id="level_2_id" value="" />
+<input type="hidden" id="level_2_name" value="" />
+<input type="hidden" id="level_3_id" value="" />
+<input type="hidden" id="level_3_name" value="" />
+<input type="hidden" id="rownum" value="" />
+<input type="hidden" id="defultpjfs" value="" />
+<div id='loading'
+	style='display:none;width:100%;height:120%;text-align:center;padding-top:20%; position: absolute;alpha(opacity=45); opacity:0.45;background-color:#FFFFFF;z-index:1000;'>
+	<table style='margin:auto;'>
+		<tr>
+			<td><span id='disp'>提交中,请等待...</span>
+			</td>
+		</tr>
+		<tr>
+			<td><img src='#path()/static/images/loading.gif'>
+			</td>
+		</tr>
+	</table>
+</div>
+<aside class="right-side">
+	<section class="content">
+		<div id="page-wrapper" class="outburst">
+			<!-- <div class="row">
+				<ol class="breadcrumb">
+					<li><a href="../index/index">首页</a></li>
+					<li class="active">突发公共卫生事件:</li>
+				</ol>
+			</div> -->
+			<div class="row">
+				<div class="table-head clearfix">
+					<div class="col-md-9" style="margin-top:15px">
+						<!-- <span class='labelSearch'>事件 ：</span> -->
+						<div class="input-group globalSearch pull-left version-hide" style="left:0" e_name="events_insert_name">
+							<input id="name" style='height:36px;border-radius: 4px;'
+								type="text" class="form-control  formInput" placeholder="请输入事件">
+						</div>
+						<div class="input-group globalSearch pull-left version-hide clearfix" style="width:250px;margin-left:10px;left:0" e_name="events_insert_num">
+							<input id="num" style='height:36px;width:calc(100% - 76px);float:left' type="text"
+								class="form-control  formInput" placeholder="请输入人数"><div id="numdiv" style="padding:0 10px;background:#eee;line-height:36px;border-radius:4px"></div> <span
+								class="input-group-btn">
+								<button class="btn btn-warning btn-sm version-hide" id="btn-chat"
+									onclick="add();" Userbehavior="A159" e_name="events_insert_list" style="float:left">生成清单</button> </span>
+						</div>
+					</div>
+					<div class='col-md-3'>
+						<div class="text-right button-add1">
+							<button type="button" class="btn btn-info btn-common"
+							Userbehavior="A160"	onclick="openEvents();">返回</button>
+							<button id="save" type="button" class="btn btn-info btn-common version-hide" Userbehavior="A63" onclick="save();"  style="display: none" e_name="events_insert_save">保存</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row outburst-table-box">
+				<div class="panel-table">
+					<div class="panel panel-default">
+						<div class="panel-body p0 tabMain">
+							<div class="table-responsive tableDelay table-box version-hide" e_name="events_list">
+								<!-- <table class="table table-outburst1">											
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>就诊卡号</th>
+											<th>姓名</th>
+											<th>性别</th>
+											<th>出生日期</th>
+											<th>费别</th>
+											<th></th>
+											<th>来院方式</th>
+											<th>意识状态</th>
+											<th>既往病史</th>
+											<th>无创血压<br>mmHg</th>
+											<th>心率<br>次/分</th>
+											<th>呼吸频率<br>次/分</th>
+											<th>体温<br>℃</th>
+											<th>分级</th>
+											<th>分诊去向</th>
+											<th>备注</th>
+											<th>编辑</th>
+										</tr>
+									</thead>																																		
+								</table> -->
+								<div class="table-responsive table-outburst2">
+									<table class="table table-hover titbox">	
+										<!-- <colgroup>
+											<col style="width:5%;" />
+											<col style="width:6%;" />
+											<col style="width:5%;" />
+											<col style="width:6%;" />
+											<col style="width:9%;" />
+											<col style="width:6%;" />
+											<col style="width:6%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:9%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:5%;" />
+											<col style="width:3%;" />
+										</colgroup>	 -->
+										<thead>
+										<tr>
+											<th>序号</th>
+											<th>就诊卡号</th>
+											<th>姓名</th>
+											<th>性别</th>
+											<th>出生日期</th>
+											<th>费别</th>
+											<th></th>
+										<!-- 	<th>来院方式</th>
+											<th>意识状态</th>
+											<th>既往病史</th> -->
+											<th>无创血压<br>mmHg</th>
+											<th>心率<br>次/分</th>
+											<th>呼吸频率<br>次/分</th>
+											<th>体温<br>℃</th>
+											<th>分级</th>
+											<th>分诊去向</th>
+											<th>备注</th>
+											<th>编辑</th>
+										</tr>
+									</thead>																																				
+										<tbody id="tbody">
+											<tr class="border-no">
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<!-- <td>——</td>
+												<td>——</td>
+												<td>——</td> -->
+												<td>——&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+												<td>——</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="addList" data-toggle="modal" Userbehavior="A163" onclick="addListShow();" ><i class="fa fa-plus"></i>添加患者</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade common-modal addcont" id="addList" style="width:300px">  
+			  <div class="modal-dialog" style="width:300px">  
+			    <div class="modal-content">  
+			      <div class="modal-header">  		      
+				      	目前有<span id=nownum></span>名患者列表  
+				  </div>
+			      <div class="modal-body text-center">  
+			      	<span class="reduce" onclick="reduce();">-</span>
+			      	<input type="text" class="form-control formHalf number" readonly="readonly" id="addnum" value="1" style="padding-left: 25px;">      
+			      	<span class="plus" onclick="plus();">+</span>			      	
+			      </div>  
+			      <div class="modal-footer modal-bottom">
+			     	 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+			      	 <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="add2();">确定</button>
+			      </div>  
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade common-modal" id="delete" style="width:300px"> 
+			  <div class="modal-dialog" style="width:300px">  
+			    <div class="modal-content message_align" style="background:#fff">
+			    	<div class="modal-header record-head"> 
+			    	 	删除记录 		      
+				  	</div>  
+			      <div class="modal-body text-center modal-middle"> 			      	
+			       	 确实删除“序号<span id="delxuhao"></span>”这一条记录？
+			      </div>  
+			      <div class="modal-footer modal-bottom" style="text-align:center">
+			      	 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+					 <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="removerow();">确定</button>
+			      </div>  
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade common-modal addcont" id="clear" style="width:300px;position:absolute; z-index:9999;" >  
+			  <div class="modal-dialog" style="width:300px">  
+			    <div class="modal-content">  
+			      <div class="modal-header record-head" style="margin-bottom:-1px">
+			      	  清除数据		      
+				  </div>
+			      <div class="modal-body text-center">  
+			      	是否清除评级信息?	      	
+			      </div>  
+			      <div class="modal-footer modal-bottom" style="border-bottom-left-radius: 6px;border-bottom-right-radius: 6px;"> 
+			      	 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button> 
+			      	 <button data-dismiss="modal" class="btn btn-primary" type="button" onclick="reset();">确定</button>
+			      </div>  
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade common-modal addcont" id="dosava" style="width:300px;position:absolute; z-index:9999;" >  
+			  <div class="modal-dialog" style="width:300px">  
+			    <div class="modal-content">  
+			      <div class="modal-body text-center">		
+			     	 <p>      	
+			      		<img src="#path()/static/images/success.png"> 
+			      	</p>	
+			      	<h4>保存成功！</h4>		      	
+			      </div>  
+			    </div>
+			  </div>
+			</div>
+			#include("fenzhenpjb.html")
+	</section>
+</aside>
+
+<!-- <div class="row">
+					<div class="col-md-12">
+						<div class='text-center footer'>
+							南京晨伟医疗设备有限公司 武汉大学人民医院  版权所有
+							<img src="images/footer.png">
+            			<i class="icon iconfont icon-duihuakuang4 pull-right"></i> 
+						</div>
+					</div>
+				</div>-->
+</div>
+</div>
+#end

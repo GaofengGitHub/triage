@@ -1,0 +1,139 @@
+ #@bj_layout('outburst') #define bj_main()
+<style>
+.datagrid-btable tr {
+	height: 30px;
+}
+
+.seach_div_data {
+	height: 340px !important;
+	overflow: auto;
+}
+
+.seach_div_header {
+	height: 25px !important;
+}
+</style>
+<script type="text/javascript">
+#include("outburst.js")
+$("body").css("background","#fff");
+</script>
+
+#include("window.html")
+<aside class="right-side">
+	<section class="content outburst">
+		<input type="hidden" id="evevtsid" value=""></input>
+		<div class="row" id="main2" style=" display: none;" >
+			<!-- <ol class="breadcrumb">
+				<li><a href="../index/index">首页</a></li>
+				<li>突发公共卫生事件</li>
+				<li>查看事件</li>
+			</ol> -->
+			<div class="events">
+				事件：<span id="name"></span><span  style="padding-left: 120px">人数：<span id="num"></span></span>
+				<span style="float:right;"><button type="button"
+						class="btn btn-info btn-common" Userbehavior="A155" onclick="openEvents();">返回</button>
+				</span>
+			</div>
+		</div>
+		<div id="page-wrapper">
+			<!-- <div class="row" id="main1">
+				<ol class="breadcrumb">
+					<li><a href="../index/index">首页</a></li>
+					<li>突发公共卫生事件</li>
+				</ol>
+			</div> -->
+
+			<div class="row button-add">
+				<div class="col-md-7 triage-time">
+					<span class='labelSearch'></span>
+					<div e_name="events_query_time" class="outburst-top-serach version-hide">
+						<div class="input-group globalSearch date-picker input-daterange " style="left:12px;width:150px" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+							<input id="btn-input-begin"
+								style='height:36px;border-radius: 4px;' type="text"
+								class="form-control  formInput">
+						</div>
+						<span class='labelSearch' style="left:22px">-</span>
+						<div class="input-group globalSearch date-picker input-daterange " style="left:30px;width:150px" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+							<input id="btn-input-end" style='height:36px;border-radius: 4px;'
+								type="text" class="form-control  formInput">
+						</div>
+					</div>
+					<div class="input-group globalSearch pull-left version-hide" e_name="events_query_name" style="width:236px;">
+						<input id="btn-input-name" style='height:36px;width:calc(100% - 58px);float:left' type="text"
+							class="form-control  formInput" placeholder="请输入事件名称" oninput="queryEvents(0)" onporpertychange="queryEvents(0)"> <span
+							class="input-group-btn" style="width:58px;float:left">
+							<button class="btn btn-sm btn-chat" Userbehavior="A59" onclick="queryEvents(0);">
+								<i class="fa fa-search"></i>
+							</button> </span>
+					</div>
+				</div>
+				
+				<div class='col-md-5 pull-right'>
+					<div class="text-right">
+						<div id="time" class="outburst-radio-box">
+							<div class="pull-left common-radio">
+								<label class="control-label" val='1'>一个月内</label>
+								<span class="checked-static radio-static">
+									<input type="radio" name='time' value='1'>
+									<i></i>
+								</span>													
+							</div>
+							<div class="pull-left common-radio">
+								<label class="control-label" val='6'>半年内</label>
+								<span class="checked-static radio-static">
+									<input type="radio" name='time' value='6'>
+									<i></i>
+								</span>													
+							</div>
+							<div class="pull-left common-radio">
+								<label class="control-label" val='12'>一年内</label>
+								<span class="checked-static radio-static">
+									<input type="radio" name='time' value='12'>
+									<i></i>
+								</span>													
+							</div>
+							<div class="pull-left common-radio">
+								<label class="control-label" val='all'>全部</label>
+								<span class="checked-static radio-static">
+									<input type="radio" name='time' value='all'>
+									<i></i>
+								</span>													
+							</div>
+							<!-- <sapn>一个月内</span>
+							<input type="radio" value='1' name='time'>
+							<sapn>半年内</span>
+							<input type="radio" value='6' name='time'>
+							<sapn>一年内</span>
+							<input type="radio" value='12' name='time'> -->
+						</div>
+						<button type="button" class="btn btn-info btn-common"
+						Userbehavior="A60" onclick="toAdd();">新增事件</button>
+					</div>
+				</div>
+			</div>
+			<div class="row entry">				
+				<div class="b-panel-body p0 table-set table-create">
+					<table class="table table-hover" id="tb0">
+					</table>
+				</div>
+			</div>
+			<!--<div class="row">
+					<div class="col-md-12">
+						<div class='text-center footer'>
+							南京晨伟医疗设备有限公司 武汉大学人民医院  版权所有
+							<img src="images/footer.png">
+            			<i class="icon iconfont icon-duihuakuang4 pull-right"></i>
+						</div>
+					</div>
+				</div> -->
+		</div>
+		<div class="row entry">			
+			<div class="b-panel-body p0 table-set table-create">
+				<table class="table table-hover" id="tb5">
+				</table>
+
+			</div>
+		</div>
+	</section>
+</aside>
+#end

@@ -1,0 +1,141 @@
+<script type="text/javascript">
+#include("report_16.js")
+</script>
+<div class="chart-section">
+	<div class="select-top clearfix">
+		<div class="datetime-box pull-left">
+	        <form class="form-inline headSearch" role="">
+	        	<div style="display:inline-block;vertical-align: middle;">
+					<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+				        <input type="text" class="form-control" name="from" id="starttime">
+				        <span class="input-group-addon"> - </span>
+				        <input type="text" class="form-control" name="to" id="endtime">                    
+				    </div>
+				</div>
+					   <!--  <input type="text" class="form-control" style='width: 40%;'
+					        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+							id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+						<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+							查询
+						</a>
+					</form>
+	    </div>
+	    <a href="#" class="chart-part16-notice-btn">事件发生中</a>
+	    <div class="chart-part16-notice">
+	        <div>
+	            <label>发展与变化：</label>
+	            <p>2019-03-01 23:40 第一例患者到院</p>
+	        </div>
+	        <div>
+	            <label>处置进程：</label>
+	            <p>目前已分诊2人  诊疗中1人  等待1人  完成诊疗0人</p>
+	        </div>
+	        <div>
+	            <label>事件的诊断和原因或可能因素：</label>
+	            <p></p>
+	        </div>
+	        <div>
+	            <label>势态评估：</label>
+	            <p></p>
+	        </div>
+	        <div>
+	            <label>控制措施：</label>
+	            <p></p>
+	        </div>
+	    </div>
+		
+	</div>
+        <div class="clearfix chart-part08 chart-part16">
+        <div class="chart-part08-01 clearfix">
+            <div class="pull-left">
+                <div class="chart-part16-01-content report-common-box">
+                    <h1 class="chart-big-title">突发公共卫生事件数</h1>
+                    <div>
+                        <h2><span class="counter">11</span>件</h2>
+                        <div class="report-common-text clearfix">
+	                        <p>涉及患者数(人)<span class="counter">329</span></p>
+	                        <p>死亡人数(人)<span class="counter">7</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="report-common-box">
+	                <h1 class="chart-big-title">发生场所排名</h1>
+	                <table class="table table-bordered report-common-table report-common-table-notdbg chart-part08-rank">
+						<thead>
+							<tr>
+								<th>事件场所</th>
+								<th>数量(件)</th>
+							</tr>
+						</thead>
+						<tbody>					
+							<tr>
+								<td>学校</td>
+								<td class="counter">5</td>							
+							</tr>
+							<tr>
+								<td>医疗卫生机构</td>
+								<td class="counter">3</td>							
+							</tr>
+							<tr>
+								<td>家庭</td>
+								<td class="counter">1</td>							
+							</tr>
+							<tr>
+								<td>宾馆饭店写字楼</td>
+								<td class="counter">1</td>							
+							</tr>
+							<tr>
+								<td>餐饮服务单位</td>
+								<td class="counter">1</td>							
+							</tr>
+						</tbody>
+					</table>	                
+	            </div>
+            </div>
+            <div class="pull-right">
+            	<div class="report-common-box">
+               		<h1 class="chart-big-title">事件分类情况</h1>
+                	<div class="chart-box" id="report_16_chart1" style="height:300px"></div>
+               </div>
+            	<div class="clearfix chart-part16-right-bottom">
+                	<div class="pull-left report-common-box">
+                    	<h1 class="chart-big-title">事件等级情况</h1>
+                    	<div class="chart-box" style="width:100%;height:calc(100% - 120px)" id="report_16_chart2"></div>
+                    	<div class="chart-table">
+		                    <table class="table table-bordered chart-part01-table">
+		                        <thead>
+		                        <tr>
+		            
+		                            <th>事件等级</th>
+		                            <th>特别重大</th>
+		                            <th>重大</th>
+		                            <th>较大</th>
+		                            <th>一般</th>
+		                            <th>未分级</th>
+		                            <th>非突发事件</th>
+		                        </tr>
+		                        </thead>
+		                        <tbody>
+		                        <tr>
+		                            <td>急诊人次数</td>
+		                            <td>0</td>
+		                            <td>1</td>
+		                            <td>2</td>
+		                            <td>8</td>
+		                            <td>0</td>
+		                            <td>0</td>
+		                        </tr>
+		                       
+		                        </tbody>
+		                    </table>
+		                </div>
+	                </div>
+	                <div class="pull-right report-common-box">
+	                    <h1 class="chart-big-title">患者危急情况</h1>
+	                    <div class="chart-box" id="report_16_chart3" style="height:calc(100% - 50px)"></div>
+	                </div>
+	            </div>                              
+            </div>
+        </div>        
+    </div>    
+</div>

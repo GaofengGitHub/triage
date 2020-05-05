@@ -1,0 +1,66 @@
+<script type="text/javascript">
+#include("report_2.js")
+</script>
+<div class="chart-section">
+    <div class="select-top">
+    	<div class="datetime-box clearfix">
+        <form class="form-inline headSearch" role="">
+        <div style="display:inline-block;vertical-align: middle;">
+			<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+		        <input type="text" class="form-control" name="from" id="starttime">
+		        <span class="input-group-addon"> - </span>
+		        <input type="text" class="form-control" name="to" id="endtime">                    
+		    </div>
+		</div>
+				    <!-- <input type="text" class="form-control" style='width: 40%;'
+				        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+						id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+					<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+						查询
+					</a>
+				</form>
+    </div>
+    </div>
+    <div class="clearfix chart-part02">
+        <div class="pull-left report-common-box chart-part02-01">
+            <h1 class="chart-big-title">急诊分诊率&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#" class="title-link">查看未分诊患者明细</a></h1>
+            <div class="clearfix">
+                <div class="percent-text pull-left">
+                    <div class="circle-bar">
+					    <div class="circle-bar-left"></div>
+					    <div class="circle-bar-right"></div>
+					    <div class="mask">
+					        <span class="percent" >99%</span>
+					    </div>
+					</div>
+                </div>
+                <div class="pull-right percent-text-right">
+                    <p>挂号例数(例)<br /><span class="counter">8233</span></p>
+                    <p>分诊例数(例)<br /><span class="counter">8156</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="pull-left report-common-box chart-part02-02">
+            <h1 class="chart-big-title">分诊用时</h1>
+            <div class="clearfix">
+                <p>平均(秒)<br /><span class="counter">118</span></p>
+                <p>最长(秒)<br /><span class="counter">283</span></p>
+                <p>最短(秒)<br /><span class="counter">60</span></p>
+            </div>
+        </div>
+        <div class="pull-left report-common-box chart-part02-03">
+            <h1 class="chart-big-title">日分诊量曲线图</h1>
+            <div class="chart-box" id="linechart5" style="height:130px">
+                
+            </div>
+        </div>
+
+    </div>
+    <div class="four-part-chart02 report-common-box clearfix">
+        <h1 class="chart-big-title">分诊患者分类情况&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#" class="title-link">查看明细</a></h1>
+        <div class="four-part-chart02-01" id="linechart"></div>
+        <div class="four-part-chart02-02" id="linechart2" ></div>
+        <div class="four-part-chart02-03" id="linechart3"></div>
+        <div class="four-part-chart02-04" id="linechart4"></div>
+    </div>
+</div>

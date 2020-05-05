@@ -1,0 +1,133 @@
+#@bj_layout('card')
+#define bj_main()
+<script>
+#include("cardlist.js")
+</script>
+ <aside class="right-side">
+    <section class="content">
+    	<div class="addcard-section">
+    		<h1 class="clearfix"><span>办卡记录</span><a id="addCard" href="javascript:void(0);">新增就诊卡</a></h1>
+    		<div class="addcard-list-search clearfix">
+    			<div class="pull-left">
+                    <label class="control-label pull-left">办卡日期</label>
+                     <div class="pull-left">
+                        <div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+                           <input type="text" class="form-control" name="from" placeholder="请选择开始时间" id="from">
+                           <span class="input-group-addon"> - </span>
+                           <input type="text" class="form-control" name="to" placeholder="请选择结束时间" id="to">
+                        </div>                                            
+                     </div>
+               </div>
+    			<div class="pull-left">
+                    <label class="control-label pull-left">就诊卡号</label>
+                    <input type="text" class="form-control" placeholder="请输入查询就诊卡号" style="display:inline-block;width:200px;" id="cardnum" oninput="queryCardInfoList()" onporpertychange="queryCardInfoList()">
+               </div>
+               <div class="pull-left">
+                    <label class="control-label pull-left">患者姓名</label>
+                    <input type="text" class="form-control" placeholder="请输入患者姓名" style="display:inline-block;width:160px;" id="fullname" oninput="queryCardInfoList()" onporpertychange="queryCardInfoList()">
+               </div>
+               <button class="btn btn-primary"><i class="fa fa-search" id="search"></i></button>
+<!--                <button class="btn btn-primary" id="all">全部</button> -->
+    		</div>
+    		<div class="addcard-list-table">
+    			<table class="table table-bordered" id="tb0">
+    			</table>
+    		</div>
+    		<!-- 查看详情弹窗 -->
+    		<div class="modal fade common-modal" id="cardlist-detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width:800px">  
+			  <div class="modal-dialog" style="width:100%">  
+			    <div class="modal-content">  
+			      <div class="modal-header">  
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span Userbehavior="A75" aria-hidden="true">×</span></button>  
+			        <h4 class="modal-title">就诊卡信息浏览</h4>  
+			      </div>  
+			      <div class="modal-body">
+			      	<div class="showcard-form-top clearfix">
+			      		<div class="pull-left">
+			      			<label class="control-label">就诊卡号：</label>
+			      			<p class="static-text" id="p_cardnum"></p>
+			      		</div>			      	
+			      		<div class="pull-right">
+			      			<label class="control-label">办卡人：</label>
+			      			<p class="static-text" id="p_updateusername">陈一玲</p>
+			      		</div>
+			      		<div class="pull-right">
+			      			<label class="control-label">办卡日期：</label>
+			      			<p class="static-text" id="p_updatetime"></p>
+			      		</div>
+			      	</div>  
+			        <div class="addcard-form showcard-form clearfix">
+					  	<div class="pull-left">
+							 <div class="form-group clearfix">
+							    <label class="control-label">姓名：</label>
+							    <p class="static-text" id="p_fullname"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">身份证号：</label>
+							    <p class="static-text" id="p_idcard"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">性别：</label>
+							    <p class="static-text" id="p_gender"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">出生日期：</label>
+							    <p class="static-text" id="p_bronday"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">年龄：</label>
+							    <p class="static-text" id="p_age"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">联系电话：</label>
+							    <p class="static-text" id="p_tel"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">民族：</label>
+							    <p class="static-text" id="p_nation"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">国籍：</label>
+							    <p class="static-text" id="p_country"></p>
+							 </div>	 
+					  	</div>
+					  	<div class="pull-left">
+							 <div class="form-group clearfix">
+							    <label class="control-label">紧急联系人：</label>
+							    <p class="static-text" id="p_ralationname"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">紧急联系人电话：</label>
+							    <p class="static-text" id="p_ralationtel"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">家庭住址：</label>
+							    <p class="static-text" id="p_adderssdesc"></p>
+							 </div>
+							 <div class="form-group clearfix">
+							    <label class="control-label">工作单位：</label>
+							    <p class="static-text" id="p_occupation"></p>
+							 </div>	
+							 <div class="form-group clearfix">
+							    <label class="control-label">职业：</label>
+							    <p class="static-text" id="p_workplace"></p>
+							 </div> 
+							 <div class="form-group clearfix">
+							    <label class="control-label">备注信息：</label>
+							    <p class="static-text" id="p_remark"></p>
+							 </div>
+							 
+					  	</div>
+					  </div>
+			          
+			      </div>  
+			      <div class="modal-footer">  
+			         <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>  
+			      </div>  
+			    </div>
+			  </div>
+			</div>
+    	</div>
+    </section>
+  </aside>
+#end

@@ -1,0 +1,52 @@
+
+
+<script src="#path()/static/dist/js/interaction.js"></script>
+<script type="text/javascript">
+	#include("setVersion.js")
+</script>
+<div class="panelMain">
+	<div id='update' class="setversion-section">
+		<h3>版本选择</h3>
+		<div id='info_list'></div>
+		<div class="form-group ">
+			<button onclick="updateinfo();" class="btn btn-rule btn-lg">保存</button>
+		</div>
+	</div>
+	<div id='look' class="setversion-section">
+		<h3>湖北省人民医院试用分诊<span id='v_name'></span></h3>
+		<div class="form-group ">
+			<button onclick="showupdateinfo();" class="btn btn-rule btn-lg">修改</button>
+		</div>
+	</div>
+</div>
+<div class="row">
+			
+			<div class="col-md-10">
+				<div id="twopanel" style="padding-top: 0px;padding-left: 0px;">
+					<div id='update'>
+						<div class="panelMain">
+							<div>
+								输入验证码：
+								<textarea id='cd_key' rows="1" cols="30" type="text"
+									placeholder='请输入验证码' autocomplete=off></textarea>
+							</div>
+							<div class="form-group ">
+								<button onclick="updatecdkey();" class="btn btn-rule btn-lg">保存</button>
+							</div>
+						</div>
+					</div>
+					<div id='look'>
+						<div class="panelMain">
+							<div id='look_con_ver'></div>
+							<div id='look_con'></div>
+							
+							<div class="form-group ">
+								<button onclick="showupdatecdkey();" class="btn btn-rule btn-lg">修改</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>

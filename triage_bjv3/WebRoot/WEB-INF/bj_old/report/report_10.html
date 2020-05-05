@@ -1,0 +1,141 @@
+<script type="text/javascript">
+#include("report_10.js")
+</script>
+<div class="chart-section">
+    <div class="select-top">
+    	<div class="datetime-box clearfix">
+        <form class="form-inline headSearch" role="">
+        	<div style="display:inline-block;vertical-align: middle;">
+				<div class="input-group input-large date-picker input-daterange" data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+			        <input type="text" class="form-control" name="from" id="starttime">
+			        <span class="input-group-addon"> - </span>
+			        <input type="text" class="form-control" name="to" id="endtime">                    
+			    </div>
+			</div>
+				   <!--  <input type="text" class="form-control" style='width: 40%;'
+				        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 40%;'
+						id="endtime" placeholder="" AUTOCOMPLETE="OFF"> -->
+					<a class="report-top-search-btn" Userbehavior="A54" href="javascript:void(0);" onclick="tongji();">
+						查询
+					</a>
+				</form>
+    </div>
+    </div>
+    <div class="clearfix chart-part10">
+        <div class="chart-part08-02 chart-part10-01 clearfix">
+            <div class="pull-left">
+                <h1 class="chart-big-title">急诊人次</h1>
+                <h2 class="counter">8156</h2>
+                <h3>共计(人次)</h3>
+            </div>
+            <div class="pull-left report-common-box">                       
+                <h1 class="chart-big-title">主诉排名</h1>
+                <table class="table table-bordered report-common-table report-common-table-notdbg chart-part08-rank">
+						<thead>
+							<tr>
+								<th>事件</th>
+								<th>人数(人次)</th>
+							</tr>
+						</thead>
+						<tbody>					
+							<tr>
+								<td>发热</td>
+								<td class="counter">1453</td>							
+							</tr>
+							<tr>
+								<td>咽痛</td>
+								<td class="counter">858</td>							
+							</tr>
+							<tr>
+								<td>咳嗽</td>
+								<td class="counter">832</td>							
+							</tr>
+							<tr>
+								<td>鼻塞、流涕、打喷嚏</td>
+								<td class="counter">645</td>							
+							</tr>
+							<tr>
+								<td>腹痛</td>
+								<td class="counter">325</td>							
+							</tr>														
+						</tbody>
+					</table>	                
+            </div>
+            <div class="pull-left report-common-box">
+                <h1 class="chart-big-title">诊断排名</h1>
+                <table class="table table-bordered report-common-table report-common-table-notdbg chart-part08-rank">
+						<thead>
+							<tr>
+								<th>事件</th>
+								<th>人数(人次)</th>
+							</tr>
+						</thead>
+						<tbody>					
+							<tr>
+								<td>急性酒精中毒</td>
+								<td class="counter">121</td>							
+							</tr>
+							<tr>
+								<td>过敏性休克</td>
+								<td class="counter">87</td>							
+							</tr>
+							<tr>
+								<td>心脏呼吸骤停</td>
+								<td class="counter">65</td>							
+							</tr>
+							<tr>
+								<td>脑震荡</td>
+								<td class="counter">54</td>							
+							</tr>	
+							<tr>
+								<td>胃炎</td>
+								<td class="counter">34</td>							
+							</tr>						
+						</tbody>
+					</table>	              
+            </div>
+        </div>
+        <div class="report-common-box chart-part10-bottom">
+        	<h1>急诊病种分析</h1>
+        	<div class="chart-box" id="option_1" style="height:calc(100% - 160px);"></div>
+			<table class="table table-bordered report-common-table report-common-table-notdbg">
+				<thead>
+					<tr>
+						<th>呼吸系统疾病</th>
+						<th>心脏血管疾病</th>
+						<th>肠胃系统疾病</th>
+						<th>神经系统疾病</th>
+						<th>骨骼系统疾病</th>
+						<th>泌尿系统疾病</th>
+						<th>耳鼻喉系统疾病</th>
+						<th>眼科疾病</th>
+						<th>皮肤疾病</th>
+						<th>妇科疾病</th>
+						<th>产科疾病</th>
+						<th>精神疾病</th>
+						<th>物质误用</th>
+						<th>其他</th>
+					</tr>
+				</thead>
+				<tbody>			
+					<tr>
+						<td class="counter">2966</td>
+						<td class="counter">2552</td>
+						<td class="counter">1576</td>
+						<td class="counter">123</td>
+						<td class="counter">251</td>
+						<td class="counter">141</td>
+						<td class="counter">154</td>
+						<td class="counter">122</td>
+						<td class="counter">121</td>
+						<td class="counter">55</td>
+						<td class="counter">43</td>
+						<td class="counter">21</td>
+						<td class="counter">18</td>
+						<td class="counter">13</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+	</div>
+</div>

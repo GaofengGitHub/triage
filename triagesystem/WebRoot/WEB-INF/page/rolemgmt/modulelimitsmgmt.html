@@ -1,0 +1,43 @@
+<link rel="stylesheet" type="text/css" href="#path()/static/shu2/css/style.css" />
+<link rel="stylesheet" href="#path()/static/dist/css/demo.css" type="text/css">
+<link rel="stylesheet" href="#path()/static/dist/css/metroStyle.css" type="text/css">
+<script type="text/javascript" src="#path()/static/dist/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="#path()/static/dist/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="#path()/static/dist/js/jquery.ztree.exedit.js"></script>
+<script type="text/javascript">
+#include("modulelimitsmgmt.js")	
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#json1").children().css("background-color","#6699FF");
+	bb("1");
+});
+        
+</script>
+<div class="panelMain">
+	<div class="col-md-3">
+		<div style="float: left;">
+			<a href="javascript:void(0);" id="json1" onclick="treeload(this);"><div
+					style="height: 120px; width: 30px; background-color: #D7D7D7; color: #000000; font-size: 15px; border-radius: 5px; display: flex; display: -webkit-flex; align-items: center; -webkit-align-items: center; justify-content: space-around; -webkit-justify-content: space-around; margin-bottom: 2px;">
+					科<br>室<br>管<br>理
+				</div></a> <a href="javascript:void(0);" id="json2" onclick="treeload(this);"><div
+					style="height: 120px; width: 30px; background-color: #D7D7D7; color: #000000; font-size: 15px; border-radius: 5px; display: flex; display: -webkit-flex; align-items: center; -webkit-align-items: center; justify-content: space-around; -webkit-justify-content: space-around; margin-bottom: 2px;">
+					临<br>床
+				</div></a> <a href="javascript:void(0);" id="json3" onclick="treeload(this);"><div
+					style="height: 120px; width: 30px; background-color: #D7D7D7; color: #000000; font-size: 15px; border-radius: 5px; display: flex; display: -webkit-flex; align-items: center; -webkit-align-items: center; justify-content: space-around; -webkit-justify-content: space-around">
+					系<br>统<br>管<br>理
+				</div></a>
+		</div>
+		<div class="circumscribe" style="float: left; width: 202px;">
+			<div id="treepanel">
+				<div class="tree well" style="overflow: auto">
+					<ul id="rootUL1">
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="workstation">
+	</div>
+</div>
+

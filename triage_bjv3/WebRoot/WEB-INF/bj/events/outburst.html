@@ -1,0 +1,119 @@
+ #@bj_layout('outburst') #define bj_main()
+ <section class="content history">
+
+
+ <nav class="navbar navbar-default">
+	 <div class="container-fluid">
+		 <!-- Collect the nav links, forms, and other content for toggling -->
+		 <div class="collapse navbar-collapse specialThing  row p0" id="bs-example-navbar-collapse-1">
+			 <div class="col-md-4 p0" >
+				 <div id="time" class="outburst-radio-box">
+					 <div class="checkbox">
+						 <label>
+							 <i></i>
+							 <input type="radio"  name="time" val="1"> 一个月内
+						 </label>
+					 </div>
+					 <div class="checkbox">
+						 <label>
+						 	 <i></i>
+							 <input type="radio" name="time" val="6"> 半年内
+						 </label>
+					 </div>
+					 <div class="checkbox">
+						 <label>
+						  	<i></i>
+							 <input type="radio" name="time" val="12"> 一年内
+						 </label>
+					 </div>
+
+				 </div>
+			 </div>
+			
+			<div class="col-md-8 p0">
+				<!-- <div class="my-data-picker">
+					<img  src="#path()/static/vendor/newpage/images/tfsj/data.png" alt=""> -->
+					<!-- <div class="my-data-picker my-data-picker-text">
+						<div class="date-picker input-daterange "  data-date="2018-12-12" data-date-format="yyyy/mm/dd">
+							<input id="btn-input-begin"
+								   type="text"
+								   class=" formInput">
+						</div>
+						<span class='data-to'>-</span>
+						<div class="date-picker input-daterange " data-date="2018-12-12" data-date-format="yyyy/mm/dd">
+							<input id="btn-input-end"
+								   type="text" class="formInput">
+						</div>
+					</div> -->
+					<div class="my-data-picker" style="width: 35%">
+						<img  src="#path()/static/vendor/newpage/images/tfsj/data.png" alt="">
+						 <div class="my-data-picker my-data-picker-text">
+							<div class=" input-daterange "  data-date="2018-12-12" data-date-format="yyyy-mm-dd"  >
+								<input id="btn-input-begin"
+									   type="text"
+									   name="from"
+									   placeholder="开始时间"
+									   class=" formInput">
+							</div>
+							<span class='data-to'>-</span>
+							<div class=" input-daterange " data-date="2018-12-12" data-date-format="yyyy-mm-dd">
+								<input id="btn-input-end" name="to"
+									   type="text" class="formInput" placeholder="结束时间">
+							</div>
+						</div>
+					</div>
+ 						<!-- <input type="text" class="form-control layer-date" name = "from" id=" btn-input-begin"  placeholder="开始时间" />  -  
+						<input type="text" class="form-control layer-date" name = "to" id=" btn-input-end"  placeholder="结束时间" /> 	  -->
+	
+				<div class="form-group globalSearch pull-left">
+					<input id="btn-input-name"  type="text"
+						   class="form-control  formInput" placeholder="请输入事件名称" oninput="queryEvents()" onporpertychange="queryEvents()">
+					<button type="button" class="btn btn-sm btn-primary btn-search" Userbehavior="A59" onclick="queryEvents();">
+						<i class="fa fa-search"></i> 查询
+					</button>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li onclick="toAdd();"><a href="javascript:void(0)">
+						<img src="#path()/static/vendor/newpage/images/tfsj/add.png" alt="">
+						新增事件</a></li>
+				</ul>
+			</div>
+
+		 </div><!-- /.navbar-collapse -->
+	 </div><!-- /.container-fluid -->
+ </nav>
+
+	 <div class="row entry">
+		 <div class="b-panel-body p0 table-set table-create">
+			 <table class="table table-hover" id="tb0" style="border-collapse: separate !important; padding: 0; border-spacing: 0px 6px;">
+			 </table>
+		 </div>
+	 </div>
+
+
+<!-- <div class="pageSize row">-->
+<!--	 <div class="col-md-6 p0"></div>-->
+<!--	 <div class="col-md-2 p0">-->
+<!--		 <div class="pageSizeTotal">-->
+<!--			 每页显示<input type="text" class="form-control " disabled value="22条">记录-->
+<!--		 </div>-->
+<!--	 </div>-->
+<!--	 <div class="col-md-4 p0">-->
+<!--		 <ul class="pagination pagination-lg">-->
+<!--			 <li><a href="#">&laquo;</a></li>-->
+<!--			 <li><a href="#">1</a></li>-->
+<!--			 <li><a href="#">2</a></li>-->
+<!--			 <li><a href="#">3</a></li>-->
+<!--			 <li><a href="#">4</a></li>-->
+<!--			 <li><a href="#">5</a></li>-->
+<!--			 <li><a href="#">&raquo;</a></li>-->
+<!--		 </ul>-->
+<!--	 </div>-->
+
+<!-- </div>-->
+ </section>
+ <script type="text/javascript">
+	 #include("outburst.js")
+	 $("body").css("background","#fff");
+ </script>
+#end

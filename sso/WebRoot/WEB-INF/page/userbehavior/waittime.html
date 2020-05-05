@@ -1,0 +1,41 @@
+<script type="text/javascript">
+$(document).ready(function () {
+	var date = new Date();
+	var mes = new Date(date-1000*3600*24*30);
+	laydate.render({
+		 elem: '#starttime' //指定元素
+		,value: mes
+	});
+	laydate.render({
+		 elem: '#endtime' //指定元素
+		,value: new Date()
+	});
+	queryTypeBehavior("station");
+	querywaittime();
+	zerowaittime();
+})
+</script>
+	
+	<div class="table table-repeive Info">
+	页面停留时间
+		<form class="form-inline headSearch" role="">
+		    时间段：<input type="text" class="form-control" style='width:120px;'
+		        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width:120px;'
+				id="endtime" placeholder="" AUTOCOMPLETE="OFF">
+		</form>
+		<form class="form-inline headSearch" role="">
+		    工作站：<select class="form-control" id="stationlist"></select>
+		</form>
+		<a class="btn btn-sm btn-primary" href="javascript:void(0);" onclick="querywaittime();">
+			<i class="fa fa-search"></i>查询
+		</a>
+	</div>
+    <div class="row">
+	<div class="recordData tab-content">
+    	<div class="tab-pane" style="display:block" id="showwaittime">
+	    </div>
+    </div>
+    <div style="margin-left: 90%;">
+	无停留页面：<span id="zerowaittime"></span>
+	</div>
+    </div>

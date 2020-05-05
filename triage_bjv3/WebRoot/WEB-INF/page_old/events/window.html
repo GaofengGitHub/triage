@@ -1,0 +1,46 @@
+<div class="modal fade common-modal" id="seach_patient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+		<div class="modal-dialog" style="width:880px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">病人信息</h4>
+				</div>
+				<div class="modal-body">
+					<div class="b-panel b-panel-default">
+						<div class="b-panel-body p0">
+							<div class="table-responsive" id="seach_div" style="overflow: auto;">
+								<table class="table table-hover " id="tb4" >
+
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">
+						确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<div class="modal fade common-modal" id="teModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+  <div class="modal-dialog" style="width:300px">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+        <h4 class="modal-title">提示信息</h4>  
+      </div>  
+      <div class="modal-body">  
+        <p id="temessage"></p>  
+      </div>  
+      <div class="modal-footer">  
+         <input type="hidden" id="tep_id"/>
+         <input type="hidden" id="caozuo"/>
+         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+         <a  onclick="teurlSubmit()" class="btn btn-primary" data-dismiss="modal">确定</a>  
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div><!-- /.modal -->

@@ -1,0 +1,141 @@
+<script type="text/javascript">
+
+function dataDictionaryList() {
+    $('#dataDictionaryList').datagrid({
+         url: '#path()/systemmgmt/queryDataDictionary',
+         allowCellSelect: true,
+         check: {
+             enable: true
+         },
+         //idField: 'id',
+         rownumbers: true,
+         toolbar: '#row1,#row2',
+         nowrap: true, //列内容多时自动折至第二行
+         border: false,
+         pagination:true,
+         pageSize : 10, //页大小
+         pageList : [ 5,10,15,20],
+         fitColumns:true,
+         singleSelect: true,//选择多行
+         columns: [[
+            {field: 'id', hidden: 'true' },
+			{field : 'name',title : '标签名',align : 'center',width : '15%',sortable : false},
+			{field : 'val',title : '数据值',align : 'center',width : '15%',sortable : false},
+			{field : 'sort',title : '类型',align : 'center',width : '15%',sortable : false},
+			{field : 'descr',title : '描述',align : 'center',width : '19%',sortable : false},
+			{field : 'num',title : '排序',align : 'center',width : '12%',sortable : false},
+			{field : 'addr',title :'简称',align : 'center',width : '15%',sortable : false},
+			{field : 'note',title : '备注信息',align : 'center',width : '25%',sortable : false}
+         ]],
+         onAfterEdit : function(index, row) {
+             //endEdit该方法触发此事件
+                 //updateNodeEditOrNew(row);
+                 //刷新树结构
+                 //row.editing = false;
+                 $('#dataDictionaryList').datagrid('refreshRow', index);
+         }
+     });
+}
+
+function modInfo(){
+    var rowData = $("#dataDictionaryList").datagrid("getSelections");
+	if(rowData.length != 1){
+        toastr.warning("请选中一行数据");
+        return;
+    }
+    $('#twopanel').panel({
+		href:'#path()/systemmgmt/updateDataDictionary?dataDictionaryId='+rowData[0].id
+	});   
+}
+
+function deleteDataDictionary(){
+    //编辑完之后自动刷新行
+    $('#dataDictionaryList').datagrid( rowIndex,'refreshRow');
+	var rowData = $("#dataDictionaryList").datagrid("getSelections");
+	if(rowData.length != 1){
+        toastr.warning("请选中一行数据");
+        return;
+    }
+	if(!confirm("确定要删除数据?")){
+	 	return false;
+	}
+
+	var rowIndex=$('#dataDictionaryList').datagrid('getRowIndex',rowData[0]);
+	$.ajax({
+		type : "post",
+		url : "#path()/systemmgmt/deleteDataDictionary",
+		dataType : "json",
+		async : false,
+		data : {
+			dataDictionaryId : rowData[0].id
+		},
+		success : function(result) {
+			toastr.warning("操作成功");
+		    //编辑完之后自动刷新行
+		    $('#dataDictionaryList').datagrid( rowIndex,'refreshRow');
+		},
+		error : function() {
+			toastr.warning("操作失败");
+		}
+   });
+}
+
+/*批量导入*/
+/*#load:为按钮,点击后生成一个隐藏的input file标签*/
+
+function uploadFile() {
+    var myform = new FormData();
+    myform.append('file',$('#load_xls')[0].files[0]);
+    $.ajax({
+        //url: "admin.php?r=org/orguser/addusers",
+        type: "POST",
+        //data: myform,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            console.log(data);
+        },
+        error:function(data){
+            console.log(data)
+        }
+    });
+}
+
+$(document).ready(function() {
+	dataDictionaryList();
+	$('#loadFile').after('<input type="file" id="load_xls" name="file" style="display:none" onchange ="uploadFile()">');
+	$('#loadFile').click(function(){
+	    document.getElementById("load_xls").click();
+	});
+});
+
+$("#search").click(function(){
+	var desc = $("#desc").val();
+	$('#dataDictionaryList').datagrid('load',{                          
+         desc:desc
+    });
+});
+
+$("#reset").click(function(){
+	$("#desc").val("");
+});
+</script>
+	<div class="panelMain" style='padding:30px;'>
+	    <div style="text-align:center;">
+	        <input type="text" name="desc" id="desc"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary btn-xs" id="search">查询</button>&nbsp;<button class="btn btn-primary btn-xs" id="reset">重置</button>
+	    </div>
+		<table class="easyui-datagrid" id="dataDictionaryList" title="数据字典管理"
+			style="width: 98%; height: 98%;">
+		</table>
+		<div id="row2">
+			<a href="javascript:void(0);" onclick="load('addDataDictionary');">
+				<button class="btn btn-primary btn-xs">新增</button>
+			</a> 
+			<a href="javascript:void(0);" onclick="modInfo();">
+				<button class="btn btn-primary btn-xs">修改</button>
+			</a> 
+			<a href="javascript:void(0);" onclick="deleteDataDictionary();">
+				<button class="btn btn-primary btn-xs">删除</button>
+			</a>
+		</div>
+	</div>

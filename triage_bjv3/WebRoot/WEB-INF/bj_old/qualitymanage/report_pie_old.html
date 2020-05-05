@@ -1,0 +1,153 @@
+#@bj_layout('index')
+#define bj_main()
+
+<script type="text/javascript">
+#include("report_pie_old.js")
+ $(document).ready(function () {
+    	$('#input').show();
+		$('#case').show();
+		$('#qualitymanage').show();
+		$('#nextwork').show();
+		$('#ismore').html('隐藏更多功能');
+    });
+</script>
+<aside class="right-side">
+	                 <section class="content">
+		<div class="row chartips">
+			<div class='col-md-4 text-center'>
+				<span class='norm'>全国急诊专业医疗质量控制指标(2017版)</span>
+			</div>
+			<div class='col-md-5'>
+				<form class="form-inline chartSearch" role="form">
+					<input type="text" class="form-control" style='width: 35%;'
+				        id="starttime" placeholder="" AUTOCOMPLETE="OFF">-<input type="text" class="form-control" style='width: 35%;'
+						id="endtime" placeholder="" AUTOCOMPLETE="OFF">
+					<a class="btn btn-sm btn-primary" Userbehavior="A65" href="javascript:void(0);">
+						<i class="fa fa-search" style="color:#1967b2"></i>统计
+					</a>
+				</form>
+			</div>
+			<div class='col-md-34'>
+				<ul class="nav nav-tabs pageTab">
+				    <li><a data-toggle="tab" Userbehavior="A67" href="#pageTwo">第二页</a>
+					</li>
+					<li class="active"><a data-toggle="tab" Userbehavior="A66" href="#pageOne">第一页</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="tab-content zk-chart-box">
+			<div id="pageOne" class="tab-pane active">
+				<div class="row" style="margin-left: 0px;margin-right: 0px;">
+					<div class="col-md-12">
+						<div class='col-md-4'>
+							<h5 class="barTitle">急诊科医患比 &nbsp;&nbsp;<span class='red'>1:16</span></h5>
+							<canvas id="barchart" width="200" height="90"></canvas>
+						</div>
+						<div class='col-md-4 text-center cf'>
+							<h5 class="barTitle">急诊科医生职称构成比</h5>
+							<canvas id="piechart" width="200" height="90"></canvas>
+						</div>
+						<div class='col-md-4 text-center'>
+							<h5 class="barTitle">急诊科护患比&nbsp;&nbsp;<span class='red'>1:8</span></h5></h5>
+							<canvas id="barchart2" width="200" height="90"></canvas>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class='clearfix' style='border-top: 4px solid #c8c9cb;'>
+							<div class='col-md-4'>
+								<h5 class="barTitle">急诊科护士职称构成比</h5>
+								<canvas id="piechart2" width="200" height="90"></canvas>
+							</div>
+							<div class='col-md-4 text-center cf'>
+								<h5 class="barTitle">急诊科占地面积</h5>
+								<div class='occupy'>
+									<div>
+										<span>急诊科占地面积(2005年)</span> <span class='red'>650㎡</span>
+									</div>
+									<div>
+										<span>急诊科占地面积(2016年)</span> <span class='red'>1200㎡</span>
+									</div>
+								</div>
+							</div>
+							<div class='col-md-4'>
+								<h5 class="barTitle">监护床位病患比</h5>
+								<canvas id="piechart3" width="200" height="90"></canvas>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class='clearfix' style='border-top: 4px solid #c8c9cb;'>
+							<div class='col-md-4 text-center'>
+								<h5 class="barTitle">急诊各级患者比例</h5>
+								<canvas id="piechart4" width="200" height="90"></canvas>
+							</div>
+							<div class='col-md-4 cf'>
+								<h5 class="barTitle">
+									抢救室滞留时间平均数 &nbsp;<span class='red'>1.4小时</span>
+								</h5>
+								<canvas id="linechart" width="200" height="90"></canvas>
+							</div>
+							<div class='col-md-4'>
+								<h5 class="barTitle">
+									平均急性心肌梗死(STEMI)<br>在急诊心电图时间
+								</h5>
+								<div class='occupy'>
+									<div>
+										<span class='red'>21.5分钟</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="pageTwo" class="tab-pane">
+				<div class="row" style="margin-left: 0px;margin-right: 0px;">
+					<div class="col-md-12">
+						<div class='col-md-4'>
+							<h5 class="barTitle">平均急性心肌梗死(STEMI)<br>在急诊首次给予抗血小板药物时间</h5>
+							<div class='occupy'>
+									<div>
+										<span class='red'>45.6分钟</span>
+									</div>
+								</div>
+						</div>
+						<div class='col-md-4 text-center cf'>
+							<h5 class="barTitle">急诊抢救室患者死亡率</h5>
+							<canvas id="piechart5" width="200" height="90"></canvas>
+						</div>
+						<div class='col-md-4 text-center'>
+							<h5 class="barTitle">急诊多发伤手术患者死亡率</h5>
+							<canvas id="piechart6" width="200" height="90"></canvas>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class='clearfix' style='border-top: 4px solid #c8c9cb;'>
+							<div class='col-md-4 text-center'>
+								<h5 class="barTitle">ROSC成功率</h5>
+								<canvas id="piechart7" width="200" height="90"></canvas>
+							</div>
+							<div class='col-md-4 text-center cf'>
+								<h5 class="barTitle">急诊上呼吸道感染患者抗生素使用率</h5>
+								<canvas id="piechart8" width="200" height="90"></canvas>
+							</div>
+							<div class='col-md-4'>
+								<h5 class="barTitle">急诊就诊费用</h5>
+								<canvas id="piechart9" width="200" height="90"></canvas>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="footer-main">
+                    <div class="roll">
+                        <ul class="mingdan list-unstyled" style="margin-top: 0px;" id="depart">
+                          
+                        </ul>
+                      </div>
+                </div>
+                   </section>
+                   </aside> 
+#end

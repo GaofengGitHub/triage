@@ -1,0 +1,127 @@
+
+<script type="text/javascript">
+#include("demo.js")	
+</script>
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+	var sde = new SDE({
+		 el: document.querySelector('#sde'),
+		 iframe_js_src: null,
+		 page_header_footer: {
+			    header(index) {
+			    	return '<div>这里是header</div>';
+			    }, //返回header的Element对象
+			    footer(index) {
+			    	return '<div><center>第'+index+'页<center></div>';
+			    }, //返回footer的Element对象
+		},
+ 	});
+	//触发器 编辑器加载完成后 加载 历史数据
+	var ready=function(){
+		
+		sde.seniorPrint({
+		      resettingPrint(opt, viewDom) {}, //默认重置（包括首次设置）打印页面前触发。优先级高于render系列函数
+		      resetedPrint(opt, viewDom) {}, //默认重置（包括首次设置）打印页面后触发。优先级高于render系列函数
+		      renderHeader(index, page) {
+		        return '<div style="line-height:55px;background:red;border:1px solid yellow;">这里是header</div>';
+		      }, //返回要渲染的页眉。默认从零开始
+		      renderFooter(index, page) {
+		        return '<div style="line-height:35px;background:blue;border:1px solid green;"><center>第${index + 1}页<center></div>';
+		      }, //返回要渲染的页脚。默认从零开始
+		      renderedHeader(index, count, page, header) {}, //渲染后
+		      renderedFooter(index, count, page, footer) {}, //渲染后
+		      scale: 2, //放大比例，默认2倍，越大越清晰，相应的渲染也更慢
+		      autoPrint: true, //是否默认打开pdfviewer即执行打印操作
+		      isDownload: false, //是否下载，如果为true，则不再打开pdfviewer页面
+		      fileName: 'SDE 测试打印', //如果isDownload=true时的pdf文件下载名称
+		      pageMode: 'A4', //页面模式:A3|A4|A5 ……
+		      width: 794, //以下默认值
+		      height: 1123,
+		      top: 100,
+		      right: 100,
+		      bottom: 100,
+		      left: 100,
+		      printMode: 'normal', //打印模式：normal|neat|revise|comment
+		      ctrlMode: 'normal', //控件模式：normal|hidden|remove
+		      printDirection: 'vertical', //打印方向 vertical|horizontal
+		      printCssUrl: null, //打印的样式表，可以是string，也可以是array
+		      printJsUrl: null, //打印的js，可以是string，也可以是array
+		    });
+		
+		sde.html('#(editor.content ??)');
+		console.log('编辑器初始化完成！');
+	};
+	sde.addListener('ready',ready);
+	window.sde = sde;
+	$('#editorId').val("#(id ??)");
+
+	$('#editor_type').val("#(editor.type ?? '知情同意书')");
+	$('#editor_name').val("#(editor.name ??)");
+
+	$("#saveEditor").click(function(){
+		saveEditor();
+	});
+	
+});
+
+function saveEditor(){
+	var id = $('#editorId').val();
+	var editor_type = $('#editor_type').val();
+	var editor_name = $('#editor_name').val();
+	var content = sde.html();
+	if(feiknum("模版名称","limit24",editor_name,$("#editor_name").next())) return;
+ 
+	
+	$.ajax({
+	     type: "post",
+	     url: "#path()/medicaltextmgmt/saveEditor",
+	     dataType: "json",
+	     data:{
+	    	 id:id,
+	    	 editor_type:editor_type,
+	    	 editor_name:editor_name,
+	    	 content:content
+	     },
+	     success: function(result){
+	    	 toastr.warning(result.message);
+	    	 if(result.status=="200"){
+	    		 load('editormain');
+	    	 }else{
+	    		
+	    	 }
+	     },
+	     error: function(){
+	    	 return false;
+	     }
+	 }); 
+}
+</script>
+	<div class="panelMain">
+			<div class="contact">
+				<form name="form1" method="post">
+					
+					<div class="form-group">
+						<input type="hidden"  value="#(id ??)" id="editorId" name="editorId">
+						<label style="margin-left: 50px;"><i class="red">*</i>模版类型：</label>
+						 <select id="editor_type">
+						 	<option value="病历">病历</option>
+						 	<option value="知情同意书">知情同意书</option>
+						 </select>
+					</div>
+					<div class="form-group">
+						<label style="margin-left: 50px;"><i class="red">*</i>模版名称：</label>
+						 <input type="text" style="width:254px;text-align: center;" id="editor_name" name="editor_name"
+							autocomplete="off" required /><span
+							class="tips" ></span>
+					</div>
+		
+					<div class="form-group">
+						<div style="width:1200px;margin:0 auto;  box-shadow: 0 0 0 1px #d1d1d1, 0 0 3px 1px #ccc;;height:600px;" id='sde'>编辑器实例</div>
+					</div>
+					<b class="btn" style="margin-left: 140px;margin-top: 200px;"><input id="saveEditor" type="button" value="提交" class="btn btn-rule btn-lg"/> <button class="btn btn-rule btn-lg" onclick="load('deviceList');">取消</button></b>
+				</form>
+			</div>
+		</div>
+

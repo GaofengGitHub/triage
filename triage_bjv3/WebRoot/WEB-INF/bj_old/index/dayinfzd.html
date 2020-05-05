@@ -1,0 +1,94 @@
+<script>
+//确认打印
+function dayinconfirm(){
+	//原生js打印功能
+	var sytime = synctime();
+	Print('#fz-print-content', {
+        onStart: function () {
+          console.log('onStart', sytime)
+        },
+        onEnd: function () {
+          console.log('onEnd', sytime)
+        }
+    })
+}
+</script>
+<script src="#path()/static/bj/js/JsBarcode.all.min.js"></script>
+<div class="modal fade common-modal" id="fz-print-tc" style="width:280px;">
+  <div class="modal-dialog" style="width:280px">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" style="font-size:12px;line-height: 22px;">分诊单打印预览</h4>  
+      </div>  
+      <div class="modal-body" style="background:#fff;padding:15px 10px;">  
+         <div class="fz-print-content" id="fz-print-content">
+<!--          	<h1>湖北省人民医院<br />分诊评估单</h1>-->         	
+				<h1>北京市普仁医院<br />分诊评估单</h1>
+			<img id="imgcode1" />
+         	<div class="fz-print-nameinfo">
+         	<input type="hidden" id="bia" value="1">
+         	<b id="dividfullname"></b><span id="dividcardnum"></span><span id="dividgender"></span><span id="dividage"></span><span id="dividcategory"></span></div>
+         	
+         	<div class="fz-print-lifeinfo" >
+         	<!--  
+         		<b>生命体征：</b>
+         		<div class="fz-print-lifeinfo-list clearfix">
+         			<div class="pull-left w-space01">
+         				<span>心率：</span>
+         				<b id="dividHR"></b>
+         				<span>次/分钟</span>
+         			</div>
+         			<div class="pull-left">
+         				<span>血氧：</span>
+         				<b id="dividSPO2"></b>
+         				<span>%</span>
+         			</div>
+         			<div class="pull-left w-space01">
+         				<span>呼吸频率：</span>
+         				<b id="dividR"></b>
+         				<span>次/分钟</span>
+         			</div>
+         		</div>
+         		<div class="fz-print-lifeinfo-list clearfix">
+         			<div class="pull-left w-space01">
+         				<span>无创血压：</span>
+         				<b id="dividBP"></b>
+         				<span>mmHg</span>
+         			</div>
+         			<div class="pull-left">
+         				<span>体温：</span>
+         				<b id="dividT"></b>
+         				<span>℃</span>
+         			</div>
+         			<div class="pull-left w-space01">
+         				<span>etCO2：</span>
+         				<b id="dividetCO2"></b>
+         				<span>mmHg</span>
+         			</div>
+         		</div>
+         		-->
+         		<div class="fz-print-grade">
+         			<b id="dividgrade"></b>
+         			<!-- <ul id="dividpfyj1">
+         			</ul> -->
+         		</div>
+         		<div class="fz-print-bottom">
+         			<p>分诊去向：<b id="dividdepart"></b></p>
+         			<!--  
+         			<p>分诊护士：<b id="dividnurse"></b></p>
+         			-->
+         			<p></p>
+         			<p></p>
+         		</div>
+				
+         	</div>
+         </div>  
+      </div>  
+      <!-- <div class="modal-footer fz-print-footer">  
+      	<button class="btn btn-default" data-dismiss="modal">取消</button>
+         <button onclick="dayinconfirm()" class="btn btn-primary">打印</button> 
+      </div>   -->
+    </div> 
+  </div>
+</div>
